@@ -1,6 +1,7 @@
 import ProductPageLayout from '../../components/ProductPageLayout';
+import SEO from '../../components/SEO';
 
-const A = '#fb923c';            // Litigation accent — orange
+const A = '#fb923c';            // Litigation accent - orange
 const A2 = '#38bdf8';          // blue secondary
 
 const I = {
@@ -20,7 +21,7 @@ function MockHeroDash() {
       <rect width="560" height="400" rx="14" fill="#0d0d13"/>
       <rect width="560" height="34" fill="#121219"/>
       <circle cx="18" cy="17" r="4.5" fill="#ff5f57"/><circle cx="33" cy="17" r="4.5" fill="#febc2e"/><circle cx="48" cy="17" r="4.5" fill="#28c840"/>
-      <text x="280" y="21" textAnchor="middle" fill="rgba(255,255,255,.4)" fontSize="10" fontFamily="system-ui">Litigation — Caseload</text>
+      <text x="280" y="21" textAnchor="middle" fill="rgba(255,255,255,.4)" fontSize="10" fontFamily="system-ui">Litigation - Caseload</text>
       <rect x="0" y="34" width="120" height="366" fill="#0a0a10"/>
       <rect x="14" y="50" width="92" height="26" rx="6" fill={A} fillOpacity=".14"/>
       <circle cx="28" cy="63" r="5" fill={A}/><rect x="40" y="59" width="54" height="6" rx="3" fill={A} fillOpacity=".8"/>
@@ -147,7 +148,7 @@ function MockCaseBoard() {
       <rect width="960" height="360" rx="14" fill="#0c0c12"/>
       <rect width="960" height="40" fill="#101018"/>
       <circle cx="22" cy="20" r="5" fill="#ff5f57"/><circle cx="40" cy="20" r="5" fill="#febc2e"/><circle cx="58" cy="20" r="5" fill="#28c840"/>
-      <text x="480" y="25" textAnchor="middle" fill="rgba(255,255,255,.4)" fontSize="11" fontFamily="system-ui">Litigation — Case Pipeline</text>
+      <text x="480" y="25" textAnchor="middle" fill="rgba(255,255,255,.4)" fontSize="11" fontFamily="system-ui">Litigation - Case Pipeline</text>
       {cols.map((col, ci) => {
         const x = 24 + ci * 234;
         return (
@@ -225,14 +226,30 @@ function MockConsole() {
   );
 }
 
+const faqItems = [
+  { q: 'How does it make sure we never miss a date?', a: 'Every hearing, limitation period and filing deadline is tracked against the matter with automated reminders to the responsible team members and counsel - over email, WhatsApp and in-app - at intervals you configure.' },
+  { q: 'Can we link documents to a specific case?', a: 'Yes. Pleadings, evidence, orders and correspondence are attached to the matter, versioned, and full-text searchable (including OCR for scans), so the whole file is one click away in court or in chambers.' },
+  { q: 'Does it handle time tracking and billing?', a: 'Yes. Log billable time against matters and activities, apply rates, and generate client invoices. Reports show recovery, write-offs and billable targets per lawyer and per matter.' },
+  { q: 'Is it suitable for in-house legal teams too?', a: 'Absolutely. In-house teams use it to track litigation, manage external counsel, store contracts and report matter status and spend to the business - not just for billing.' },
+  { q: 'On-premise or cloud, and how long to go live?', a: 'Deploy on-premise for confidentiality or on a private cloud. A standard firm rollout with matter import and calendar sync runs 4–8 weeks; larger firms with billing and DMS integration run 10–14 weeks.' },
+];
+
 export default function LitigationManagementPage() {
   return (
+    <>
+    <SEO
+      title="Litigation Management"
+      description="TechBird Litigation Management - court dates, case files, document linking, task assignment and time-billing in one place. Built for law firms and in-house legal teams that juggle dozens of matters at once."
+      keywords="litigation management software, legal case management, court date tracking, case file management, legal billing, time tracking lawyers, document linking, law firm software, in-house legal, legal tech India"
+      faqItems={faqItems}
+      softwareSchema={{ name: 'TechBird Litigation Management', description: 'Case tracking, court calendars, deadline alerts and legal billing.', category: 'BusinessApplication' }}
+    />
     <ProductPageLayout
       accent={A}
       category="Legal Case Tracking"
       breadcrumbLabel="Litigation Management"
       title="Never miss a *court date again.*"
-      lead="Cases, court dates, document linking, task assignment and time-billing in one place — built for law firms and in-house legal teams that juggle dozens of matters at once."
+      lead="Cases, court dates, document linking, task assignment and time-billing in one place - built for law firms and in-house legal teams that juggle dozens of matters at once."
       heroActions={[
         { label: 'Request a Demo', to: '/contact', variant: 'accent' },
         { label: 'See it in action', to: '/contact', variant: 'white' },
@@ -247,7 +264,7 @@ export default function LitigationManagementPage() {
       bento={{
         eyebrow: 'Capabilities',
         heading: 'Every matter, every deadline, tracked.',
-        sub: 'Cases, hearings, documents, tasks and time share one matter record — so nothing falls through the cracks and billing writes itself.',
+        sub: 'Cases, hearings, documents, tasks and time share one matter record - so nothing falls through the cracks and billing writes itself.',
         items: [
           { icon: I.gavel, title: 'Case management', text: 'Every matter with parties, status, history and linked documents in one view.', art: <ArtCaseList />, span: true },
           { icon: I.calendar, title: 'Court calendar', text: 'Hearing dates with automated reminders for the team and counsel.', art: <ArtCourtCal /> },
@@ -259,7 +276,7 @@ export default function LitigationManagementPage() {
       light={{
         eyebrow: 'The matter',
         heading: 'Intake to judgment, on record.',
-        sub: 'A matter moves from intake through discovery and hearings to closure — every filing, date and hour captured against one case file.',
+        sub: 'A matter moves from intake through discovery and hearings to closure - every filing, date and hour captured against one case file.',
         mockup: <MockCaseBoard />,
         columns: [
           { icon: I.gavel, title: 'Open & assign', text: 'Create the matter, capture parties, set the team and link the first documents.' },
@@ -270,7 +287,7 @@ export default function LitigationManagementPage() {
       laser={{
         eyebrow: 'Live Product',
         heading: 'See the case file in action.',
-        sub: 'One workspace per matter — hearings, timeline, linked documents and billed time, live. Hover to explore.',
+        sub: 'One workspace per matter - hearings, timeline, linked documents and billed time, live. Hover to explore.',
         mockup: <MockConsole />,
         features: [
           { icon: I.gavel, title: 'Matter workspace', text: 'Parties, status, timeline and documents for every case in one place.' },
@@ -291,13 +308,7 @@ export default function LitigationManagementPage() {
           { label: 'Accounting', tech: 'Tally, ERPNext and Zoho Books for invoicing' },
         ],
       }}
-      faqItems={[
-        { q: 'How does it make sure we never miss a date?', a: 'Every hearing, limitation period and filing deadline is tracked against the matter with automated reminders to the responsible team members and counsel — over email, WhatsApp and in-app — at intervals you configure.' },
-        { q: 'Can we link documents to a specific case?', a: 'Yes. Pleadings, evidence, orders and correspondence are attached to the matter, versioned, and full-text searchable (including OCR for scans), so the whole file is one click away in court or in chambers.' },
-        { q: 'Does it handle time tracking and billing?', a: 'Yes. Log billable time against matters and activities, apply rates, and generate client invoices. Reports show recovery, write-offs and billable targets per lawyer and per matter.' },
-        { q: 'Is it suitable for in-house legal teams too?', a: 'Absolutely. In-house teams use it to track litigation, manage external counsel, store contracts and report matter status and spend to the business — not just for billing.' },
-        { q: 'On-premise or cloud, and how long to go live?', a: 'Deploy on-premise for confidentiality or on a private cloud. A standard firm rollout with matter import and calendar sync runs 4–8 weeks; larger firms with billing and DMS integration run 10–14 weeks.' },
-      ]}
+      faqItems={faqItems}
       cta={{
         label: 'Get started',
         heading: 'Ready to take control of your caseload?',
@@ -305,5 +316,6 @@ export default function LitigationManagementPage() {
         button: { label: 'Book a Demo', to: '/contact' },
       }}
     />
+    </>
   );
 }

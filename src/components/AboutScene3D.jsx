@@ -42,7 +42,7 @@ const SPIRIT = Array.from({ length: 340 }, () => {
   return { x: Math.cos(θ)*r, y, z: Math.sin(θ)*r*0.6 };
 });
 
-/* Pure Canvas-2D scene — no WebGL required */
+/* Pure Canvas-2D scene - no WebGL required */
 export default function AboutScene3D() {
   const mountRef = useRef(null);
 

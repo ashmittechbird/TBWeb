@@ -18,7 +18,7 @@ export default function Hero() {
             DRIVING DIGITAL<br /><em>TRANSFORMATION</em>
           </h1>
           <p className="hero-desc">
-            Scalable, secure &amp; intelligent technology — from expert consultancy and custom
+            Scalable, secure &amp; intelligent technology - from expert consultancy and custom
             software to cutting-edge AI integration.
           </p>
         </div>

@@ -1,6 +1,7 @@
 import ProductPageLayout from '../../components/ProductPageLayout';
+import SEO from '../../components/SEO';
 
-const A = '#a3e635';            // Visitor accent — lime
+const A = '#a3e635';            // Visitor accent - lime
 const A2 = '#22d3ee';          // cyan secondary
 
 const I = {
@@ -20,7 +21,7 @@ function MockHeroDash() {
       <rect width="560" height="400" rx="14" fill="#0d0d13"/>
       <rect width="560" height="34" fill="#121219"/>
       <circle cx="18" cy="17" r="4.5" fill="#ff5f57"/><circle cx="33" cy="17" r="4.5" fill="#febc2e"/><circle cx="48" cy="17" r="4.5" fill="#28c840"/>
-      <text x="280" y="21" textAnchor="middle" fill="rgba(255,255,255,.4)" fontSize="10" fontFamily="system-ui">Visitor — Front Desk</text>
+      <text x="280" y="21" textAnchor="middle" fill="rgba(255,255,255,.4)" fontSize="10" fontFamily="system-ui">Visitor - Front Desk</text>
       <rect x="0" y="34" width="120" height="366" fill="#0a0a10"/>
       <rect x="14" y="50" width="92" height="26" rx="6" fill={A} fillOpacity=".14"/>
       <circle cx="28" cy="63" r="5" fill={A}/><rect x="40" y="59" width="54" height="6" rx="3" fill={A} fillOpacity=".8"/>
@@ -145,7 +146,7 @@ function MockFlowBoard() {
       <rect width="960" height="360" rx="14" fill="#0c0c12"/>
       <rect width="960" height="40" fill="#101018"/>
       <circle cx="22" cy="20" r="5" fill="#ff5f57"/><circle cx="40" cy="20" r="5" fill="#febc2e"/><circle cx="58" cy="20" r="5" fill="#28c840"/>
-      <text x="480" y="25" textAnchor="middle" fill="rgba(255,255,255,.4)" fontSize="11" fontFamily="system-ui">Visitor — Live Flow</text>
+      <text x="480" y="25" textAnchor="middle" fill="rgba(255,255,255,.4)" fontSize="11" fontFamily="system-ui">Visitor - Live Flow</text>
       {cols.map((col, ci) => {
         const x = 24 + ci * 234;
         return (
@@ -184,7 +185,7 @@ function MockConsole() {
       {['Visitors','Pre-register','Hosts','Badges','Watchlist','Reports','Settings'].map((t,i)=>(
         <g key={i}><circle cx="32" cy={146+i*32} r="5" fill="rgba(255,255,255,.18)"/><text x="46" y={150+i*32} fill="rgba(255,255,255,.45)" fontSize="11" fontFamily="system-ui">{t}</text></g>
       ))}
-      <text x="206" y="78" fill="#fff" fontSize="17" fontFamily="'Space Grotesk'" fontWeight="700">Front Desk — Live</text>
+      <text x="206" y="78" fill="#fff" fontSize="17" fontFamily="'Space Grotesk'" fontWeight="700">Front Desk - Live</text>
       <text x="206" y="96" fill="rgba(255,255,255,.35)" fontSize="11" fontFamily="system-ui">Main Lobby · Tue 10 Jun</text>
       <rect x="772" y="60" width="144" height="32" rx="16" fill={A}/>
       <text x="844" y="80" textAnchor="middle" fill="#15200a" fontSize="11" fontFamily="'Space Grotesk'" fontWeight="700">Check In</text>
@@ -231,14 +232,30 @@ function MockConsole() {
   );
 }
 
+const faqItems = [
+  { q: 'How fast is check-in for a visitor?', a: 'A pre-registered guest scans a QR code and is checked in within seconds. A walk-in scans their ID, takes a photo and selects a host - typically under 40 seconds, with the badge printing automatically.' },
+  { q: 'Does the host get notified automatically?', a: 'Yes. The moment a visitor checks in, their host receives an alert over WhatsApp, Slack, Teams or email with the visitor\'s name and photo, and can accept or send a quick "be right there".' },
+  { q: 'Can it screen visitors for security?', a: 'Yes. It verifies government IDs, checks names against watchlists or denied-entry lists, captures NDAs or health declarations, and maintains an evacuation list of everyone currently on-site.' },
+  { q: 'Does it work across multiple locations?', a: 'Yes. Manage many sites and kiosks from one console, with per-location hosts, badges and policies, and consolidated reporting across the whole organisation.' },
+  { q: 'On-premise or cloud, and how long to go live?', a: 'Deploy on cloud or on-premise. A single-lobby setup with a kiosk and badge printer can go live in 2–4 weeks; multi-site rollouts with access-control and directory integration run 6–10 weeks.' },
+];
+
 export default function VisitorManagementPage() {
   return (
+    <>
+    <SEO
+      title="Visitor Management System"
+      description="TechBird Visitor Management System - digital check-in, ID verification, instant host alerts, badge printing and searchable visitor logs. Replace the paper register with a fast, secure, on-brand arrival experience."
+      keywords="visitor management system, digital check-in, visitor registration, badge printing, host notification, ID verification, front desk automation, visitor analytics, security screening, visitor management India"
+      faqItems={faqItems}
+      softwareSchema={{ name: 'TechBird VMS', description: 'Pre-registration, QR badges, host notifications and visitor compliance.', category: 'BusinessApplication' }}
+    />
     <ProductPageLayout
       accent={A}
       category="Front-Desk Automation"
       breadcrumbLabel="Visitor Management"
       title="A front desk that *runs itself.*"
-      lead="Digital check-in, ID verification, instant host alerts, badge printing and a searchable visitor log — replacing the paper register with a fast, secure, on-brand arrival experience."
+      lead="Digital check-in, ID verification, instant host alerts, badge printing and a searchable visitor log - replacing the paper register with a fast, secure, on-brand arrival experience."
       heroActions={[
         { label: 'Request a Demo', to: '/contact', variant: 'accent' },
         { label: 'See it in action', to: '/contact', variant: 'white' },
@@ -253,9 +270,9 @@ export default function VisitorManagementPage() {
       bento={{
         eyebrow: 'Capabilities',
         heading: 'Every visitor, handled in seconds.',
-        sub: 'From pre-registration to check-out, every arrival is captured, verified and logged — and the host knows the moment their guest walks in.',
+        sub: 'From pre-registration to check-out, every arrival is captured, verified and logged - and the host knows the moment their guest walks in.',
         items: [
-          { icon: I.scan, title: 'Self check-in', text: 'QR or kiosk check-in — scan ID, capture a photo, pick a host, done.', art: <ArtCheckin />, span: true },
+          { icon: I.scan, title: 'Self check-in', text: 'QR or kiosk check-in - scan ID, capture a photo, pick a host, done.', art: <ArtCheckin />, span: true },
           { icon: I.badge, title: 'Badge printing', text: 'Auto-printed photo badges with host, zone and expiry on arrival.', art: <ArtBadge /> },
           { icon: I.id, title: 'Visitor log', text: 'A live, searchable record of who is on-site, with full history.', art: <ArtLog /> },
           { icon: I.bell, title: 'Instant host alerts', text: 'Host gets a WhatsApp/Slack/email ping the second their guest checks in.', art: <ArtHostAlert /> },
@@ -265,18 +282,18 @@ export default function VisitorManagementPage() {
       light={{
         eyebrow: 'The arrival',
         heading: 'Expected to checked-out, tracked.',
-        sub: 'A visitor moves from pre-registration through check-in, the meeting and check-out — every stage time-stamped and visible to security and reception.',
+        sub: 'A visitor moves from pre-registration through check-in, the meeting and check-out - every stage time-stamped and visible to security and reception.',
         mockup: <MockFlowBoard />,
         columns: [
           { icon: I.scan, title: 'Pre-register & invite', text: 'Send guests a QR invite so they breeze through check-in on arrival.' },
-          { icon: I.bell, title: 'Check-in & notify', text: 'ID, photo and badge in seconds — the host is alerted instantly.' },
+          { icon: I.bell, title: 'Check-in & notify', text: 'ID, photo and badge in seconds - the host is alerted instantly.' },
           { icon: I.chart, title: 'Check-out & report', text: 'Auto check-out, accurate on-site counts and analytics for facilities.' },
         ],
       }}
       laser={{
         eyebrow: 'Live Product',
         heading: 'See the front desk in action.',
-        sub: 'One console for reception and security — live footfall, who is on-site, and every safety check, in real time. Hover to explore.',
+        sub: 'One console for reception and security - live footfall, who is on-site, and every safety check, in real time. Hover to explore.',
         mockup: <MockConsole />,
         features: [
           { icon: I.scan, title: 'Digital check-in', text: 'Kiosk, QR and tablet check-in with photo capture and host selection.' },
@@ -297,13 +314,7 @@ export default function VisitorManagementPage() {
           { label: 'Hardware', tech: 'iPad/Android kiosks, badge & label printers, ID scanners' },
         ],
       }}
-      faqItems={[
-        { q: 'How fast is check-in for a visitor?', a: 'A pre-registered guest scans a QR code and is checked in within seconds. A walk-in scans their ID, takes a photo and selects a host — typically under 40 seconds, with the badge printing automatically.' },
-        { q: 'Does the host get notified automatically?', a: 'Yes. The moment a visitor checks in, their host receives an alert over WhatsApp, Slack, Teams or email with the visitor’s name and photo, and can accept or send a quick "be right there".' },
-        { q: 'Can it screen visitors for security?', a: 'Yes. It verifies government IDs, checks names against watchlists or denied-entry lists, captures NDAs or health declarations, and maintains an evacuation list of everyone currently on-site.' },
-        { q: 'Does it work across multiple locations?', a: 'Yes. Manage many sites and kiosks from one console, with per-location hosts, badges and policies, and consolidated reporting across the whole organisation.' },
-        { q: 'On-premise or cloud, and how long to go live?', a: 'Deploy on cloud or on-premise. A single-lobby setup with a kiosk and badge printer can go live in 2–4 weeks; multi-site rollouts with access-control and directory integration run 6–10 weeks.' },
-      ]}
+      faqItems={faqItems}
       cta={{
         label: 'Get started',
         heading: 'Ready to upgrade your lobby?',
@@ -311,5 +322,6 @@ export default function VisitorManagementPage() {
         button: { label: 'Book a Demo', to: '/contact' },
       }}
     />
+    </>
   );
 }

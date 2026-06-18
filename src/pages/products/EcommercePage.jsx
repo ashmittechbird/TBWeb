@@ -1,6 +1,7 @@
 import ProductPageLayout from '../../components/ProductPageLayout';
+import SEO from '../../components/SEO';
 
-const A = '#f472b6';            // E-commerce accent — pink
+const A = '#f472b6';            // E-commerce accent - pink
 const A2 = '#22d3ee';          // cyan secondary
 
 const I = {
@@ -20,7 +21,7 @@ function MockHeroDash() {
       <rect width="560" height="400" rx="14" fill="#0d0d13"/>
       <rect width="560" height="34" fill="#121219"/>
       <circle cx="18" cy="17" r="4.5" fill="#ff5f57"/><circle cx="33" cy="17" r="4.5" fill="#febc2e"/><circle cx="48" cy="17" r="4.5" fill="#28c840"/>
-      <text x="280" y="21" textAnchor="middle" fill="rgba(255,255,255,.4)" fontSize="10" fontFamily="system-ui">Commerce — Overview</text>
+      <text x="280" y="21" textAnchor="middle" fill="rgba(255,255,255,.4)" fontSize="10" fontFamily="system-ui">Commerce - Overview</text>
       <rect x="0" y="34" width="120" height="366" fill="#0a0a10"/>
       <rect x="14" y="50" width="92" height="26" rx="6" fill={A} fillOpacity=".14"/>
       <circle cx="28" cy="63" r="5" fill={A}/><rect x="40" y="59" width="54" height="6" rx="3" fill={A} fillOpacity=".8"/>
@@ -139,7 +140,7 @@ function MockOrderBoard() {
       <rect width="960" height="360" rx="14" fill="#0c0c12"/>
       <rect width="960" height="40" fill="#101018"/>
       <circle cx="22" cy="20" r="5" fill="#ff5f57"/><circle cx="40" cy="20" r="5" fill="#febc2e"/><circle cx="58" cy="20" r="5" fill="#28c840"/>
-      <text x="480" y="25" textAnchor="middle" fill="rgba(255,255,255,.4)" fontSize="11" fontFamily="system-ui">Commerce — Fulfilment</text>
+      <text x="480" y="25" textAnchor="middle" fill="rgba(255,255,255,.4)" fontSize="11" fontFamily="system-ui">Commerce - Fulfilment</text>
       {cols.map((col, ci) => {
         const x = 24 + ci * 234;
         return (
@@ -224,14 +225,30 @@ function MockConsole() {
   );
 }
 
+const faqItems = [
+  { q: 'Is this a marketplace or a single-brand store?', a: 'Either. Run a single-brand storefront, or a full multi-vendor marketplace where sellers get their own dashboards, inventory, commissions and payouts. You can start single-brand and add vendors later.' },
+  { q: 'Can it sell across multiple channels at once?', a: 'Yes. Manage your website, mobile app and marketplace listings (Amazon, Flipkart) and social commerce from one back office, with inventory and orders synced so you never oversell.' },
+  { q: 'Which payment and shipping options are supported?', a: 'Payments via UPI, cards, wallets, net banking, COD and EMI through Razorpay/PayU/Stripe, all auto-reconciled. Shipping integrates with Shiprocket, Delhivery and major couriers for label printing and live tracking.' },
+  { q: 'How does inventory stay accurate?', a: 'Stock is tracked in real time across warehouses and channels. A sale anywhere decrements inventory everywhere, with reservations during checkout and low-stock alerts to prevent overselling and stockouts.' },
+  { q: 'On-premise or cloud, and how long to go live?', a: 'Deploy on cloud (recommended for storefront performance) or on-premise. A single-brand store can launch in 4–8 weeks; a multi-vendor marketplace with vendor onboarding and marketplace sync runs 10–16 weeks.' },
+];
+
 export default function EcommercePage() {
   return (
+    <>
+    <SEO
+      title="E-commerce Platform"
+      description="TechBird E-commerce Platform - multi-vendor marketplace or single-brand storefront with catalog, inventory, payments, shipping integration and analytics. One back office for every channel you sell on."
+      keywords="ecommerce platform, multi-vendor marketplace, online store, inventory management, payment gateway integration, shipping integration, order management, ecommerce analytics, Shopify alternative, ecommerce India"
+      faqItems={faqItems}
+      softwareSchema={{ name: 'TechBird E-commerce', description: 'Multi-vendor marketplace with catalog, inventory, payments and shipping.', category: 'BusinessApplication' }}
+    />
     <ProductPageLayout
       accent={A}
       category="Multi-Vendor Commerce"
       breadcrumbLabel="E-Commerce Platform"
       title="Sell everywhere, *manage from one place.*"
-      lead="A multi-vendor marketplace or single-brand storefront with catalog, inventory, payments, shipping and analytics — one back office for every channel you sell on."
+      lead="A multi-vendor marketplace or single-brand storefront with catalog, inventory, payments, shipping and analytics - one back office for every channel you sell on."
       heroActions={[
         { label: 'Request a Demo', to: '/contact', variant: 'accent' },
         { label: 'See it in action', to: '/contact', variant: 'white' },
@@ -246,10 +263,10 @@ export default function EcommercePage() {
       bento={{
         eyebrow: 'Capabilities',
         heading: 'A storefront and a back office, together.',
-        sub: 'Catalog, orders, inventory, payments and vendors share one system — so a sale anywhere updates stock and accounting everywhere.',
+        sub: 'Catalog, orders, inventory, payments and vendors share one system - so a sale anywhere updates stock and accounting everywhere.',
         items: [
           { icon: I.store, title: 'Storefront & catalog', text: 'Branded, responsive storefront with rich product pages, search and offers.', art: <ArtStorefront />, span: true },
-          { icon: I.bag, title: 'Order management', text: 'One queue for every channel — capture, fulfil, refund and track.', art: <ArtOrders /> },
+          { icon: I.bag, title: 'Order management', text: 'One queue for every channel - capture, fulfil, refund and track.', art: <ArtOrders /> },
           { icon: I.chart, title: 'Sales analytics', text: 'Revenue, AOV, conversion and cohort insights across channels.', art: <ArtSales /> },
           { icon: I.users, title: 'Multi-vendor', text: 'Onboard sellers with their own dashboards, payouts and commissions.', art: <ArtVendors /> },
           { icon: I.box, title: 'Inventory sync', text: 'Real-time stock across warehouses and channels, with low-stock alerts.' },
@@ -258,7 +275,7 @@ export default function EcommercePage() {
       light={{
         eyebrow: 'Order to doorstep',
         heading: 'Cart to delivery, one pipeline.',
-        sub: 'An order flows from checkout through packing, shipping and delivery — updating inventory, payouts and the customer at every step.',
+        sub: 'An order flows from checkout through packing, shipping and delivery - updating inventory, payouts and the customer at every step.',
         mockup: <MockOrderBoard />,
         columns: [
           { icon: I.card, title: 'Checkout & pay', text: 'Fast checkout with UPI, cards and wallets; payments reconciled automatically.' },
@@ -269,7 +286,7 @@ export default function EcommercePage() {
       laser={{
         eyebrow: 'Live Product',
         heading: 'See the platform in action.',
-        sub: 'One console across storefront and operations — GMV, orders, conversion and channels, live. Hover to explore.',
+        sub: 'One console across storefront and operations - GMV, orders, conversion and channels, live. Hover to explore.',
         mockup: <MockConsole />,
         features: [
           { icon: I.store, title: 'Headless storefront', text: 'Fast, SEO-friendly, fully themeable storefront for web and mobile.' },
@@ -290,13 +307,7 @@ export default function EcommercePage() {
           { label: 'Back office', tech: 'TechBird ERP, Tally and accounting exports' },
         ],
       }}
-      faqItems={[
-        { q: 'Is this a marketplace or a single-brand store?', a: 'Either. Run a single-brand storefront, or a full multi-vendor marketplace where sellers get their own dashboards, inventory, commissions and payouts. You can start single-brand and add vendors later.' },
-        { q: 'Can it sell across multiple channels at once?', a: 'Yes. Manage your website, mobile app and marketplace listings (Amazon, Flipkart) and social commerce from one back office, with inventory and orders synced so you never oversell.' },
-        { q: 'Which payment and shipping options are supported?', a: 'Payments via UPI, cards, wallets, net banking, COD and EMI through Razorpay/PayU/Stripe, all auto-reconciled. Shipping integrates with Shiprocket, Delhivery and major couriers for label printing and live tracking.' },
-        { q: 'How does inventory stay accurate?', a: 'Stock is tracked in real time across warehouses and channels. A sale anywhere decrements inventory everywhere, with reservations during checkout and low-stock alerts to prevent overs elling and stockouts.' },
-        { q: 'On-premise or cloud, and how long to go live?', a: 'Deploy on cloud (recommended for storefront performance) or on-premise. A single-brand store can launch in 4–8 weeks; a multi-vendor marketplace with vendor onboarding and marketplace sync runs 10–16 weeks.' },
-      ]}
+      faqItems={faqItems}
       cta={{
         label: 'Get started',
         heading: 'Ready to scale your commerce?',
@@ -304,5 +315,6 @@ export default function EcommercePage() {
         button: { label: 'Book a Demo', to: '/contact' },
       }}
     />
+    </>
   );
 }

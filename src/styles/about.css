@@ -711,12 +711,91 @@
   .ab-pillars-grid--6 .ab-pillar:nth-child(4) { border-left: none; }
 }
 @media (max-width: 600px) {
-  .ab-lead-grid { grid-template-columns: 1fr 1fr; }
-  .ab-trust { grid-template-columns: 1fr 1fr; }
-  .ab-fan-strip { height: clamp(220px, 56vw, 300px); gap: 3px; }
-  .ab-fan-name { font-size: 0.9rem; }
+  .ab-lead-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .ab-trust { grid-template-columns: 1fr; gap: 16px; }
+
+  /* Hero title */
+  .ab-title { font-size: clamp(2.4rem, 10vw, 4rem); }
+  .ab-tagline { font-size: clamp(1.2rem, 4vw, 1.8rem); }
+  .ab-content { padding: clamp(80px, 12vh, 120px) clamp(1rem, 4vw, 2rem) clamp(28px, 5vh, 50px); }
+
+  /* Mission */
+  .ab-mission h2 { font-size: clamp(1.3rem, 5vw, 2rem); }
+  .ab-mission p { font-size: 0.9rem; }
+
+  /* Pillars */
+  .ab-pillar { min-height: clamp(180px, 28vh, 240px); padding: 24px 18px; }
+  .ab-pillar-ghost { font-size: clamp(2rem, 8vw, 3.2rem); }
+
+  /* Story cards */
+  .ab-story-card { padding: 18px 16px; }
+  .ab-story-card-val { font-size: clamp(1.6rem, 6vw, 2.2rem); }
+  .ab-story-text p { font-size: 14px; }
+
+  /* Stats */
+  .ab-stats-grid { border-radius: 12px; }
+  .ab-stat { padding: 20px 14px; }
+  .ab-stat-val { font-size: clamp(1.6rem, 6vw, 2.4rem); }
+
+  /* Closing */
+  .ab-closing h2 { font-size: clamp(1.8rem, 7vw, 3rem); }
+  .ab-closing p { font-size: 14px; }
+  .ab-closing-actions { flex-direction: column; align-items: center; }
+  .ab-closing-actions .btn-pill { width: 100%; justify-content: center; }
+
+  /* FAQ */
+  .ab-faq-btn span { font-size: 0.9rem; }
+
+  /* Leadership info */
+  .ab-lead-info { padding: 14px 12px 14px; }
+  .ab-lead-meta h3 { font-size: 0.88rem; }
+  .ab-lead-meta span { font-size: 10.5px; }
+  .ab-lead-li { width: 28px; height: 28px; border-radius: 7px; }
+  .ab-lead-li svg { width: 15px; height: 15px; }
+
+  /* Mobile: horizontal scroll cards */
+  .ab-fan-strip {
+    height: auto;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    gap: 12px;
+    padding: 0 16px 16px;
+  }
+  .ab-fan-card {
+    flex: 0 0 200px;
+    height: 280px;
+    border-radius: 16px;
+    scroll-snap-align: start;
+    transition: none;
+  }
+  .ab-fan-card.is-active { flex-grow: unset; flex-basis: 200px; }
+  .ab-fan-card img {
+    filter: grayscale(0) brightness(0.85);
+    border-radius: 16px;
+  }
+  .ab-fan-card.is-active img {
+    filter: grayscale(0) brightness(1);
+  }
+  /* Always show label on mobile */
+  .ab-fan-label {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+    transition: none;
+    padding: 40px 14px 14px;
+  }
+  .ab-fan-card:not(.is-active) .ab-fan-label { opacity: 1; transform: none; }
+  .ab-fan-name { font-size: 0.88rem; }
+  .ab-fan-role { font-size: 11px; }
   .ab-fan-li { width: 30px; height: 30px; border-radius: 8px; }
   .ab-fan-li svg { width: 14px; height: 14px; }
+
+  /* Hide scrollbar */
+  .ab-fan-strip::-webkit-scrollbar { display: none; }
+  .ab-fan-strip { -ms-overflow-style: none; scrollbar-width: none; }
 }
 @media (max-width: 700px) {
   .ab-tagline { text-align: left; }

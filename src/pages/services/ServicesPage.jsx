@@ -4,6 +4,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import InnerNavbar from '../../components/InnerNavbar';
 import Footer from '../../components/Footer';
+import SEO from '../../components/SEO';
 import '../../styles/inner.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -34,11 +35,6 @@ const ArrowUpRight = () => (
     <path d="M3 13L13 3M13 3H6M13 3V10" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
   </svg>
 );
-const ChevronRight = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 12, height: 12 }}>
-    <path d="M9 18l6-6-6-6"/>
-  </svg>
-);
 const ArrowRight = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 16, height: 16 }}>
     <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -54,6 +50,7 @@ const TEXT_CARDS = [
     title: <>Cloud &amp;<br />DevOps</>,
     desc: 'Robust cloud environments and DevOps pipelines designed for 99.9% uptime and secure growth.',
     to: '/services/cloud-devops',
+    bgImg: '/assets/svc-cloud.jpg',
   },
   {
     id: 'tc2',
@@ -62,6 +59,7 @@ const TEXT_CARDS = [
     title: 'MarTech',
     desc: 'Optimized MarTech stacks spanning CRM, analytics, automation and customer data platforms.',
     to: '/services/martech',
+    bgImg: '/assets/svc-martech.jpg',
   },
   {
     id: 'tc3',
@@ -70,13 +68,14 @@ const TEXT_CARDS = [
     title: <>Marketing<br />Strategy</>,
     desc: 'GTM, SEO, SEM and social campaigns aligned with your business goals for sustainable growth.',
     to: '/services/marketing',
+    bgImg: '/assets/svc-marketing.jpg',
   },
 ];
 
 const FAQ_ITEMS = [
   {
     q: 'Do you work on individual services or do clients have to take everything?',
-    a: 'Both. Many clients start with a single service — an ERP implementation, a cloud migration, or a marketing campaign — and expand as they see results. Others engage us across multiple disciplines from day one because they want a single accountable team. There is no minimum scope.',
+    a: 'Both. Many clients start with a single service - an ERP implementation, a cloud migration, or a marketing campaign - and expand as they see results. Others engage us across multiple disciplines from day one because they want a single accountable team. There is no minimum scope.',
   },
   {
     q: 'How long does a typical project take?',
@@ -84,7 +83,7 @@ const FAQ_ITEMS = [
   },
   {
     q: 'Do you work with clients outside India?',
-    a: 'Yes. We have delivered projects across the UK, US, UAE, Southeast Asia and Africa. We operate across time zones — asynchronous collaboration for day-to-day work, live calls scheduled to overlap with your team. Our pricing is transparent and fixed-scope, so geography doesn\'t create billing surprises.',
+    a: 'Yes. We have delivered projects across the UK, US, UAE, Southeast Asia and Africa. We operate across time zones - asynchronous collaboration for day-to-day work, live calls scheduled to overlap with your team. Our pricing is transparent and fixed-scope, so geography doesn\'t create billing surprises.',
   },
   {
     q: 'What does a project engagement look like end to end?',
@@ -92,11 +91,11 @@ const FAQ_ITEMS = [
   },
   {
     q: 'Can you take over a project that someone else started?',
-    a: 'Yes. We regularly take over projects mid-flight — inherited codebases, stalled ERP implementations, underperforming campaigns. We start with an audit to understand what exists, what works and what needs to change, then build a remediation plan before touching anything. We are honest about what is salvageable and what is not.',
+    a: 'Yes. We regularly take over projects mid-flight - inherited codebases, stalled ERP implementations, underperforming campaigns. We start with an audit to understand what exists, what works and what needs to change, then build a remediation plan before touching anything. We are honest about what is salvageable and what is not.',
   },
   {
     q: 'How do you price your services?',
-    a: 'We price by deliverable, not by the hour. Fixed-scope projects give you cost certainty from the start. For ongoing engagements — managed cloud, marketing retainers, support contracts — we use monthly retainer pricing with defined SLAs. We don\'t do open-ended time-and-materials billing that transfers project risk onto the client.',
+    a: 'We price by deliverable, not by the hour. Fixed-scope projects give you cost certainty from the start. For ongoing engagements - managed cloud, marketing retainers, support contracts - we use monthly retainer pricing with defined SLAs. We don\'t do open-ended time-and-materials billing that transfers project risk onto the client.',
   },
 ];
 
@@ -177,49 +176,54 @@ export default function ServicesPage() {
 
   return (
     <>
+      <SEO
+        title="Our Services"
+        description="Six disciplines, one team - custom software development, AI solutions, cloud & DevOps, 2D/3D animation, marketing strategy and MarTech. TechBird delivers end-to-end digital transformation for enterprises worldwide."
+        keywords="IT services, software development, AI solutions, cloud DevOps, animation, marketing strategy, MarTech, ERP, TechBird"
+        faqItems={FAQ_ITEMS}
+      />
       <InnerNavbar />
 
-      {/* ── Services Section (heading + grid unified) ── */}
+      {/* ── Hero ── */}
+      <section className="ihero">
+        <div className="ihero-wrap">
+          <div className="ihero-text">
+            <p className="ihero-ey">What we do</p>
+            <h1 className="ihero-h1">Six disciplines.<br /><span>One team.</span></h1>
+            <p className="ihero-sub">From ERP rollouts to AI pipelines, from cloud infrastructure to creative production — each service connects to the others. One team, accountable for every outcome.</p>
+          </div>
+          <div className="ihero-img-side">
+            <img src="/assets/services-hero-bg.jpg" alt="Software development workspace" className="ihero-img" loading="eager" />
+          </div>
+        </div>
+      </section>
+
+      {/* ── Services Section ── */}
       <section className="svc-bento-section">
         <div className="svc-bento-wrap">
 
-          {/* Heading block */}
-          <div className="svc-pg-heading" data-reveal>
-            <nav className="ip2-bc">
-              <Link to="/">Home</Link>
-              <ChevronRight />
-              <span>Services</span>
-            </nav>
-            <div className="svc-pg-heading-row">
-              <div className="svc-pg-heading-left">
-                <span className="ip2-eyebrow">What we do</span>
-                <h1 className="svc-pg-title">Six disciplines.<br />One team.</h1>
-              </div>
-              <p className="svc-pg-sub">
-                From ERP rollouts to AI pipelines, from cloud infrastructure to creative production —
-                each service connects to the others. One team, accountable for every outcome.
-              </p>
-            </div>
-          </div>
-
           <div className="svc-bento-grid" ref={bentoRef}>
 
-            {/* ── Left column — 3 supporting text cards ── */}
+            {/* ── Left column - 3 supporting text cards ── */}
             {TEXT_CARDS.map((card) => (
               <Link to={card.to} className="b-cell b-text-card" key={card.id}>
-                <div className="btc-icon">{card.icon}</div>
-                <div className="btc-body">
+                {card.bgImg && <>
+                  <img src={card.bgImg} className="b-card-img" alt={typeof card.title === 'string' ? card.title : ''} loading="lazy" style={{ opacity: 0.4 }} />
+                  <div className="b-card-color-wash" style={{ background: 'linear-gradient(160deg, rgba(8,8,10,0.82) 0%, rgba(8,8,10,0.55) 50%, rgba(8,8,10,0.35) 100%)' }} />
+                </>}
+                <div className="btc-icon" style={{ position: 'relative', zIndex: 2 }}>{card.icon}</div>
+                <div className="btc-body" style={{ position: 'relative', zIndex: 2 }}>
                   <p className="btc-cat">{card.cat}</p>
                   <h3 className="btc-title">{card.title}</h3>
                   <p className="btc-desc">{card.desc}</p>
                 </div>
-                <div className="btc-arrow"><ArrowUpRight /></div>
+                <div className="btc-arrow" style={{ position: 'relative', zIndex: 2 }}><ArrowUpRight /></div>
               </Link>
             ))}
 
-            {/* ── CENTER HERO — Software Development (main focus) ── */}
+            {/* ── CENTER HERO - Software Development (main focus) ── */}
             <Link to="/services/software-development" className="b-cell b-center-card">
-              <img src="/assets/team-visual.jpg" className="b-card-img" alt="Software Development" />
+              <img src="/assets/team-visual.jpg" className="b-card-img" alt="Software Development" loading="lazy" />
               <div className="b-card-color-wash b-wash-purple" />
 
               {/* Floating tag top-left */}
@@ -232,7 +236,7 @@ export default function ServicesPage() {
                 <span className="b-center-cat">ERP · WebApp · APIs · SaaS</span>
                 <h3 className="b-center-title">Build.<br />Scale.<br />Dominate.</h3>
                 <p className="b-center-desc">
-                  Custom ERP systems, enterprise web apps, mobile platforms and SaaS solutions — engineered for scale across 50+ countries.
+                  Custom ERP systems, enterprise web apps, mobile platforms and SaaS solutions - engineered for scale across 50+ countries.
                 </p>
                 <span className="b-center-cta">
                   Explore our work
@@ -241,9 +245,9 @@ export default function ServicesPage() {
               </div>
             </Link>
 
-            {/* ── Right top — AI Solutions visual card (ai-core image) ── */}
+            {/* ── Right top - AI Solutions visual card (ai-core image) ── */}
             <Link to="/services/ai-solutions" className="b-cell b-visual-card">
-              <img src="/assets/ai-core.png" className="b-card-img" alt="AI Solutions" />
+              <img src="/assets/ai-core.png" className="b-card-img" alt="AI Solutions" loading="lazy" />
               <div className="b-card-color-wash b-wash-blue" />
               <div className="b-vis-content">
                 <span className="b-vis-cat">Custom Models · Consulting</span>
@@ -252,19 +256,21 @@ export default function ServicesPage() {
               </div>
             </Link>
 
-            {/* ── Right bottom — Animation text card ── */}
+            {/* ── Right bottom - Animation card with bg image ── */}
             <Link to="/services/animation" className="b-cell b-text-card b-last">
-              <div className="btc-icon">
+              <img src="/assets/svc-animation.jpg" className="b-card-img" alt="Animation" loading="lazy" style={{ opacity: 0.4 }} />
+              <div className="b-card-color-wash" style={{ background: 'linear-gradient(160deg, rgba(8,8,10,0.82) 0%, rgba(8,8,10,0.55) 50%, rgba(8,8,10,0.35) 100%)' }} />
+              <div className="btc-icon" style={{ position: 'relative', zIndex: 2 }}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                   <polygon points="5 3 19 12 5 21 5 3"/>
                 </svg>
               </div>
-              <div className="btc-body">
+              <div className="btc-body" style={{ position: 'relative', zIndex: 2 }}>
                 <p className="btc-cat">CGI · VFX · AR · VR</p>
                 <h3 className="btc-title">2D &amp; 3D<br />Animation</h3>
                 <p className="btc-desc">Immersive CGI, VFX and AR/VR experiences crafted for global brands.</p>
               </div>
-              <div className="btc-arrow"><ArrowUpRight /></div>
+              <div className="btc-arrow" style={{ position: 'relative', zIndex: 2 }}><ArrowUpRight /></div>
             </Link>
 
           </div>
@@ -279,10 +285,10 @@ export default function ServicesPage() {
           </p>
           <div className="ip2-intro-r">
             <p data-reveal>
-              Most agencies specialise in one thing and refer everything else. That model creates coordination overhead, blame gaps, and results that don't add up to a coherent outcome. TechBird is built differently — every discipline under the same roof, on the same project, accountable for the same result.
+              Most agencies specialise in one thing and refer everything else. That model creates coordination overhead, blame gaps, and results that don't add up to a coherent outcome. TechBird is built differently - every discipline under the same roof, on the same project, accountable for the same result.
             </p>
             <p data-reveal data-delay="1">
-              Whether you need an ERP rollout, an AI pipeline, a cloud migration, a brand campaign, or all of the above — you deal with one team, one point of contact, and one deliverable standard. No vendor management. No integration headaches. Just outcomes.
+              Whether you need an ERP rollout, an AI pipeline, a cloud migration, a brand campaign, or all of the above - you deal with one team, one point of contact, and one deliverable standard. No vendor management. No integration headaches. Just outcomes.
             </p>
           </div>
         </div>
@@ -297,7 +303,7 @@ export default function ServicesPage() {
               {
                 num: '01',
                 title: 'Discover',
-                desc: 'We start with your operations, not a template. Every engagement opens with a structured discovery — mapping processes, identifying bottlenecks and defining what success actually looks like for your business.',
+                desc: 'We start with your operations, not a template. Every engagement opens with a structured discovery - mapping processes, identifying bottlenecks and defining what success actually looks like for your business.',
               },
               {
                 num: '02',
@@ -307,12 +313,12 @@ export default function ServicesPage() {
               {
                 num: '03',
                 title: 'Build',
-                desc: 'Cross-functional teams execute in parallel — software, cloud, creative and marketing moving together. Weekly check-ins, shared dashboards and direct Slack access keep you in the loop without slowing us down.',
+                desc: 'Cross-functional teams execute in parallel - software, cloud, creative and marketing moving together. Weekly check-ins, shared dashboards and direct Slack access keep you in the loop without slowing us down.',
               },
               {
                 num: '04',
                 title: 'Scale',
-                desc: 'Launch is the beginning, not the end. We monitor, iterate and scale every delivery — performance tuning, campaign optimisation, infrastructure scaling and product evolution as your business grows.',
+                desc: 'Launch is the beginning, not the end. We monitor, iterate and scale every delivery - performance tuning, campaign optimisation, infrastructure scaling and product evolution as your business grows.',
               },
             ].map((step) => (
               <div className="ip2-proc-card" key={step.num} data-reveal>

@@ -14,7 +14,7 @@ export default function About() {
         </h2>
         <p className="lead reveal">
           A premier technology partner for agile startups to large-scale enterprises. We turn
-          complex operational challenges into streamlined digital solutions — through expert
+          complex operational challenges into streamlined digital solutions - through expert
           consultancy, custom software development, and cutting-edge AI integration.
         </p>
       </div>

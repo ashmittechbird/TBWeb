@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import StaggeredMenu from './StaggeredMenu';
 
@@ -55,7 +55,14 @@ const LeftDeco = () => (
 
 export default function InnerNavbar() {
   const [mega, setMega] = useState(null);
+  const [scrolled, setScrolled] = useState(false);
   const timer = useRef(null);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const open  = (name) => { clearTimeout(timer.current); setMega(name); };
   const close = ()     => { timer.current = setTimeout(() => setMega(null), 130); };
@@ -88,8 +95,8 @@ export default function InnerNavbar() {
       ]
     },
     { label: 'Industries', ariaLabel: 'View industries we serve', link: '/industries' },
+    { label: 'Case Studies', ariaLabel: 'View case studies', link: '/case-studies' },
     { label: 'About',      ariaLabel: 'Learn about us', link: '/about' },
-    { label: 'Blog',       ariaLabel: 'Read our blog',  link: '/blog' },
     { label: 'Contact',    ariaLabel: 'Get in touch',   link: '/contact' }
   ];
 
@@ -99,7 +106,22 @@ export default function InnerNavbar() {
 
   return (
     <>
-      <nav className="topbar topbar--inner" id="topbar">
+      {/* ── Floating pill nav (appears on scroll) ── */}
+      <div className={`inner-pill-nav${scrolled ? ' visible' : ''}`}>
+        <Link to="/" className="pill-logo">
+          <img src="/logo.png" alt="TechBird" />
+        </Link>
+        <Link to="/">Home</Link>
+        <Link to="/services">Services</Link>
+        <Link to="/products">Products</Link>
+        <Link to="/industries">Industries</Link>
+        <Link to="/case-studies">Case Studies</Link>
+        <Link to="/about">About</Link>
+        <Link to="/contact">Contact</Link>
+        <Link to="/contact" className="pill-cta">Get Started</Link>
+      </div>
+
+      <nav className={`topbar topbar--inner${scrolled ? ' topbar--hidden' : ''}`} id="topbar">
       <Link className="logo" to="/">
         <img src="/logo.png" alt="TechBird" className="logo-img" style={{ filter: 'brightness(0) invert(1)' }} />
       </Link>
@@ -122,8 +144,9 @@ export default function InnerNavbar() {
         </li>
 
         <li><NavLink to="/industries" className={({ isActive }) => isActive ? 'active' : ''}>Industries</NavLink></li>
+        <li><NavLink to="/case-studies" className={({ isActive }) => isActive ? 'active' : ''}>Case Studies</NavLink></li>
         <li><NavLink to="/about"      className={({ isActive }) => isActive ? 'active' : ''}>About</NavLink></li>
-        <li><NavLink to="/blog"       className={({ isActive }) => isActive ? 'active' : ''}>Blog</NavLink></li>
+        <li><NavLink to="/contact"    className={({ isActive }) => isActive ? 'active' : ''}>Contact</NavLink></li>
       </ul>
 
       <Link to="/contact" className="btn-pill ghost" id="ctaTop">

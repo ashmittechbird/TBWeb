@@ -1,6 +1,7 @@
 import ProductPageLayout from '../../components/ProductPageLayout';
+import SEO from '../../components/SEO';
 
-const A = '#fbbf24';             // ERP accent — amber
+const A = '#fbbf24';             // ERP accent - amber
 const A2 = '#38bdf8';           // blue secondary for chart variety
 
 const I = {
@@ -20,7 +21,7 @@ function MockHeroDash() {
       <rect width="560" height="400" rx="14" fill="#0d0d13"/>
       <rect width="560" height="34" fill="#121219"/>
       <circle cx="18" cy="17" r="4.5" fill="#ff5f57"/><circle cx="33" cy="17" r="4.5" fill="#febc2e"/><circle cx="48" cy="17" r="4.5" fill="#28c840"/>
-      <text x="280" y="21" textAnchor="middle" fill="rgba(255,255,255,.4)" fontSize="10" fontFamily="system-ui">ERP — Overview</text>
+      <text x="280" y="21" textAnchor="middle" fill="rgba(255,255,255,.4)" fontSize="10" fontFamily="system-ui">ERP - Overview</text>
       <rect x="0" y="34" width="120" height="366" fill="#0a0a10"/>
       <rect x="14" y="50" width="92" height="26" rx="6" fill={A} fillOpacity=".14"/>
       <circle cx="28" cy="63" r="5" fill={A}/><rect x="40" y="59" width="54" height="6" rx="3" fill={A} fillOpacity=".8"/>
@@ -134,7 +135,7 @@ function MockOpsBoard() {
       <rect width="960" height="360" rx="14" fill="#0c0c12"/>
       <rect width="960" height="40" fill="#101018"/>
       <circle cx="22" cy="20" r="5" fill="#ff5f57"/><circle cx="40" cy="20" r="5" fill="#febc2e"/><circle cx="58" cy="20" r="5" fill="#28c840"/>
-      <text x="480" y="25" textAnchor="middle" fill="rgba(255,255,255,.4)" fontSize="11" fontFamily="system-ui">ERP — Order to Cash</text>
+      <text x="480" y="25" textAnchor="middle" fill="rgba(255,255,255,.4)" fontSize="11" fontFamily="system-ui">ERP - Order to Cash</text>
       {cols.map((col, ci) => {
         const x = 24 + ci * 234;
         return (
@@ -217,14 +218,30 @@ function MockConsole() {
   );
 }
 
+const faqItems = [
+  { q: 'Is this built on ERPNext?', a: 'Yes. We implement and extend ERPNext - an open-source, full-suite ERP - so you get a mature, well-supported core with no per-user licensing lock-in, plus custom modules and workflows specific to your business.' },
+  { q: 'Can it be configured to our processes?', a: 'That is the point. Rather than forcing your team onto rigid defaults, we configure document flows, approval chains, naming, print formats and reports to match how you actually operate - and build custom doctypes where the standard model does not fit.' },
+  { q: 'Does it handle Indian GST and e-invoicing?', a: 'Yes. GST-compliant accounting, GSTR reports, e-invoicing (IRN/QR) and e-way bills are supported, along with TDS, multi-currency and multi-company consolidation.' },
+  { q: 'Can we migrate from Tally or our legacy ERP?', a: 'Yes. We migrate masters (items, customers, suppliers, accounts) and opening balances from Tally, spreadsheets or legacy systems, with reconciliation so your books tie out from day one.' },
+  { q: 'On-premise or cloud, and how long to go live?', a: 'Deploy on-premise or on AWS/GCP/Azure. A focused single-module rollout can go live in 6–8 weeks; a full multi-module implementation with migration and integrations typically runs 12–20 weeks.' },
+];
+
 export default function ERPPage() {
   return (
+    <>
+    <SEO
+      title="Custom ERP"
+      description="TechBird Custom ERP powered by ERPNext - finance, inventory, manufacturing, sales, purchase and HR on a single platform. Configured to your workflows, deployed on-premise or cloud."
+      keywords="ERP software, ERPNext, custom ERP, enterprise resource planning, manufacturing ERP, inventory management, finance accounting, GST e-invoicing, supply chain management, ERP India"
+      faqItems={faqItems}
+      softwareSchema={{ name: 'TechBird Custom ERP', description: 'Full-suite ERP with accounting, inventory, manufacturing, HR and CRM modules.', category: 'BusinessApplication' }}
+    />
     <ProductPageLayout
       accent={A}
       category="ERPNext-Powered"
       breadcrumbLabel="Custom ERP"
       title="One system to run the *whole business.*"
-      lead="A full-suite ERP on ERPNext — finance, inventory, manufacturing, sales, purchase and HR on a single data layer, configured to your workflows instead of forcing you onto someone else's."
+      lead="A full-suite ERP on ERPNext - finance, inventory, manufacturing, sales, purchase and HR on a single data layer, configured to your workflows instead of forcing you onto someone else's."
       heroActions={[
         { label: 'Request a Demo', to: '/contact', variant: 'accent' },
         { label: 'See it in action', to: '/contact', variant: 'white' },
@@ -239,9 +256,9 @@ export default function ERPPage() {
       bento={{
         eyebrow: 'Capabilities',
         heading: 'Every department, one connected system.',
-        sub: 'Built on ERPNext — orders, stock, production, accounting and people share one database, so a sale updates inventory, finance and dispatch at once.',
+        sub: 'Built on ERPNext - orders, stock, production, accounting and people share one database, so a sale updates inventory, finance and dispatch at once.',
         items: [
-          { icon: I.grid, title: 'Integrated modules', text: 'Finance, inventory, manufacturing, sales, purchase and HR — switched on as you need them.', art: <ArtModules />, span: true },
+          { icon: I.grid, title: 'Integrated modules', text: 'Finance, inventory, manufacturing, sales, purchase and HR - switched on as you need them.', art: <ArtModules />, span: true },
           { icon: I.box, title: 'Inventory & warehouse', text: 'Multi-warehouse stock, batch/serial tracking and reorder automation.', art: <ArtInventory /> },
           { icon: I.coins, title: 'Finance & accounting', text: 'GL, AP/AR, multi-currency and GST-ready statutory reporting.', art: <ArtFinance /> },
           { icon: I.factory, title: 'Manufacturing', text: 'BOMs, work orders, capacity planning and shop-floor tracking.', art: <ArtProduction /> },
@@ -251,7 +268,7 @@ export default function ERPPage() {
       light={{
         eyebrow: 'Order to cash',
         heading: 'Quote to cash, without re-keying.',
-        sub: 'A quotation becomes a sales order, a delivery note and an invoice — each step carrying the data forward and posting to finance and inventory automatically.',
+        sub: 'A quotation becomes a sales order, a delivery note and an invoice - each step carrying the data forward and posting to finance and inventory automatically.',
         mockup: <MockOpsBoard />,
         columns: [
           { icon: I.box, title: 'Procure & stock', text: 'Purchase orders, goods receipt and stock valuation update in real time.' },
@@ -262,7 +279,7 @@ export default function ERPPage() {
       laser={{
         eyebrow: 'Live Product',
         heading: 'See the ERP in action.',
-        sub: 'One console across finance, inventory and operations — revenue, margin, stock and receivables, live. Hover to explore.',
+        sub: 'One console across finance, inventory and operations - revenue, margin, stock and receivables, live. Hover to explore.',
         mockup: <MockConsole />,
         features: [
           { icon: I.coins, title: 'Real-time financials', text: 'P&L, balance sheet and cash flow that update with every posted transaction.' },
@@ -283,19 +300,14 @@ export default function ERPPage() {
           { label: 'Devices & APIs', tech: 'Barcode/RFID, biometric and REST API for anything else' },
         ],
       }}
-      faqItems={[
-        { q: 'Is this built on ERPNext?', a: 'Yes. We implement and extend ERPNext — an open-source, full-suite ERP — so you get a mature, well-supported core with no per-user licensing lock-in, plus custom modules and workflows specific to your business.' },
-        { q: 'Can it be configured to our processes?', a: 'That is the point. Rather than forcing your team onto rigid defaults, we configure document flows, approval chains, naming, print formats and reports to match how you actually operate — and build custom doctypes where the standard model does not fit.' },
-        { q: 'Does it handle Indian GST and e-invoicing?', a: 'Yes. GST-compliant accounting, GSTR reports, e-invoicing (IRN/QR) and e-way bills are supported, along with TDS, multi-currency and multi-company consolidation.' },
-        { q: 'Can we migrate from Tally or our legacy ERP?', a: 'Yes. We migrate masters (items, customers, suppliers, accounts) and opening balances from Tally, spreadsheets or legacy systems, with reconciliation so your books tie out from day one.' },
-        { q: 'On-premise or cloud, and how long to go live?', a: 'Deploy on-premise or on AWS/GCP/Azure. A focused single-module rollout can go live in 6–8 weeks; a full multi-module implementation with migration and integrations typically runs 12–20 weeks.' },
-      ]}
+      faqItems={faqItems}
       cta={{
         label: 'Get started',
         heading: 'Ready to unify your operations?',
-        body: 'A focused walkthrough of the ERP mapped to your actual order, inventory and accounting flows — and a realistic rollout plan.',
+        body: 'A focused walkthrough of the ERP mapped to your actual order, inventory and accounting flows - and a realistic rollout plan.',
         button: { label: 'Book a Demo', to: '/contact' },
       }}
     />
+    </>
   );
 }

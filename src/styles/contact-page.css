@@ -1,0 +1,422 @@
+/* ============================================================
+   TechBird — Contact Page
+   Clean, modern design · Space Grotesk + Manrope
+   ============================================================ */
+
+.cp-root {
+  background: #08080a;
+  color: #fff;
+  font-family: var(--body, 'Manrope', system-ui, sans-serif);
+}
+.cp-root * { box-sizing: border-box; }
+
+.cp-inner {
+  max-width: 76rem;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 4vw, 3rem);
+}
+
+/* ── Label ── */
+.cp-label {
+  display: inline-block;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: rgba(255,255,255,.45);
+  padding: 6px 16px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 100px;
+}
+
+/* Hero uses shared .ihero styles from inner.css */
+
+/* ════════════════════════════════════════
+   INFO STRIP
+   ════════════════════════════════════════ */
+.cp-info-strip {
+  padding: clamp(3rem, 6vh, 5rem) 0 clamp(3.5rem, 7vh, 5.5rem);
+}
+.cp-info-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.cp-info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 28px 24px;
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 14px;
+  text-decoration: none;
+  color: #fff;
+  transition: background 0.2s, border-color 0.2s;
+}
+a.cp-info-item:hover {
+  background: rgba(255,255,255,.12);
+  border-color: rgba(255,255,255,.22);
+}
+.cp-info-icon {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,.1);
+  border-radius: 12px;
+}
+.cp-info-icon svg { width: 20px; height: 20px; color: rgba(255,255,255,.8); }
+.cp-info-text { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.cp-info-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,.5);
+}
+.cp-info-text strong {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.45;
+}
+
+/* ════════════════════════════════════════
+   FORM SECTION
+   ════════════════════════════════════════ */
+.cp-form-section {
+  padding: clamp(2rem, 4vh, 4rem) 0 clamp(5rem, 10vh, 8rem);
+}
+.cp-form-layout {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  align-items: start;
+}
+
+/* ── Form Card ── */
+.cp-form-card {
+  background: #fff;
+  color: #1a1a2e;
+  border-radius: 20px;
+  padding: clamp(2rem, 4vw, 2.75rem);
+}
+.cp-form-card h2 {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: clamp(1.4rem, 2.2vw, 1.75rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: #08080a;
+}
+.cp-form-sub {
+  font-size: 0.9rem;
+  color: rgba(0,0,0,.45);
+  margin: 6px 0 28px;
+}
+
+/* Fields */
+.cp-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.cp-field { margin-bottom: 16px; }
+.cp-field label {
+  display: block;
+  font-size: 0.76rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(0,0,0,.5);
+  margin-bottom: 7px;
+}
+.cp-field input,
+.cp-field select,
+.cp-field textarea {
+  width: 100%;
+  padding: 12px 14px;
+  font-family: 'Manrope', system-ui, sans-serif;
+  font-size: 0.92rem;
+  color: #08080a;
+  background: #f5f5f7;
+  border: 1.5px solid transparent;
+  border-radius: 10px;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+.cp-field input::placeholder,
+.cp-field textarea::placeholder { color: rgba(0,0,0,.28); }
+.cp-field input:focus,
+.cp-field select:focus,
+.cp-field textarea:focus {
+  border-color: #08080a;
+  background: #fff;
+}
+.cp-field select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M3 4.5l3 3 3-3' stroke='%23666' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+  cursor: pointer;
+}
+.cp-field select option { background: #fff; color: #08080a; }
+.cp-field textarea { resize: vertical; min-height: 120px; }
+
+/* Submit */
+.cp-submit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+  padding: 14px 32px;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #fff;
+  background: #08080a;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+.cp-submit-btn:hover { background: #1a1a2e; }
+.cp-submit-btn:active { transform: scale(0.98); }
+.cp-submit-btn svg { width: 18px; height: 18px; }
+
+/* Success */
+.cp-success {
+  text-align: center;
+  padding: clamp(2rem, 5vh, 4rem) 0;
+}
+.cp-success-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #ecfdf5;
+}
+.cp-success-icon svg { width: 32px; height: 32px; color: #10b981; }
+.cp-success h3 {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 0 0 8px;
+  color: #08080a;
+}
+.cp-success p { font-size: 0.88rem; color: rgba(0,0,0,.5); line-height: 1.6; }
+.cp-success a { color: #2563eb; text-decoration: underline; }
+.cp-again-btn {
+  margin-top: 16px;
+  padding: 10px 22px;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #08080a;
+  background: #f5f5f7;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.cp-again-btn:hover { background: #e8e8ed; }
+
+/* ── Side Cards ── */
+.cp-side {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.cp-map-card {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.07);
+}
+.cp-map-card iframe { display: block; }
+
+.cp-connect-card {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 16px;
+  padding: 24px;
+}
+.cp-connect-card h3 {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+.cp-connect-card p {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,.45);
+  line-height: 1.65;
+  margin: 0 0 18px;
+}
+.cp-call-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #fff;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 100px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.cp-call-btn:hover { background: rgba(255,255,255,.14); }
+.cp-call-btn svg { width: 18px; height: 18px; }
+
+.cp-social-card {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 16px;
+  padding: 24px;
+}
+.cp-social-card h3 {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: 0.92rem;
+  font-weight: 600;
+  margin: 0 0 14px;
+}
+.cp-social-links {
+  display: flex;
+  gap: 10px;
+}
+.cp-social-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: rgba(255,255,255,.7);
+  background: rgba(255,255,255,.06);
+  border-radius: 10px;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+.cp-social-links a:hover { background: rgba(255,255,255,.12); color: #fff; }
+.cp-social-links svg { width: 18px; height: 18px; }
+
+/* ════════════════════════════════════════
+   FAQ
+   ════════════════════════════════════════ */
+.cp-faq {
+  padding: clamp(4rem, 8vh, 6rem) 0;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+.cp-faq-head {
+  text-align: center;
+  margin-bottom: clamp(2rem, 4vh, 3.5rem);
+}
+.cp-faq-head h2 {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin: 16px 0 0;
+}
+.cp-faq-list {
+  max-width: 700px;
+  margin: 0 auto;
+}
+.cp-faq-item {
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.cp-faq-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+.cp-faq-btn span {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: rgba(255,255,255,.72);
+  transition: color 0.2s;
+}
+.cp-faq-btn:hover span { color: #fff; }
+.cp-faq-chevron {
+  flex-shrink: 0;
+  color: rgba(255,255,255,.35);
+  transition: transform 0.3s ease, color 0.2s;
+}
+.cp-faq-item.open .cp-faq-chevron { transform: rotate(180deg); color: #fff; }
+
+/* animate body */
+.cp-faq-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.35s ease;
+  padding-bottom: 0;
+}
+.cp-faq-item.open .cp-faq-body {
+  max-height: 300px;
+  padding-bottom: 20px;
+}
+.cp-faq-body p {
+  font-size: 0.88rem;
+  line-height: 1.75;
+  color: rgba(255,255,255,.48);
+}
+
+/* ════════════════════════════════════════
+   RESPONSIVE
+   ════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .cp-info-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 860px) {
+  .cp-form-layout { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .cp-info-grid { grid-template-columns: 1fr; }
+  .cp-row { grid-template-columns: 1fr; }
+  .cp-hero { padding-top: 7rem; }
+
+  /* Form card */
+  .cp-form-card { padding: 1.5rem; border-radius: 16px; }
+  .cp-form-card h2 { font-size: clamp(1.2rem, 4.5vw, 1.5rem); }
+  .cp-submit-btn { width: 100%; justify-content: center; }
+
+  /* Info items */
+  .cp-info-item { padding: 20px 18px; }
+  .cp-info-icon { width: 38px; height: 38px; }
+  .cp-info-text strong { font-size: 0.85rem; }
+
+  /* Social links wrap */
+  .cp-social-links { flex-wrap: wrap; gap: 8px; }
+  .cp-social-links a { padding: 10px 14px; font-size: 0.78rem; }
+
+  /* Connect card */
+  .cp-connect-card { padding: 20px; }
+  .cp-call-btn { width: 100%; justify-content: center; }
+
+  /* FAQ */
+  .cp-faq-btn span { font-size: 0.9rem; }
+  .cp-faq-head h2 { font-size: clamp(1.4rem, 5vw, 1.8rem); }
+
+  /* Side cards */
+  .cp-map-card iframe { height: 200px; }
+}

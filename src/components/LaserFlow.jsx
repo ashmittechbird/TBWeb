@@ -272,8 +272,8 @@ export const LaserFlow = ({
         preserveDrawingBuffer: false, failIfMajorPerformanceCaveat: false,
         logarithmicDepthBuffer: false,
       });
-    } catch (e) {
-      // WebGL context limit exceeded or not available — degrade silently
+    } catch {
+      // WebGL context limit exceeded or not available - degrade silently
       return;
     }
     rendererRef.current = renderer;
@@ -427,7 +427,9 @@ export const LaserFlow = ({
       document.removeEventListener('visibilitychange', onVis);
       geometry.dispose();
       material.dispose();
-      try { renderer.forceContextLoss(); } catch (_) {}
+      try { renderer.forceContextLoss(); } catch {
+        // Context loss can fail after the browser has already reclaimed WebGL.
+      }
       renderer.dispose();
       if (mount.contains(canvas)) mount.removeChild(canvas);
     };

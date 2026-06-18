@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
 import StaggeredMenu from './StaggeredMenu';
@@ -80,7 +80,7 @@ export default function Navbar() {
       ]
     },
     {
-      label: 'Products', ariaLabel: 'View our products', link: '/#products',
+      label: 'Products', ariaLabel: 'View our products', link: '/products',
       subItems: [
         { label: 'Custom ERP',            link: '/products/erp' },
         { label: 'HRMS',                  link: '/products/hrms' },
@@ -92,9 +92,10 @@ export default function Navbar() {
         { label: 'Visitor Management',    link: '/products/visitor-management' },
       ]
     },
+    { label: 'Industries', ariaLabel: 'View industries we serve', link: '/industries' },
+    { label: 'Case Studies', ariaLabel: 'View case studies', link: '/case-studies' },
     { label: 'About',   ariaLabel: 'Learn about us', link: '/about' },
-    { label: 'Blog',    ariaLabel: 'Read our blog',  link: '/#blog' },
-    { label: 'Contact', ariaLabel: 'Get in touch',   link: '/#contact' }
+    { label: 'Contact', ariaLabel: 'Get in touch',   link: '/contact' }
   ];
 
   const socialItems = [
@@ -118,17 +119,18 @@ export default function Navbar() {
           </li>
 
           <li onMouseEnter={() => open('pro')} onMouseLeave={close}>
-            <Link to="/#products" className={`nav-trigger${mega === 'pro' ? ' active' : ''}`}>
+            <Link to="/products" className={`nav-trigger${mega === 'pro' ? ' active' : ''}`}>
               Products <Chev />
             </Link>
           </li>
 
+          <li><Link to="/industries">Industries</Link></li>
+          <li><Link to="/case-studies">Case Studies</Link></li>
           <li><Link to="/about">About</Link></li>
-          <li><Link to="/#blog">Blog</Link></li>
-          <li><Link to="/#contact">Contact</Link></li>
+          <li><Link to="/contact">Contact</Link></li>
         </ul>
 
-        <Link to="/#contact" className="btn-pill" id="ctaTop">
+        <Link to="/contact" className="btn-pill" id="ctaTop">
           <span>Get Started</span>
           <i className="arrow"></i>
         </Link>
@@ -165,7 +167,7 @@ export default function Navbar() {
                 <svg viewBox="0 0 16 16" fill="none"><path d="M8 3H3v10h10V8M8 3h5v5M8 8l5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 View all services
               </Link>
-              <Link to="/#contact" className="mega-bar-link">
+              <Link to="/contact" className="mega-bar-link">
                 <svg viewBox="0 0 16 16" fill="none"><path d="M2 4h12v8H2zM2 4l6 5 6-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 Talk to an expert
               </Link>
@@ -183,7 +185,7 @@ export default function Navbar() {
             <span className="mega-left-eye">Our platforms</span>
             <h3 className="mega-left-title">Platforms<br/>ready to<br/>deploy.</h3>
             <p className="mega-left-sub">8 products.<br/>50+ enterprise clients.</p>
-            <Link to="/#contact" className="mega-left-cta">
+            <Link to="/contact" className="mega-left-cta">
               Request a demo
               <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
             </Link>
@@ -201,11 +203,11 @@ export default function Navbar() {
             </div>
 
             <div className="mega-bar">
-              <Link to="/#contact" className="mega-bar-link">
+              <Link to="/contact" className="mega-bar-link">
                 <svg viewBox="0 0 16 16" fill="none"><path d="M8 2v12M3 8l5 6 5-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 Request a demo
               </Link>
-              <Link to="/#contact" className="mega-bar-link">
+              <Link to="/contact" className="mega-bar-link">
                 <svg viewBox="0 0 16 16" fill="none"><path d="M2 4h12v8H2zM2 4l6 5 6-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 Get in touch
               </Link>

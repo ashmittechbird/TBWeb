@@ -29,7 +29,7 @@ const CARDS = [
         <circle cx="80" cy="80" r="40" stroke="rgba(124,58,237,.15)" strokeWidth="1" fill="none" />
       </>
     ),
-    desc: 'Custom ERP systems, web apps, APIs and SaaS platforms — built for enterprise scale across 50+ countries.',
+    desc: 'Custom ERP systems, web apps, APIs and SaaS platforms - built for enterprise scale across 50+ countries.',
     cta: 'See our work',
     vbFront: '0 0 480 360',
     vbBack: '0 0 480 360',
@@ -54,7 +54,7 @@ const CARDS = [
       </>
     ),
     to: '/services/ai-solutions',
-    desc: 'Bespoke AI models, intelligent automation and consulting — unlocking data-driven insights across your operations.',
+    desc: 'Bespoke AI models, intelligent automation and consulting - unlocking data-driven insights across your operations.',
     cta: 'Explore AI',
     vbFront: '0 0 560 400',
     vbBack: '0 0 560 400',
@@ -79,7 +79,7 @@ const CARDS = [
       </>
     ),
     to: '/services/cloud-devops',
-    desc: 'Robust cloud environments and DevOps pipelines — designed and managed for seamless operations and secure digital growth.',
+    desc: 'Robust cloud environments and DevOps pipelines - designed and managed for seamless operations and secure digital growth.',
     cta: 'View solutions',
     vbFront: '0 0 480 360',
     vbBack: '0 0 480 360',
@@ -156,7 +156,7 @@ const CARDS = [
       </>
     ),
     to: '/services/marketing',
-    desc: 'Marketing strategies aligned with business goals — GTM, SEO, SEM and social campaigns that drive sustainable growth.',
+    desc: 'Marketing strategies aligned with business goals - GTM, SEO, SEM and social campaigns that drive sustainable growth.',
     cta: 'Get strategy',
     vbFront: '0 0 480 360',
     vbBack: '0 0 480 360',
@@ -173,7 +173,7 @@ export default function Services() {
         </div>
 
         {CARDS.map(card => (
-          <div className={`recog-card ${card.cls}`} id={card.id} key={card.id}>
+          <Link to={card.to} className={`recog-card ${card.cls}`} id={card.id} key={card.id}>
             <div className="rc-inner">
               <div className="rc-front">
                 <svg className="rc-svg" viewBox={card.vbFront} fill="none" preserveAspectRatio="xMidYMid slice">
@@ -187,13 +187,13 @@ export default function Services() {
                   {card.svgBack}
                 </svg>
                 <p className="rc-back-desc">{card.desc}</p>
-                <Link to={card.to} className="rc-back-cta">
+                <span className="rc-back-cta">
                   {card.cta}{' '}
                   <span className="rc-cta-icon"><ArrowIcon /></span>
-                </Link>
+                </span>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </section>

@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Disallow: /api/
+Disallow: /_debug/
+
+Sitemap: https://www.techbird.in/sitemap.xml

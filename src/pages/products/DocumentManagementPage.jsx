@@ -1,6 +1,7 @@
 import ProductPageLayout from '../../components/ProductPageLayout';
+import SEO from '../../components/SEO';
 
-const A = '#22d3ee';            // DMS accent — cyan
+const A = '#22d3ee';            // DMS accent - cyan
 const A2 = '#a78bfa';          // violet secondary
 
 const I = {
@@ -20,7 +21,7 @@ function MockHeroDash() {
       <rect width="560" height="400" rx="14" fill="#0d0d13"/>
       <rect width="560" height="34" fill="#121219"/>
       <circle cx="18" cy="17" r="4.5" fill="#ff5f57"/><circle cx="33" cy="17" r="4.5" fill="#febc2e"/><circle cx="48" cy="17" r="4.5" fill="#28c840"/>
-      <text x="280" y="21" textAnchor="middle" fill="rgba(255,255,255,.4)" fontSize="10" fontFamily="system-ui">DMS — Library</text>
+      <text x="280" y="21" textAnchor="middle" fill="rgba(255,255,255,.4)" fontSize="10" fontFamily="system-ui">DMS - Library</text>
       <rect x="0" y="34" width="120" height="366" fill="#0a0a10"/>
       <text x="14" y="58" fill="rgba(255,255,255,.3)" fontSize="8" fontFamily="system-ui" letterSpacing="1">FOLDERS</text>
       {['Contracts','HR','Finance','Projects','Legal'].map((t,i)=>(
@@ -40,7 +41,7 @@ function MockHeroDash() {
       ))}
       <rect x="138" y="144" width="408" height="156" rx="10" fill="#13131b" stroke="rgba(255,255,255,.06)"/>
       <text x="154" y="166" fill="rgba(255,255,255,.45)" fontSize="10" fontFamily="system-ui">Recent documents</text>
-      {[['Master Services Agreement.pdf','v4',A],['Q2 Budget.xlsx','v2',A2],['Vendor NDA — Acme.docx','v1','#34d399'],['Board Minutes Jun.pdf','v3','#fb923c']].map(([n,v,c],i)=>(
+      {[['Master Services Agreement.pdf','v4',A],['Q2 Budget.xlsx','v2',A2],['Vendor NDA - Acme.docx','v1','#34d399'],['Board Minutes Jun.pdf','v3','#fb923c']].map(([n,v,c],i)=>(
         <g key={i}>
           <rect x="154" y={178+i*28} width="378" height="22" rx="5" fill="#0f0f16"/>
           <rect x="162" y={183+i*28} width="11" height="13" rx="2" fill={c} fillOpacity=".3"/>
@@ -130,17 +131,17 @@ function ArtEsign() {
 
 function MockApprovalBoard() {
   const cols = [
-    { head: 'Draft', tone: '#6b6c6d', cards: [['NDA — Vertex', 'Legal'], ['SOW — Orbit', 'Sales']] },
-    { head: 'In Review', tone: A2, cards: [['MSA — Acme', 'Manager'], ['Policy v6', 'HR']] },
-    { head: 'Approved', tone: A, cards: [['Lease — Pune', 'Finance']] },
-    { head: 'Signed', tone: '#34d399', cards: [['Contract — Zen', 'Legal'], ['PO — Apex', 'Ops']] },
+    { head: 'Draft', tone: '#6b6c6d', cards: [['NDA - Vertex', 'Legal'], ['SOW - Orbit', 'Sales']] },
+    { head: 'In Review', tone: A2, cards: [['MSA - Acme', 'Manager'], ['Policy v6', 'HR']] },
+    { head: 'Approved', tone: A, cards: [['Lease - Pune', 'Finance']] },
+    { head: 'Signed', tone: '#34d399', cards: [['Contract - Zen', 'Legal'], ['PO - Apex', 'Ops']] },
   ];
   return (
     <svg viewBox="0 0 960 360" xmlns="http://www.w3.org/2000/svg">
       <rect width="960" height="360" rx="14" fill="#0c0c12"/>
       <rect width="960" height="40" fill="#101018"/>
       <circle cx="22" cy="20" r="5" fill="#ff5f57"/><circle cx="40" cy="20" r="5" fill="#febc2e"/><circle cx="58" cy="20" r="5" fill="#28c840"/>
-      <text x="480" y="25" textAnchor="middle" fill="rgba(255,255,255,.4)" fontSize="11" fontFamily="system-ui">DMS — Approval Workflow</text>
+      <text x="480" y="25" textAnchor="middle" fill="rgba(255,255,255,.4)" fontSize="11" fontFamily="system-ui">DMS - Approval Workflow</text>
       {cols.map((col, ci) => {
         const x = 24 + ci * 234;
         return (
@@ -211,7 +212,7 @@ function MockConsole() {
           <text x="840" y="274" fill="rgba(255,255,255,.3)" fontSize="8.5" fontFamily="system-ui" letterSpacing="1">STATUS</text>
         </g>
       ))}
-      {[['Master Services Agreement.pdf','A. Thakur','v4','Signed','#34d399'],['Vendor NDA — Acme.docx','R. Verma','v1','In review',A2],['Lease Agreement — Pune.pdf','M. Iyer','v2','Approved',A],['Q2 Budget Sign-off.xlsx','D. Nair','v3','Pending','#fb923c'],['Board Resolution Jun.pdf','K. Khan','v1','Draft','#6b6c6d'],['Employment Contract.docx','A. Bose','v5','Signed','#34d399']].map(([n,o,v,s,c],i)=>{
+      {[['Master Services Agreement.pdf','A. Thakur','v4','Signed','#34d399'],['Vendor NDA - Acme.docx','R. Verma','v1','In review',A2],['Lease Agreement - Pune.pdf','M. Iyer','v2','Approved',A],['Q2 Budget Sign-off.xlsx','D. Nair','v3','Pending','#fb923c'],['Board Resolution Jun.pdf','K. Khan','v1','Draft','#6b6c6d'],['Employment Contract.docx','A. Bose','v5','Signed','#34d399']].map(([n,o,v,s,c],i)=>{
         const y=290+i*36;
         return (
           <g key={i}>
@@ -229,14 +230,30 @@ function MockConsole() {
   );
 }
 
+const faqItems = [
+  { q: 'How does version control work?', a: 'Every save creates a new version while preserving all prior ones. You can compare versions, see who changed what and when, and restore any earlier version. No more emailing "final" files back and forth.' },
+  { q: 'Are the e-signatures legally valid?', a: 'Yes. The built-in e-signature captures intent, identity and a tamper-evident audit trail with timestamps. We also integrate DocuSign and Aadhaar eSign where a specific standard (eIDAS, IT Act) is required.' },
+  { q: 'Can we control who sees what?', a: 'Granular, role-based permissions apply at folder, document and action level (view, edit, download, share, delete). Every access and change is logged for a complete audit trail.' },
+  { q: 'Can it search inside documents?', a: 'Yes. Full-text indexing (including OCR for scanned PDFs and images) lets you find documents by their content, not just file names - across the entire archive in seconds.' },
+  { q: 'On-premise or cloud, and how long to go live?', a: 'Deploy on-premise for data sovereignty, or on your private cloud. A standard rollout with folder structure, permissions and migration runs 4–8 weeks; large archives with OCR and integrations run 10–14 weeks.' },
+];
+
 export default function DocumentManagementPage() {
   return (
+    <>
+    <SEO
+      title="Document Management System"
+      description="TechBird Document Management System - centralised storage, version control, approval workflows, e-signatures and role-based access. Eliminate paper chaos and scattered drives at enterprise scale."
+      keywords="document management system, DMS, version control, e-signature, approval workflow, document storage, role-based access, audit trail, full-text search, enterprise DMS India"
+      faqItems={faqItems}
+      softwareSchema={{ name: 'TechBird DMS', description: 'Version-controlled document storage with OCR, search, audit trails and workflows.', category: 'BusinessApplication' }}
+    />
     <ProductPageLayout
       accent={A}
       category="Enterprise DMS"
       breadcrumbLabel="Document Management"
       title="Every document, *under control.*"
-      lead="Centralised storage with version control, approval workflows, e-signatures and role-based access — so the right people find the right file, and the wrong people never do."
+      lead="Centralised storage with version control, approval workflows, e-signatures and role-based access - so the right people find the right file, and the wrong people never do."
       heroActions={[
         { label: 'Request a Demo', to: '/contact', variant: 'accent' },
         { label: 'See it in action', to: '/contact', variant: 'white' },
@@ -251,19 +268,19 @@ export default function DocumentManagementPage() {
       bento={{
         eyebrow: 'Capabilities',
         heading: 'Replace the shared drive chaos.',
-        sub: 'Every document has a single home, a full version history and a clear access policy — with approvals and signatures built into the flow.',
+        sub: 'Every document has a single home, a full version history and a clear access policy - with approvals and signatures built into the flow.',
         items: [
           { icon: I.file, title: 'Central library', text: 'One organised, searchable repository with folder hierarchy and metadata tagging.', art: <ArtDocList />, span: true },
-          { icon: I.history, title: 'Version control', text: 'Every edit kept, compared and restorable — no more "final_v7_FINAL".', art: <ArtVersions /> },
+          { icon: I.history, title: 'Version control', text: 'Every edit kept, compared and restorable - no more "final_v7_FINAL".', art: <ArtVersions /> },
           { icon: I.flow, title: 'Approval workflows', text: 'Route documents through multi-stage review and sign-off automatically.', art: <ArtApproval /> },
           { icon: I.pen, title: 'E-signatures', text: 'Legally valid digital signing built in, with verification and timestamps.', art: <ArtEsign /> },
-          { icon: I.lock, title: 'Role-based access', text: 'Granular permissions per folder, document and action — fully audited.' },
+          { icon: I.lock, title: 'Role-based access', text: 'Granular permissions per folder, document and action - fully audited.' },
         ],
       }}
       light={{
         eyebrow: 'Lifecycle',
         heading: 'Draft, review, sign, archive.',
-        sub: 'A document moves from draft through review and sign-off to a controlled archive — every step logged, every version preserved.',
+        sub: 'A document moves from draft through review and sign-off to a controlled archive - every step logged, every version preserved.',
         mockup: <MockApprovalBoard />,
         columns: [
           { icon: I.file, title: 'Create & store', text: 'Upload or author in place, tag with metadata, and file it where it belongs.' },
@@ -274,14 +291,14 @@ export default function DocumentManagementPage() {
       laser={{
         eyebrow: 'Live Product',
         heading: 'See the DMS in action.',
-        sub: 'One library for the whole organisation — documents, versions, approvals and signatures, fully searchable. Hover to explore.',
+        sub: 'One library for the whole organisation - documents, versions, approvals and signatures, fully searchable. Hover to explore.',
         mockup: <MockConsole />,
         features: [
           { icon: I.file, title: 'Centralised storage', text: 'Folder hierarchy, metadata and a single source of truth for every file.' },
           { icon: I.history, title: 'Full version history', text: 'Track, compare and restore any prior version with a complete change log.' },
           { icon: I.flow, title: 'Approval workflows', text: 'Configurable multi-stage routing with reminders and escalation.' },
           { icon: I.pen, title: 'Built-in e-signature', text: 'Send for signature and capture legally valid, verifiable signatures.' },
-          { icon: I.search, title: 'Full-text search', text: 'Find documents by content, name, tag or metadata in seconds — even inside PDFs.' },
+          { icon: I.search, title: 'Full-text search', text: 'Find documents by content, name, tag or metadata in seconds - even inside PDFs.' },
           { icon: I.lock, title: 'Access & audit', text: 'Role-based permissions and a tamper-evident audit trail on every action.' },
         ],
       }}
@@ -295,13 +312,7 @@ export default function DocumentManagementPage() {
           { label: 'Systems', tech: 'ERP, CRM and HRMS via REST API and webhooks' },
         ],
       }}
-      faqItems={[
-        { q: 'How does version control work?', a: 'Every save creates a new version while preserving all prior ones. You can compare versions, see who changed what and when, and restore any earlier version. No more emailing "final" files back and forth.' },
-        { q: 'Are the e-signatures legally valid?', a: 'Yes. The built-in e-signature captures intent, identity and a tamper-evident audit trail with timestamps. We also integrate DocuSign and Aadhaar eSign where a specific standard (eIDAS, IT Act) is required.' },
-        { q: 'Can we control who sees what?', a: 'Granular, role-based permissions apply at folder, document and action level (view, edit, download, share, delete). Every access and change is logged for a complete audit trail.' },
-        { q: 'Can it search inside documents?', a: 'Yes. Full-text indexing (including OCR for scanned PDFs and images) lets you find documents by their content, not just file names — across the entire archive in seconds.' },
-        { q: 'On-premise or cloud, and how long to go live?', a: 'Deploy on-premise for data sovereignty, or on your private cloud. A standard rollout with folder structure, permissions and migration runs 4–8 weeks; large archives with OCR and integrations run 10–14 weeks.' },
-      ]}
+      faqItems={faqItems}
       cta={{
         label: 'Get started',
         heading: 'Ready to tame your documents?',
@@ -309,5 +320,6 @@ export default function DocumentManagementPage() {
         button: { label: 'Book a Demo', to: '/contact' },
       }}
     />
+    </>
   );
 }

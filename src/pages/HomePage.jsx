@@ -6,10 +6,13 @@ import Services from '../components/Services';
 import Recognition from '../components/Recognition';
 import Products from '../components/Products';
 import Industries from '../components/Industries';
-import Insights from '../components/Insights';
+import Clients from '../components/Clients';
+import Testimonials from '../components/Testimonials';
+import CaseStudies from '../components/CaseStudies';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 import SplashCursor from '../components/SplashCursor';
+import SEO from '../components/SEO';
 import useAppInit from '../hooks/useAppInit';
 import useScrollAnimations from '../hooks/useScrollAnimations';
 
@@ -19,6 +22,11 @@ export default function HomePage() {
 
   return (
     <>
+      <SEO
+        title={null}
+        description="Premier technology partner for startups to enterprises. Custom software development, AI solutions, cloud & DevOps, ERP (ERPNext), mobile apps, and marketing technology. 50+ enterprise clients in Pune, India."
+        keywords="software development company, ERP solutions, ERPNext, Frappe, AI solutions, cloud DevOps, custom software, web development, mobile app development, IT services India, Pune, digital transformation, SaaS, enterprise software"
+      />
       <div className="scroll-progress" id="scrollProgress"></div>
 
       <header className="stage" id="stage">
@@ -39,7 +47,9 @@ export default function HomePage() {
         <Recognition />
         <Products />
         <Industries />
-        <Insights />
+        <Clients />
+        <CaseStudies />
+        <Testimonials />
         <Contact />
         <Footer />
       </main>

@@ -1,12 +1,40 @@
 import ServicePageLayout from '../../components/ServicePageLayout';
+import SEO from '../../components/SEO';
+
+const faqItems = [
+  {
+    q: 'How long does it take to see results from SEO?',
+    a: 'SEO is a compounding channel - results build over time rather than appearing immediately. Technical fixes and low-competition keyword wins can produce measurable traffic improvements within 4–8 weeks. Building authority and ranking for competitive terms typically takes 6–12 months of consistent execution. We set realistic expectations upfront and measure progress against organic traffic, keyword rankings and lead conversion, not just position changes.',
+  },
+  {
+    q: 'What is included in a GTM strategy engagement?',
+    a: 'A GTM strategy engagement includes: market and competitive analysis; ideal customer profile and buyer persona development; positioning and messaging framework; channel selection and prioritisation; content and campaign strategy; launch timeline and milestone mapping; KPI framework and attribution setup. Deliverables are documented, not just presented in slides.',
+  },
+  {
+    q: 'Do you run paid campaigns on a percentage-of-spend model?',
+    a: 'No. We charge a fixed management fee, not a percentage of ad spend. Percentage-of-spend models create an incentive to increase budget regardless of performance. Our fee is based on the scope of work - platforms managed, campaign complexity, reporting cadence - and is independent of what you spend on media.',
+  },
+  {
+    q: 'Can you work alongside our internal marketing team?',
+    a: 'Yes. Many of our engagements are structured as an extension of an existing internal team - we handle the strategic and technical work that requires specialist expertise while your team manages day-to-day execution. We also run fully embedded engagements where we function as your marketing department. The structure is designed around your needs.',
+  },
+];
 
 export default function MarketingPage() {
   return (
-    <ServicePageLayout
+    <>
+      <SEO
+        title="Marketing Strategy"
+        description="Results-driven marketing strategy services - GTM planning, SEO, SEM, paid media, content strategy, social media management and email automation. Marketing that connects channel activity to revenue."
+        keywords="marketing strategy, GTM, go-to-market, SEO, SEM, paid media, Google Ads, content marketing, social media, email automation, TechBird"
+        faqItems={faqItems}
+        serviceSchema={{ name: 'Marketing Strategy', description: 'GTM strategy, SEO, SEM, paid media, social media and content marketing.', category: 'Marketing Consulting' }}
+      />
+      <ServicePageLayout
       accentColor="#22d3ee"
       eyebrow="Marketing Strategy"
       title="Marketing Strategies That Drive Growth, Not Just Impressions"
-      subtitle="GTM strategy, SEO, paid media, content and social — designed as a system that connects channel activity to revenue, not just reporting dashboards."
+      subtitle="GTM strategy, SEO, paid media, content and social - designed as a system that connects channel activity to revenue, not just reporting dashboards."
       breadcrumbLabel="Marketing Strategy"
       metrics={[
         { number: '3.4×', label: 'Average ROAS improvement across accounts' },
@@ -14,8 +42,8 @@ export default function MarketingPage() {
         { number: '85%', label: 'Client retention rate on ongoing retainers' },
       ]}
       introParagraphs={[
-        'Impressions, clicks and followers are not business outcomes. Too many companies spend months running campaigns that look busy in reporting dashboards but never move the metrics that matter — pipeline, revenue and customer acquisition cost. The disconnect is usually strategic: channels are managed in silos, creative is produced without audience insight, and budgets are allocated based on last year\'s plan rather than this quarter\'s data.',
-        'TechBird approaches marketing as a systems problem. We design the strategy, set up the attribution infrastructure, build the campaigns and measure what actually drives revenue — not what looks impressive in a deck.',
+        'Impressions, clicks and followers are not business outcomes. Too many companies spend months running campaigns that look busy in reporting dashboards but never move the metrics that matter - pipeline, revenue and customer acquisition cost. The disconnect is usually strategic: channels are managed in silos, creative is produced without audience insight, and budgets are allocated based on last year\'s plan rather than this quarter\'s data.',
+        'TechBird approaches marketing as a systems problem. We design the strategy, set up the attribution infrastructure, build the campaigns and measure what actually drives revenue - not what looks impressive in a deck.',
       ]}
       sections={[
         {
@@ -23,7 +51,7 @@ export default function MarketingPage() {
           color: '#22d3ee',
           heading: 'Go-To-Market (GTM) Strategy',
           paragraphs: [
-            'A product launch without a GTM strategy is a press release that nobody reads. We develop positioning frameworks, ideal customer profiles, competitive landscape analysis and channel strategies that ensure your product reaches the right audience with the right message at the right time — from pricing strategy and sales enablement to launch timelines and success metrics.',
+            'A product launch without a GTM strategy is a press release that nobody reads. We develop positioning frameworks, ideal customer profiles, competitive landscape analysis and channel strategies that ensure your product reaches the right audience with the right message at the right time - from pricing strategy and sales enablement to launch timelines and success metrics.',
           ],
           useCases: 'New product launches, Market expansion, Competitive repositioning, Vertical GTM, Partnership strategy',
         },
@@ -32,7 +60,7 @@ export default function MarketingPage() {
           color: '#38bdf8',
           heading: 'SEO & Content Strategy',
           paragraphs: [
-            'Organic search is the highest-ROI marketing channel for most B2B companies — when it is executed with the discipline of an engineering project. We build SEO programmes that start with keyword research and competitive gap analysis, develop content that matches search intent at every stage of the buyer journey, and implement technical SEO improvements that compound over time.',
+            'Organic search is the highest-ROI marketing channel for most B2B companies - when it is executed with the discipline of an engineering project. We build SEO programmes that start with keyword research and competitive gap analysis, develop content that matches search intent at every stage of the buyer journey, and implement technical SEO improvements that compound over time.',
           ],
           useCases: 'Technical SEO audits, Content gap analysis, Link building, Local SEO, E-commerce SEO',
         },
@@ -41,7 +69,7 @@ export default function MarketingPage() {
           color: '#a78bfa',
           heading: 'Paid Media (SEM & Social)',
           paragraphs: [
-            'Paid media is the accelerant — but only when the targeting, creative and landing page are aligned. We run Google Ads, Meta Ads, LinkedIn Ads and programmatic campaigns with rigorous A/B testing, audience segmentation and attribution modelling. Budget allocation is driven by measured CAC and LTV, not gut feel or channel bias.',
+            'Paid media is the accelerant - but only when the targeting, creative and landing page are aligned. We run Google Ads, Meta Ads, LinkedIn Ads and programmatic campaigns with rigorous A/B testing, audience segmentation and attribution modelling. Budget allocation is driven by measured CAC and LTV, not gut feel or channel bias.',
           ],
           useCases: 'Google Ads management, Meta advertising, LinkedIn B2B campaigns, Retargeting, Programmatic display',
         },
@@ -50,7 +78,7 @@ export default function MarketingPage() {
           color: '#34d399',
           heading: 'Social Media & Community',
           paragraphs: [
-            'Social media presence without strategy is noise. We build social programmes around a content calendar that aligns with your business objectives — thought leadership content, product announcements, community engagement and paid amplification. We manage LinkedIn, Instagram, X and YouTube across B2B and consumer contexts, with monthly reporting tied to business metrics.',
+            'Social media presence without strategy is noise. We build social programmes around a content calendar that aligns with your business objectives - thought leadership content, product announcements, community engagement and paid amplification. We manage LinkedIn, Instagram, X and YouTube across B2B and consumer contexts, with monthly reporting tied to business metrics.',
           ],
           useCases: 'LinkedIn strategy, Instagram brand building, Content calendars, Community management, Influencer partnerships',
         },
@@ -59,7 +87,7 @@ export default function MarketingPage() {
           color: '#fbbf24',
           heading: 'Email & Marketing Automation',
           paragraphs: [
-            'Email remains the highest-ROI direct channel when sequences are built around buyer behaviour rather than calendar. We design and implement nurture sequences, onboarding flows, win-back campaigns and transactional emails — in HubSpot, Mailchimp, Klaviyo and custom stacks. Every sequence is tested, measured and improved based on open, click and conversion data.',
+            'Email remains the highest-ROI direct channel when sequences are built around buyer behaviour rather than calendar. We design and implement nurture sequences, onboarding flows, win-back campaigns and transactional emails - in HubSpot, Mailchimp, Klaviyo and custom stacks. Every sequence is tested, measured and improved based on open, click and conversion data.',
           ],
           useCases: 'Lead nurture sequences, Onboarding emails, Win-back campaigns, Newsletter strategy, HubSpot automation',
         },
@@ -72,26 +100,10 @@ export default function MarketingPage() {
         { label: 'Analytics', tech: 'GA4, Mixpanel, Amplitude, Looker Studio, Heap' },
         { label: 'Social', tech: 'Sprout Social, Buffer, Hootsuite, Creator Studio' },
       ]}
-      faqItems={[
-        {
-          q: 'How long does it take to see results from SEO?',
-          a: 'SEO is a compounding channel — results build over time rather than appearing immediately. Technical fixes and low-competition keyword wins can produce measurable traffic improvements within 4–8 weeks. Building authority and ranking for competitive terms typically takes 6–12 months of consistent execution. We set realistic expectations upfront and measure progress against organic traffic, keyword rankings and lead conversion, not just position changes.',
-        },
-        {
-          q: 'What is included in a GTM strategy engagement?',
-          a: 'A GTM strategy engagement includes: market and competitive analysis; ideal customer profile and buyer persona development; positioning and messaging framework; channel selection and prioritisation; content and campaign strategy; launch timeline and milestone mapping; KPI framework and attribution setup. Deliverables are documented, not just presented in slides.',
-        },
-        {
-          q: 'Do you run paid campaigns on a percentage-of-spend model?',
-          a: 'No. We charge a fixed management fee, not a percentage of ad spend. Percentage-of-spend models create an incentive to increase budget regardless of performance. Our fee is based on the scope of work — platforms managed, campaign complexity, reporting cadence — and is independent of what you spend on media.',
-        },
-        {
-          q: 'Can you work alongside our internal marketing team?',
-          a: 'Yes. Many of our engagements are structured as an extension of an existing internal team — we handle the strategic and technical work that requires specialist expertise while your team manages day-to-day execution. We also run fully embedded engagements where we function as your marketing department. The structure is designed around your needs.',
-        },
-      ]}
+      faqItems={faqItems}
       ctaHeading="Build a Marketing Engine"
       ctaText="Tell us about your growth goals and current marketing situation. We will identify the highest-leverage opportunities and build a plan around them."
     />
+    </>
   );
 }

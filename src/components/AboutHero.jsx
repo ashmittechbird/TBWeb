@@ -5,7 +5,7 @@ import AboutScene3D from './AboutScene3D';
 
 gsap.registerPlugin(ScrollTrigger);
 
-/* About-us hero — real-time Three.js "spirit in cupped hands" scene
+/* About-us hero - real-time Three.js "spirit in cupped hands" scene
    (AboutScene3D) with a scroll-scrubbed content choreography on top. */
 export default function AboutHero() {
   const root = useRef(null);
@@ -23,7 +23,7 @@ export default function AboutHero() {
         .to('.ab-mission',  { opacity: 1 }, 0.85);
     }, root);
 
-    return () => { ctx.revert(); ScrollTrigger.getAll().forEach(t => t.kill()); };
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -49,7 +49,7 @@ export default function AboutHero() {
 
           {/* mission statement (resolves mid-scroll) */}
           <div className="ab-mission">
-            <h2>Most enterprises don't need another IT vendor. They need a team that builds systems they actually run on — and sticks around after launch.</h2>
+            <h2>Most enterprises don't need another IT vendor. They need a team that builds systems they actually run on - and sticks around after launch.</h2>
             <p>
               TechBird IT Services is headquartered in Pune, India. We build ERPNext systems, agentic AI tools,
               custom web applications, cloud infrastructure and proprietary products for enterprises worldwide.

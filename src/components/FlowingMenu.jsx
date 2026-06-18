@@ -1,15 +1,16 @@
 import { useRef, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 
 const PRODUCTS = [
-  { link: '#contact', text: 'Custom ERP',             image: 'https://picsum.photos/600/400?random=11' },
-  { link: '#contact', text: 'HRMS',                   image: 'https://picsum.photos/600/400?random=22' },
-  { link: '#contact', text: 'Lead & Sales CRM',       image: 'https://picsum.photos/600/400?random=33' },
-  { link: '#contact', text: 'Financial Markets',      image: 'https://picsum.photos/600/400?random=44' },
-  { link: '#contact', text: 'E-commerce Platform',    image: 'https://picsum.photos/600/400?random=55' },
-  { link: '#contact', text: 'Document Management',    image: 'https://picsum.photos/600/400?random=66' },
-  { link: '#contact', text: 'Legal Practice Suite',   image: 'https://picsum.photos/600/400?random=77' },
-  { link: '#contact', text: 'Travel & Visitor Mgmt', image: 'https://picsum.photos/600/400?random=88' },
+  { link: '/products/erp',                    text: 'Custom ERP',           image: '/assets/products/erp.jpg' },
+  { link: '/products/hrms',                   text: 'HRMS',                 image: '/assets/products/hrms.jpg' },
+  { link: '/products/crm',                    text: 'Lead & Sales CRM',     image: '/assets/products/crm.jpg' },
+  { link: '/products/practice-management',    text: 'Practice Management',  image: '/assets/products/practice.jpg' },
+  { link: '/products/ecommerce',              text: 'E-commerce Platform',  image: '/assets/products/ecommerce.jpg' },
+  { link: '/products/document-management',    text: 'Document Management',  image: '/assets/products/dms.jpg' },
+  { link: '/products/litigation-management',  text: 'Litigation Management',image: '/assets/products/litigation.jpg' },
+  { link: '/products/visitor-management',     text: 'Visitor Management',   image: '/assets/products/visitor.jpg' },
 ];
 
 function dist(x, y, x2, y2) { return (x - x2) ** 2 + (y - y2) ** 2; }
@@ -72,9 +73,9 @@ function MenuItem({ link, text, image, speed = 13 }) {
 
   return (
     <div className="fm-item" ref={itemRef}>
-      <a className="fm-link" href={link} onMouseEnter={onEnter} onMouseLeave={onLeave}>
+      <Link className="fm-link" to={link} onMouseEnter={onEnter} onMouseLeave={onLeave} onTouchStart={onEnter} onTouchEnd={onLeave}>
         {text}
-      </a>
+      </Link>
       <div className="fm-marquee" ref={marqueeRef}>
         <div className="fm-marquee-wrap">
           <div className="fm-marquee-inner" ref={marqueeInnerRef} aria-hidden="true">

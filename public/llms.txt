@@ -1,0 +1,90 @@
+# TechBird IT Services
+
+> TechBird is a premier technology partner for agile startups to large-scale enterprises, specializing in custom software development, AI solutions, cloud & DevOps, 2D/3D animation, MarTech, and marketing strategy. Based in Pune, India.
+
+## Company Overview
+- **Name**: TechBird IT Services
+- **Type**: IT Services & Product Company
+- **Founded**: 2020, Pune, Maharashtra, India
+- **Expertise**: ERPNext, Frappe, React, Next.js, Python, Django, Flutter, AWS, Azure, GCP, AI/ML
+- **Scale**: 50+ enterprise clients, 100+ projects delivered, 15+ team members
+- **Website**: https://www.techbird.in
+- **LinkedIn**: https://www.linkedin.com/company/techbird-it-services/
+
+## Frequently Asked Questions
+
+### What does TechBird do?
+TechBird builds enterprise software, AI solutions, cloud infrastructure, mobile apps, and marketing technology for businesses ranging from startups to large enterprises. Core specialities include ERPNext implementation, custom web/mobile development, and AI-powered automation.
+
+### Where is TechBird located?
+TechBird is headquartered in Pune, Maharashtra, India and serves clients across India, Middle East, and globally.
+
+### What tech stack does TechBird use?
+Primary stack: ERPNext/Frappe (Python), React, Next.js, Vue.js, Node.js, Django, FastAPI, Flutter, React Native, PostgreSQL, MariaDB, AWS, Azure, GCP, Docker, Kubernetes, TensorFlow, PyTorch.
+
+### What industries does TechBird serve?
+Manufacturing, Healthcare, Legal & Compliance, Retail & E-commerce, Education, Real Estate, Professional Services, Logistics & Supply Chain, Finance, and Government.
+
+### How long does a typical project take?
+Discovery: 2-4 weeks. MVP: 8-12 weeks. Full enterprise deployment: 16-24 weeks. ERPNext implementation: 8-16 weeks depending on module count.
+
+## Services (6 Disciplines)
+
+### 1. Software Development
+ERP implementation (ERPNext & Frappe), custom web applications (React, Next.js, Vue.js), mobile apps (Flutter, React Native, Kotlin, Swift), REST/GraphQL API development, SaaS/PaaS product engineering. Key verticals: manufacturing ERP, professional services, multi-location retail.
+
+### 2. AI Solutions
+Custom AI/ML model development, RAG (Retrieval Augmented Generation) systems, agentic AI workflows, intelligent document processing (OCR + NLP), predictive analytics, computer vision, chatbots & virtual assistants, LLM fine-tuning. Tools: TensorFlow, PyTorch, LangChain, OpenAI API.
+
+### 3. Cloud & DevOps
+AWS/Azure/GCP infrastructure design, CI/CD pipeline automation (GitHub Actions, GitLab CI, Jenkins), containerization (Docker, Kubernetes), infrastructure-as-code (Terraform, Pulumi), monitoring (Prometheus, Grafana, Datadog), security hardening, cost optimization, multi-cloud strategy.
+
+### 4. 2D & 3D Animation
+CGI production, VFX compositing, AR/VR experiences, product visualization, architectural walkthroughs, explainer videos, motion graphics, character animation, game-ready 3D assets. Tools: Blender, Maya, Unreal Engine, Unity, After Effects.
+
+### 5. MarTech (Marketing Technology)
+CRM implementation & customization, AdTech integration, analytics dashboards, marketing automation (email, SMS, WhatsApp), CDP (Customer Data Platform) setup, attribution modelling, A/B testing infrastructure, data pipeline engineering.
+
+### 6. Marketing Strategy
+Go-to-market (GTM) strategy, SEO/SEM, paid media (Google Ads, Meta Ads), content marketing, social media management, brand positioning, conversion rate optimization, marketing analytics, competitor analysis.
+
+## Products (8 Platforms)
+
+### Custom ERP
+Full-suite enterprise resource planning built on ERPNext/Frappe. Modules: accounting, inventory, manufacturing, HR, CRM, projects, procurement. Multi-company, multi-currency. Replaces Tally, SAP Business One.
+
+### HRMS (Human Resource Management System)
+Payroll processing, attendance & leave management, recruitment pipeline, performance reviews, employee self-service portal, tax compliance (India). Integrates with biometric devices and ERPNext.
+
+### Lead & Sales CRM
+Lead capture from web/phone/email, pipeline management, quotation builder, sales forecasting, territory management, WhatsApp integration, automated follow-ups, real-time dashboards.
+
+### Practice Management
+For law firms, CA firms, consultancies. Client & matter management, time tracking, billing, document management, court date tracking, compliance calendars.
+
+### E-commerce Platform
+Multi-vendor marketplace or single-brand storefront. Catalog management, inventory sync across channels, payment gateway integration (Razorpay, Stripe, PayU), shipping integration (Shiprocket, Delhivery), analytics.
+
+### Document Management System
+Version-controlled document storage, OCR & full-text search, access control, audit trails, workflow approvals, digital signatures, compliance archiving, integration with ERP.
+
+### Litigation Management
+Case lifecycle tracking, court calendar management, document filing, deadline alerts, client communication logs, legal research integration, billing & time tracking for legal teams.
+
+### Visitor Management System
+Pre-registration, QR/badge printing, host notifications, visitor logs, compliance reporting, multi-location support, integration with access control and CCTV systems.
+
+## Entity Relationships
+- TechBird **provides** Software Development, AI Solutions, Cloud & DevOps, Animation, MarTech, Marketing Strategy
+- TechBird **builds** Custom ERP, HRMS, CRM, Practice Management, E-commerce, DMS, Litigation Management, VMS
+- TechBird **uses** ERPNext, Frappe, React, Python, AWS, Azure, Flutter, TensorFlow
+- TechBird **serves** Manufacturing, Healthcare, Legal, Retail, Education, Real Estate, Professional Services, Logistics
+- TechBird **is located in** Pune, Maharashtra, India
+- TechBird **competes with** IT services companies providing ERPNext consulting, custom software development, and AI solutions in India
+
+## Structured Data References
+- Organization Schema: https://www.techbird.in (embedded in every page)
+- FAQ Schema: Available on all service and product pages
+- BreadcrumbList: On all inner pages
+- Service Schema: On /services/* pages
+- SoftwareApplication Schema: On /products/* pages

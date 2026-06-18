@@ -2,7 +2,7 @@
    TechBird — FlowingMenu (fm- prefix to avoid .marquee conflicts)
    ============================================================ */
 .flowing-menu-wrap {
-  margin-top: 56px;
+  margin-top: clamp(32px, 5vw, 56px);
   border-radius: var(--r-card);
   overflow: hidden;
   border: 1px solid rgba(255,255,255,.08);
@@ -112,4 +112,33 @@
   background-size: cover;
   background-position: 50% 50%;
   flex-shrink: 0;
+}
+
+/* ── Mobile: smaller rows, touch-friendly tap targets ── */
+@media (max-width: 640px) {
+  .flowing-menu-wrap { border-radius: 20px; }
+  .fm-item { min-height: 60px; }
+  .fm-link { min-height: 60px; font-size: 18px; padding: 0 12px; }
+  .fm-part span { font-size: 18px; padding: 0 12px; }
+  .fm-img { width: 80px; height: 32px; margin: 0 10px; }
+}
+
+/* Touch devices: show product images inline since hover doesn't work */
+@media (hover: none) {
+  .fm-item { min-height: auto; }
+  .fm-link {
+    justify-content: flex-start;
+    padding: 0 clamp(16px, 4vw, 28px);
+    min-height: 56px;
+  }
+  /* Ensure marquee hover effect doesn't get stuck */
+  .fm-marquee { pointer-events: none; }
+}
+
+@media (max-width: 420px) {
+  .flowing-menu-wrap { border-radius: 16px; }
+  .fm-item { min-height: 52px; }
+  .fm-link { min-height: 52px; font-size: 15px; padding: 0 10px; }
+  .fm-part span { font-size: 15px; padding: 0 8px; }
+  .fm-img { width: 60px; height: 28px; margin: 0 6px; }
 }

@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 
 const MAX_COLORS = 8;
+const DEFAULT_COLORS = ['#00c9b1', '#0ea5e9', '#1a56db', '#38bdf8'];
 
 const hexToRGB = hex => {
   const c = hex.replace('#', '').padEnd(6, '0');
@@ -144,7 +145,7 @@ const FRAG = `
 `;
 
 export default function LightfallBanner({
-  colors           = ['#00c9b1', '#0ea5e9', '#1a56db', '#38bdf8'],
+  colors           = DEFAULT_COLORS,
   backgroundColor  = '#030e1f',
   speed            = 0.7,
   streakCount      = 5,
@@ -176,12 +177,16 @@ export default function LightfallBanner({
        Re-using a canvas for a second getContext is brittle in some Chrome builds. */
     const ctxOpts = { antialias: false, alpha: true, premultipliedAlpha: true, depth: false, stencil: false, preserveDrawingBuffer: false };
     let gl = null;
-    try { gl = canvas.getContext('webgl2', ctxOpts); } catch (_) {}
-    if (!gl) {
-      try { gl = canvas.getContext('webgl', ctxOpts) || canvas.getContext('experimental-webgl', ctxOpts); } catch (_) {}
+    try { gl = canvas.getContext('webgl2', ctxOpts); } catch {
+      // Fall through to WebGL 1 fallback.
     }
     if (!gl) {
-      /* WebGL truly unavailable — render a graceful CSS fallback */
+      try { gl = canvas.getContext('webgl', ctxOpts) || canvas.getContext('experimental-webgl', ctxOpts); } catch {
+        // A CSS fallback is applied below when no context can be created.
+      }
+    }
+    if (!gl) {
+      /* WebGL truly unavailable - render a graceful CSS fallback */
       container.style.background =
         'radial-gradient(120% 80% at 50% 30%, rgba(56,189,248,.20), transparent 60%), ' +
         'radial-gradient(80% 70% at 50% 90%, rgba(26,86,219,.18), transparent 60%), #030e1f';
@@ -193,7 +198,7 @@ export default function LightfallBanner({
       const s = gl.createShader(type);
       gl.shaderSource(s, src);
       gl.compileShader(s);
-      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS))
+      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS) && import.meta.env.DEV)
         console.error('Shader error:', gl.getShaderInfoLog(s));
       return s;
     }
@@ -310,14 +315,41 @@ export default function LightfallBanner({
       document.removeEventListener('visibilitychange', onVis);
       ro.disconnect();
       io.disconnect();
-      try { gl.deleteProgram(prg); } catch (_) {}
-      try { gl.deleteShader(vs);  } catch (_) {}
-      try { gl.deleteShader(fs);  } catch (_) {}
-      try { gl.deleteBuffer(posBuf); } catch (_) {}
-      try { gl.deleteBuffer(uvBuf);  } catch (_) {}
+      try { gl.deleteProgram(prg); } catch {
+        // Program may already be released during context loss.
+      }
+      try { gl.deleteShader(vs);  } catch {
+        // Shader may already be released during context loss.
+      }
+      try { gl.deleteShader(fs);  } catch {
+        // Shader may already be released during context loss.
+      }
+      try { gl.deleteBuffer(posBuf); } catch {
+        // Buffer may already be released during context loss.
+      }
+      try { gl.deleteBuffer(uvBuf);  } catch {
+        // Buffer may already be released during context loss.
+      }
       if (canvas.parentElement === container) container.removeChild(canvas);
     };
-  }, []);
+  }, [
+    backgroundColor,
+    backgroundGlow,
+    colors,
+    density,
+    glow,
+    mouseDampening,
+    mouseInteraction,
+    mouseRadius,
+    mouseStrength,
+    opacity,
+    speed,
+    streakCount,
+    streakLength,
+    streakWidth,
+    twinkle,
+    zoom,
+  ]);
 
   return (
     <div

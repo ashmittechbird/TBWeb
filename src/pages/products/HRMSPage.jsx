@@ -1,6 +1,7 @@
 import ProductPageLayout from '../../components/ProductPageLayout';
+import SEO from '../../components/SEO';
 
-const A = '#2b93e0';              // HRMS accent — TechBird logo blue (bright)
+const A = '#2b93e0';              // HRMS accent - TechBird logo blue (bright)
 const A2 = '#22d3ee';             // teal secondary (bird-mark gradient) for chart variety
 
 /* ──────────────────────────────────────────────
@@ -22,7 +23,7 @@ const I = {
 };
 
 /* ──────────────────────────────────────────────
-   MOCKUP — Hero dashboard (compact)
+   MOCKUP - Hero dashboard (compact)
    ────────────────────────────────────────────── */
 function MockHeroDash() {
   return (
@@ -31,7 +32,7 @@ function MockHeroDash() {
       {/* titlebar */}
       <rect width="560" height="34" fill="#121219"/>
       <circle cx="18" cy="17" r="4.5" fill="#ff5f57"/><circle cx="33" cy="17" r="4.5" fill="#febc2e"/><circle cx="48" cy="17" r="4.5" fill="#28c840"/>
-      <text x="280" y="21" textAnchor="middle" fill="rgba(255,255,255,.4)" fontSize="10" fontFamily="system-ui">HRMS — Dashboard</text>
+      <text x="280" y="21" textAnchor="middle" fill="rgba(255,255,255,.4)" fontSize="10" fontFamily="system-ui">HRMS - Dashboard</text>
       {/* sidebar */}
       <rect x="0" y="34" width="120" height="366" fill="#0a0a10"/>
       <rect x="14" y="50" width="92" height="26" rx="6" fill={A} fillOpacity=".14"/>
@@ -194,7 +195,7 @@ function MockOnboarding() {
       <rect width="960" height="360" rx="14" fill="#0c0c12"/>
       <rect width="960" height="40" fill="#101018"/>
       <circle cx="22" cy="20" r="5" fill="#ff5f57"/><circle cx="40" cy="20" r="5" fill="#febc2e"/><circle cx="58" cy="20" r="5" fill="#28c840"/>
-      <text x="480" y="25" textAnchor="middle" fill="rgba(255,255,255,.4)" fontSize="11" fontFamily="system-ui">HRMS — Recruitment Pipeline</text>
+      <text x="480" y="25" textAnchor="middle" fill="rgba(255,255,255,.4)" fontSize="11" fontFamily="system-ui">HRMS - Recruitment Pipeline</text>
       {cols.map((col,ci)=>{
         const x = 24 + ci*234;
         return (
@@ -221,7 +222,7 @@ function MockOnboarding() {
 }
 
 /* ──────────────────────────────────────────────
-   MOCKUP — the LASER showpiece (wide HRMS console)
+   MOCKUP - the LASER showpiece (wide HRMS console)
    ────────────────────────────────────────────── */
 function MockConsole() {
   return (
@@ -292,7 +293,7 @@ function MockConsole() {
 
       {/* bottom progress strip */}
       <rect x="206" y="434" width="710" height="74" rx="12" fill="#13131b" stroke="rgba(255,255,255,.06)"/>
-      <text x="224" y="460" fill="rgba(255,255,255,.5)" fontSize="11" fontFamily="system-ui">June payroll run — statutory checks</text>
+      <text x="224" y="460" fill="rgba(255,255,255,.5)" fontSize="11" fontFamily="system-ui">June payroll run - statutory checks</text>
       {['PF','ESI','TDS','PT','Gratuity'].map((t,i)=>(
         <g key={i}>
           <rect x={224+i*140} y="474" width="124" height="22" rx="11" fill={A} fillOpacity=".12"/>
@@ -308,14 +309,30 @@ function MockConsole() {
 /* ══════════════════════════════════════════════
    PAGE
    ══════════════════════════════════════════════ */
+const faqItems = [
+  { q: 'Is HRMS off-the-shelf or customised to us?', a: 'Both. You go live on a production-ready core in weeks, and where your leave policies, salary structures or approval flows differ from the standard, we configure them - no workarounds.' },
+  { q: 'Can it run our payroll with Indian statutory rules?', a: 'Yes. PF, ESI, TDS, Professional Tax and gratuity are built in, with the current slabs and the ability to update them. Payroll output includes bank payout files and statutory return formats ready to file.' },
+  { q: 'Does it integrate with our biometric attendance devices?', a: 'It works with ESSL, ZKTeco, Matrix and any reader that supports a push API or standard export. Mobile punch-in with geo-fencing is also available for field and remote staff.' },
+  { q: 'Can employees access it themselves?', a: 'Every employee gets a self-service portal and mobile access to view payslips, apply for leave, check balances, submit reimbursements and update personal details - cutting most routine HR queries.' },
+  { q: 'On-premise or cloud - and how long to go live?', a: 'Deploy on-premise, on your private cloud (AWS/GCP/Azure) or as a managed service. Standard rollouts run 4–8 weeks; implementations with historical-data migration and integrations run 10–16 weeks.' },
+];
+
 export default function HRMSPage() {
   return (
+    <>
+    <SEO
+      title="HRMS"
+      description="TechBird HRMS - automate payroll, attendance, leave, recruitment, appraisals and statutory compliance. The full employee lifecycle in one system, deployed on-premise or cloud."
+      keywords="HRMS, HR management system, payroll software, attendance management, leave management, recruitment software, employee self-service, statutory compliance, PF ESI TDS, HR automation India"
+      faqItems={faqItems}
+      softwareSchema={{ name: 'TechBird HRMS', description: 'Payroll, attendance, leave, recruitment and compliance automation.', category: 'BusinessApplication' }}
+    />
     <ProductPageLayout
       accent={A}
       category="HR Automation"
       breadcrumbLabel="HRMS"
       title="The entire employee lifecycle, in *one system.*"
-      lead="Payroll, attendance, leave, recruitment, appraisals and statutory compliance — automated end-to-end. Hire to retire, without the spreadsheets."
+      lead="Payroll, attendance, leave, recruitment, appraisals and statutory compliance - automated end-to-end. Hire to retire, without the spreadsheets."
       heroActions={[
         { label: 'Request a Demo', to: '/contact', variant: 'accent' },
         { label: 'See it in action', to: '/contact', variant: 'white' },
@@ -330,37 +347,37 @@ export default function HRMSPage() {
       bento={{
         eyebrow: 'Capabilities',
         heading: 'Run your whole HR function from one place.',
-        sub: 'Every module shares one employee record — so data entered once flows everywhere, from onboarding to the final settlement.',
+        sub: 'Every module shares one employee record - so data entered once flows everywhere, from onboarding to the final settlement.',
         items: [
-          { icon: I.payroll, title: 'Automated payroll', text: 'Salary structures, deductions and net pay calculated automatically — with statutory rules built in.', art: <ArtPayslip />, span: true },
+          { icon: I.payroll, title: 'Automated payroll', text: 'Salary structures, deductions and net pay calculated automatically - with statutory rules built in.', art: <ArtPayslip />, span: true },
           { icon: I.fingerprint, title: 'Attendance', text: 'Biometric, mobile geo-punch and shift rosters, synced in real time.', art: <ArtHeatmap /> },
           { icon: I.calendar, title: 'Leave management', text: 'Policies, balances, approvals and holiday calendars per location.', art: <ArtLeave /> },
-          { icon: I.briefcase, title: 'Recruitment & onboarding', text: 'From job post to digital onboarding — applicants tracked through every stage, with appraisal cycles built in.', art: <ArtOnboard /> },
+          { icon: I.briefcase, title: 'Recruitment & onboarding', text: 'From job post to digital onboarding - applicants tracked through every stage, with appraisal cycles built in.', art: <ArtOnboard /> },
           { icon: I.shield, title: 'Statutory compliance', text: 'PF, ESI, TDS, PT and gratuity reports generated and filed on schedule.', art: <ArtCompliance /> },
         ],
       }}
       light={{
         eyebrow: 'Lifecycle',
         heading: 'From offer letter to exit clearance.',
-        sub: 'One continuous record follows every employee through hiring, onboarding, their full tenure and a clean offboarding — nothing falls through the cracks.',
+        sub: 'One continuous record follows every employee through hiring, onboarding, their full tenure and a clean offboarding - nothing falls through the cracks.',
         mockup: <MockOnboarding />,
         columns: [
-          { icon: I.users, title: 'Recruit', text: 'Track candidates across stages, schedule interviews and roll out offers — all from one pipeline view.' },
+          { icon: I.users, title: 'Recruit', text: 'Track candidates across stages, schedule interviews and roll out offers - all from one pipeline view.' },
           { icon: I.briefcase, title: 'Onboard', text: 'Digital joining kits, document collection and asset allocation, so day one runs itself.' },
-          { icon: I.logout, title: 'Offboard', text: 'Structured exit workflows, full-and-final settlement and clearance — automated and audit-ready.' },
+          { icon: I.logout, title: 'Offboard', text: 'Structured exit workflows, full-and-final settlement and clearance - automated and audit-ready.' },
         ],
       }}
       laser={{
         eyebrow: 'Live Product',
         heading: 'See HRMS in action.',
-        sub: 'A single console for the whole people operation — headcount, payroll, attendance and compliance, live. Hover to explore.',
+        sub: 'A single console for the whole people operation - headcount, payroll, attendance and compliance, live. Hover to explore.',
         mockup: <MockConsole />,
         features: [
-          { icon: I.payroll, title: 'Payroll engine', text: 'Run payroll for the entire org in minutes — statutory deductions calculated automatically.' },
+          { icon: I.payroll, title: 'Payroll engine', text: 'Run payroll for the entire org in minutes - statutory deductions calculated automatically.' },
           { icon: I.fingerprint, title: 'Biometric attendance', text: 'Connect existing biometric devices or punch in from mobile with geo-fencing.' },
           { icon: I.calendar, title: 'Leave & holidays', text: 'Configurable leave policies, accrual rules and location-wise holiday calendars.' },
           { icon: I.award, title: 'Appraisal workflows', text: 'Define cycles, collect 360° feedback and link ratings to revisions.' },
-          { icon: I.shield, title: 'Compliance reports', text: 'PF, ESI, TDS, PT and gratuity — generated, validated and ready to file.' },
+          { icon: I.shield, title: 'Compliance reports', text: 'PF, ESI, TDS, PT and gratuity - generated, validated and ready to file.' },
           { icon: I.portal, title: 'Self-service portal', text: 'Employees view payslips, apply for leave and update details themselves.' },
         ],
       }}
@@ -374,13 +391,7 @@ export default function HRMSPage() {
           { label: 'Communication', tech: 'WhatsApp, email and SMS for slips and approvals' },
         ],
       }}
-      faqItems={[
-        { q: 'Is HRMS off-the-shelf or customised to us?', a: 'Both. You go live on a production-ready core in weeks, and where your leave policies, salary structures or approval flows differ from the standard, we configure them — no workarounds.' },
-        { q: 'Can it run our payroll with Indian statutory rules?', a: 'Yes. PF, ESI, TDS, Professional Tax and gratuity are built in, with the current slabs and the ability to update them. Payroll output includes bank payout files and statutory return formats ready to file.' },
-        { q: 'Does it integrate with our biometric attendance devices?', a: 'It works with ESSL, ZKTeco, Matrix and any reader that supports a push API or standard export. Mobile punch-in with geo-fencing is also available for field and remote staff.' },
-        { q: 'Can employees access it themselves?', a: 'Every employee gets a self-service portal and mobile access to view payslips, apply for leave, check balances, submit reimbursements and update personal details — cutting most routine HR queries.' },
-        { q: 'On-premise or cloud — and how long to go live?', a: 'Deploy on-premise, on your private cloud (AWS/GCP/Azure) or as a managed service. Standard rollouts run 4–8 weeks; implementations with historical-data migration and integrations run 10–16 weeks.' },
-      ]}
+      faqItems={faqItems}
       cta={{
         label: 'Get started',
         heading: 'Ready to automate HR?',
@@ -388,5 +399,6 @@ export default function HRMSPage() {
         button: { label: 'Book a Demo', to: '/contact' },
       }}
     />
+    </>
   );
 }

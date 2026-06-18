@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import InnerNavbar from '../components/InnerNavbar';
 import Footer from '../components/Footer';
 import AboutHero from '../components/AboutHero';
+import SEO from '../components/SEO';
 import '../styles/inner.css';
 import '../styles/about.css';
 
@@ -18,7 +19,7 @@ const STORY_STATS = [
 
 const PILLARS = [
   { ghost: 'Problem', title: 'Problem first, solution second', text: "We don't walk in with a pre-built pitch. Every project starts with understanding what's actually broken, what it's costing you, and what success looks like in your context." },
-  { ghost: 'Ship',    title: 'Ship fast, iterate honestly',    text: "We deliver working systems in weeks, not quarters. Then we iterate based on actual usage data and your team's feedback — not our assumptions." },
+  { ghost: 'Ship',    title: 'Ship fast, iterate honestly',    text: "We deliver working systems in weeks, not quarters. Then we iterate based on actual usage data and your team's feedback - not our assumptions." },
   { ghost: 'Direct',  title: 'Direct communication, always',   text: 'No intermediaries, no account managers relaying messages. You talk directly to the engineers and leads building your system. Every time.' },
   { ghost: 'Global',  title: 'Built for cross-border delivery', text: 'Our Pune team works IST with structured timezone overlap for UK and UAE clients. Systems are built to international compliance standards from day one.' },
   { ghost: 'Own',     title: 'Own what we build',              text: "We don't disappear after go-live. Our team provides ongoing support, system evolution and performance monitoring as your business grows." },
@@ -33,28 +34,26 @@ const LEADERSHIP = [
 ];
 
 const TEAM = [
-  { name: 'Abhishek Chougule', role: 'Full Stack Developer',    img: '/assets/team/Abhishek-Chougule.jpg', li: 'https://www.linkedin.com/company/techbird-it-services/' },
+  { name: 'Abhishek Chougule', role: 'Software Developer',      img: '/assets/team/Abhishek-Chougule.jpg', li: 'https://www.linkedin.com/company/techbird-it-services/' },
   { name: 'Aditi Patade',      role: 'Software Developer',      img: '/assets/team/Aditi-Patade.jpg',      li: 'https://www.linkedin.com/company/techbird-it-services/' },
-  { name: 'Amol Aaghade',      role: 'Backend Developer',       img: '/assets/team/Amol-Aaghade.jpg',      li: 'https://www.linkedin.com/company/techbird-it-services/' },
+  { name: 'Amol Aaghade',      role: 'Software Developer',       img: '/assets/team/Amol-Aaghade.jpg',      li: 'https://www.linkedin.com/company/techbird-it-services/' },
   { name: 'Ankit Patil',       role: 'Software Developer',      img: '/assets/team/Ankit-Patil.jpg',       li: 'https://www.linkedin.com/company/techbird-it-services/' },
-  { name: 'Ashmit Singh',      role: 'Motion Designer',         img: '/assets/team/Ashmit-singh.jpg',      li: 'https://www.linkedin.com/company/techbird-it-services/' },
-  { name: 'Hitesh Sahu',       role: 'Frontend Developer',      img: '/assets/team/Hitesh-Sahu.png',       li: 'https://www.linkedin.com/company/techbird-it-services/' },
-  { name: 'Mehul Rathi',       role: 'Marketing Manager',       img: '/assets/team/Mehul-Rathi.jpg',       li: 'https://www.linkedin.com/company/techbird-it-services/' },
-  { name: 'Namrata',           role: 'Marketing Executive',     img: '/assets/team/Namrata.jpg',           li: 'https://www.linkedin.com/company/techbird-it-services/' },
-  { name: 'Paridhi Jhabak',    role: 'Motion Designer',         img: '/assets/team/Paridhi-Jhabak.jpg',    li: 'https://www.linkedin.com/company/techbird-it-services/' },
-  { name: 'Pooja Gaikwad',     role: 'Software Developer',      img: '/assets/team/Pooja-Gaikwad.jpg',     li: 'https://www.linkedin.com/company/techbird-it-services/' },
-  { name: 'Purvesh Jain',      role: '3D Artist & Animator',    img: '/assets/team/Purvesh-Jain.jpg',      li: 'https://www.linkedin.com/company/techbird-it-services/' },
+  { name: 'Ashmit Singh',      role: 'Software Developer',      img: '/assets/team/Ashmit-singh.jpg',      li: 'https://www.linkedin.com/company/techbird-it-services/' },
+  { name: 'Mehul Rathi',       role: 'Software Developer',      img: '/assets/team/Mehul-Rathi.jpg',       li: 'https://www.linkedin.com/company/techbird-it-services/' },
+  { name: 'Namrata',           role: 'HR',                      img: '/assets/team/Namrata.jpg',           li: 'https://www.linkedin.com/company/techbird-it-services/' },
+  { name: 'Paridhi Jhabak',    role: 'Software Developer',      img: '/assets/team/Paridhi-Jhabak.jpg',    li: 'https://www.linkedin.com/company/techbird-it-services/' },
+  { name: 'Purvesh Jain',      role: 'Software Developer',      img: '/assets/team/Purvesh-Jain.jpg',      li: 'https://www.linkedin.com/company/techbird-it-services/' },
   { name: 'Sanjukta Barik',    role: 'Software Developer',      img: '/assets/team/Sanjukta-Barik.jpg',    li: 'https://www.linkedin.com/company/techbird-it-services/' },
-  { name: 'Shrikant Maharana', role: 'Full Stack Developer',    img: '/assets/team/Shrikant-Maharana.jpg', li: 'https://www.linkedin.com/company/techbird-it-services/' },
+  { name: 'Shrikant Maharana', role: 'Software Developer',      img: '/assets/team/Shrikant-Maharana.jpg', li: 'https://www.linkedin.com/company/techbird-it-services/' },
   { name: 'Snehal Sukhadeve',  role: 'Software Developer',      img: '/assets/team/Snehal-Sukhadeve.jpg',  li: 'https://www.linkedin.com/company/techbird-it-services/' },
 ];
 
 const FAQS = [
   { q: 'Where is TechBird based?', a: 'TechBird IT Services is headquartered in Pune, India. All engineering, design and delivery runs from our Pune office. We serve clients across India, the United Kingdom, the United States and the UAE with structured timezone overlap for international engagements.' },
-  { q: 'How large is your team?', a: "We are a focused team of engineers, designers and project leads. We deliberately stay lean so every team member is directly involved in delivery. No bench resources, no offshore subcontracting — the people you meet are the people who build your system." },
+  { q: 'How large is your team?', a: "We are a focused team of engineers, designers and project leads. We deliberately stay lean so every team member is directly involved in delivery. No bench resources, no offshore subcontracting - the people you meet are the people who build your system." },
   { q: 'Do you work with clients outside India?', a: 'Yes. A significant portion of our work is for clients in the UK and UAE. We structure our working hours to provide morning overlap with UK business hours and evening overlap with UAE business hours. All systems are built to GDPR and international compliance standards from the start.' },
   { q: 'What industries do you specialise in?', a: "We've shipped production systems across manufacturing, retail and e-commerce, legal and finance, BPO and call centres, and IT and technology companies. Our deepest experience is in manufacturing ERP and legal AI, but our architecture and cloud teams work across all sectors." },
-  { q: 'How do you handle project communication?', a: 'Every project has a named lead who is your single point of contact. We communicate via Slack, Microsoft Teams or email — whichever your team prefers. No intermediaries, no account managers relaying messages. You get direct access to the people building your system.' },
+  { q: 'How do you handle project communication?', a: 'Every project has a named lead who is your single point of contact. We communicate via Slack, Microsoft Teams or email - whichever your team prefers. No intermediaries, no account managers relaying messages. You get direct access to the people building your system.' },
 ];
 
 export default function AboutPage() {
@@ -118,11 +117,38 @@ export default function AboutPage() {
         opacity: 0, y: 40, stagger: 0.12, duration: 0.8, ease,
       });
     }, root);
-    return () => { ctx.revert(); ScrollTrigger.getAll().forEach(t => t.kill()); };
+    return () => ctx.revert();
   }, []);
 
   return (
     <div className="ab-root" ref={root}>
+      <SEO
+        title="About Us"
+        description="Learn about TechBird IT Services - a premier technology partner in Pune, India. Our expert team delivers custom software, AI, cloud, and digital transformation solutions for enterprises worldwide."
+        keywords="about TechBird, IT services company, technology partner, Pune, India, software company, digital transformation, enterprise solutions"
+        faqItems={FAQS}
+        schema={{
+          '@context': 'https://schema.org',
+          '@type': 'AboutPage',
+          name: 'About TechBird IT Services',
+          description: 'Learn about TechBird IT Services - a premier technology partner in Pune, India. Our expert team delivers custom software, AI, cloud, and digital transformation solutions for enterprises worldwide.',
+          url: 'https://www.techbird.in/about',
+          mainEntity: {
+            '@type': 'Organization',
+            name: 'TechBird IT Services',
+            url: 'https://www.techbird.in',
+            foundingDate: '2020',
+            address: {
+              '@type': 'PostalAddress',
+              addressLocality: 'Pune',
+              addressRegion: 'Maharashtra',
+              addressCountry: 'IN',
+            },
+            numberOfEmployees: { '@type': 'QuantitativeValue', value: 20 },
+            areaServed: ['India', 'United Kingdom', 'United States', 'UAE'],
+          },
+        }}
+      />
       <InnerNavbar />
       <AboutHero />
 
@@ -137,7 +163,7 @@ export default function AboutPage() {
               </div>
               <div className="ab-story-text">
                 <p>TechBird IT Services started with a simple observation: businesses across India, the UK and the UAE were paying for enterprise software that never worked the way they needed. Off-the-shelf tools didn't fit. Custom builds got abandoned. The gap between what was promised and what was delivered kept growing.</p>
-                <p>We set out to close that gap. Today, TechBird builds ERPNext systems, agentic AI tools, custom web applications, cloud infrastructure and proprietary software products for enterprises. We also produce 2D and 3D animation, VFX and AR/VR experiences, and run digital marketing and MarTech programmes. Every engagement starts with understanding the actual problem — not selling a solution we've already decided on.</p>
+                <p>We set out to close that gap. Today, TechBird builds ERPNext systems, agentic AI tools, custom web applications, cloud infrastructure and proprietary software products for enterprises. We also produce 2D and 3D animation, VFX and AR/VR experiences, and run digital marketing and MarTech programmes. Every engagement starts with understanding the actual problem - not selling a solution we've already decided on.</p>
               </div>
             </div>
             <div className="ab-story-cards">
@@ -208,7 +234,7 @@ export default function AboutPage() {
 
       {/* ════ TEAM ════ */}
       <section className="ab-team">
-        {/* heading — stays inside max-width container */}
+        {/* heading - stays inside max-width container */}
         <div className="ab-team-inner">
           <div className="ab-team-head" style={{ textAlign: 'center', marginLeft: 'auto', marginRight: 'auto' }}>
             <span className="ab-eyebrow" style={{ justifyContent: 'center' }}>Meet Our Team</span>
@@ -217,13 +243,14 @@ export default function AboutPage() {
           </div>
         </div>
 
-        {/* fan strip — full-bleed, no side padding */}
+        {/* fan strip - desktop: hover expand, mobile: scrollable cards */}
         <div className="ab-fan-strip" onMouseLeave={handleFanLeave}>
           {TEAM.map((m, i) => (
             <div
               key={m.name}
               className={`ab-fan-card${activeTeam === i ? ' is-active' : ''}`}
               onMouseEnter={() => handleFanEnter(i)}
+              onClick={() => setActiveTeam(activeTeam === i ? null : i)}
             >
               <img src={m.img} alt={m.name} loading="lazy" draggable="false" />
               <div className="ab-fan-label">
@@ -246,7 +273,7 @@ export default function AboutPage() {
           ))}
         </div>
 
-        {/* trust items — back inside max-width container */}
+        {/* trust items - back inside max-width container */}
         <div className="ab-team-inner">
           <div className="ab-trust">
             <div className="ab-trust-item">
@@ -299,13 +326,13 @@ export default function AboutPage() {
       {/* ════ CLOSING ════ */}
       <section className="ab-closing">
         <h2>Most projects start with a 30-minute call.</h2>
-        <p>Tell us what you're trying to build — or what's currently broken. We come to the first conversation prepared. No 47-page deck. No NDAs on call one. Just a direct conversation.</p>
+        <p>Tell us what you're trying to build - or what's currently broken. We come to the first conversation prepared. No 47-page deck. No NDAs on call one. Just a direct conversation.</p>
         <div className="ab-closing-actions">
           <Link to="/contact" className="btn-pill">
             <span>Book 30 Minutes</span><i className="arrow"></i>
           </Link>
-          <a href="mailto:info@techbirdit.in" className="btn-pill ghost">
-            <span>info@techbirdit.in</span>
+          <a href="mailto:connect@techbirdit.in" className="btn-pill ghost">
+            <span>connect@techbirdit.in</span>
           </a>
         </div>
       </section>

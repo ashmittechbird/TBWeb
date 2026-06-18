@@ -1,6 +1,7 @@
 import ProductPageLayout from '../../components/ProductPageLayout';
+import SEO from '../../components/SEO';
 
-const A = '#38bdf8';            // Practice accent — sky blue
+const A = '#38bdf8';            // Practice accent - sky blue
 const A2 = '#a78bfa';          // violet secondary
 
 const I = {
@@ -20,7 +21,7 @@ function MockHeroDash() {
       <rect width="560" height="400" rx="14" fill="#0d0d13"/>
       <rect width="560" height="34" fill="#121219"/>
       <circle cx="18" cy="17" r="4.5" fill="#ff5f57"/><circle cx="33" cy="17" r="4.5" fill="#febc2e"/><circle cx="48" cy="17" r="4.5" fill="#28c840"/>
-      <text x="280" y="21" textAnchor="middle" fill="rgba(255,255,255,.4)" fontSize="10" fontFamily="system-ui">Practice — Today</text>
+      <text x="280" y="21" textAnchor="middle" fill="rgba(255,255,255,.4)" fontSize="10" fontFamily="system-ui">Practice - Today</text>
       <rect x="0" y="34" width="120" height="366" fill="#0a0a10"/>
       <rect x="14" y="50" width="92" height="26" rx="6" fill={A} fillOpacity=".14"/>
       <circle cx="28" cy="63" r="5" fill={A}/><rect x="40" y="59" width="54" height="6" rx="3" fill={A} fillOpacity=".8"/>
@@ -98,7 +99,7 @@ function ArtRecord() {
   );
 }
 function ArtBilling() {
-  const rows = [['Consultation', '₹ 800'], ['Lab — CBC', '₹ 450'], ['Pharmacy', '₹ 1,240']];
+  const rows = [['Consultation', '₹ 800'], ['Lab - CBC', '₹ 450'], ['Pharmacy', '₹ 1,240']];
   return (
     <svg viewBox="0 0 220 150" xmlns="http://www.w3.org/2000/svg">
       <rect width="220" height="150" rx="8" fill="#0a0a10"/>
@@ -130,7 +131,7 @@ function MockScheduleBoard() {
       <rect width="960" height="360" rx="14" fill="#0c0c12"/>
       <rect width="960" height="40" fill="#101018"/>
       <circle cx="22" cy="20" r="5" fill="#ff5f57"/><circle cx="40" cy="20" r="5" fill="#febc2e"/><circle cx="58" cy="20" r="5" fill="#28c840"/>
-      <text x="480" y="25" textAnchor="middle" fill="rgba(255,255,255,.4)" fontSize="11" fontFamily="system-ui">Practice — Patient Flow</text>
+      <text x="480" y="25" textAnchor="middle" fill="rgba(255,255,255,.4)" fontSize="11" fontFamily="system-ui">Practice - Patient Flow</text>
       {cols.map((col, ci) => {
         const x = 24 + ci * 234;
         return (
@@ -194,7 +195,7 @@ function MockConsole() {
           {[0,1,3,4].includes(i) && (
             <g>
               <rect x="278" y={258+i*38} width="330" height="24" rx="6" fill={[A,A2,A,'#34d399',A,A2][i]} fillOpacity=".16" stroke={[A,A2,A,'#34d399',A,A2][i]} strokeWidth="0.5" strokeOpacity=".4"/>
-              <text x="290" y={274+i*38} fill="rgba(255,255,255,.7)" fontSize="9.5" fontFamily="system-ui">{['Riya Sen — Follow-up','Amit K — Consult','','Neha P — Review','Sims R — New','' ][i]}</text>
+              <text x="290" y={274+i*38} fill="rgba(255,255,255,.7)" fontSize="9.5" fontFamily="system-ui">{['Riya Sen - Follow-up','Amit K - Consult','','Neha P - Review','Sims R - New','' ][i]}</text>
             </g>
           )}
         </g>
@@ -218,14 +219,30 @@ function MockConsole() {
   );
 }
 
+const faqItems = [
+  { q: 'Is this for clinics, hospitals or law firms?', a: 'All three. The same engine - scheduling, records, billing, compliance - adapts to a single-doctor clinic, a multi-department hospital, or a law firm managing client matters and appointments. We configure terminology and workflows to your domain.' },
+  { q: 'Can patients or clients book online themselves?', a: 'Yes. A self-service portal and booking widget let people see availability and book without calling. They also get reminders, reports and online payment links, which cuts front-desk load significantly.' },
+  { q: 'How does it reduce no-shows?', a: 'Automated reminders go out over WhatsApp, SMS and email at configurable intervals before each appointment, with easy reschedule links. Practices typically see no-shows drop by a third or more.' },
+  { q: 'Is patient data kept private and compliant?', a: 'Yes. Role-based access controls who can see what, consent is captured and logged, and every record access is audited. Data can be hosted on-premise or in a private cloud for sovereignty requirements.' },
+  { q: 'On-premise or cloud, and how long to go live?', a: 'Deploy on-premise or on a private cloud. A single-location practice can go live in 3–5 weeks; multi-location or hospital deployments with diagnostics and insurance integrations run 8–14 weeks.' },
+];
+
 export default function PracticeManagementPage() {
   return (
+    <>
+    <SEO
+      title="Practice Management"
+      description="TechBird Practice Management - appointments, patient and client records, billing and compliance for clinics, hospitals and law firms. Reduce no-shows, streamline billing and run your practice from one interface."
+      keywords="practice management software, clinic management, hospital management, appointment scheduling, patient records, medical billing, law firm management, healthcare software, practice automation India"
+      faqItems={faqItems}
+      softwareSchema={{ name: 'TechBird Practice Management', description: 'Client management, time tracking, billing and compliance for law/CA firms.', category: 'BusinessApplication' }}
+    />
     <ProductPageLayout
       accent={A}
       category="Healthcare & Legal"
       breadcrumbLabel="Practice Management"
       title="Run the practice, *not the paperwork.*"
-      lead="Appointments, patient or client records, billing and compliance in one interface — for clinics, hospitals and law firms. Less front-desk chaos, more time with the people who matter."
+      lead="Appointments, patient or client records, billing and compliance in one interface - for clinics, hospitals and law firms. Less front-desk chaos, more time with the people who matter."
       heroActions={[
         { label: 'Request a Demo', to: '/contact', variant: 'accent' },
         { label: 'See it in action', to: '/contact', variant: 'white' },
@@ -240,7 +257,7 @@ export default function PracticeManagementPage() {
       bento={{
         eyebrow: 'Capabilities',
         heading: 'Front desk to follow-up, handled.',
-        sub: 'Scheduling, records, billing and reminders share one patient/client profile — so the whole visit flows without re-entering anything.',
+        sub: 'Scheduling, records, billing and reminders share one patient/client profile - so the whole visit flows without re-entering anything.',
         items: [
           { icon: I.calendar, title: 'Smart scheduling', text: 'Multi-practitioner, multi-room calendars with online booking and waitlists.', art: <ArtCalendar />, span: true },
           { icon: I.record, title: 'Patient / case records', text: 'Complete history, notes, documents and prescriptions in one profile.', art: <ArtRecord /> },
@@ -252,7 +269,7 @@ export default function PracticeManagementPage() {
       light={{
         eyebrow: 'The visit',
         heading: 'Booked to billed, in one flow.',
-        sub: 'A patient moves from booking through check-in, consultation and billing — each step updating one shared record with no duplicate entry.',
+        sub: 'A patient moves from booking through check-in, consultation and billing - each step updating one shared record with no duplicate entry.',
         mockup: <MockScheduleBoard />,
         columns: [
           { icon: I.calendar, title: 'Book & remind', text: 'Online or front-desk booking with automatic reminders to reduce no-shows.' },
@@ -263,7 +280,7 @@ export default function PracticeManagementPage() {
       laser={{
         eyebrow: 'Live Product',
         heading: 'See the platform in action.',
-        sub: 'One console for the whole practice — schedule, patient queue, records and billing, live. Hover to explore.',
+        sub: 'One console for the whole practice - schedule, patient queue, records and billing, live. Hover to explore.',
         mockup: <MockConsole />,
         features: [
           { icon: I.calendar, title: 'Appointment scheduling', text: 'Multi-practitioner calendars, online booking, reminders and waitlists.' },
@@ -284,13 +301,7 @@ export default function PracticeManagementPage() {
           { label: 'Accounting', tech: 'Tally, ERPNext and Zoho Books exports' },
         ],
       }}
-      faqItems={[
-        { q: 'Is this for clinics, hospitals or law firms?', a: 'All three. The same engine — scheduling, records, billing, compliance — adapts to a single-doctor clinic, a multi-department hospital, or a law firm managing client matters and appointments. We configure terminology and workflows to your domain.' },
-        { q: 'Can patients or clients book online themselves?', a: 'Yes. A self-service portal and booking widget let people see availability and book without calling. They also get reminders, reports and online payment links, which cuts front-desk load significantly.' },
-        { q: 'How does it reduce no-shows?', a: 'Automated reminders go out over WhatsApp, SMS and email at configurable intervals before each appointment, with easy reschedule links. Practices typically see no-shows drop by a third or more.' },
-        { q: 'Is patient data kept private and compliant?', a: 'Yes. Role-based access controls who can see what, consent is captured and logged, and every record access is audited. Data can be hosted on-premise or in a private cloud for sovereignty requirements.' },
-        { q: 'On-premise or cloud, and how long to go live?', a: 'Deploy on-premise or on a private cloud. A single-location practice can go live in 3–5 weeks; multi-location or hospital deployments with diagnostics and insurance integrations run 8–14 weeks.' },
-      ]}
+      faqItems={faqItems}
       cta={{
         label: 'Get started',
         heading: 'Ready to streamline your practice?',
@@ -298,5 +309,6 @@ export default function PracticeManagementPage() {
         button: { label: 'Book a Demo', to: '/contact' },
       }}
     />
+    </>
   );
 }

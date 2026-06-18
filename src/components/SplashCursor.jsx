@@ -4,13 +4,13 @@ export default function SplashCursor({
   SIM_RESOLUTION    = 128,
   DYE_RESOLUTION    = 1024,
   CAPTURE_RESOLUTION= 512,
-  DENSITY_DISSIPATION  = 3.5,
-  VELOCITY_DISSIPATION = 2,
+  DENSITY_DISSIPATION  = 4.5,
+  VELOCITY_DISSIPATION = 3,
   PRESSURE          = 0.1,
   PRESSURE_ITERATIONS  = 20,
-  CURL              = 3,
-  SPLAT_RADIUS      = 0.2,
-  SPLAT_FORCE       = 6000,
+  CURL              = 2,
+  SPLAT_RADIUS      = 0.12,
+  SPLAT_FORCE       = 3000,
   SHADING           = true,
   COLOR_UPDATE_SPEED= 10,
   BACK_COLOR        = { r: 0, g: 0, b: 0 },
@@ -37,10 +37,13 @@ export default function SplashCursor({
     const onVisibility = () => { isVisible = !document.hidden; };
     document.addEventListener('visibilitychange', onVisibility);
 
+    let effectiveSimResolution = SIM_RESOLUTION;
+    let effectiveDyeResolution = DYE_RESOLUTION;
+
     /* lower simulation size on smaller / lower-DPR devices */
     if (window.innerWidth < 1280 || (window.devicePixelRatio || 1) < 1.5) {
-      DYE_RESOLUTION = Math.min(DYE_RESOLUTION, 720);
-      SIM_RESOLUTION = Math.min(SIM_RESOLUTION, 96);
+      effectiveDyeResolution = Math.min(effectiveDyeResolution, 720);
+      effectiveSimResolution = Math.min(effectiveSimResolution, 96);
     }
 
     function pointerPrototype() {
@@ -51,7 +54,9 @@ export default function SplashCursor({
     }
 
     let config = {
-      SIM_RESOLUTION, DYE_RESOLUTION, CAPTURE_RESOLUTION,
+      SIM_RESOLUTION: effectiveSimResolution,
+      DYE_RESOLUTION: effectiveDyeResolution,
+      CAPTURE_RESOLUTION,
       DENSITY_DISSIPATION, VELOCITY_DISSIPATION, PRESSURE,
       PRESSURE_ITERATIONS, CURL, SPLAT_RADIUS, SPLAT_FORCE,
       SHADING, COLOR_UPDATE_SPEED, PAUSED: false,
@@ -176,7 +181,7 @@ export default function SplashCursor({
       const shader = gl.createShader(type);
       gl.shaderSource(shader, source);
       gl.compileShader(shader);
-      if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) console.trace(gl.getShaderInfoLog(shader));
+      if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS) && import.meta.env.DEV) console.trace(gl.getShaderInfoLog(shader));
       return shader;
     }
 
@@ -500,8 +505,8 @@ export default function SplashCursor({
     }
 
     function clickSplat(p) {
-      const color=generateColor(); color.r*=10; color.g*=10; color.b*=10;
-      splat(p.texcoordX,p.texcoordY,10*(Math.random()-0.5),30*(Math.random()-0.5),color);
+      const color=generateColor(); color.r*=5; color.g*=5; color.b*=5;
+      splat(p.texcoordX,p.texcoordY,6*(Math.random()-0.5),18*(Math.random()-0.5),color);
     }
 
     function splat(x,y,dx,dy,color) {
@@ -537,7 +542,7 @@ export default function SplashCursor({
     ];
     function generateColor() {
       const base=BRAND_COLORS[Math.floor(Math.random()*BRAND_COLORS.length)];
-      return {r:base.r*0.85,g:base.g*0.85,b:base.b*0.85};
+      return {r:base.r*0.55,g:base.g*0.55,b:base.b*0.55};
     }
 
     function wrap(v,min,max){const r=max-min;if(r===0)return min;return((v-min)%r)+min;}

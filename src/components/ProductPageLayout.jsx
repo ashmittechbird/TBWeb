@@ -1,10 +1,11 @@
-import { useEffect, useLayoutEffect, useRef, useState, useCallback } from 'react';
+import { Fragment, useEffect, useLayoutEffect, useRef, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import InnerNavbar from './InnerNavbar';
 import Footer from './Footer';
 import LaserFlow from './LaserFlow';
+import '../styles/inner.css';
 import '../styles/products.css';
 import '../styles/product-detail.css';
 
@@ -37,6 +38,7 @@ export default function ProductPageLayout({
   category,
   breadcrumbLabel,
   title,                 // string; wrap a word in *stars* to gradient-highlight it
+  lead,
   heroActions,           // [{ label, to, variant }]
   heroMockup,            // ReactNode (SVG)
   stats,                 // [{ value, label }]
@@ -80,7 +82,9 @@ export default function ProductPageLayout({
     '--pd-accent-line': hexA(accent, 0.30),
   };
 
-  useEffect(() => { window.scrollTo(0, 0); }, []);
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   /* mouse reveal over laser screenshot */
   const onLaserMove = useCallback((e) => {
@@ -174,8 +178,8 @@ export default function ProductPageLayout({
       });
     }, root);
 
-    return () => { ctx.revert(); ScrollTrigger.getAll().forEach(t => t.kill()); };
-  }, []);  
+    return () => ctx.revert();
+  }, []);
 
   const titleParts = splitStars(title);
 
@@ -183,7 +187,7 @@ export default function ProductPageLayout({
     <div className="pd-root" ref={root} style={accentVars}>
       <InnerNavbar />
 
-      {/* ════ HERO — full-width headline, beam splashes on the panel's top edge ════ */}
+      {/* ════ HERO - full-width headline, beam splashes on the panel's top edge ════ */}
       <section className="pd-hero">
         {/* one continuous beam from the very top, behind the content */}
         <div className="pd-hero-skybeam" aria-hidden="true"><span className="pd-hero-pulse" /></div>
@@ -200,6 +204,7 @@ export default function ProductPageLayout({
                 <WordWrap key={i} text={seg.text} grad={seg.gradient} />
               ))}
             </h1>
+            {lead && <p className="pd-hero-lead">{lead}</p>}
           </div>
 
           <div className="pd-hero-cta">
@@ -241,7 +246,7 @@ export default function ProductPageLayout({
         </div>
       </section>
 
-      {/* ════ STAT BAND — moved out of the hero ════ */}
+      {/* ════ STAT BAND - moved out of the hero ════ */}
       {stats?.length > 0 && (
         <section className="pd-statband">
           <div className="pd-wrap">
@@ -418,11 +423,22 @@ export default function ProductPageLayout({
 
 /* ── helpers ── */
 function WordWrap({ text, grad }) {
-  return text.split(/\s+/).filter(Boolean).map((w, i) => (
-    <span className="pd-word-wrap" key={i}>
-      <span className={`pd-word${grad ? ' grad' : ''}`}>{w}</span>
-    </span>
-  ));
+  const words = text.split(/\s+/).filter(Boolean);
+  if (!words.length) return text;
+  return (
+    <>
+      {/^\s/.test(text) ? ' ' : ''}
+      {words.map((w, i) => (
+        <Fragment key={i}>
+          <span className="pd-word-wrap">
+            <span className={`pd-word${grad ? ' grad' : ''}`}>{w}</span>
+          </span>
+          {i < words.length - 1 ? ' ' : ''}
+        </Fragment>
+      ))}
+      {/\s$/.test(text) ? ' ' : ''}
+    </>
+  );
 }
 
 /* split a string on *highlighted* runs → [{text, gradient}] */

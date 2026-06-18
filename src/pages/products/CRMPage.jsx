@@ -1,6 +1,7 @@
 import ProductPageLayout from '../../components/ProductPageLayout';
+import SEO from '../../components/SEO';
 
-const A = '#a78bfa';              // CRM accent — violet
+const A = '#a78bfa';              // CRM accent - violet
 const A2 = '#22d3ee';            // cyan secondary for chart variety
 
 /* ── feature icons ── */
@@ -24,7 +25,7 @@ function MockHeroDash() {
       <rect width="560" height="400" rx="14" fill="#0d0d13"/>
       <rect width="560" height="34" fill="#121219"/>
       <circle cx="18" cy="17" r="4.5" fill="#ff5f57"/><circle cx="33" cy="17" r="4.5" fill="#febc2e"/><circle cx="48" cy="17" r="4.5" fill="#28c840"/>
-      <text x="280" y="21" textAnchor="middle" fill="rgba(255,255,255,.4)" fontSize="10" fontFamily="system-ui">CRM — Pipeline</text>
+      <text x="280" y="21" textAnchor="middle" fill="rgba(255,255,255,.4)" fontSize="10" fontFamily="system-ui">CRM - Pipeline</text>
       {/* sidebar */}
       <rect x="0" y="34" width="120" height="366" fill="#0a0a10"/>
       <rect x="14" y="50" width="92" height="26" rx="6" fill={A} fillOpacity=".14"/>
@@ -178,7 +179,7 @@ function MockDealBoard() {
       <rect width="960" height="360" rx="14" fill="#0c0c12"/>
       <rect width="960" height="40" fill="#101018"/>
       <circle cx="22" cy="20" r="5" fill="#ff5f57"/><circle cx="40" cy="20" r="5" fill="#febc2e"/><circle cx="58" cy="20" r="5" fill="#28c840"/>
-      <text x="480" y="25" textAnchor="middle" fill="rgba(255,255,255,.4)" fontSize="11" fontFamily="system-ui">CRM — Deal Pipeline</text>
+      <text x="480" y="25" textAnchor="middle" fill="rgba(255,255,255,.4)" fontSize="11" fontFamily="system-ui">CRM - Deal Pipeline</text>
       {cols.map((col, ci) => {
         const x = 24 + ci * 234;
         return (
@@ -270,14 +271,30 @@ function MockConsole() {
 }
 
 /* ══════════════════════════════════════════════ */
+const faqItems = [
+  { q: 'Can we migrate our existing leads and deals?', a: 'Yes. We import contacts, accounts, open deals and activity history from spreadsheets or your current CRM (HubSpot, Zoho, Salesforce, etc.), mapping stages and owners so nothing is lost in the move.' },
+  { q: 'How does lead scoring work?', a: 'Scoring combines fit (company size, industry, region, role) with engagement (email opens, site visits, replies, meeting bookings). You define the weights, and the score updates in real time so reps always call the hottest leads first.' },
+  { q: 'Can it automate follow-ups?', a: 'Yes. Build multi-step sequences across email, call tasks and WhatsApp/SMS, with branching based on replies and stage. Inactivity triggers reminders so deals never go cold from a forgotten follow-up.' },
+  { q: 'Does it sync with our email and phone system?', a: 'Two-way sync with Gmail and Outlook logs every email automatically. Click-to-call with recording integrates with common telephony/IVR providers, and calls log against the contact without manual entry.' },
+  { q: 'On-premise or cloud, and how long to go live?', a: 'Deploy on cloud or on-premise. A standard rollout with import, pipeline configuration and email/calendar sync runs 3–6 weeks; complex multi-team setups with telephony and custom automation run 8–12 weeks.' },
+];
+
 export default function CRMPage() {
   return (
+    <>
+    <SEO
+      title="Lead & Sales CRM"
+      description="TechBird Lead & Sales CRM - full-funnel pipeline management with lead scoring, automated follow-ups, activity tracking and revenue forecasting. Close more deals, lose fewer leads."
+      keywords="CRM software, sales CRM, lead management, pipeline management, lead scoring, sales automation, deal tracking, follow-up automation, revenue forecasting, CRM India"
+      faqItems={faqItems}
+      softwareSchema={{ name: 'TechBird CRM', description: 'Lead capture, pipeline management, sales forecasting and automated follow-ups.', category: 'BusinessApplication' }}
+    />
     <ProductPageLayout
       accent={A}
       category="Pipeline Intelligence"
       breadcrumbLabel="Lead & Sales CRM"
       title="Turn every lead into *closed revenue.*"
-      lead="A full-funnel CRM that captures leads, scores them, automates follow-up and forecasts the quarter — so nothing slips and reps sell instead of doing data entry."
+      lead="A full-funnel CRM that captures leads, scores them, automates follow-up and forecasts the quarter - so nothing slips and reps sell instead of doing data entry."
       heroActions={[
         { label: 'Request a Demo', to: '/contact', variant: 'accent' },
         { label: 'See it in action', to: '/contact', variant: 'white' },
@@ -292,7 +309,7 @@ export default function CRMPage() {
       bento={{
         eyebrow: 'Capabilities',
         heading: 'Every deal, visible and moving forward.',
-        sub: 'Lead, contact and account records are unified — so scoring, automation, activity and forecasting all run off the same data.',
+        sub: 'Lead, contact and account records are unified - so scoring, automation, activity and forecasting all run off the same data.',
         items: [
           { icon: I.funnel, title: 'Visual pipeline', text: 'Drag deals across stages, see weighted value update live, and spot what is stuck.', art: <ArtPipeline />, span: true },
           { icon: I.target, title: 'Lead capture & scoring', text: 'Auto-capture from forms, ads and inbox; rank by fit and intent.', art: <ArtLeadScore /> },
@@ -304,18 +321,18 @@ export default function CRMPage() {
       light={{
         eyebrow: 'The funnel',
         heading: 'From first touch to closed-won.',
-        sub: 'One continuous record follows every opportunity through capture, qualification, proposal and close — with full history at every stage.',
+        sub: 'One continuous record follows every opportunity through capture, qualification, proposal and close - with full history at every stage.',
         mockup: <MockDealBoard />,
         columns: [
           { icon: I.target, title: 'Capture & qualify', text: 'Leads flow in from every channel, get scored, and route to the right rep instantly.' },
           { icon: I.bolt, title: 'Nurture & advance', text: 'Automated cadences and reminders keep deals moving without manual chasing.' },
-          { icon: I.chart, title: 'Close & forecast', text: 'Quotes, approvals and won-deal handoff — with forecasts leadership can trust.' },
+          { icon: I.chart, title: 'Close & forecast', text: 'Quotes, approvals and won-deal handoff - with forecasts leadership can trust.' },
         ],
       }}
       laser={{
         eyebrow: 'Live Product',
         heading: 'See the CRM in action.',
-        sub: 'One console for the whole revenue motion — pipeline, weighted forecast, win rate and cycle time, live. Hover to explore.',
+        sub: 'One console for the whole revenue motion - pipeline, weighted forecast, win rate and cycle time, live. Hover to explore.',
         mockup: <MockConsole />,
         features: [
           { icon: I.funnel, title: 'Drag-and-drop pipeline', text: 'Move deals between stages; weighted value and forecast recompute instantly.' },
@@ -336,13 +353,7 @@ export default function CRMPage() {
           { label: 'Lead sources', tech: 'Web forms, Meta & Google Ads, marketplaces, APIs' },
         ],
       }}
-      faqItems={[
-        { q: 'Can we migrate our existing leads and deals?', a: 'Yes. We import contacts, accounts, open deals and activity history from spreadsheets or your current CRM (HubSpot, Zoho, Salesforce, etc.), mapping stages and owners so nothing is lost in the move.' },
-        { q: 'How does lead scoring work?', a: 'Scoring combines fit (company size, industry, region, role) with engagement (email opens, site visits, replies, meeting bookings). You define the weights, and the score updates in real time so reps always call the hottest leads first.' },
-        { q: 'Can it automate follow-ups?', a: 'Yes. Build multi-step sequences across email, call tasks and WhatsApp/SMS, with branching based on replies and stage. Inactivity triggers reminders so deals never go cold from a forgotten follow-up.' },
-        { q: 'Does it sync with our email and phone system?', a: 'Two-way sync with Gmail and Outlook logs every email automatically. Click-to-call with recording integrates with common telephony/IVR providers, and calls log against the contact without manual entry.' },
-        { q: 'On-premise or cloud, and how long to go live?', a: 'Deploy on cloud or on-premise. A standard rollout with import, pipeline configuration and email/calendar sync runs 3–6 weeks; complex multi-team setups with telephony and custom automation run 8–12 weeks.' },
-      ]}
+      faqItems={faqItems}
       cta={{
         label: 'Get started',
         heading: 'Ready to fix your pipeline?',
@@ -350,5 +361,6 @@ export default function CRMPage() {
         button: { label: 'Book a Demo', to: '/contact' },
       }}
     />
+    </>
   );
 }

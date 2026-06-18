@@ -1,11 +1,43 @@
 import ServicePageLayout from '../../components/ServicePageLayout';
+import SEO from '../../components/SEO';
+
+const faqItems = [
+  {
+    q: 'How long does an animated video take to produce?',
+    a: 'Timeline depends on length, complexity and revision cycles. A 60-second 2D explainer typically takes 4–6 weeks from approved script to final delivery: 1 week for storyboard approval, 2–3 weeks for animation, 1 week for revisions and sound. 3D and CGI productions take longer due to modelling, rigging and rendering time. We provide a detailed production schedule after the brief is approved.',
+  },
+  {
+    q: 'What is your production process?',
+    a: 'Our production process: (1) Brief and objectives - understanding the goal, audience and channel; (2) Script and storyboard - written narrative and visual frame-by-frame layout for approval; (3) Style frames - key visual moments to establish look and feel before full production; (4) Animation production; (5) Sound design and voiceover; (6) Review and revisions; (7) Final delivery in required formats.',
+  },
+  {
+    q: 'Do you provide voiceover and sound design?',
+    a: 'Yes. We work with professional voice talent across languages - English, Hindi and regional Indian languages, plus international English accents. Sound design, music licensing and audio mix are included as standard in all video productions. We can also source custom music composition for productions that require an original score.',
+  },
+  {
+    q: 'Can you animate our existing brand assets?',
+    a: 'Yes. Animating existing logos, illustrations, product photography and brand elements is a standard request. We work from your brand guidelines and existing asset library. If your assets are not in vector or high-resolution format, we can recreate them for animation.',
+  },
+  {
+    q: 'What formats do you deliver in?',
+    a: 'Standard delivery includes MP4 (H.264) for web and social, ProRes or DNxHD for broadcast, and transparent PNG sequences or WebM for animated overlays. For 3D assets, we deliver FBX, OBJ, glTF and USDZ depending on the use case. For AR/VR, we deliver integrated Unity or Unreal packages or standalone app builds.',
+  },
+];
 
 export default function AnimationPage() {
   return (
-    <ServicePageLayout
+    <>
+      <SEO
+        title="2D & 3D Animation"
+        description="Professional 2D and 3D animation, CGI, VFX, AR and VR production services. Immersive visual storytelling for global brands - explainer videos, product visualisation, motion graphics and interactive experiences."
+        keywords="2D animation, 3D animation, CGI, VFX, AR, VR, motion graphics, explainer video, product visualisation, visual effects, TechBird"
+        faqItems={faqItems}
+        serviceSchema={{ name: '2D & 3D Animation', description: 'CGI, VFX, AR/VR, product visualization and motion graphics production.', category: 'Animation Production' }}
+      />
+      <ServicePageLayout
       accentColor="#fbbf24"
       eyebrow="2D & 3D Animation"
-      title="Immersive Visual Storytelling — 2D, 3D, CGI, VFX, AR & VR"
+      title="Immersive Visual Storytelling - 2D, 3D, CGI, VFX, AR & VR"
       subtitle="Animation, modelling, CGI, VFX and AR/VR experiences for global brands that demand production quality and stop-scroll impact."
       breadcrumbLabel="2D & 3D Animation"
       metrics={[
@@ -14,8 +46,8 @@ export default function AnimationPage() {
         { number: '30+', label: 'Global brand and agency clients' },
       ]}
       introParagraphs={[
-        'Static imagery no longer captures attention in a world of infinite scrolling. Brands that communicate through motion — whether a 30-second explainer, a photorealistic product render or an augmented reality experience — earn more engagement, higher recall and stronger emotional connection with their audience.',
-        'Animation is not just about making things move; it is about telling a story that serves a business objective. Every production at TechBird starts with the brief, not the medium. We recommend the right format for your goal, audience and distribution channel — then we build it to the standards that make people stop scrolling.',
+        'Static imagery no longer captures attention in a world of infinite scrolling. Brands that communicate through motion - whether a 30-second explainer, a photorealistic product render or an augmented reality experience - earn more engagement, higher recall and stronger emotional connection with their audience.',
+        'Animation is not just about making things move; it is about telling a story that serves a business objective. Every production at TechBird starts with the brief, not the medium. We recommend the right format for your goal, audience and distribution channel - then we build it to the standards that make people stop scrolling.',
       ]}
       sections={[
         {
@@ -41,7 +73,7 @@ export default function AnimationPage() {
           color: '#38bdf8',
           heading: 'CGI & VFX',
           paragraphs: [
-            'CGI allows you to show what cannot be filmed — molecular interactions, infrastructure at scale, product concepts that don\'t exist yet, historical reconstructions. VFX allows you to enhance what was filmed — compositing digital elements with live footage, adding environment extensions, creating the impossible. We produce CGI and VFX for commercial advertising, documentary, corporate communications and social media.',
+            'CGI allows you to show what cannot be filmed - molecular interactions, infrastructure at scale, product concepts that don\'t exist yet, historical reconstructions. VFX allows you to enhance what was filmed - compositing digital elements with live footage, adding environment extensions, creating the impossible. We produce CGI and VFX for commercial advertising, documentary, corporate communications and social media.',
           ],
           useCases: 'Commercial advertising, Product concept visualisation, VFX compositing, Documentary CGI, Corporate films',
         },
@@ -50,7 +82,7 @@ export default function AnimationPage() {
           color: '#a78bfa',
           heading: 'AR & VR Experiences',
           paragraphs: [
-            'Augmented reality overlays digital content on the physical world — product try-ons, assembly instructions, interactive brand experiences. Virtual reality creates fully immersive environments for training simulations, virtual showrooms, architectural visualisation and experiential marketing. We build AR/VR experiences for iOS (ARKit), Android (ARCore) and standalone VR headsets.',
+            'Augmented reality overlays digital content on the physical world - product try-ons, assembly instructions, interactive brand experiences. Virtual reality creates fully immersive environments for training simulations, virtual showrooms, architectural visualisation and experiential marketing. We build AR/VR experiences for iOS (ARKit), Android (ARCore) and standalone VR headsets.',
           ],
           useCases: 'AR product try-on, VR training simulations, Virtual showrooms, Interactive packaging, Immersive brand events',
         },
@@ -63,30 +95,10 @@ export default function AnimationPage() {
         { label: 'AR / VR', tech: 'Unity, Unreal Engine, ARKit, ARCore, WebXR' },
         { label: 'Output Formats', tech: 'MP4, ProRes, WebM, USDZ, glTF, FBX, OBJ' },
       ]}
-      faqItems={[
-        {
-          q: 'How long does an animated video take to produce?',
-          a: 'Timeline depends on length, complexity and revision cycles. A 60-second 2D explainer typically takes 4–6 weeks from approved script to final delivery: 1 week for storyboard approval, 2–3 weeks for animation, 1 week for revisions and sound. 3D and CGI productions take longer due to modelling, rigging and rendering time. We provide a detailed production schedule after the brief is approved.',
-        },
-        {
-          q: 'What is your production process?',
-          a: 'Our production process: (1) Brief and objectives — understanding the goal, audience and channel; (2) Script and storyboard — written narrative and visual frame-by-frame layout for approval; (3) Style frames — key visual moments to establish look and feel before full production; (4) Animation production; (5) Sound design and voiceover; (6) Review and revisions; (7) Final delivery in required formats.',
-        },
-        {
-          q: 'Do you provide voiceover and sound design?',
-          a: 'Yes. We work with professional voice talent across languages — English, Hindi and regional Indian languages, plus international English accents. Sound design, music licensing and audio mix are included as standard in all video productions. We can also source custom music composition for productions that require an original score.',
-        },
-        {
-          q: 'Can you animate our existing brand assets?',
-          a: 'Yes. Animating existing logos, illustrations, product photography and brand elements is a standard request. We work from your brand guidelines and existing asset library. If your assets are not in vector or high-resolution format, we can recreate them for animation.',
-        },
-        {
-          q: 'What formats do you deliver in?',
-          a: 'Standard delivery includes MP4 (H.264) for web and social, ProRes or DNxHD for broadcast, and transparent PNG sequences or WebM for animated overlays. For 3D assets, we deliver FBX, OBJ, glTF and USDZ depending on the use case. For AR/VR, we deliver integrated Unity or Unreal packages or standalone app builds.',
-        },
-      ]}
+      faqItems={faqItems}
       ctaHeading="Start a Production"
-      ctaText="Share your brief — what you want to communicate, who it is for and where it will run. We will recommend the right format and scope the production."
+      ctaText="Share your brief - what you want to communicate, who it is for and where it will run. We will recommend the right format and scope the production."
     />
+    </>
   );
 }

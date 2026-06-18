@@ -17,7 +17,7 @@ export default function Recognition() {
             <div className="svc-no">02</div>
             <h3>AI Innovation</h3>
             <p className="svc-tags">Intelligence · Automation · Insight</p>
-            <p className="svc-desc">Top AI solutions partner for 2 consecutive years — driving intelligent transformation.</p>
+            <p className="svc-desc">Top AI solutions partner for 2 consecutive years - driving intelligent transformation.</p>
           </article>
           <article className="svc-card reveal-up">
             <div className="svc-no">03</div>

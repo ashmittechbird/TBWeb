@@ -31,3 +31,10 @@ Thumbs.db
 # Local agent / editor tooling
 .claude/
 .mcp.json
+.codex/
+
+# Vercel
+.vercel/
+
+# Legacy / empty
+techbird-web/
