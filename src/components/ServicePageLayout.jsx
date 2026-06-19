@@ -362,26 +362,267 @@ function Visual5({ color, index = 0 }) {
     </svg>
   );
 }
-const VISUALS = [Visual0, Visual1, Visual2, Visual3, Visual4, Visual5];
+/* 6 - AI Brain / Neural Network */
+function Visual6({ color }) {
+  const c = color !== '#ffffff' ? color : '#38bdf8';
+  const neurons = [[240,80],[140,140],[340,140],[180,220],[300,220],[240,160]];
+  const synapses = [[0,5],[5,1],[5,2],[1,3],[2,4],[5,3],[5,4],[0,1],[0,2]];
+  return (
+    <svg viewBox="0 0 480 320" fill="none" xmlns="http://www.w3.org/2000/svg" className="ip2-row-svg">
+      <rect width="480" height="320" fill="#0c0c10" />
+      {synapses.map(([a,b],i)=>(
+        <g key={i}>
+          <line x1={neurons[a][0]} y1={neurons[a][1]} x2={neurons[b][0]} y2={neurons[b][1]} stroke={c} strokeWidth="1" strokeOpacity="0.15" />
+          <circle r="3" fill={c} fillOpacity="0.7">
+            <animate attributeName="cx" values={`${neurons[a][0]};${neurons[b][0]}`} dur={`${1.8+i*0.3}s`} repeatCount="indefinite" />
+            <animate attributeName="cy" values={`${neurons[a][1]};${neurons[b][1]}`} dur={`${1.8+i*0.3}s`} repeatCount="indefinite" />
+            <animate attributeName="fillOpacity" values="0;0.8;0" dur={`${1.8+i*0.3}s`} repeatCount="indefinite" />
+          </circle>
+        </g>
+      ))}
+      {neurons.map(([x,y],i)=>(
+        <g key={`n${i}`}>
+          <circle cx={x} cy={y} r={i===5?22:14} fill={c} fillOpacity={i===5?0.12:0.06} stroke={c} strokeWidth="1.5" strokeOpacity={i===5?0.6:0.3}>
+            <animate attributeName="r" values={`${i===5?22:14};${i===5?25:16};${i===5?22:14}`} dur={`${2+i*0.4}s`} repeatCount="indefinite" />
+          </circle>
+          <circle cx={x} cy={y} r="4" fill={c} fillOpacity="0.6" />
+        </g>
+      ))}
+      <text x="240" y="164" textAnchor="middle" fill={c} fillOpacity="0.5" fontSize="8" fontFamily="JetBrains Mono, monospace">AI</text>
+      <text x="20" y="308" fill="rgba(255,255,255,0.15)" fontSize="8" fontFamily="JetBrains Mono, monospace" letterSpacing="3">NEURAL NETWORK</text>
+    </svg>
+  );
+}
 
-/* ── Keyword-based visual picker — matches section heading to the most relevant SVG ── */
-const VISUAL_KEYWORDS = [
-  { keys: ['code','erp','web app','api','saas','software','custom','frappe','development','backend','frontend'], viz: 0 },
-  { keys: ['analytics','dashboard','report','metric','data','attribution','kpi','insight','bi','forecast'], viz: 1 },
-  { keys: ['mobile','app','ios','android','react native','flutter','responsive','pwa'], viz: 2 },
-  { keys: ['ai','ml','rag','llm','agent','model','neural','nlp','automation','chatbot','intelligent'], viz: 3 },
-  { keys: ['cloud','devops','ci/cd','pipeline','kubernetes','docker','infrastructure','migration','server','deploy','aws','azure'], viz: 4 },
-  { keys: ['global','network','integration','connect','platform','crm','hubspot','salesforce','cdp','martech','stack'], viz: 5 },
-  { keys: ['seo','content','marketing','gtm','paid','social','campaign','growth','brand','email','strategy'], viz: 1 },
-  { keys: ['2d','3d','animation','cgi','vfx','ar','vr','motion','render','visual','video','explainer'], viz: 2 },
-  { keys: ['security','compliance','audit','governance','encrypt','firewall','pen test','iso','gdpr'], viz: 4 },
-  { keys: ['cost','optim','budget','pricing','saving','roi','roas','revenue','performance'], viz: 1 },
-];
+/* 7 - SEO / Search Rankings */
+function Visual7({ color }) {
+  const c = color !== '#ffffff' ? color : '#22d3ee';
+  const bars = [85,60,72,48,90,65,55,78];
+  return (
+    <svg viewBox="0 0 480 320" fill="none" xmlns="http://www.w3.org/2000/svg" className="ip2-row-svg">
+      <rect width="480" height="320" fill="#0c0c10" />
+      <rect x="40" y="30" width="400" height="260" rx="12" fill="#141418" stroke="rgba(255,255,255,0.1)" strokeWidth="1" />
+      <rect x="60" y="50" width="200" height="24" rx="12" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" strokeWidth="1" />
+      <circle cx="76" cy="62" r="6" stroke={c} strokeWidth="1.5" strokeOpacity="0.6" fill="none" />
+      <rect x="90" y="58" width="80" height="8" rx="4" fill="rgba(255,255,255,0.08)"><animate attributeName="width" values="40;80;60;80" dur="3s" repeatCount="indefinite" /></rect>
+      {[0,1,2,3,4].map(i=>(
+        <g key={i} opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin={`${0.3+i*0.15}s`} fill="freeze" />
+          <rect x="60" y={88+i*36} width="360" height="30" rx="6" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.06)" strokeWidth="0.5" />
+          <text x="72" y={107+i*36} fill={i===0?c:'rgba(255,255,255,0.4)'} fontSize="10" fontFamily="JetBrains Mono, monospace" fontWeight={i===0?'700':'400'}>#{i+1}</text>
+          <rect x="96" y={96+i*36} width={120-i*12} height="8" rx="2" fill={i===0?c:'rgba(255,255,255,0.1)'} fillOpacity={i===0?0.4:1} />
+          <rect x="96" y={108+i*36} width={180-i*18} height="5" rx="2" fill="rgba(255,255,255,0.06)" />
+          <rect x="350" y={96+i*36} width={50-i*6} height="14" rx="3" fill={c} fillOpacity={0.35-i*0.06}><animate attributeName="width" values={`${30-i*4};${50-i*6};${40-i*5}`} dur="2.5s" repeatCount="indefinite" /></rect>
+        </g>
+      ))}
+      <text x="20" y="308" fill="rgba(255,255,255,0.15)" fontSize="8" fontFamily="JetBrains Mono, monospace" letterSpacing="3">SEARCH RANKINGS</text>
+    </svg>
+  );
+}
+
+/* 8 - 3D/Animation Scene */
+function Visual8({ color }) {
+  const c = color !== '#ffffff' ? color : '#fbbf24';
+  return (
+    <svg viewBox="0 0 480 320" fill="none" xmlns="http://www.w3.org/2000/svg" className="ip2-row-svg">
+      <rect width="480" height="320" fill="#0c0c10" />
+      <rect x="40" y="24" width="400" height="272" rx="12" fill="#141418" stroke="rgba(255,255,255,0.1)" strokeWidth="1" />
+      {/* timeline bar at bottom */}
+      <rect x="50" y="268" width="380" height="18" rx="4" fill="rgba(255,255,255,0.04)" />
+      <rect x="56" y="272" width="0" height="10" rx="2" fill={c} fillOpacity="0.4"><animate attributeName="width" from="0" to="200" dur="4s" repeatCount="indefinite" /></rect>
+      {[0,1,2,3,4,5,6,7].map(i=>(<line key={i} x1={86+i*42} y1="270" x2={86+i*42} y2="284" stroke="rgba(255,255,255,0.08)" strokeWidth="0.5" />))}
+      {/* 3D cube wireframe rotating */}
+      <g>
+        <animateTransform attributeName="transform" type="rotate" from="0 240 150" to="360 240 150" dur="12s" repeatCount="indefinite" />
+        {/* front face */}
+        <rect x="200" y="110" width="80" height="80" fill={c} fillOpacity="0.04" stroke={c} strokeWidth="1.2" strokeOpacity="0.4" />
+        {/* back face */}
+        <rect x="220" y="90" width="80" height="80" fill="none" stroke={c} strokeWidth="0.8" strokeOpacity="0.2" />
+        {/* connecting edges */}
+        <line x1="200" y1="110" x2="220" y2="90" stroke={c} strokeWidth="0.8" strokeOpacity="0.25" />
+        <line x1="280" y1="110" x2="300" y2="90" stroke={c} strokeWidth="0.8" strokeOpacity="0.25" />
+        <line x1="200" y1="190" x2="220" y2="170" stroke={c} strokeWidth="0.8" strokeOpacity="0.25" />
+        <line x1="280" y1="190" x2="300" y2="170" stroke={c} strokeWidth="0.8" strokeOpacity="0.25" />
+      </g>
+      {/* vertex dots */}
+      {[[200,110],[280,110],[200,190],[280,190],[220,90],[300,90],[220,170],[300,170]].map(([x,y],i)=>(
+        <circle key={i} cx={x} cy={y} r="3" fill={c} fillOpacity="0.6"><animate attributeName="fillOpacity" values="0.3;0.8;0.3" dur={`${1.5+i*0.2}s`} repeatCount="indefinite" /></circle>
+      ))}
+      {/* playback controls */}
+      <polygon points="52,274 60,278 52,282" fill="rgba(255,255,255,0.4)" />
+      <text x="20" y="308" fill="rgba(255,255,255,0.15)" fontSize="8" fontFamily="JetBrains Mono, monospace" letterSpacing="3">3D VIEWPORT</text>
+    </svg>
+  );
+}
+
+/* 9 - VR/AR Headset */
+function Visual9({ color }) {
+  const c = color !== '#ffffff' ? color : '#fbbf24';
+  return (
+    <svg viewBox="0 0 480 320" fill="none" xmlns="http://www.w3.org/2000/svg" className="ip2-row-svg">
+      <rect width="480" height="320" fill="#0c0c10" />
+      {/* VR headset */}
+      <rect x="140" y="100" width="200" height="120" rx="30" fill="rgba(255,255,255,0.04)" stroke={c} strokeWidth="1.5" strokeOpacity="0.4" />
+      <circle cx="200" cy="160" r="32" fill={c} fillOpacity="0.06" stroke={c} strokeWidth="1" strokeOpacity="0.3" />
+      <circle cx="280" cy="160" r="32" fill={c} fillOpacity="0.06" stroke={c} strokeWidth="1" strokeOpacity="0.3" />
+      <circle cx="200" cy="160" r="18" fill={c} fillOpacity="0.1" stroke={c} strokeWidth="0.8" strokeOpacity="0.5"><animate attributeName="r" values="18;20;18" dur="2s" repeatCount="indefinite" /></circle>
+      <circle cx="280" cy="160" r="18" fill={c} fillOpacity="0.1" stroke={c} strokeWidth="0.8" strokeOpacity="0.5"><animate attributeName="r" values="18;20;18" dur="2s" repeatCount="indefinite" begin="0.3s" /></circle>
+      {/* strap */}
+      <path d="M140 140 Q100 130 90 160 Q100 190 140 180" stroke={c} strokeWidth="1" strokeOpacity="0.2" fill="none" />
+      <path d="M340 140 Q380 130 390 160 Q380 190 340 180" stroke={c} strokeWidth="1" strokeOpacity="0.2" fill="none" />
+      {/* floating particles */}
+      {[[120,70],[360,80],[100,250],[380,240],[200,50],[300,270]].map(([x,y],i)=>(
+        <circle key={i} cx={x} cy={y} r="2" fill={c} fillOpacity="0.4"><animate attributeName="cy" values={`${y};${y-15};${y}`} dur={`${2+i*0.4}s`} repeatCount="indefinite" /><animate attributeName="fillOpacity" values="0.1;0.5;0.1" dur={`${2+i*0.4}s`} repeatCount="indefinite" /></circle>
+      ))}
+      <text x="20" y="308" fill="rgba(255,255,255,0.15)" fontSize="8" fontFamily="JetBrains Mono, monospace" letterSpacing="3">IMMERSIVE XR</text>
+    </svg>
+  );
+}
+
+/* 10 - Email / Automation Workflow */
+function Visual10({ color }) {
+  const c = color !== '#ffffff' ? color : '#22d3ee';
+  const steps = [[80,160],[180,100],[280,160],[380,100]];
+  return (
+    <svg viewBox="0 0 480 320" fill="none" xmlns="http://www.w3.org/2000/svg" className="ip2-row-svg">
+      <rect width="480" height="320" fill="#0c0c10" />
+      {/* workflow path */}
+      <path d="M80 160 Q130 100 180 100 Q230 100 280 160 Q330 220 380 100" stroke={c} strokeWidth="1.5" strokeOpacity="0.2" fill="none" strokeDasharray="6 4" />
+      {/* animated dot on path */}
+      <circle r="5" fill={c} fillOpacity="0.8"><animateMotion dur="3s" repeatCount="indefinite" path="M80 160 Q130 100 180 100 Q230 100 280 160 Q330 220 380 100" /></circle>
+      {/* step nodes */}
+      {[['Trigger',80,160,'⚡'],['Segment',180,100,'👥'],['Send',280,160,'✉'],['Track',380,100,'📊']].map(([label,x,y,icon],i)=>(
+        <g key={i}>
+          <rect x={x-30} y={y-22} width="60" height="44" rx="10" fill="rgba(255,255,255,0.04)" stroke={c} strokeWidth="1" strokeOpacity={0.3+i*0.05}>
+            <animate attributeName="strokeOpacity" values={`${0.2};${0.5};${0.2}`} dur={`${2+i*0.3}s`} repeatCount="indefinite" />
+          </rect>
+          <text x={x} y={y-4} textAnchor="middle" fontSize="14">{icon}</text>
+          <text x={x} y={y+14} textAnchor="middle" fill="rgba(255,255,255,0.5)" fontSize="8" fontFamily="JetBrains Mono, monospace">{label}</text>
+        </g>
+      ))}
+      <text x="20" y="308" fill="rgba(255,255,255,0.15)" fontSize="8" fontFamily="JetBrains Mono, monospace" letterSpacing="3">AUTOMATION FLOW</text>
+    </svg>
+  );
+}
+
+/* 11 - Shield / Security */
+function Visual11({ color }) {
+  const c = color !== '#ffffff' ? color : '#34d399';
+  return (
+    <svg viewBox="0 0 480 320" fill="none" xmlns="http://www.w3.org/2000/svg" className="ip2-row-svg">
+      <rect width="480" height="320" fill="#0c0c10" />
+      <path d="M240 50 L340 90 L340 180 Q340 260 240 280 Q140 260 140 180 L140 90 Z" fill={c} fillOpacity="0.04" stroke={c} strokeWidth="1.5" strokeOpacity="0.35" />
+      <path d="M240 70 L320 102 L320 178 Q320 240 240 258 Q160 240 160 178 L160 102 Z" fill={c} fillOpacity="0.03" stroke={c} strokeWidth="0.8" strokeOpacity="0.2" />
+      {/* checkmark */}
+      <path d="M210 160 L230 180 L270 130" stroke={c} strokeWidth="3" strokeOpacity="0.7" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="80" strokeDashoffset="80">
+        <animate attributeName="strokeDashoffset" from="80" to="0" dur="1s" begin="0.5s" fill="freeze" />
+      </path>
+      {/* scan line */}
+      <line x1="150" y1="100" x2="330" y2="100" stroke={c} strokeWidth="1" strokeOpacity="0.15">
+        <animate attributeName="y1" values="100;260;100" dur="3s" repeatCount="indefinite" />
+        <animate attributeName="y2" values="100;260;100" dur="3s" repeatCount="indefinite" />
+      </line>
+      {/* lock icon */}
+      <rect x="226" y="218" width="28" height="22" rx="4" fill={c} fillOpacity="0.15" stroke={c} strokeWidth="1" strokeOpacity="0.3" />
+      <path d="M233 218 L233 210 Q233 202 240 202 Q247 202 247 210 L247 218" stroke={c} strokeWidth="1.5" strokeOpacity="0.4" fill="none" />
+      <text x="20" y="308" fill="rgba(255,255,255,0.15)" fontSize="8" fontFamily="JetBrains Mono, monospace" letterSpacing="3">SECURITY</text>
+    </svg>
+  );
+}
+
+/* 12 - Cost / FinOps Gauge */
+function Visual12({ color }) {
+  const c = color !== '#ffffff' ? color : '#34d399';
+  return (
+    <svg viewBox="0 0 480 320" fill="none" xmlns="http://www.w3.org/2000/svg" className="ip2-row-svg">
+      <rect width="480" height="320" fill="#0c0c10" />
+      {/* large gauge arc */}
+      <path d="M140 220 A100 100 0 0 1 340 220" stroke="rgba(255,255,255,0.08)" strokeWidth="12" strokeLinecap="round" fill="none" />
+      <path d="M140 220 A100 100 0 0 1 340 220" stroke={c} strokeWidth="12" strokeLinecap="round" fill="none" strokeDasharray="0 314">
+        <animate attributeName="strokeDasharray" values="0 314;200 114" dur="1.5s" begin="0.3s" fill="freeze" />
+      </path>
+      {/* needle */}
+      <g><animateTransform attributeName="transform" type="rotate" from="-90 240 220" to="30 240 220" dur="1.5s" begin="0.3s" fill="freeze" />
+        <line x1="240" y1="220" x2="240" y2="140" stroke={c} strokeWidth="2" strokeOpacity="0.8" strokeLinecap="round" />
+      </g>
+      <circle cx="240" cy="220" r="8" fill={c} fillOpacity="0.3" stroke={c} strokeWidth="1.5" strokeOpacity="0.6" />
+      {/* value */}
+      <text x="240" y="260" textAnchor="middle" fill={c} fillOpacity="0.7" fontSize="22" fontFamily="JetBrains Mono, monospace" fontWeight="700">60%</text>
+      <text x="240" y="278" textAnchor="middle" fill="rgba(255,255,255,0.35)" fontSize="9" fontFamily="JetBrains Mono, monospace">COST REDUCTION</text>
+      {/* savings cards */}
+      {[[-1,1],[1,1]].map(([dx,i],k)=>(
+        <g key={k} opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.4s" begin={`${1.5+k*0.2}s`} fill="freeze" />
+          <rect x={dx<0?60:310} y="100" width="110" height="48" rx="8" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" strokeWidth="1" />
+          <text x={dx<0?115:365} y="120" textAnchor="middle" fill={c} fillOpacity="0.6" fontSize="14" fontFamily="JetBrains Mono, monospace" fontWeight="700">{dx<0?'↓40%':'↑2.3×'}</text>
+          <text x={dx<0?115:365} y="138" textAnchor="middle" fill="rgba(255,255,255,0.3)" fontSize="7" fontFamily="JetBrains Mono, monospace">{dx<0?'SPEND':'ROI'}</text>
+        </g>
+      ))}
+      <text x="20" y="308" fill="rgba(255,255,255,0.15)" fontSize="8" fontFamily="JetBrains Mono, monospace" letterSpacing="3">FINOPS DASHBOARD</text>
+    </svg>
+  );
+}
+
+/* 13 - Social / Community */
+function Visual13({ color }) {
+  const c = color !== '#ffffff' ? color : '#22d3ee';
+  const people = [[160,100],[240,80],[320,100],[140,180],[240,200],[340,180]];
+  return (
+    <svg viewBox="0 0 480 320" fill="none" xmlns="http://www.w3.org/2000/svg" className="ip2-row-svg">
+      <rect width="480" height="320" fill="#0c0c10" />
+      {/* connection lines */}
+      {[[0,1],[1,2],[0,3],[1,4],[2,5],[3,4],[4,5]].map(([a,b],i)=>(
+        <line key={i} x1={people[a][0]} y1={people[a][1]} x2={people[b][0]} y2={people[b][1]} stroke={c} strokeWidth="0.8" strokeOpacity="0.15" />
+      ))}
+      {/* people avatars */}
+      {people.map(([x,y],i)=>(
+        <g key={i}>
+          <circle cx={x} cy={y-8} r={i===1||i===4?16:12} fill={c} fillOpacity={i===1||i===4?0.1:0.05} stroke={c} strokeWidth="1" strokeOpacity={i===1||i===4?0.4:0.2}>
+            <animate attributeName="r" values={`${i===1||i===4?16:12};${i===1||i===4?18:14};${i===1||i===4?16:12}`} dur={`${2.5+i*0.3}s`} repeatCount="indefinite" />
+          </circle>
+          <circle cx={x} cy={y-14} r="5" fill="rgba(255,255,255,0.15)" />
+          <rect x={x-6} y={y-6} width="12" height="8" rx="4" fill="rgba(255,255,255,0.1)" />
+        </g>
+      ))}
+      {/* engagement bubbles */}
+      {[[180,135,'❤️'],[290,135,'💬'],[240,145,'📊']].map(([x,y,emoji],i)=>(
+        <g key={`b${i}`} opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" dur="4s" begin={`${i*1.3}s`} repeatCount="indefinite" />
+          <rect x={x-12} y={y-12} width="24" height="24" rx="8" fill="rgba(255,255,255,0.06)" stroke={c} strokeWidth="0.5" strokeOpacity="0.3">
+            <animate attributeName="y" values={`${y-8};${y-16}`} dur="4s" begin={`${i*1.3}s`} repeatCount="indefinite" />
+          </rect>
+          <text x={x} y={y+4} textAnchor="middle" fontSize="10"><animate attributeName="y" values={`${y+8};${y}`} dur="4s" begin={`${i*1.3}s`} repeatCount="indefinite" />{emoji}</text>
+        </g>
+      ))}
+      <text x="20" y="308" fill="rgba(255,255,255,0.15)" fontSize="8" fontFamily="JetBrains Mono, monospace" letterSpacing="3">COMMUNITY</text>
+    </svg>
+  );
+}
+
+const VISUALS = [Visual0, Visual1, Visual2, Visual3, Visual4, Visual5, Visual6, Visual7, Visual8, Visual9, Visual10, Visual11, Visual12, Visual13];
+
+/* ── Exact heading → visual index map — each section gets a unique, relevant visual ── */
+const HEADING_VISUAL_MAP = {
+  /* Software Dev */
+  'erp implementation': 0, 'custom web applications': 0, 'mobile app development': 2,
+  'api & integration': 3, 'saas & paas': 4,
+  /* AI */
+  'retrieval-augmented generation': 6, 'agentic ai': 6, 'llm integration': 3,
+  'ai automation': 10,
+  /* Cloud & DevOps */
+  'cloud migration': 4, 'devops & ci/cd': 0, 'kubernetes': 4,
+  'cloud security': 11, 'cost optim': 12,
+  /* Animation */
+  '2d animation': 8, '3d modelling': 8, 'cgi & vfx': 8, 'ar & vr': 9,
+  /* Marketing */
+  'go-to-market': 1, 'seo & content': 7, 'paid media': 1,
+  'social media': 13, 'email & marketing': 10,
+  /* MarTech */
+  'crm implementation': 5, 'marketing analytics': 1, 'marketing automation': 10,
+  'customer data platform': 5, 'adtech': 7,
+};
 
 function pickVisual(heading, index) {
   const h = (heading || '').toLowerCase();
-  for (const rule of VISUAL_KEYWORDS) {
-    if (rule.keys.some(k => h.includes(k))) return VISUALS[rule.viz];
+  for (const [key, vizIdx] of Object.entries(HEADING_VISUAL_MAP)) {
+    if (h.includes(key)) return VISUALS[vizIdx];
   }
   return VISUALS[index % VISUALS.length];
 }
