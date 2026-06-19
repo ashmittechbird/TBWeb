@@ -158,13 +158,13 @@
    ════════════════════════════════════════ */
 .ip2-hero {
   background: var(--ip-bg);
-  padding-top: 0.5rem;
+  padding-top: 0;
   padding-bottom: 0;
 }
 .ip2-hero-inner {
   max-width: var(--ip-mw);
   margin: 0 auto;
-  padding: 2rem var(--ip-px) 4.5rem;
+  padding: 6.5rem var(--ip-px) 4.5rem;
 }
 
 /* Breadcrumb */
@@ -1691,7 +1691,7 @@
 
 /* ── HERO ── */
 .ihero {
-  padding: 4rem 0 0;
+  padding: 6.5rem 0 0;
   border-bottom: 1px solid rgba(255,255,255,0.1);
   position: relative;
   overflow: hidden;
