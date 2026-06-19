@@ -69,6 +69,14 @@ export default function SEO({
       contactType: 'sales',
       availableLanguage: ['English', 'Hindi'],
     },
+    founder: [
+      { '@type': 'Person', name: 'Amol Sane', jobTitle: 'Co-Founder & CEO', sameAs: 'https://www.linkedin.com/in/amol-sane-b8675316/' },
+      { '@type': 'Person', name: 'Ekansh Jain', jobTitle: 'Co-Founder & CTO', sameAs: 'https://www.linkedin.com/in/jainekansh1512/' },
+    ],
+    employee: [
+      { '@type': 'Person', name: 'Amit Thakur', jobTitle: 'CBO', sameAs: 'https://www.linkedin.com/in/amitthakurtechbirdit/' },
+      { '@type': 'Person', name: 'Shubham Agarwal', jobTitle: 'CFO', sameAs: 'https://www.linkedin.com/in/shubham-a-54aa78271/' },
+    ],
   };
 
   /* ── WebSite schema (homepage only) ── */
