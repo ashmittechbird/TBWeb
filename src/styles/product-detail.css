@@ -149,7 +149,7 @@
 .pd-hero {
   position: relative;
   background: var(--h-void);
-  padding: clamp(53px, 11vh, 128px) 0 clamp(52px, 7vh, 96px);
+  padding: clamp(80px, 11vh, 128px) 0 clamp(52px, 7vh, 96px);
   overflow: hidden;
   isolation: isolate;
 }
