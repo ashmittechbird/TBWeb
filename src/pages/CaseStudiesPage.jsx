@@ -49,7 +49,7 @@ export default function CaseStudiesPage() {
             </div>
           </div>
           <div className="ihero-img-side">
-            <img src="/assets/products-hero-bg.jpg" alt="Case studies" className="ihero-img" loading="eager" />
+            <img src="/assets/products-hero-bg.webp" alt="Case studies" className="ihero-img" loading="eager" />
           </div>
         </div>
       </section>

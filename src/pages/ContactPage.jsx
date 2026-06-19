@@ -93,7 +93,7 @@ export default function ContactPage() {
             <p className="ihero-sub">Have a project in mind? Whether you need a full product build, AI integration, ERP implementation or a quick consultation — we're here to help.</p>
           </div>
           <div className="ihero-img-side">
-            <img src="/assets/services-hero-bg.jpg" alt="TechBird office" className="ihero-img" loading="eager" />
+            <img src="/assets/services-hero-bg.webp" alt="TechBird office" className="ihero-img" loading="eager" />
           </div>
         </div>
       </section>

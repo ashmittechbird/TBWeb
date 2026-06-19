@@ -50,7 +50,7 @@ const TEXT_CARDS = [
     title: <>Cloud &amp;<br />DevOps</>,
     desc: 'Robust cloud environments and DevOps pipelines designed for 99.9% uptime and secure growth.',
     to: '/services/cloud-devops',
-    bgImg: '/assets/svc-cloud.jpg',
+    bgImg: '/assets/svc-cloud.webp',
   },
   {
     id: 'tc2',
@@ -59,7 +59,7 @@ const TEXT_CARDS = [
     title: 'MarTech',
     desc: 'Optimized MarTech stacks spanning CRM, analytics, automation and customer data platforms.',
     to: '/services/martech',
-    bgImg: '/assets/svc-martech.jpg',
+    bgImg: '/assets/svc-martech.webp',
   },
   {
     id: 'tc3',
@@ -68,7 +68,7 @@ const TEXT_CARDS = [
     title: <>Marketing<br />Strategy</>,
     desc: 'GTM, SEO, SEM and social campaigns aligned with your business goals for sustainable growth.',
     to: '/services/marketing',
-    bgImg: '/assets/svc-marketing.jpg',
+    bgImg: '/assets/svc-marketing.webp',
   },
 ];
 
@@ -193,7 +193,7 @@ export default function ServicesPage() {
             <p className="ihero-sub">From ERP rollouts to AI pipelines, from cloud infrastructure to creative production — each service connects to the others. One team, accountable for every outcome.</p>
           </div>
           <div className="ihero-img-side">
-            <img src="/assets/services-hero-bg.jpg" alt="Software development workspace" className="ihero-img" loading="eager" />
+            <img src="/assets/services-hero-bg.webp" alt="Software development workspace" className="ihero-img" loading="eager" />
           </div>
         </div>
       </section>
@@ -223,7 +223,7 @@ export default function ServicesPage() {
 
             {/* ── CENTER HERO - Software Development (main focus) ── */}
             <Link to="/services/software-development" className="b-cell b-center-card">
-              <img src="/assets/team-visual.jpg" className="b-card-img" alt="Software Development" loading="lazy" />
+              <img src="/assets/team-visual.webp" className="b-card-img" alt="Software Development" loading="lazy" />
               <div className="b-card-color-wash b-wash-purple" />
 
               {/* Floating tag top-left */}
@@ -247,7 +247,7 @@ export default function ServicesPage() {
 
             {/* ── Right top - AI Solutions visual card (ai-core image) ── */}
             <Link to="/services/ai-solutions" className="b-cell b-visual-card">
-              <img src="/assets/ai-core.png" className="b-card-img" alt="AI Solutions" loading="lazy" />
+              <img src="/assets/ai-core.webp" className="b-card-img" alt="AI Solutions" loading="lazy" />
               <div className="b-card-color-wash b-wash-blue" />
               <div className="b-vis-content">
                 <span className="b-vis-cat">Custom Models · Consulting</span>
@@ -258,7 +258,7 @@ export default function ServicesPage() {
 
             {/* ── Right bottom - Animation card with bg image ── */}
             <Link to="/services/animation" className="b-cell b-text-card b-last">
-              <img src="/assets/svc-animation.jpg" className="b-card-img" alt="Animation" loading="lazy" style={{ opacity: 0.4 }} />
+              <img src="/assets/svc-animation.webp" className="b-card-img" alt="Animation" loading="lazy" style={{ opacity: 0.4 }} />
               <div className="b-card-color-wash" style={{ background: 'linear-gradient(160deg, rgba(8,8,10,0.82) 0%, rgba(8,8,10,0.55) 50%, rgba(8,8,10,0.35) 100%)' }} />
               <div className="btc-icon" style={{ position: 'relative', zIndex: 2 }}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">

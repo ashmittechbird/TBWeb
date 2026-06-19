@@ -175,7 +175,7 @@ export default function ProductsPage() {
             </div>
           </div>
           <div className="ihero-img-side">
-            <img src="/assets/products-hero-bg.jpg" alt="Enterprise software development" className="ihero-img" loading="eager" />
+            <img src="/assets/products-hero-bg.webp" alt="Enterprise software development" className="ihero-img" loading="eager" />
           </div>
         </div>
       </section>

@@ -577,7 +577,7 @@ export default function ServicePageLayout({
       <div className="ip2-hero-band" ref={heroBandImgRef}>
         <img
           className="svc-spec-img"
-          src={heroImage || '/assets/team-visual.jpg'}
+          src={heroImage || '/assets/team-visual.webp'}
           alt={eyebrow}
           loading="lazy"
         />

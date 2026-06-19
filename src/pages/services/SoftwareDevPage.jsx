@@ -35,7 +35,7 @@ export default function SoftwareDevPage() {
         serviceSchema={{ name: 'Software Development', description: 'Custom software development - ERP, web apps, mobile apps, APIs and SaaS products for enterprises.', category: 'Software Development' }}
       />
       <ServicePageLayout
-      heroImage="/assets/software-dev-hero.jpg"
+      heroImage="/assets/software-dev-hero.webp"
       eyebrow="Software Development"
       title="Enterprise Software That Fits Your Operations - Not the Other Way Around"
       subtitle="ERP, web apps, mobile apps, APIs, SaaS and PaaS - built on ERPNext, Frappe and modern stacks. From discovery to production, maintained long after launch."

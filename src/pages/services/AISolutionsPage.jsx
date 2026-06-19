@@ -35,7 +35,7 @@ export default function AISolutionsPage() {
         serviceSchema={{ name: 'AI Solutions', description: 'Custom AI/ML models, RAG systems, intelligent automation and predictive analytics.', category: 'AI Consulting' }}
       />
       <ServicePageLayout
-      heroImage="/assets/ai-core.png"
+      heroImage="/assets/ai-core.webp"
       eyebrow="AI Solutions"
       title="Custom AI Systems for Enterprises That Need More Than a Chatbot"
       subtitle="We build the layer underneath - retrieval systems, agent orchestration, fine-tuned models and production-grade AI infrastructure that runs reliably at scale."

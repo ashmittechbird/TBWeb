@@ -169,7 +169,7 @@ export default function IndustriesPage() {
             <p className="ihero-sub">We've shipped production systems in these sectors — not just proposals. Each industry gets solutions built around its specific workflows, compliance needs and growth patterns.</p>
           </div>
           <div className="ihero-img-side">
-            <img src="/assets/industries-hero.jpg" alt="Technology workspace" className="ihero-img" loading="eager" />
+            <img src="/assets/industries-hero.webp" alt="Technology workspace" className="ihero-img" loading="eager" />
           </div>
         </div>
       </section>
