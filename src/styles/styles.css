@@ -1713,7 +1713,7 @@ body.loaded .scroll-hint {
     gap: 12px;
     flex-wrap: wrap;
     justify-content: center;
-    padding: 0 18px;
+    padding: 18px 18px 6px;
   }
 
   .stat {
@@ -2187,14 +2187,19 @@ body.loaded .scroll-hint {
     position: relative;
     height: auto;
     flex-direction: column;
-    align-items: flex-start;
-    padding: clamp(48px, 8vh, 80px) 0;
-    gap: 20px;
+    align-items: stretch;
+    padding: clamp(48px, 8vh, 80px) clamp(16px, 4vw, 28px);
+    gap: 14px;
     overflow: visible;
   }
 
   .recog-text {
-    padding: 0;
+    padding: 0 4px;
+    margin-bottom: 10px;
+  }
+
+  .recog-title {
+    font-size: clamp(32px, 8vw, 52px);
   }
 
   .recog-card {
@@ -2202,8 +2207,62 @@ body.loaded .scroll-hint {
     left: auto !important;
     right: auto !important;
     width: 100% !important;
-    aspect-ratio: 16/9;
+    aspect-ratio: auto;
+    min-height: 200px;
     transform: none !important;
+    border-radius: 20px;
+  }
+
+  /* On mobile, disable the flip — show front with more info */
+  .rc-inner {
+    transform-style: flat;
+    position: relative;
+    inset: auto;
+    min-height: 200px;
+  }
+  .recog-card:hover .rc-inner {
+    transform: none;
+  }
+
+  .rc-front {
+    position: relative;
+    inset: auto;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 24px 22px;
+  }
+
+  .rc-back {
+    display: none;
+  }
+
+  .rc-cat {
+    font-size: 10px;
+    letter-spacing: .14em;
+    margin-bottom: 6px;
+  }
+
+  .rc-label {
+    font-size: clamp(18px, 5vw, 24px);
+    line-height: 1.15;
+  }
+
+  /* Show description on front for mobile */
+  .rc-front::after {
+    content: attr(data-desc);
+    display: block;
+    margin-top: 10px;
+    font-family: var(--body);
+    font-size: 13px;
+    line-height: 1.5;
+    color: rgba(255,255,255,.6);
+    max-width: 90%;
+  }
+
+  .rc-svg {
+    opacity: 0.5;
   }
 }
 
@@ -2443,11 +2502,13 @@ body.loaded .scroll-hint {
   .is-arr { width: 40px; height: 40px; }
   .insights-controls { gap: 12px; margin-top: 20px; }
 
-  /* Recognition mobile */
-  .recog-title { font-size: clamp(36px, 10vw, 64px); }
-  .recog-sub { font-size: 14px; }
+  /* Recognition / Services cards mobile */
+  .recog-inner { padding: clamp(40px, 7vh, 64px) 14px; gap: 12px; }
+  .recog-title { font-size: clamp(28px, 8vw, 44px); }
   .recog-card { border-radius: 16px; }
-  .rc-label { font-size: clamp(14px, 3.5vw, 20px); }
+  .rc-front { padding: 20px 18px; min-height: 180px; }
+  .rc-label { font-size: clamp(16px, 4.5vw, 20px); }
+  .rc-front::after { font-size: 12px; margin-top: 8px; }
 
   /* Services */
   .svc-card { border-radius: 20px; }

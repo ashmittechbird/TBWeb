@@ -175,7 +175,7 @@ export default function Services() {
         {CARDS.map(card => (
           <Link to={card.to} className={`recog-card ${card.cls}`} id={card.id} key={card.id}>
             <div className="rc-inner">
-              <div className="rc-front">
+              <div className="rc-front" data-desc={card.desc}>
                 <svg className="rc-svg" viewBox={card.vbFront} fill="none" preserveAspectRatio="xMidYMid slice">
                   {card.svgFront}
                 </svg>
