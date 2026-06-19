@@ -2,26 +2,22 @@ import { lazy, Suspense } from 'react';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import About from '../components/About';
+import Marquee from '../components/Marquee';
+import Services from '../components/Services';
+import Recognition from '../components/Recognition';
+import Products from '../components/Products';
+import Industries from '../components/Industries';
+import Clients from '../components/Clients';
+import Testimonials from '../components/Testimonials';
+import CaseStudies from '../components/CaseStudies';
+import Contact from '../components/Contact';
+import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import useAppInit from '../hooks/useAppInit';
 import useScrollAnimations from '../hooks/useScrollAnimations';
 
-/* Below-fold components — lazy loaded for faster initial paint */
-const Marquee       = lazy(() => import('../components/Marquee'));
-const Services      = lazy(() => import('../components/Services'));
-const Recognition   = lazy(() => import('../components/Recognition'));
-const Products      = lazy(() => import('../components/Products'));
-const Industries    = lazy(() => import('../components/Industries'));
-const Clients       = lazy(() => import('../components/Clients'));
-const Testimonials  = lazy(() => import('../components/Testimonials'));
-const CaseStudies   = lazy(() => import('../components/CaseStudies'));
-const Contact       = lazy(() => import('../components/Contact'));
-const Footer        = lazy(() => import('../components/Footer'));
-
-/* SplashCursor already self-disables on mobile/reduced-motion */
-const SplashCursor  = lazy(() => import('../components/SplashCursor'));
-
-const Placeholder = () => <div style={{ minHeight: '40vh' }} />;
+/* Only lazy-load the heavy GPU canvas — it self-disables on mobile anyway */
+const SplashCursor = lazy(() => import('../components/SplashCursor'));
 
 export default function HomePage() {
   useAppInit();
@@ -49,18 +45,16 @@ export default function HomePage() {
 
       <main id="content">
         <About />
-        <Suspense fallback={<Placeholder />}>
-          <Marquee />
-          <Services />
-          <Recognition />
-          <Products />
-          <Industries />
-          <Clients />
-          <CaseStudies />
-          <Testimonials />
-          <Contact />
-          <Footer />
-        </Suspense>
+        <Marquee />
+        <Services />
+        <Recognition />
+        <Products />
+        <Industries />
+        <Clients />
+        <CaseStudies />
+        <Testimonials />
+        <Contact />
+        <Footer />
       </main>
 
       <Suspense fallback={null}>
