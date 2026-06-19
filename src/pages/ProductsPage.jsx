@@ -27,7 +27,7 @@ const ChevDown = () => (
 const PRODUCTS = [
   {
     id: 'hrms', name: 'HRMS', cat: 'HR Automation',
-    desc: 'Payroll, attendance, leave, recruitment, appraisals and statutory compliance — the full employee lifecycle in one system.',
+    desc: 'Payroll, attendance, leave, recruitment, appraisals and statutory compliance: the full employee lifecycle in one system.',
     caps: ['Automated payroll with statutory deductions', 'Biometric & mobile attendance', 'Leave and holiday management', 'Performance appraisal workflows', 'Recruitment and digital onboarding', 'ESI, PF, compliance reports'],
   },
   {
@@ -37,17 +37,17 @@ const PRODUCTS = [
   },
   {
     id: 'dms', name: 'Document Management', cat: 'Enterprise DMS',
-    desc: 'Centralised storage, version control, approval workflows, e-signatures and role-based access — eliminating paper chaos at scale.',
+    desc: 'Centralised storage, version control, approval workflows, e-signatures and role-based access, eliminating paper chaos at scale.',
     caps: ['Centralised storage with folder hierarchy', 'Version control and audit trail', 'Multi-stage approval workflows', 'Digital e-signature integration', 'Role-based access permissions', 'Full-text search across all docs'],
   },
   {
     id: 'visitor', name: 'Visitor Management', cat: 'Front-Desk Automation',
-    desc: 'Digital check-in, ID verification, host alerts, badge printing and visitor log analytics — replacing paper registers.',
+    desc: 'Digital check-in, ID verification, host alerts, badge printing and visitor log analytics, replacing paper registers.',
     caps: [],
   },
   {
     id: 'litigation', name: 'Litigation Management', cat: 'Legal Case Tracking',
-    desc: 'Court dates, case files, document linking, task assignment and billing — built specifically for law firms and in-house legal teams.',
+    desc: 'Court dates, case files, document linking, task assignment and billing. Built specifically for law firms and in-house legal teams.',
     caps: [],
   },
   {
@@ -62,7 +62,7 @@ const PRODUCTS = [
   },
   {
     id: 'erp', name: 'Custom ERP', cat: 'ERPNext-Powered',
-    desc: 'Full-suite ERP on ERPNext covering manufacturing, finance, HR, supply chain and CRM — configured to your workflows.',
+    desc: 'Full-suite ERP on ERPNext covering manufacturing, finance, HR, supply chain and CRM, configured to your workflows.',
     caps: [],
   },
 ];
@@ -71,7 +71,7 @@ const PRODUCTS = [
 const FAQS = [
   {
     q: 'Are TechBird products off-the-shelf or custom-built?',
-    a: 'Both. Each product ships with a production-ready core — you can be live in weeks, not months. Where your workflows differ from the standard, we configure or extend the platform.',
+    a: 'Both. Each product ships with a production-ready core, so you can be live in weeks, not months. Where your workflows differ from the standard, we configure or extend the platform.',
   },
   {
     q: 'Can the products integrate with our existing systems?',
@@ -79,7 +79,7 @@ const FAQS = [
   },
   {
     q: 'Do you provide implementation and training?',
-    a: 'Implementation is included — requirements, configuration, data migration, UAT and go-live support. Training covers administrators and end-users.',
+    a: 'Implementation is included: requirements, configuration, data migration, UAT and go-live support. Training covers administrators and end-users.',
   },
   {
     q: 'Can your products be deployed on-premise or our own cloud?',
@@ -156,7 +156,7 @@ export default function ProductsPage() {
     <>
       <SEO
         title="Our Products"
-        description="Eight production-grade enterprise platforms by TechBird — HRMS, CRM, ERP, Document Management, Practice Management, Visitor Management, Litigation Management and E-Commerce."
+        description="Eight production-grade enterprise platforms by TechBird - HRMS, CRM, ERP, Document Management, Practice Management, Visitor Management, Litigation Management and E-Commerce."
         keywords="TechBird products, enterprise software, HRMS, CRM, ERP, document management, practice management, visitor management, litigation management, ecommerce platform"
         faqItems={FAQS}
       />
@@ -168,7 +168,7 @@ export default function ProductsPage() {
           <div className="ihero-text">
             <p className="ihero-ey">Our Platforms</p>
             <h1 className="ihero-h1">Products built for<br /><span>enterprise reality.</span></h1>
-            <p className="ihero-sub">Eight production-grade platforms — deployed on-premise or cloud — each solving a distinct operational problem. Built on ERPNext and modern stacks. Configured to your workflows.</p>
+            <p className="ihero-sub">Eight production-grade platforms, deployed on-premise or cloud, each solving a distinct operational problem. Built on ERPNext and modern stacks. Configured to your workflows.</p>
             <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1.5rem' }}>
               <Link to="/contact" className="icta-btn" style={{ fontSize: '0.78rem', padding: '0.7rem 1.4rem' }}>Request a Demo</Link>
               <a href="#products" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', fontFamily: 'var(--body)', fontSize: '0.78rem', color: 'rgba(255,255,255,0.6)', textDecoration: 'none' }}>See in Action →</a>
@@ -180,7 +180,7 @@ export default function ProductsPage() {
         </div>
       </section>
 
-      {/* ══ PRODUCT INDEX — editorial table of contents ══ */}
+      {/* ══ PRODUCT INDEX - editorial table of contents ══ */}
       <section className="px-index" id="products">
         <div className="px-wrap">
           <div className="px-index-head" data-reveal>
@@ -202,7 +202,7 @@ export default function ProductsPage() {
         </div>
       </section>
 
-      {/* ══ SPOTLIGHT — 3 flagship products on white bg ══ */}
+      {/* ══ SPOTLIGHT - 3 flagship products on white bg ══ */}
       <section className="px-spot">
         <div className="px-wrap">
           <div className="px-spot-head" data-reveal>
@@ -214,7 +214,7 @@ export default function ProductsPage() {
             <Link to="/products/hrms" className="px-card" data-reveal data-num="01">
               <span className="px-card-cat">HR Automation</span>
               <h3 className="px-card-name">HRMS</h3>
-              <p className="px-card-desc">The full employee lifecycle — offer letter to exit clearance. Payroll in minutes. Attendance synced. Leave balances in real time.</p>
+              <p className="px-card-desc">The full employee lifecycle, from offer letter to exit clearance. Payroll in minutes. Attendance synced. Leave balances in real time.</p>
               <ul className="px-card-caps">
                 {PRODUCTS[0].caps.slice(0, 5).map((c) => <li key={c}>{c}</li>)}
               </ul>
@@ -273,7 +273,7 @@ export default function ProductsPage() {
               <h2 className="px-h2 px-h2--dark" data-reveal>See a product<br />in action?</h2>
             </div>
             <div>
-              <p className="px-cta-body" data-reveal>No sales pitch. No 47-slide deck. A focused 30-minute demo of the product most relevant to your operations — with your actual workflows in mind.</p>
+              <p className="px-cta-body" data-reveal>No sales pitch. No 47-slide deck. A focused 30-minute demo of the product most relevant to your operations, with your actual workflows in mind.</p>
               <Link to="/contact" className="px-cta-btn" data-reveal>Book a Demo <ArrowRight /></Link>
             </div>
           </div>

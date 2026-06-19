@@ -190,7 +190,7 @@ export default function ServicesPage() {
           <div className="ihero-text">
             <p className="ihero-ey">What we do</p>
             <h1 className="ihero-h1">Six disciplines.<br /><span>One team.</span></h1>
-            <p className="ihero-sub">From ERP rollouts to AI pipelines, from cloud infrastructure to creative production — each service connects to the others. One team, accountable for every outcome.</p>
+            <p className="ihero-sub">From ERP rollouts to AI pipelines, from cloud infrastructure to creative production, each service connects to the others. One team, accountable for every outcome.</p>
           </div>
           <div className="ihero-img-side">
             <img src="/assets/services-hero-bg.webp" alt="Software development workspace" className="ihero-img" loading="eager" />

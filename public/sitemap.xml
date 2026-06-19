@@ -20,4 +20,7 @@
   <url><loc>https://www.techbird.in/products/litigation-management</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://www.techbird.in/products/visitor-management</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://www.techbird.in/industries</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://www.techbird.in/case-studies</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.techbird.in/privacy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://www.techbird.in/terms</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
 </urlset>

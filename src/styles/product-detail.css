@@ -1,5 +1,5 @@
 /* ============================================================
-   TechBird — Product Detail Pages (HRMS, ERP, CRM …)
+   TechBird: Product Detail Pages (HRMS, ERP, CRM …)
    Huly design language · dark cosmic SaaS
    Tokens inherited from products.css (--h-*)
    Accent is per-product, injected via --pd-accent on .pd-root
@@ -144,12 +144,12 @@
 .pd-btn-accent svg, .pd-btn-white svg, .pd-btn-ghost svg { width: 15px; height: 15px; }
 
 /* ════════════════════════════════════════
-   HERO  — void bg + aurora beam
+   HERO: void bg + aurora beam
    ════════════════════════════════════════ */
 .pd-hero {
   position: relative;
   background: var(--h-void);
-  padding: clamp(80px, 11vh, 128px) 0 clamp(52px, 7vh, 96px);
+  padding: clamp(120px, 15vh, 168px) 0 clamp(52px, 7vh, 96px);
   overflow: hidden;
   isolation: isolate;
 }
@@ -165,7 +165,7 @@
   width: clamp(150px, 18vw, 280px);
   height: 82%;                /* reaches down past the panel's top edge */
 }
-/* soft volumetric glow — transparent at top, blooming toward the panel */
+/* soft volumetric glow: transparent at top, blooming toward the panel */
 .pd-hero-skybeam::before {
   content: "";
   position: absolute;
@@ -197,7 +197,7 @@
 }
 @keyframes pd-beam-breathe { 0%, 100% { opacity: 0.42; } 50% { opacity: 0.62; } }
 
-/* a bright pulse that travels DOWN the beam — reads as a running laser */
+/* a bright pulse that travels DOWN the beam, reads as a running laser */
 .pd-hero-pulse {
   position: absolute;
   left: 50%; top: 0;
@@ -226,7 +226,7 @@
 }
 .pd-hero-laser2 { position: absolute; inset: 0; }
 
-/* ── impact: intensity on the BORDER — a thin wide splash hugging the
+/* ── impact: intensity on the BORDER, a thin wide splash hugging the
    panel's top edge (not a bloom inside the panel) ── */
 .pd-hero-impact {
   position: absolute;
@@ -272,11 +272,11 @@
   display: flex;
   gap: 12px;
 }
-/* use the site-wide brand button (.btn-pill) — reset its default auto margins */
+/* use the site-wide brand button (.btn-pill): reset its default auto margins */
 .pd-hero-cta .btn-pill,
 .pd-cta .btn-pill { margin: 0; }
 
-/* product console as a FULL-WIDTH banner below, shown HALF — the beam
+/* product console as a FULL-WIDTH banner below, shown HALF; the beam
    splashes on its top edge and the panel fades down into the dark */
 .pd-hero-showcase {
   --beam-h: clamp(87px, 10vh, 220px);
@@ -361,7 +361,7 @@
   border: 1px solid rgba(255,255,255,.08);
   box-shadow: var(--h-shadow-xl);
 }
-/* hero frame: the INTENSITY lives on the top border — bright rim + edge glow */
+/* hero frame: the INTENSITY lives on the top border, bright rim + edge glow */
 .pd-hero-art .pd-frame {
   border-color: rgba(255,255,255,.08);
   border-top: 1.5px solid color-mix(in srgb, var(--pd-accent) 85%, #ffffff);
@@ -373,7 +373,7 @@
 .pd-frame svg { display: block; width: 100%; height: auto; }
 
 /* ════════════════════════════════════════
-   STAT BAND — its own section under the hero
+   STAT BAND: its own section under the hero
    ════════════════════════════════════════ */
 .pd-statband {
   background: var(--h-canvas);
@@ -412,7 +412,7 @@
 }
 
 /* ════════════════════════════════════════
-   BENTO  — dark canvas, mixed feature cards
+   BENTO: dark canvas, mixed feature cards
    ════════════════════════════════════════ */
 .pd-bento {
   background: var(--h-canvas);
@@ -492,7 +492,7 @@
 .pd-bento-art svg { display: block; width: 100%; height: auto; border-radius: 8px; }
 
 /* ════════════════════════════════════════
-   LIGHT FEATURE  — white band, big shot + cols
+   LIGHT FEATURE: white band, big shot + cols
    ════════════════════════════════════════ */
 .pd-light {
   background: var(--h-light);
@@ -538,7 +538,7 @@
 }
 
 /* ════════════════════════════════════════
-   LASERFLOW  — the cinematic reveal section
+   LASERFLOW: the cinematic reveal section
    ════════════════════════════════════════ */
 .pd-laser {
   position: relative;
@@ -547,7 +547,7 @@
   overflow: hidden;
   isolation: isolate;
 }
-/* the LaserFlow webgl canvas — bounded to the heading+screenshot region
+/* the LaserFlow webgl canvas, bounded to the heading+screenshot region
    so the beam converges on the screenshot's top edge (like the reference) */
 .pd-laser-bg {
   position: absolute;
@@ -566,7 +566,7 @@
   height: 180px;
   background: linear-gradient(180deg, transparent, var(--h-void));
 }
-/* CSS fallback/base beam — always renders the dramatic vertical streak;
+/* CSS fallback/base beam: always renders the dramatic vertical streak;
    the WebGL LaserFlow canvas layers wisps + fog on top (additive). */
 .pd-laser-cssbeam {
   position: absolute;
@@ -783,7 +783,7 @@
 /* ════════════════════════════════════════
    CTA
    ════════════════════════════════════════ */
-/* Light CTA — matches services sub-page pattern (--ip-bg3) */
+/* Light CTA: matches services sub-page pattern (--ip-bg3) */
 .pd-cta { background: #f2f2f0; padding: clamp(80px, 12vh, 150px) 0; }
 .pd-cta-inner {
   max-width: 88rem;
@@ -829,7 +829,7 @@
   .pd-laser-feats { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 860px) {
-  .pd-hero { padding-top: 80px; padding-bottom: 16px; }
+  .pd-hero { padding-top: 100px; padding-bottom: 16px; }
   .pd-hero-showcase { justify-content: center; margin-top: clamp(16px, 2.5vh, 28px); }
   .pd-hero-showcase { --beam-h: clamp(32px, 5vh, 60px); }
   .pd-hero-showcase .pd-hero-art { max-height: clamp(260px, 50vh, 420px); }
@@ -854,7 +854,7 @@
   .pd-sec-h2 { font-size: clamp(1.6rem, 6vw, 2.4rem); }
 }
 @media (max-width: 560px) {
-  .pd-hero { padding-top: 72px; }
+  .pd-hero { padding-top: 88px; }
   .pd-bento-grid { grid-template-columns: 1fr; }
   .pd-bento-card.span-2 { grid-column: span 1; }
   .pd-bento-card { min-height: 200px; padding: 20px; }

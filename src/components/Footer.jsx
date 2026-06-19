@@ -102,7 +102,14 @@ export default function Footer() {
         </div>
 
         <div className="foot-bar">
-          <p className="foot-copy">&copy; {new Date().getFullYear()} TechBird IT Services. All rights reserved.</p>
+          <div className="foot-legal">
+            <p className="foot-copy">&copy; {new Date().getFullYear()} TechBird IT Services. All rights reserved.</p>
+            <div className="foot-legal-links">
+              <Link to="/privacy">Privacy Policy</Link>
+              <span className="foot-dot" />
+              <Link to="/terms">Terms of Service</Link>
+            </div>
+          </div>
           <div className="foot-regions">
             <span>India</span>
             <span className="foot-dot" />
@@ -120,6 +127,7 @@ export default function Footer() {
 
       {/* Scroll to top */}
       <button
+        type="button"
         className={`foot-scroll-top${showTop ? ' visible' : ''}`}
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         aria-label="Scroll to top"

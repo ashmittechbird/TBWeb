@@ -90,7 +90,7 @@ export default function ContactPage() {
           <div className="ihero-text">
             <p className="ihero-ey">Get in touch</p>
             <h1 className="ihero-h1">Let's start a<br /><span>conversation.</span></h1>
-            <p className="ihero-sub">Have a project in mind? Whether you need a full product build, AI integration, ERP implementation or a quick consultation — we're here to help.</p>
+            <p className="ihero-sub">Have a project in mind? Whether you need a full product build, AI integration, ERP implementation or a quick consultation, we're here to help.</p>
           </div>
           <div className="ihero-img-side">
             <img src="/assets/services-hero-bg.webp" alt="TechBird office" className="ihero-img" loading="eager" />
@@ -147,7 +147,7 @@ export default function ContactPage() {
         <div className="cp-inner">
           <div className="cp-form-layout">
 
-            {/* Left — Form */}
+            {/* Left: Form */}
             <div className="cp-form-card">
               <h2>Send us a message</h2>
               <p className="cp-form-sub">Fill out the form below. We typically respond within 24 hours.</p>
@@ -159,28 +159,28 @@ export default function ContactPage() {
                   </div>
                   <h3>Message prepared!</h3>
                   <p>Your email client should have opened. If not, email us at <a href="mailto:connect@techbirdit.in">connect@techbirdit.in</a></p>
-                  <button className="cp-again-btn" onClick={() => { setSubmitted(false); setFormState({ name: '', email: '', phone: '', company: '', service: '', message: '' }); }}>Send another</button>
+                  <button type="button" className="cp-again-btn" onClick={() => { setSubmitted(false); setFormState({ name: '', email: '', phone: '', company: '', service: '', message: '' }); }}>Send another</button>
                 </div>
               ) : (
                 <form className="cp-form" onSubmit={handleSubmit}>
                   <div className="cp-row">
                     <div className="cp-field">
                       <label htmlFor="cp-name">Full Name *</label>
-                      <input id="cp-name" name="name" type="text" required value={formState.name} onChange={handleChange} placeholder="John Doe" />
+                      <input id="cp-name" name="name" type="text" required maxLength={100} autoComplete="name" value={formState.name} onChange={handleChange} placeholder="John Doe" />
                     </div>
                     <div className="cp-field">
                       <label htmlFor="cp-email">Work Email *</label>
-                      <input id="cp-email" name="email" type="email" required value={formState.email} onChange={handleChange} placeholder="john@company.com" />
+                      <input id="cp-email" name="email" type="email" required autoComplete="email" value={formState.email} onChange={handleChange} placeholder="john@company.com" />
                     </div>
                   </div>
                   <div className="cp-row">
                     <div className="cp-field">
                       <label htmlFor="cp-phone">Phone</label>
-                      <input id="cp-phone" name="phone" type="tel" value={formState.phone} onChange={handleChange} placeholder="+91 98765 43210" />
+                      <input id="cp-phone" name="phone" type="tel" pattern="[+]?[0-9\s]{7,15}" minLength={7} maxLength={15} autoComplete="tel" value={formState.phone} onChange={handleChange} placeholder="+91 98765 43210" />
                     </div>
                     <div className="cp-field">
                       <label htmlFor="cp-company">Company</label>
-                      <input id="cp-company" name="company" type="text" value={formState.company} onChange={handleChange} placeholder="Your company" />
+                      <input id="cp-company" name="company" type="text" maxLength={100} autoComplete="organization" value={formState.company} onChange={handleChange} placeholder="Your company" />
                     </div>
                   </div>
                   <div className="cp-field">
@@ -199,7 +199,7 @@ export default function ContactPage() {
                   </div>
                   <div className="cp-field">
                     <label htmlFor="cp-msg">Tell us about your project *</label>
-                    <textarea id="cp-msg" name="message" required rows="5" value={formState.message} onChange={handleChange} placeholder="What are you building? What's the timeline?" />
+                    <textarea id="cp-msg" name="message" required rows="5" minLength={10} maxLength={2000} value={formState.message} onChange={handleChange} placeholder="What are you building? What's the timeline?" />
                   </div>
                   <button type="submit" className="cp-submit-btn">
                     <span>Send Message</span>
@@ -209,7 +209,7 @@ export default function ContactPage() {
               )}
             </div>
 
-            {/* Right — Side info */}
+            {/* Right: Side info */}
             <div className="cp-side">
               {/* Map */}
               <div className="cp-map-card">
@@ -228,7 +228,7 @@ export default function ContactPage() {
               {/* Quick connect */}
               <div className="cp-connect-card">
                 <h3>Prefer a quick chat?</h3>
-                <p>Book a 30-minute discovery call. No commitment, no sales pitch — just a direct conversation about your project.</p>
+                <p>Book a 30-minute discovery call. No commitment, no sales pitch, just a direct conversation about your project.</p>
                 <a href="tel:+919766661836" className="cp-call-btn">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
                   <span>Call +91 97666 61836</span>
@@ -264,7 +264,7 @@ export default function ContactPage() {
           <div className="cp-faq-list">
             {FAQS.map((f, i) => (
               <div className={`cp-faq-item${openFaq === i ? ' open' : ''}`} key={i}>
-                <button className="cp-faq-btn" onClick={() => setOpenFaq(openFaq === i ? null : i)} aria-expanded={openFaq === i}>
+                <button type="button" className="cp-faq-btn" onClick={() => setOpenFaq(openFaq === i ? null : i)} aria-expanded={openFaq === i}>
                   <span>{f.q}</span>
                   <svg className="cp-faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 </button>

@@ -4,7 +4,7 @@ export default function Contact() {
       <div className="wrap">
         <div className="contact-card reveal-up" id="contactCard">
           <div className="contact-split">
-            {/* Left — heading + description + button */}
+            {/* Left: heading + description + button */}
             <div className="contact-left">
               <p className="eyebrow dark"><i></i>Let's build together</p>
               <h2 className="contact-title">Let's get<br />in touch.</h2>
@@ -17,7 +17,7 @@ export default function Contact() {
               </a>
             </div>
 
-            {/* Right — contact details */}
+            {/* Right: contact details */}
             <div className="contact-right">
               <div className="contact-rows">
                 <a className="contact-row" href="tel:+919766661836">

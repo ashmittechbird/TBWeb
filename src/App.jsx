@@ -24,6 +24,8 @@ const MartechPage               = lazy(() => import('./pages/services/MartechPag
 const CaseStudiesPage           = lazy(() => import('./pages/CaseStudiesPage'));
 const CaseStudyDetailPage       = lazy(() => import('./pages/CaseStudyDetailPage'));
 const ContactPage               = lazy(() => import('./pages/ContactPage'));
+const PrivacyPage               = lazy(() => import('./pages/PrivacyPage'));
+const TermsPage                 = lazy(() => import('./pages/TermsPage'));
 
 const Fallback = () => (
   <div style={{ minHeight: '60vh', background: '#08080a' }} />
@@ -56,6 +58,8 @@ export default function App() {
         <Route path="/case-studies" element={<CaseStudiesPage />} />
         <Route path="/case-studies/:slug" element={<CaseStudyDetailPage />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/privacy" element={<PrivacyPage />} />
+        <Route path="/terms" element={<TermsPage />} />
         {/* 404 catch-all */}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

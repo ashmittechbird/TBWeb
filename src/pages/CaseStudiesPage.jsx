@@ -37,13 +37,13 @@ export default function CaseStudiesPage() {
       />
       <InnerNavbar />
 
-      {/* ══ HERO — same pattern as Products page ══ */}
+      {/* ══ HERO: same pattern as Products page ══ */}
       <section className="ihero">
         <div className="ihero-wrap">
           <div className="ihero-text">
             <p className="ihero-ey">Case Studies</p>
             <h1 className="ihero-h1">Real results from<br /><span>real engagements.</span></h1>
-            <p className="ihero-sub">See how we've helped enterprises automate operations, digitise workflows and deploy production-grade platforms — on time and on budget.</p>
+            <p className="ihero-sub">See how we've helped enterprises automate operations, digitise workflows and deploy production-grade platforms, on time and on budget.</p>
             <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1.5rem' }}>
               <Link to="/contact" className="icta-btn" style={{ fontSize: '0.78rem', padding: '0.7rem 1.4rem' }}>Start a Project</Link>
             </div>
@@ -54,7 +54,7 @@ export default function CaseStudiesPage() {
         </div>
       </section>
 
-      {/* ══ CASE STUDY LISTING — editorial rows ══ */}
+      {/* ══ CASE STUDY LISTING: editorial rows ══ */}
       <section className="csp-listing">
         <div className="csp-listing-wrap">
           <div className="csp-listing-head" data-reveal>
@@ -70,7 +70,7 @@ export default function CaseStudiesPage() {
                 </div>
                 <span className="csp-listing-num">{c.num}</span>
                 <div className="csp-listing-body">
-                  <span className="csp-listing-meta">{c.client} — {c.industry}</span>
+                  <span className="csp-listing-meta">{c.client} | {c.industry}</span>
                   <h3 className="csp-listing-title">{c.title}</h3>
                   <p className="csp-listing-desc">{c.desc}</p>
                 </div>

@@ -1,5 +1,5 @@
 /* ============================================================
-   TechBird — Inner / Service Pages v2
+   TechBird: Inner / Service Pages v2
    Editorial dark design · Space Grotesk + Manrope
    ============================================================ */
 
@@ -39,7 +39,7 @@
   /* small right gap between words */
   margin-right: 0.22em;
 }
-/* last word — no extra gap */
+/* last word: no extra gap */
 .ip2-word-wrap:last-child { margin-right: 0; }
 .ip2-title-word {
   display: inline-block;
@@ -48,7 +48,7 @@
 /* ════════════════════════════════════════
    INNER NAVBAR OVERRIDES
    ════════════════════════════════════════ */
-/* Full-width bar — default state at top */
+/* Full-width bar: default state at top */
 .topbar--inner {
   position: fixed !important;
   top: 0; left: 0; right: 0;
@@ -154,7 +154,7 @@
 }
 
 /* ════════════════════════════════════════
-   HERO — full-width headline
+   HERO: full-width headline
    ════════════════════════════════════════ */
 .ip2-hero {
   background: var(--ip-bg);
@@ -276,7 +276,7 @@
   inset: 0;
 }
 
-/* Dark gradient overlay — left darker for text legibility */
+/* Dark gradient overlay: left darker for text legibility */
 .phb-overlay {
   position: absolute;
   inset: 0;
@@ -407,7 +407,7 @@
 }
 
 /* ════════════════════════════════════════
-   INTRO — 2-column quote + body
+   INTRO: 2-column quote + body
    ════════════════════════════════════════ */
 .ip2-intro {
   background: var(--ip-bg);
@@ -712,7 +712,7 @@
 }
 
 /* ════════════════════════════════════════
-   FAQ — Accordion (adapted from Anima)
+   FAQ: Accordion (adapted from Anima)
    ════════════════════════════════════════ */
 .ip2-faq {
   background: var(--ip-bg);
@@ -807,7 +807,7 @@
 }
 
 /* ════════════════════════════════════════
-   CTA — inverted (light bg)
+   CTA: inverted (light bg)
    ════════════════════════════════════════ */
 .ip2-cta {
   background: var(--ip-bg3);
@@ -863,7 +863,7 @@
 .ip2-cta-btn:hover { opacity: 0.78; }
 
 /* ════════════════════════════════════════
-   SERVICES PAGE — HEADING (inside bento section)
+   SERVICES PAGE: HEADING (inside bento section)
    ════════════════════════════════════════ */
 .svc-pg-heading {
   margin-bottom: 2rem;
@@ -900,8 +900,8 @@
 }
 
 /* ════════════════════════════════════════
-   SERVICES PAGE — BENTO GRID
-   Reference: 3-col layout —
+   SERVICES PAGE: BENTO GRID
+   Reference: 3-col layout -
      Left (3 text cards) | Center (tall visual) | Right (tall visual + text card)
    ════════════════════════════════════════ */
 .svc-bento-section {
@@ -1004,29 +1004,29 @@
 }
 .b-text-card:hover::before { opacity: 1; }
 
-/* Per-card subtle color tints — each card has a hint of its service colour */
-/* Cloud & DevOps — emerald */
+/* Per-card subtle color tints: each card has a hint of its service colour */
+/* Cloud & DevOps - emerald */
 .b-cell:nth-child(1).b-text-card {
   background: linear-gradient(145deg, #13131a 60%, rgba(16,185,129,0.06) 100%);
 }
 .b-cell:nth-child(1).b-text-card:hover {
   background: linear-gradient(145deg, #17171f 60%, rgba(16,185,129,0.1) 100%);
 }
-/* MarTech — rose */
+/* MarTech - rose */
 .b-cell:nth-child(2).b-text-card {
   background: linear-gradient(145deg, #13131a 60%, rgba(236,72,153,0.06) 100%);
 }
 .b-cell:nth-child(2).b-text-card:hover {
   background: linear-gradient(145deg, #17171f 60%, rgba(236,72,153,0.1) 100%);
 }
-/* Marketing Strategy — cyan */
+/* Marketing Strategy - cyan */
 .b-cell:nth-child(3).b-text-card {
   background: linear-gradient(145deg, #13131a 60%, rgba(6,182,212,0.06) 100%);
 }
 .b-cell:nth-child(3).b-text-card:hover {
   background: linear-gradient(145deg, #17171f 60%, rgba(6,182,212,0.1) 100%);
 }
-/* Animation (b-last) — amber */
+/* Animation (b-last) - amber */
 .b-last.b-text-card {
   background: linear-gradient(145deg, #13131a 60%, rgba(245,158,11,0.06) 100%);
 }
@@ -1112,14 +1112,14 @@
   display: block;
 }
 
-/* Color wash overlay — tints the photo */
+/* Color wash overlay: tints the photo */
 .b-card-color-wash {
   position: absolute;
   inset: 0;
   pointer-events: none;
 }
 .b-wash-purple {
-  /* Software Development — deep violet */
+  /* Software Development - deep violet */
   background: linear-gradient(170deg,
     rgba(10,4,28,0.82) 0%,
     rgba(59,7,100,0.55) 45%,
@@ -1127,7 +1127,7 @@
   );
 }
 .b-wash-blue {
-  /* AI Solutions — dark sky blue */
+  /* AI Solutions - dark sky blue */
   background: linear-gradient(160deg,
     rgba(3,10,24,0.82) 0%,
     rgba(3,105,161,0.5) 50%,
@@ -1149,7 +1149,7 @@
   );
 }
 
-/* ── Center tall card (Software Development — main focus) ── */
+/* ── Center tall card (Software Development, main focus) ── */
 .b-center-card {
   background: #06040e;
   overflow: hidden;
@@ -1160,7 +1160,7 @@
 }
 .b-center-card:hover .b-card-img { transform: scale(1.05); }
 
-/* Floating service tag — top left */
+/* Floating service tag: top left */
 .b-center-tag {
   position: absolute;
   top: 22px;
@@ -1321,7 +1321,7 @@
 [data-reveal].revealed { opacity: 1; transform: none; }
 
 /* ════════════════════════════════════════
-   SERVICES LISTING PAGE  (ServicesPage) — legacy list styles kept
+   SERVICES LISTING PAGE  (ServicesPage): legacy list styles kept
    ════════════════════════════════════════ */
 .ip-breadcrumb {
   padding: 4rem 2rem 0;
@@ -1596,7 +1596,7 @@
   .ip2-process-sticky { position: static; height: auto; padding: 5rem 0; }
   .svc-pg-heading-row { flex-direction: column; align-items: flex-start; gap: 1rem; }
 
-  /* Bento: 2 cols on tablet — center stays tall, right stacks */
+  /* Bento: 2 cols on tablet, center stays tall, right stacks */
   .svc-bento-grid {
     grid-template-columns: 1fr 1.1fr;
     grid-template-rows: auto;
@@ -1624,7 +1624,7 @@
 }
 
 @media (max-width: 640px) {
-  /* Inner page hero — clear mobile menu button */
+  /* Inner page hero: clear mobile menu button */
   .ip2-hero { padding-top: 0; }
   .ip2-hero-inner { padding-top: 1rem; padding-bottom: 3rem; }
   .ip2-title { font-size: clamp(2rem, 8vw, 3.2rem); }
@@ -1685,13 +1685,13 @@
 }
 
 /* ════════════════════════════════════════
-   INDUSTRIES PAGE — Dedicated Sections
+   INDUSTRIES PAGE: Dedicated Sections
    ════════════════════════════════════════ */
 .ind-page { background: var(--ip-bg); }
 
 /* ── HERO ── */
 .ihero {
-  padding: 6.5rem 0 0;
+  padding: 7.5rem 0 0;
   border-bottom: 1px solid rgba(255,255,255,0.1);
   position: relative;
   overflow: hidden;
@@ -1712,7 +1712,7 @@
   padding: 2rem 0 3rem;
 }
 
-/* ── Hero entrance animations — consistent across all inner pages ── */
+/* ── Hero entrance animations: consistent across all inner pages ── */
 .ihero-ey {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.68rem;
@@ -1760,7 +1760,7 @@
     animation: none !important;
   }
 }
-/* Right side — image with left-fading gradient blend */
+/* Right side: image with left-fading gradient blend */
 .ihero-img-side {
   position: relative;
   height: 100%;
@@ -1776,7 +1776,7 @@
   object-position: center;
   display: block;
 }
-/* Gradient blend — fades image into dark bg on the left */
+/* Gradient blend: fades image into dark bg on the left */
 .ihero-img-side::before {
   content: '';
   position: absolute;
@@ -1944,7 +1944,7 @@
   margin-bottom: 1.25rem;
 }
 
-/* Problems — numbered rows */
+/* Problems: numbered rows */
 .iblock-probs { margin-bottom: 0; }
 .iblock-prob {
   display: flex;
@@ -1978,7 +1978,7 @@
   max-width: 48rem;
 }
 
-/* Capabilities — 3×2 grid */
+/* Capabilities: 3x2 grid */
 .iblock-cap-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -2089,7 +2089,7 @@
 
 
 /* ════════════════════════════════════════
-   CASE STUDIES — LISTING PAGE
+   CASE STUDIES: LISTING PAGE
    ════════════════════════════════════════ */
 /* Use same max-width + padding as hero for perfect left/right alignment */
 .csp-listing {
@@ -2295,7 +2295,7 @@
 
 
 /* ════════════════════════════════════════
-   CASE STUDY — DETAIL PAGE
+   CASE STUDY: DETAIL PAGE
    ════════════════════════════════════════ */
 .csd-pill {
   display: inline-block;

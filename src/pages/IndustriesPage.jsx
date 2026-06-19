@@ -23,7 +23,7 @@ const INDUSTRIES = [
       {t:'Paper-Based QC',d:'Defects aren\'t caught until they\'ve multiplied. Traceability for audits is a nightmare.'},
     ],
     caps: [
-      {t:'Smart Factory ERP',d:'Procurement, production, warehouse, finance and HR — built on ERPNext or custom.'},
+      {t:'Smart Factory ERP',d:'Procurement, production, warehouse, finance and HR, built on ERPNext or custom.'},
       {t:'Supply Chain Digitisation',d:'Supplier onboarding, purchase orders, inbound logistics and landed cost tracking.'},
       {t:'Production Planning',d:'Automated work orders, capacity planning and scheduling balanced with demand.'},
       {t:'Quality Control',d:'Digital QC checklists, automated inspections, defect tracking and corrective actions.'},
@@ -40,14 +40,14 @@ const INDUSTRIES = [
     problems: [
       {t:'Siloed Inventory',d:'Online, physical store and warehouse all run different counts. Overselling while shelves sit empty.'},
       {t:'No Unified Customer View',d:"Same person across channels but systems don't know it. No loyalty, no personalisation."},
-      {t:'Manual Order Processing',d:'Website, WhatsApp, marketplaces — all processed manually. Bottleneck and delayed fulfilment.'},
+      {t:'Manual Order Processing',d:'Website, WhatsApp, marketplaces, all processed manually. Bottleneck and delayed fulfilment.'},
     ],
     caps: [
       {t:'Omnichannel Platform',d:'Headless commerce with unified catalogue, consistent pricing and single cart.'},
       {t:'Inventory & Orders',d:'Real-time sync across all channels, automated reorder and fulfilment tracking.'},
       {t:'Customer Data Platform',d:'Unify all touchpoints into a single profile with lifetime value tracking.'},
       {t:'Loyalty & Retention',d:'Points, tiers, referrals and personalised offers driven by purchase behaviour.'},
-      {t:'Marketing Automation',d:'Automated campaigns triggered by behaviour — abandoned cart, win-back, seasonal.'},
+      {t:'Marketing Automation',d:'Automated campaigns triggered by behaviour: abandoned cart, win-back, seasonal.'},
       {t:'Analytics Dashboard',d:'Sales by channel, product performance, cohort analysis and demand forecasting.'},
     ],
   },
@@ -58,12 +58,12 @@ const INDUSTRIES = [
     pills: ['Practice Mgmt','Litigation','DMS','Compliance','AI Research'],
     stats: [{v:'70%',l:'Research time reduction'},{v:'0',l:'Missed deadlines'},{v:'5,000+',l:'Docs digitised/firm'},{v:'12',l:'CA firms served'}],
     problems: [
-      {t:'6+ Hours/Partner/Week on Research',d:'Premium billing time spent manually searching case law — AI can do it in minutes.'},
+      {t:'6+ Hours/Partner/Week on Research',d:'Premium billing time spent manually searching case law. AI can do it in minutes.'},
       {t:'Manual Deadline Tracking',d:'Court hearings and ROC deadlines in calendars. One miss can cost millions.'},
       {t:'Paper-Based Documents',d:'Finding a clause in a five-year-old agreement takes 30 minutes.'},
     ],
     caps: [
-      {t:'Practice Management',d:'Client intake, matter management, time tracking, billing and profitability — all in one.'},
+      {t:'Practice Management',d:'Client intake, matter management, time tracking, billing and profitability, all in one.'},
       {t:'Litigation Tracking',d:'Automated hearing reminders, filing deadlines and full case history across courts.'},
       {t:'AI Legal Research',d:'Kulkee searches case law in natural language. Cited research in minutes, not hours.'},
       {t:'Compliance Automation',d:'ROC filings, GST, ITR, SEBI reporting. Alerts escalate if unactioned.'},
@@ -86,7 +86,7 @@ const INDUSTRIES = [
       {t:'Workforce Management',d:'AI scheduling, shift planning, adherence tracking for 50 to 5,000 agents.'},
       {t:'Call Analytics & QA',d:'Sentiment analysis, call scoring and reporting across 100% of interactions.'},
       {t:'AI-Powered QA',d:'From 2% manual to 85%+ automated. Transcript analysis and auto score cards.'},
-      {t:'CRM Integration',d:'Unified agent desktop — telephony, CRM, knowledge base. One screen.'},
+      {t:'CRM Integration',d:'Unified agent desktop: telephony, CRM, knowledge base. One screen.'},
       {t:'Performance Dashboards',d:'Live SLA, agent KPIs, campaign metrics with role-based access.'},
       {t:'Omnichannel Platform',d:'Voice, chat, email, WhatsApp unified into a single queue.'},
     ],
@@ -103,7 +103,7 @@ const INDUSTRIES = [
       {t:'Siloed Lab & Billing',d:'Clinicians lack unified view. Delays in diagnosis and discharge compound.'},
     ],
     caps: [
-      {t:'Patient Management',d:'Registration to discharge — all HIPAA-secure in one system.'},
+      {t:'Patient Management',d:'Registration to discharge, all HIPAA-secure in one system.'},
       {t:'Scheduling Platform',d:'Online booking, automated WhatsApp/SMS reminders and smart waitlist fill.'},
       {t:'Health Analytics',d:'Population trends, utilisation, readmission risk and financial KPIs.'},
       {t:'Telemedicine',d:'Secure video, prescriptions, follow-up scheduling and remote monitoring.'},
@@ -147,13 +147,13 @@ export default function IndustriesPage() {
   return (
     <div ref={ref} className="ind-page">
       <SEO
-        title="Industries We Serve — IT Solutions by TechBird"
-        description="TechBird delivers IT solutions for manufacturing, retail, legal, BPO and healthcare — industry-specific ERP, AI and cloud that fit your needs."
+        title="Industries We Serve - IT Solutions by TechBird"
+        description="TechBird delivers IT solutions for manufacturing, retail, legal, BPO and healthcare - industry-specific ERP, AI and cloud that fit your needs."
         keywords="manufacturing ERP, retail e-commerce, legal tech, BPO automation, healthcare IT, Pune India"
         faqItems={[
           {q:'What industries does TechBird serve?',a:'Manufacturing, Retail & E-commerce, Legal & Finance, BPO & Call Centres, and Healthcare.'},
-          {q:'Does TechBird build industry-specific software?',a:'Yes — from factory ERP to hospital management, fully customised per vertical.'},
-          {q:'Where is TechBird located?',a:'Pune, India — serving clients in India, UK, US and UAE.'},
+          {q:'Does TechBird build industry-specific software?',a:'Yes, from factory ERP to hospital management, fully customised per vertical.'},
+          {q:'Where is TechBird located?',a:'Pune, India, serving clients in India, UK, US and UAE.'},
         ]}
         serviceSchema={{name:'Industry-Specific IT Solutions',description:'ERP, AI and cloud for Manufacturing, Retail, Legal, BPO and Healthcare.',category:'Technology Consulting'}}
       />
@@ -166,7 +166,7 @@ export default function IndustriesPage() {
           <div className="ihero-text">
             <p className="ihero-ey">Where we work</p>
             <h1 className="ihero-h1">Industries we know<br /><span>deeply.</span></h1>
-            <p className="ihero-sub">We've shipped production systems in these sectors — not just proposals. Each industry gets solutions built around its specific workflows, compliance needs and growth patterns.</p>
+            <p className="ihero-sub">We've shipped production systems in these sectors, not just proposals. Each industry gets solutions built around its specific workflows, compliance needs and growth patterns.</p>
           </div>
           <div className="ihero-img-side">
             <img src="/assets/industries-hero.webp" alt="Technology workspace" className="ihero-img" loading="eager" />
@@ -218,7 +218,7 @@ export default function IndustriesPage() {
         <div className="icta-inner">
           <p className="icta-ey">Don't see your industry?</p>
           <h2 className="icta-h">We adapt fast.</h2>
-          <p className="icta-p">Our ERP, AI and cloud capabilities transfer across sectors. If your industry isn't listed, let's talk — we've likely already solved a similar problem.</p>
+          <p className="icta-p">Our ERP, AI and cloud capabilities transfer across sectors. If your industry isn't listed, let's talk. We've likely already solved a similar problem.</p>
           <Link to="/contact" className="icta-btn">Start a Conversation
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </Link>

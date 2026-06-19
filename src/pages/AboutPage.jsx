@@ -307,6 +307,7 @@ export default function AboutPage() {
             {FAQS.map((f, i) => (
               <div className="ab-faq-item" key={i}>
                 <button
+                  type="button"
                   className="ab-faq-btn"
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
                   aria-expanded={openFaq === i}

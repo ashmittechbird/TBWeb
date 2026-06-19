@@ -1,5 +1,5 @@
 /* ============================================================
-   TechBird IT Services — Immersive Homepage
+   TechBird IT Services: Immersive Homepage
    Monochrome · Space Grotesk + Manrope
    ============================================================ */
 
@@ -195,7 +195,7 @@ body.loaded .topbar {
 }
 
 /* ═══════════════════════════════════════════════
-   NAV MEGA-MENU — Full-width, two-panel
+   NAV MEGA-MENU: Full-width, two-panel
    Left: brand panel  |  Right: icon grid
    Inspired by Linear / Vercel / Anthropic nav
    ═══════════════════════════════════════════════ */
@@ -1082,7 +1082,7 @@ body.loaded .scroll-hint {
   width: 100%;
 }
 
-/* industries section — scroll hijack */
+/* industries section: scroll hijack */
 .industries {
   padding: 0; /* section padding handled by ind-sticky */
 }
@@ -1100,7 +1100,7 @@ body.loaded .scroll-hint {
   padding: clamp(28px, 5vh, 50px) 0 clamp(24px, 4vh, 40px);
 }
 
-/* industries — gradient card track */
+/* industries: gradient card track */
 .ind-track-wrap {
   overflow-x: auto;
   overflow-y: visible;
@@ -1511,10 +1511,27 @@ body.loaded .scroll-hint {
   padding: 22px 0;
 }
 
+.foot-legal {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
 .foot-copy {
   color: rgba(255,255,255,.28);
   font-size: 12.5px;
 }
+.foot-legal-links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+}
+.foot-legal-links a {
+  color: rgba(255,255,255,.35);
+  text-decoration: none;
+  transition: color .2s;
+}
+.foot-legal-links a:hover { color: rgba(255,255,255,.7); }
 
 /* ── Regions ── */
 .foot-regions {
@@ -1561,7 +1578,7 @@ body.loaded .scroll-hint {
 .foot-scroll-top:hover { background: #1a1a2e; }
 .foot-scroll-top svg { width: 20px; height: 20px; }
 
-/* oversized brand wordmark — bleeds off the bottom edge */
+/* oversized brand wordmark: bleeds off the bottom edge */
 .foot-wordmark {
   position: relative;
   z-index: 1;
@@ -1761,7 +1778,7 @@ body.loaded .scroll-hint {
 
 /* ===================== MOBILE MENU ===================== */
 
-/* Hamburger — hidden on desktop, flex on mobile via media query */
+/* Hamburger: hidden on desktop, flex on mobile via media query */
 .nav-hamburger {
   display: flex;
   flex-direction: column;
@@ -2039,12 +2056,12 @@ body.loaded .scroll-hint {
   padding: 28px 30px;
 }
 
-/* front — keeps the gradient background */
+/* front: keeps the gradient background */
 .rc-front {
   /* background set per rc-1, rc-2 etc. */
 }
 
-/* back — white reveal */
+/* back: white reveal */
 .rc-back {
   background: #fff;
   color: #08080a;
@@ -2107,42 +2124,42 @@ body.loaded .scroll-hint {
   stroke: #fff;
 }
 
-/* Card 1 — Purple / Software Dev */
+/* Card 1 - Purple / Software Dev */
 .rc-1 { width: min(28vw, 380px); aspect-ratio: 4/3; left: 2%; top: 3%; z-index: 4; }
 .rc-1 .rc-front {
   background: linear-gradient(145deg, #160d35 0%, #3b0764 55%, #7c3aed 100%);
   box-shadow: 0 32px 72px -18px rgba(124,58,237,.65), 0 0 0 1px rgba(124,58,237,.25);
 }
 
-/* Card 2 — Sky blue / AI */
+/* Card 2 - Sky blue / AI */
 .rc-2 { width: min(26vw, 360px); aspect-ratio: 4/3; right: 2%; top: 1%; z-index: 5; }
 .rc-2 .rc-front {
   background: linear-gradient(145deg, #051828 0%, #0369a1 55%, #0ea5e9 100%);
   box-shadow: 0 32px 72px -18px rgba(14,165,233,.6), 0 0 0 1px rgba(14,165,233,.22);
 }
 
-/* Card 3 — Emerald / Cloud */
+/* Card 3 - Emerald / Cloud */
 .rc-3 { width: min(31vw, 420px); aspect-ratio: 4/3; left: calc(50% - min(15.5vw, 210px)); top: 18%; z-index: 6; }
 .rc-3 .rc-front {
   background: linear-gradient(145deg, #051a0f 0%, #065f46 55%, #10b981 100%);
   box-shadow: 0 32px 72px -18px rgba(16,185,129,.6), 0 0 0 1px rgba(16,185,129,.22);
 }
 
-/* Card 4 — Amber / Animation */
+/* Card 4 - Amber / Animation */
 .rc-4 { width: min(26vw, 360px); aspect-ratio: 4/3; left: 3%; top: 50%; z-index: 7; }
 .rc-4 .rc-front {
   background: linear-gradient(145deg, #1c0e00 0%, #92400e 55%, #f59e0b 100%);
   box-shadow: 0 32px 72px -18px rgba(245,158,11,.55), 0 0 0 1px rgba(245,158,11,.22);
 }
 
-/* Card 5 — Pink / MarTech */
+/* Card 5 - Pink / MarTech */
 .rc-5 { width: min(28vw, 380px); aspect-ratio: 4/3; right: 3%; top: 46%; z-index: 9; }
 .rc-5 .rc-front {
   background: linear-gradient(145deg, #1a0010 0%, #831843 55%, #ec4899 100%);
   box-shadow: 0 32px 72px -18px rgba(236,72,153,.6), 0 0 0 1px rgba(236,72,153,.22);
 }
 
-/* Card 6 — Cyan / Marketing */
+/* Card 6 - Cyan / Marketing */
 .rc-6 { width: min(30vw, 400px); aspect-ratio: 4/3; left: calc(50% - min(15vw, 200px)); top: 60%; z-index: 8; }
 .rc-6 .rc-front {
   background: linear-gradient(145deg, #00111a 0%, #0e5f6e 55%, #06b6d4 100%);
@@ -2213,7 +2230,7 @@ body.loaded .scroll-hint {
     border-radius: 20px;
   }
 
-  /* On mobile, disable the flip — show front with more info */
+  /* On mobile, disable the flip: show front with more info */
   .rc-inner {
     transform-style: flat;
     position: relative;
@@ -2516,7 +2533,7 @@ body.loaded .scroll-hint {
 }
 
 
-/* ===================== CLIENTS — marquee logo tiles ===================== */
+/* ===================== CLIENTS: marquee logo tiles ===================== */
 .cl-section {
   padding: clamp(3rem, 6vh, 5rem) 0;
   background: #f3f4f6;
@@ -2546,7 +2563,7 @@ body.loaded .scroll-hint {
   mask-image: linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
 }
 
-/* Use margin-right on tiles, NOT flex gap — gap breaks the -33.33% seam */
+/* Use margin-right on tiles, NOT flex gap: gap breaks the -33.33% seam */
 .cl-track {
   display: flex;
   width: max-content;
@@ -2618,7 +2635,7 @@ body.loaded .scroll-hint {
 }
 
 
-/* ===================== CASE STUDIES — compact, single viewport ===================== */
+/* ===================== CASE STUDIES: compact, single viewport ===================== */
 .cs-section {
   padding: clamp(48px, 8vh, 100px) 18px;
 }
@@ -2743,7 +2760,7 @@ body.loaded .scroll-hint {
 }
 
 
-/* ===================== TESTIMONIALS — auto-sliding carousel ===================== */
+/* ===================== TESTIMONIALS: auto-sliding carousel ===================== */
 .tm-section {
   padding: clamp(48px, 8vh, 100px) 0;
   overflow: hidden;

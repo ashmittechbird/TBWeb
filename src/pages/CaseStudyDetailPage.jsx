@@ -44,7 +44,7 @@ export default function CaseStudyDetailPage() {
   return (
     <>
       <SEO
-        title={`${study.title} — Case Study`}
+        title={`${study.title} - Case Study`}
         description={study.desc}
         keywords={`TechBird case study, ${study.client}, ${study.industry}, ${study.title}`}
       />

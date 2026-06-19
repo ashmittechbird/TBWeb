@@ -19,7 +19,7 @@ const ROW2 = [
 ];
 
 function MarqueeRow({ items, reverse }) {
-  /* Double the set for infinite scroll — reduced from 3× to cut DOM nodes */
+  /* Double the set for infinite scroll, reduced from 3x to cut DOM nodes */
   const tripled = [...items, ...items];
   return (
     <div className={`cl-marquee${reverse ? ' cl-marquee--rev' : ''}`}>

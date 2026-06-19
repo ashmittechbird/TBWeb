@@ -16,7 +16,7 @@ import SEO from '../components/SEO';
 import useAppInit from '../hooks/useAppInit';
 import useScrollAnimations from '../hooks/useScrollAnimations';
 
-/* Only lazy-load the heavy GPU canvas — it self-disables on mobile anyway */
+/* Only lazy-load the heavy GPU canvas: it self-disables on mobile anyway */
 const SplashCursor = lazy(() => import('../components/SplashCursor'));
 
 export default function HomePage() {

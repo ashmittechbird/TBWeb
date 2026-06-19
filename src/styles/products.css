@@ -1,9 +1,9 @@
 /* ============================================================
-   TechBird Products — Editorial Catalogue
+   TechBird Products: Editorial Catalogue
    Typography-first · Monochrome · Space Grotesk + Manrope
    ============================================================ */
 
-/* ── Layout — same max-width as ihero for consistent left/right edges ── */
+/* ── Layout: same max-width as ihero for consistent left/right edges ── */
 .px-wrap {
   max-width: 88rem;
   margin: 0 auto;
@@ -45,9 +45,9 @@
 
 
 /* ════════════════════════════════════════
-   PRODUCT INDEX — full-width editorial list
+   PRODUCT INDEX: full-width editorial list
    Each row: number · name (+ desc on hover) · category · arrow
-   Pure CSS hover — no JS state needed
+   Pure CSS hover, no JS state needed
    ════════════════════════════════════════ */
 .px-index {
   background: #08080a;
@@ -133,7 +133,7 @@
 }
 .px-row:hover .px-row-cat { opacity: 0.65; }
 
-/* Arrow — slides in on hover */
+/* Arrow: slides in on hover */
 .px-row-go {
   display: flex;
   align-items: center;
@@ -149,7 +149,7 @@
 
 
 /* ════════════════════════════════════════
-   SPOTLIGHT — white bg, dark cards, bento grid
+   SPOTLIGHT: white bg, dark cards, bento grid
    ════════════════════════════════════════ */
 .px-spot {
   background: #fff;
@@ -158,7 +158,7 @@
 
 .px-spot-head { margin-bottom: 3rem; }
 
-/* 3-column grid — equal cards, no spanning */
+/* 3-column grid: equal cards, no spanning */
 .px-bento {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -235,7 +235,7 @@
   margin-bottom: 22px;
 }
 
-/* Capability list — simple dots, no colored icons */
+/* Capability list: simple dots, no colored icons */
 .px-card-caps {
   list-style: none;
   margin: 0 0 24px;
@@ -278,7 +278,7 @@
 
 
 /* ════════════════════════════════════════
-   NUMBERS — large display type
+   NUMBERS: large display type
    ════════════════════════════════════════ */
 .px-nums {
   background: #08080a;
@@ -317,7 +317,7 @@
 
 
 /* ════════════════════════════════════════
-   FAQ — two-column, clean accordion
+   FAQ: two-column, clean accordion
    ════════════════════════════════════════ */
 .px-faq {
   background: #08080a;
@@ -391,7 +391,7 @@
 
 
 /* ════════════════════════════════════════
-   CTA — white, split layout
+   CTA: white, split layout
    ════════════════════════════════════════ */
 .px-cta {
   background: #fff;

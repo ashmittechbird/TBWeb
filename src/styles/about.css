@@ -1,5 +1,5 @@
 /* ============================================================
-   TechBird — About Us (cinematic 3D-scroll prototype)
+   TechBird: About Us (cinematic 3D-scroll prototype)
    Hybrid: WebGL glow + CSS metaball blobs + GSAP ScrollTrigger
    ============================================================ */
 
@@ -11,7 +11,7 @@
   background: var(--ab-void);
   color: #fff;
   font-family: var(--body, 'Manrope', system-ui, sans-serif);
-  /* NOTE: no overflow-x here — it would create a scroll container and break
+  /* NOTE: no overflow-x here, it would create a scroll container and break
      the sticky-pinned hero. Blobs are clipped by .ab-hero's own overflow. */
 }
 .ab-root * { box-sizing: border-box; }
@@ -53,7 +53,7 @@
   filter: blur(40px);
 }
 
-/* ── (legacy) soft drifting "metaball" blobs — kept for reference ── */
+/* ── (legacy) soft drifting "metaball" blobs, kept for reference ── */
 .ab-blobs { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
 .ab-blob {
   position: absolute;
@@ -90,7 +90,7 @@
   mix-blend-mode: screen;
 }
 
-/* ── the glowing "spirit" core (CSS — always visible, layered on the WebGL) ── */
+/* ── the glowing "spirit" core (CSS, always visible, layered on the WebGL) ── */
 .ab-glow {
   position: absolute;
   left: 50%; top: 50%;
@@ -236,7 +236,7 @@
 @keyframes ab-cue { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 50.1% { transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
 
 /* ════════════════════════════════════════
-   PILLARS — three "what we do" columns
+   PILLARS: three "what we do" columns
    ════════════════════════════════════════ */
 .ab-pillars {
   position: relative;
@@ -477,7 +477,7 @@
 .ab-lead-card:nth-child(2) .ab-lead-pebble { border-radius: 44% 44% 46% 46% / 24% 22% 34% 32%; }
 .ab-lead-card:nth-child(3) .ab-lead-pebble { border-radius: 47% 43% 45% 45% / 22% 26% 32% 30%; }
 .ab-lead-card:nth-child(4) .ab-lead-pebble { border-radius: 43% 47% 44% 46% / 24% 20% 30% 34%; }
-/* the cut-out person — all images rendered at identical height so they align consistently */
+/* the cut-out person: all images rendered at identical height so they align consistently */
 .ab-lead-img {
   position: absolute; left: 50%; bottom: 0;
   transform: translateX(-50%);
@@ -518,7 +518,7 @@
   background: #0a0a14;
   border-top: 1px solid rgba(255,255,255,.06);
   border-bottom: 1px solid rgba(255,255,255,.06);
-  /* horizontal padding removed — strip is full-bleed */
+  /* horizontal padding removed, strip is full-bleed */
   padding: clamp(70px, 11vh, 140px) 0;
 }
 /* padded inner used for heading and trust items */
@@ -579,7 +579,7 @@
   filter: grayscale(0) brightness(1);
 }
 
-/* name/role/linkedin overlay — only visible on active card */
+/* name/role/linkedin overlay: only visible on active card */
 .ab-fan-label {
   position: absolute;
   bottom: 0; left: 0; right: 0;
@@ -685,7 +685,7 @@
 .ab-faq-body p { font-size: 14.5px; line-height: 1.75; color: rgba(255,255,255,.55); }
 
 /* ════════════════════════════════════════
-   CLOSING — updated layout
+   CLOSING: updated layout
    ════════════════════════════════════════ */
 .ab-closing h2 { max-width: 22ch; }
 .ab-closing p {

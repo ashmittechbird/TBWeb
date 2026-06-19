@@ -13,7 +13,7 @@ gsap.registerPlugin(ScrollTrigger);
 /* Prevent GSAP from crashing when elements are removed during route transitions */
 gsap.config({ nullTargetWarn: false });
 
-/* NOTE: React StrictMode removed — it double-renders in dev which
+/* NOTE: React StrictMode removed: it double-renders in dev which
    causes GSAP's _getMatrix DOM helper to fail (removeChild errors).
    GSAP is fundamentally incompatible with StrictMode's double-invoke. */
 createRoot(document.getElementById('root')).render(

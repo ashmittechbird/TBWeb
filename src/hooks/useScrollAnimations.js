@@ -61,7 +61,7 @@ export default function useScrollAnimations() {
         );
       });
 
-      /* ── Services scroll — 6-card parallax ───────────────── */
+      /* ── Services scroll: 6-card parallax ───────────────── */
       const recogSection = document.querySelector('.recognition');
       if (recogSection && window.innerWidth > 860) {
         const allCards = ['rc1','rc2','rc3','rc4','rc5','rc6']

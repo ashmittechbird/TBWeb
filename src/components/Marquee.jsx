@@ -2,14 +2,14 @@ export default function Marquee() {
   return (
     <section className="marquee" aria-hidden="true">
       <div className="marquee-track" id="marqueeTrack">
-        <span>ERP Solutions</span><i>✦</i><span>Frappe &amp; ERPNext</span><i>✦</i>
-        <span>AI Integrations</span><i>✦</i><span>Custom Web Apps</span><i>✦</i>
-        <span>Mobile Apps</span><i>✦</i><span>Marketing Strategy</span><i>✦</i>
-        <span>Cloud &amp; DevOps</span><i>✦</i>
-        <span>ERP Solutions</span><i>✦</i><span>Frappe &amp; ERPNext</span><i>✦</i>
-        <span>AI Integrations</span><i>✦</i><span>Custom Web Apps</span><i>✦</i>
-        <span>Mobile Apps</span><i>✦</i><span>Marketing Strategy</span><i>✦</i>
-        <span>Cloud &amp; DevOps</span><i>✦</i>
+        <span>ERP Solutions</span><i className="mq-dot" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M5 0l1.12 3.88L10 5 6.12 6.12 5 10 3.88 6.12 0 5l3.88-1.12z" fill="currentColor"/></svg></i><span>Frappe &amp; ERPNext</span><i className="mq-dot" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M5 0l1.12 3.88L10 5 6.12 6.12 5 10 3.88 6.12 0 5l3.88-1.12z" fill="currentColor"/></svg></i>
+        <span>AI Integrations</span><i className="mq-dot" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M5 0l1.12 3.88L10 5 6.12 6.12 5 10 3.88 6.12 0 5l3.88-1.12z" fill="currentColor"/></svg></i><span>Custom Web Apps</span><i className="mq-dot" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M5 0l1.12 3.88L10 5 6.12 6.12 5 10 3.88 6.12 0 5l3.88-1.12z" fill="currentColor"/></svg></i>
+        <span>Mobile Apps</span><i className="mq-dot" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M5 0l1.12 3.88L10 5 6.12 6.12 5 10 3.88 6.12 0 5l3.88-1.12z" fill="currentColor"/></svg></i><span>Marketing Strategy</span><i className="mq-dot" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M5 0l1.12 3.88L10 5 6.12 6.12 5 10 3.88 6.12 0 5l3.88-1.12z" fill="currentColor"/></svg></i>
+        <span>Cloud &amp; DevOps</span><i className="mq-dot" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M5 0l1.12 3.88L10 5 6.12 6.12 5 10 3.88 6.12 0 5l3.88-1.12z" fill="currentColor"/></svg></i>
+        <span>ERP Solutions</span><i className="mq-dot" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M5 0l1.12 3.88L10 5 6.12 6.12 5 10 3.88 6.12 0 5l3.88-1.12z" fill="currentColor"/></svg></i><span>Frappe &amp; ERPNext</span><i className="mq-dot" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M5 0l1.12 3.88L10 5 6.12 6.12 5 10 3.88 6.12 0 5l3.88-1.12z" fill="currentColor"/></svg></i>
+        <span>AI Integrations</span><i className="mq-dot" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M5 0l1.12 3.88L10 5 6.12 6.12 5 10 3.88 6.12 0 5l3.88-1.12z" fill="currentColor"/></svg></i><span>Custom Web Apps</span><i className="mq-dot" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M5 0l1.12 3.88L10 5 6.12 6.12 5 10 3.88 6.12 0 5l3.88-1.12z" fill="currentColor"/></svg></i>
+        <span>Mobile Apps</span><i className="mq-dot" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M5 0l1.12 3.88L10 5 6.12 6.12 5 10 3.88 6.12 0 5l3.88-1.12z" fill="currentColor"/></svg></i><span>Marketing Strategy</span><i className="mq-dot" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M5 0l1.12 3.88L10 5 6.12 6.12 5 10 3.88 6.12 0 5l3.88-1.12z" fill="currentColor"/></svg></i>
+        <span>Cloud &amp; DevOps</span><i className="mq-dot" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M5 0l1.12 3.88L10 5 6.12 6.12 5 10 3.88 6.12 0 5l3.88-1.12z" fill="currentColor"/></svg></i>
       </div>
     </section>
   );

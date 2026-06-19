@@ -598,7 +598,7 @@ function Visual13({ color }) {
 
 const VISUALS = [Visual0, Visual1, Visual2, Visual3, Visual4, Visual5, Visual6, Visual7, Visual8, Visual9, Visual10, Visual11, Visual12, Visual13];
 
-/* ── Exact heading → visual index map — each section gets a unique, relevant visual ── */
+/* ── Exact heading → visual index map: each section gets a unique, relevant visual ── */
 const HEADING_VISUAL_MAP = {
   /* Software Dev */
   'erp implementation': 0, 'custom web applications': 0, 'mobile app development': 2,

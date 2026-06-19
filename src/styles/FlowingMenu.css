@@ -1,5 +1,5 @@
 /* ============================================================
-   TechBird — FlowingMenu (fm- prefix to avoid .marquee conflicts)
+   TechBird: FlowingMenu (fm- prefix to avoid .marquee conflicts)
    ============================================================ */
 .flowing-menu-wrap {
   margin-top: clamp(32px, 5vw, 56px);

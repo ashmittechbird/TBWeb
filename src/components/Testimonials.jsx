@@ -1,16 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
 
 const REVIEWS = [
-  { quote: 'TechBird transformed our entire HR operations. The HRMS handles payroll, attendance and compliance seamlessly — what took days now takes minutes.', name: 'Rajesh Kulkarni', role: 'Head of HR', company: 'Nexus Manufacturing', source: 'Google', rating: 5 },
+  { quote: 'TechBird transformed our entire HR operations. The HRMS handles payroll, attendance and compliance seamlessly. What took days now takes minutes.', name: 'Rajesh Kulkarni', role: 'Head of HR', company: 'Nexus Manufacturing', source: 'Google', rating: 5 },
   { quote: 'Their ERP implementation was on time and on budget. The team understood our manufacturing workflows better than vendors ten times their size.', name: 'Priya Sharma', role: 'COO', company: 'Vanguard Exports', source: 'Google', rating: 5 },
   { quote: 'We went from scattered spreadsheets to a fully integrated CRM and document management system. Post-launch support has been exceptional.', name: 'Amit Deshmukh', role: 'Managing Director', company: 'Pinnacle Legal', source: 'Glassdoor', rating: 5 },
-  { quote: 'The team delivered a complex e-commerce platform in just 10 weeks. Multi-vendor, payment gateway, logistics — all integrated flawlessly.', name: 'Sneha Patil', role: 'Founder', company: 'StyleKart', source: 'Google', rating: 5 },
-  { quote: 'TechBird built our visitor management system from scratch. Digital check-in, host alerts, badge printing — our front desk is now fully automated.', name: 'Vikram Joshi', role: 'Admin Head', company: 'Zenith Corp', source: 'Clutch', rating: 5 },
+  { quote: 'The team delivered a complex e-commerce platform in just 10 weeks. Multi-vendor, payment gateway, logistics: all integrated flawlessly.', name: 'Sneha Patil', role: 'Founder', company: 'StyleKart', source: 'Google', rating: 5 },
+  { quote: 'TechBird built our visitor management system from scratch. Digital check-in, host alerts, badge printing: our front desk is now fully automated.', name: 'Vikram Joshi', role: 'Admin Head', company: 'Zenith Corp', source: 'Clutch', rating: 5 },
   { quote: 'Exceptional AI solutions team. They built a custom NLP model for our legal research that cut document review time by 70%.', name: 'Aditi Menon', role: 'Partner', company: 'Menon & Associates', source: 'Glassdoor', rating: 5 },
   { quote: 'Cloud migration was seamless. Zero downtime, 40% cost reduction, and our DevOps pipeline is now fully automated. Highly recommended.', name: 'Rohan Mehta', role: 'CTO', company: 'FinEdge Solutions', source: 'Google', rating: 5 },
   { quote: 'The practice management system they built handles appointments, billing and patient records for all our 12 clinics from a single dashboard.', name: 'Dr. Kavita Rao', role: 'Director', company: 'CareFirst Clinics', source: 'Clutch', rating: 5 },
   { quote: 'From requirements to go-live in 6 weeks. The litigation management tool tracks every court date, deadline and document across our entire firm.', name: 'Sanjay Gupta', role: 'Senior Partner', company: 'Gupta Legal LLP', source: 'Google', rating: 5 },
-  { quote: 'Their marketing technology stack integration was game-changing. CRM, ad platforms, analytics — everything talks to each other now.', name: 'Meera Iyer', role: 'VP Marketing', company: 'GrowthPulse', source: 'Glassdoor', rating: 4 },
+  { quote: 'Their marketing technology stack integration was game-changing. CRM, ad platforms, analytics: everything talks to each other now.', name: 'Meera Iyer', role: 'VP Marketing', company: 'GrowthPulse', source: 'Glassdoor', rating: 4 },
 ];
 
 const SOURCE_ICONS = {
@@ -86,7 +86,7 @@ export default function Testimonials() {
         </div>
       </div>
 
-      {/* Sliding carousel — full bleed */}
+      {/* Sliding carousel: full bleed */}
       <div
         className="tm-carousel"
         onMouseEnter={() => setPaused(true)}
