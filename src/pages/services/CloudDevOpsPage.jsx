@@ -31,6 +31,7 @@ export default function CloudDevOpsPage() {
         serviceSchema={{ name: 'Cloud & DevOps', description: 'AWS/Azure/GCP infrastructure, CI/CD pipelines, Kubernetes, monitoring and security.', category: 'Cloud Computing' }}
       />
       <ServicePageLayout
+      heroImage="/assets/svc-cloud-devops.webp"
       accentColor="#34d399"
       eyebrow="Cloud & DevOps"
       title="Cloud Infrastructure That Scales Without Breaking the Budget"

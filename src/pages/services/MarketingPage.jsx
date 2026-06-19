@@ -31,6 +31,7 @@ export default function MarketingPage() {
         serviceSchema={{ name: 'Marketing Strategy', description: 'GTM strategy, SEO, SEM, paid media, social media and content marketing.', category: 'Marketing Consulting' }}
       />
       <ServicePageLayout
+      heroImage="/assets/svc-marketing-hero.webp"
       accentColor="#22d3ee"
       eyebrow="Marketing Strategy"
       title="Marketing Strategies That Drive Growth, Not Just Impressions"

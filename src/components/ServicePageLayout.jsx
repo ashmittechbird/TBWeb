@@ -364,6 +364,28 @@ function Visual5({ color, index = 0 }) {
 }
 const VISUALS = [Visual0, Visual1, Visual2, Visual3, Visual4, Visual5];
 
+/* ── Keyword-based visual picker — matches section heading to the most relevant SVG ── */
+const VISUAL_KEYWORDS = [
+  { keys: ['code','erp','web app','api','saas','software','custom','frappe','development','backend','frontend'], viz: 0 },
+  { keys: ['analytics','dashboard','report','metric','data','attribution','kpi','insight','bi','forecast'], viz: 1 },
+  { keys: ['mobile','app','ios','android','react native','flutter','responsive','pwa'], viz: 2 },
+  { keys: ['ai','ml','rag','llm','agent','model','neural','nlp','automation','chatbot','intelligent'], viz: 3 },
+  { keys: ['cloud','devops','ci/cd','pipeline','kubernetes','docker','infrastructure','migration','server','deploy','aws','azure'], viz: 4 },
+  { keys: ['global','network','integration','connect','platform','crm','hubspot','salesforce','cdp','martech','stack'], viz: 5 },
+  { keys: ['seo','content','marketing','gtm','paid','social','campaign','growth','brand','email','strategy'], viz: 1 },
+  { keys: ['2d','3d','animation','cgi','vfx','ar','vr','motion','render','visual','video','explainer'], viz: 2 },
+  { keys: ['security','compliance','audit','governance','encrypt','firewall','pen test','iso','gdpr'], viz: 4 },
+  { keys: ['cost','optim','budget','pricing','saving','roi','roas','revenue','performance'], viz: 1 },
+];
+
+function pickVisual(heading, index) {
+  const h = (heading || '').toLowerCase();
+  for (const rule of VISUAL_KEYWORDS) {
+    if (rule.keys.some(k => h.includes(k))) return VISUALS[rule.viz];
+  }
+  return VISUALS[index % VISUALS.length];
+}
+
 /* ── Chevron icon ── */
 const ChevronRight = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"
@@ -624,7 +646,7 @@ export default function ServicePageLayout({
         </div>
 
         {sections.map((s, i) => {
-          const VisualComp = VISUALS[i % VISUALS.length];
+          const VisualComp = pickVisual(s.heading, i);
           const caps = parseCaps(s.useCases);
           const vizColor = s.color || '#ffffff';
           const tag = s.heading.replace(/[^A-Za-z\s]/g, '').trim()

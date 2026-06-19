@@ -35,6 +35,7 @@ export default function AnimationPage() {
         serviceSchema={{ name: '2D & 3D Animation', description: 'CGI, VFX, AR/VR, product visualization and motion graphics production.', category: 'Animation Production' }}
       />
       <ServicePageLayout
+      heroImage="/assets/svc-animation-hero.webp"
       accentColor="#fbbf24"
       eyebrow="2D & 3D Animation"
       title="Immersive Visual Storytelling - 2D, 3D, CGI, VFX, AR & VR"

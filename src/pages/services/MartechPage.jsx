@@ -31,6 +31,7 @@ export default function MartechPage() {
         serviceSchema={{ name: 'MarTech Solutions', description: 'CRM, AdTech, analytics dashboards, CDP and marketing automation.', category: 'Marketing Technology' }}
       />
       <ServicePageLayout
+      heroImage="/assets/svc-martech-hero.webp"
       accentColor="#f472b6"
       eyebrow="MarTech"
       title="MarTech Stacks That Connect Your CRM, Analytics and Advertising"
