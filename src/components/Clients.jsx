@@ -1,26 +1,26 @@
 import { useEffect, useRef } from 'react';
 
 const ROW1 = [
-  { name: 'Build Ideas',      img: '/assets/clients/build-ideas.png' },
-  { name: 'Cafe Rova',        img: '/assets/clients/cafe-rova.png' },
-  { name: 'GLS',              img: '/assets/clients/gls.png' },
-  { name: 'Kelvino',          img: '/assets/clients/kelvino.png' },
-  { name: 'Rishabh Builders', img: '/assets/clients/rishabh-builders.png' },
-  { name: 'Smart Choice',     img: '/assets/clients/smart-choice.png' },
+  { name: 'Build Ideas',      img: '/assets/clients/build-ideas.webp' },
+  { name: 'Cafe Rova',        img: '/assets/clients/cafe-rova.webp' },
+  { name: 'GLS',              img: '/assets/clients/gls.webp' },
+  { name: 'Kelvino',          img: '/assets/clients/kelvino.webp' },
+  { name: 'Rishabh Builders', img: '/assets/clients/rishabh-builders.webp' },
+  { name: 'Smart Choice',     img: '/assets/clients/smart-choice.webp' },
 ];
 
 const ROW2 = [
-  { name: 'Starbird',     img: '/assets/clients/starbird.png' },
-  { name: 'Staybird',     img: '/assets/clients/staybird.png' },
-  { name: 'Tranqvillas',  img: '/assets/clients/tranqvillas.png' },
-  { name: 'Blupijn',      img: '/assets/clients/blupijn.png' },
-  { name: 'Blents',       img: '/assets/clients/blents.png' },
-  { name: 'KJ Capital',   img: '/assets/clients/kj-capital.png' },
+  { name: 'Starbird',     img: '/assets/clients/starbird.webp' },
+  { name: 'Staybird',     img: '/assets/clients/staybird.webp' },
+  { name: 'Tranqvillas',  img: '/assets/clients/tranqvillas.webp' },
+  { name: 'Blupijn',      img: '/assets/clients/blupijn.webp' },
+  { name: 'Blents',       img: '/assets/clients/blents.webp' },
+  { name: 'KJ Capital',   img: '/assets/clients/kj-capital.webp' },
 ];
 
 function MarqueeRow({ items, reverse }) {
-  /* Triple the set so even ultra-wide screens never see a gap */
-  const tripled = [...items, ...items, ...items];
+  /* Double the set for infinite scroll — reduced from 3× to cut DOM nodes */
+  const tripled = [...items, ...items];
   return (
     <div className={`cl-marquee${reverse ? ' cl-marquee--rev' : ''}`}>
       <div className="cl-track">

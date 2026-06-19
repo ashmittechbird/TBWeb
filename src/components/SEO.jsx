@@ -39,7 +39,7 @@ export default function SEO({
     '@type': 'Organization',
     name: 'TechBird IT Services',
     url: SITE,
-    logo: `${SITE}/logo.png`,
+    logo: `${SITE}/logo.webp`,
     description: DEFAULT_DESC,
     foundingDate: '2020',
     address: {

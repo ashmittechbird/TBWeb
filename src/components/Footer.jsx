@@ -33,7 +33,7 @@ export default function Footer() {
           {/* ── Brand ── */}
           <div className="foot-brand">
             <Link className="foot-logo-link" to="/">
-              <img src="/logo.png" alt="TechBird" className="foot-logo-img" />
+              <img src="/logo.webp" alt="TechBird" className="foot-logo-img" loading="lazy" decoding="async" width="150" height="52" />
             </Link>
             <p className="foot-tag">
               We take pride in being your trusted partner for all IT needs.

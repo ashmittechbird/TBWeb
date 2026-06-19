@@ -109,7 +109,7 @@ export default function InnerNavbar() {
       {/* ── Floating pill nav (appears on scroll) ── */}
       <div className={`inner-pill-nav${scrolled ? ' visible' : ''}`}>
         <Link to="/" className="pill-logo">
-          <img src="/logo.png" alt="TechBird" />
+          <img src="/logo.webp" alt="TechBird" />
         </Link>
         <Link to="/">Home</Link>
         <Link to="/services">Services</Link>
@@ -123,7 +123,7 @@ export default function InnerNavbar() {
 
       <nav className={`topbar topbar--inner${scrolled ? ' topbar--hidden' : ''}`} id="topbar">
       <Link className="logo" to="/">
-        <img src="/logo.png" alt="TechBird" className="logo-img" style={{ filter: 'brightness(0) invert(1)' }} />
+        <img src="/logo.webp" alt="TechBird" className="logo-img" style={{ filter: 'brightness(0) invert(1)' }} />
       </Link>
 
       <ul className="nav-links">
@@ -242,7 +242,7 @@ export default function InnerNavbar() {
       openMenuButtonColor="#000"
       changeMenuColorOnOpen={true}
       colors={['#1e1e22', '#35353c']}
-      logoUrl="/logo.png"
+      logoUrl="/logo.webp"
       accentColor="#5227FF"
     />
   </>

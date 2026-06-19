@@ -169,6 +169,11 @@ export default function LightfallBanner({
     const container = containerRef.current;
     if (!container) return;
 
+    /* Skip WebGL on mobile / reduced-motion to save GPU & battery */
+    const isMobile = window.innerWidth < 768 || window.matchMedia?.('(pointer: coarse)').matches;
+    const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    if (isMobile || reducedMotion) return;
+
     const canvas = document.createElement('canvas');
     canvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;display:block;';
     container.appendChild(canvas);

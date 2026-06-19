@@ -3,7 +3,7 @@
    Monochrome · Space Grotesk + Manrope
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap');
+/* Fonts loaded via index.html <link> for faster non-blocking load */
 
 :root {
   --bg: #08080a;

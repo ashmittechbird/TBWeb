@@ -106,7 +106,7 @@ export default function Navbar() {
     <>
       <nav className="topbar" id="topbar">
         <Link className="logo" to="/">
-          <img src="/logo.png" alt="TechBird" className="logo-img" />
+          <img src="/logo.webp" alt="TechBird" className="logo-img" width="150" height="46" fetchPriority="high" />
         </Link>
 
         <ul className="nav-links">
@@ -230,7 +230,7 @@ export default function Navbar() {
         openMenuButtonColor="#000"
         changeMenuColorOnOpen={true}
         colors={['#1e1e22', '#35353c']}
-        logoUrl="/logo.png"
+        logoUrl="/logo.webp"
         accentColor="#5227FF"
       />,
       document.body
