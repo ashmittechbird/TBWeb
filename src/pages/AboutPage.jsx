@@ -29,8 +29,8 @@ const PILLARS = [
 const LEADERSHIP = [
   { name: 'Amol Sane',       role: 'Co-Founder & CEO', img: '/assets/team/amol-sane-cut.webp', li: 'https://www.linkedin.com/in/amol-sane-b8675316/' },
   { name: 'Ekansh Jain',     role: 'Co-Founder & CTO', img: '/assets/team/ekansh-jain-cut.webp', li: 'https://www.linkedin.com/in/jainekansh1512/' },
-  { name: 'Amit Thakur',     role: 'CBO',              img: '/assets/team/amit-cut.webp', li: 'https://www.linkedin.com/in/amitthakurtechbirdit/' },
   { name: 'Shubham Agarwal', role: 'CFO',              img: '/assets/team/shubham-cut.webp', li: 'https://www.linkedin.com/in/shubham-a-54aa78271/' },
+  { name: 'Amit Thakur',     role: 'Partner & CBO',    img: '/assets/team/amit-cut.webp', li: 'https://www.linkedin.com/in/amitthakurtechbirdit/' },
 ];
 
 const TEAM = [
