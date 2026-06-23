@@ -112,12 +112,6 @@ export default function Footer() {
           </div>
           <div className="foot-regions">
             <span>India</span>
-            <span className="foot-dot" />
-            <span>United Kingdom</span>
-            <span className="foot-dot" />
-            <span>United States</span>
-            <span className="foot-dot" />
-            <span>UAE</span>
           </div>
         </div>
       </div>

@@ -12,35 +12,6 @@ export default function useAppInit() {
     requestAnimationFrame(triggerEntrance);
     const t = setTimeout(triggerEntrance, 600);
 
-    /* ── Count-up stats ───────────────────────────────────── */
-    function countUpStats() {
-      document.querySelectorAll('.stat-num [data-count]').forEach(el => {
-        const target = parseInt(el.getAttribute('data-count'), 10) || 0;
-        const dur = 1400;
-        let t0 = null;
-        function step(ts) {
-          if (!t0) t0 = ts;
-          const p = Math.min((ts - t0) / dur, 1);
-          const eased = 1 - Math.pow(1 - p, 3);
-          el.textContent = Math.round(target * eased);
-          if (p < 1) requestAnimationFrame(step);
-          else el.textContent = target;
-        }
-        requestAnimationFrame(step);
-      });
-    }
-
-    const statsEl = document.getElementById('stats');
-    let statsObserver;
-    if (statsEl && 'IntersectionObserver' in window) {
-      statsObserver = new IntersectionObserver(entries => {
-        if (entries[0].isIntersecting) { countUpStats(); statsObserver.disconnect(); }
-      }, { threshold: 0.3 });
-      statsObserver.observe(statsEl);
-    } else if (statsEl) {
-      countUpStats();
-    }
-
     /* ── Industries horizontal scroll hijack ──────────────── */
     const indWrap    = document.getElementById('indTrack');
     const indFill    = document.getElementById('indScrollFill');
@@ -135,7 +106,6 @@ export default function useAppInit() {
     return () => {
       clearTimeout(t);
       cancelAnimationFrame(rafId);
-      if (statsObserver) statsObserver.disconnect();
       if (navIO) navIO.disconnect();
       if (scrollListener) window.removeEventListener('scroll', scrollListener);
       window.removeEventListener('scroll', onScroll);

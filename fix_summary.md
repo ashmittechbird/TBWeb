@@ -1,111 +1,92 @@
-# Fix Summary (June 20, 2026)
+# Fix summary
 
-Live site: https://techbird-react.vercel.app
-Repository: https://github.com/ashmittechbird/TBWeb (main branch)
-Build: Vite 8, all builds pass cleanly.
+All approved gaps from `gap_identification.md` have been addressed. Build verified (Vite build passes).
 
-## Current audit status
+## Changes by category
 
-| Category | Pass | Gap | Needs review | Not applicable |
-| --- | --- | --- | --- | --- |
-| Crawl and discovery | 3 | 0 | 1 | 0 |
-| On page SEO | 4 | 0 | 4 | 1 |
-| Structured data | 4 | 0 | 2 | 1 |
-| GEO and AEO | 3 | 0 | 1 | 0 |
-| LLMO and AISEO | 1 | 0 | 3 | 1 |
-| E-E-A-T | 2 | 0 | 2 | 0 |
-| Performance | 1 | 0 | 3 | 0 |
-| Resilience | 3 | 0 | 1 | 0 |
-| Form validation | 10 | 0 | 1 | 0 |
-| Interaction and CTA | 2 | 0 | 0 | 0 |
-| Content and style | 2 | 0 | 0 | 0 |
-| Git hygiene | 3 | 0 | 0 | 0 |
-| Optional | 2 | 0 | 0 | 2 |
+### 1. Resilience and self-hosted delivery
 
-**Scanner false positives explained** (these show as "Gap" in the automated scan but are resolved):
-- **RESIL-03** (3 external refs): OG image tags in `index.html` use absolute URLs as required by the OG spec; the image is self-hosted at `public/og-image.png`. The Google Maps iframe in ContactPage is an approved third-party embed.
-- **RESIL-04/05** (privacy/terms "not detected"): Scanner looks for static files named `privacy`/`terms`. Both pages are React components (`PrivacyPage.jsx`, `TermsPage.jsx`) routed at `/privacy` and `/terms`, linked in footer.
-- **EEAT-04** (no privacy page): Same as RESIL-04 above.
-- **STYLE-01/02** (em dashes/emojis): All 136+ hits are inside `audit_findings.json` (gitignored scanner output). 0 in source files, confirmed by grep.
-- **OPT-04/05**: Optional items; need user-supplied tokens.
-
-## All fixes applied (across 3 commits)
-
-### Commit 1: `4fce26c` - Website standards audit fixes + hero padding
-
-#### RESIL-03: Self-hosted fonts
-- Downloaded 4 WOFF2 files to `public/fonts/` (Space Grotesk latin + latin-ext, Manrope latin + latin-ext)
-- Replaced Google Fonts CDN `<link>` tags in `index.html` with inline `@font-face` declarations and `<link rel="preload">`
+**RESIL-03: Self-hosted fonts (was Google Fonts CDN)**
+- Downloaded 4 WOFF2 font files to `public/fonts/`:
+  - `space-grotesk-latin.woff2`, `space-grotesk-latin-ext.woff2`
+  - `manrope-latin.woff2`, `manrope-latin-ext.woff2`
+- Replaced Google Fonts CDN links in `index.html` with inline `@font-face` declarations
 - Added `font-display: swap` to all font faces
+- Added `<link rel="preload">` for the latin subset of each font
+- Removed `<link rel="preconnect">` to `fonts.googleapis.com` and `fonts.gstatic.com`
 
-#### RESIL-04: Privacy Policy page
-- Created `src/pages/PrivacyPage.jsx` using project design system (inner.css tokens: `--ip-bg`, `--ip-dim`, `--ip-white`, `--ip-mw`, `--ip-px`)
-- 9 sections: Data Controller, Information Collected, How We Use Info, Data Sharing, Cookies, Retention, Your Rights, Security, Changes
-- Route `/privacy` added in `App.jsx`; linked in footer
+**RESIL-04: Privacy page**
+- Created `src/pages/PrivacyPage.jsx` using project design system (inner.css tokens)
+- Added route `/privacy` in `App.jsx`
+- Added "Privacy Policy" link in footer
 
-#### RESIL-05: Terms of Service page
-- Created `src/pages/TermsPage.jsx` matching privacy page design
-- 10 sections: Acceptance, Services, Permitted Use, IP, Disclaimers, Liability, Third-Party Links, Governing Law (Pune, India), Changes, Contact
-- Route `/terms` added in `App.jsx`; linked in footer
+**RESIL-05: Terms of Service page**
+- Created `src/pages/TermsPage.jsx` using project design system
+- Added route `/terms` in `App.jsx`
+- Added "Terms of Service" link in footer (next to Privacy Policy)
 
-#### PERF-05: Cache-Control headers
-- Created `public/_headers` for Netlify/Cloudflare Pages:
-  - `/assets/*` and `/fonts/*`: `public, max-age=31536000, immutable`
-  - HTML: `no-cache`
-  - All: `Vary: Accept-Encoding`
+### 2. Performance and caching (PERF-05)
 
-#### EEAT-04: Trustworthiness
-- Privacy page resolves the trust signal gap
+- Created `public/_headers` with cache rules for static hosting (Netlify/Cloudflare Pages):
+  - Versioned assets (`/assets/*`): `immutable, max-age=31536000`
+  - Self-hosted fonts (`/fonts/*`): `immutable, max-age=31536000`
+  - HTML pages: `no-cache`
+  - All responses: `Vary: Accept-Encoding`
+
+### 3. E-E-A-T trustworthiness (EEAT-04)
+
+- Privacy page added (see RESIL-04 above), resolving the trust signal gap
 - Contact page and About page already existed
 
-#### FORM-01, FORM-02, FORM-08, FORM-09: Contact form validation
-- Phone: `pattern="[+]?[0-9\s]{7,15}"`, `minLength={7}`, `maxLength={15}`, `autoComplete="tel"`
-- Email: `autoComplete="email"`
-- Name: `maxLength={100}`, `autoComplete="name"`
-- Company: `maxLength={100}`, `autoComplete="organization"`
-- Message textarea: `minLength={10}`, `maxLength={2000}`
+### 4. Form validation (FORM-01, FORM-02, FORM-08, FORM-09)
 
-#### CTA-02: Explicit button types
-- Added `type="button"` to 5 non-submit buttons: `offline.html` (retry), `Footer.jsx` (scroll-to-top), `AboutPage.jsx` (FAQ toggle), `ContactPage.jsx` (send another, FAQ toggle)
+All changes in `src/pages/ContactPage.jsx`:
+- **FORM-01**: Phone field: added `pattern`, `minLength={7}`, `maxLength={15}`, `autoComplete="tel"`
+- **FORM-02**: Email field: added `autoComplete="email"`
+- **FORM-08**: Name field: added `maxLength={100}`, `autoComplete="name"`; Company field: added `maxLength={100}`, `autoComplete="organization"`
+- **FORM-09**: Message textarea: added `minLength={10}`, `maxLength={2000}`
 
-#### STYLE-01: Em dashes (138 total, 0 remaining)
-- All 138 em dash characters replaced across 21+ source files with grammatically appropriate alternatives (commas, colons, periods, hyphens, or reworded sentences)
+### 5. Interaction and CTA (CTA-02)
 
-#### STYLE-02: Emojis replaced with icons
-- 22 U+2726 (four-pointed star) characters in `Marquee.jsx` replaced with inline SVG four-pointed star icons
+Added `type="button"` to 5 buttons:
+- `public/offline.html:23` (retry button)
+- `src/components/Footer.jsx:123` (scroll-to-top)
+- `src/pages/AboutPage.jsx:311` (FAQ toggle)
+- `src/pages/ContactPage.jsx:162` (send another)
+- `src/pages/ContactPage.jsx:267` (FAQ toggle)
 
-#### GIT-01: .gitignore conformance
-- Merged full organization standard: OS files, secret patterns (`*.pem`, `*.key`, `*.crt`, `*.p12`, `*.pfx`, `secrets.json`, `credentials.json`), IDE, Python, Frappe, Docker, temp, build artifacts, 20+ AI tool directories, testing output, local dev, backups, auditor output
-- All project-specific entries preserved
+### 6. Content and style (STYLE-01, STYLE-02)
 
-#### GIT-03: README
-- Replaced default Vite template with project-specific content: tech stack, prerequisites, setup, dev/build commands, project structure, deployment notes
+**STYLE-01: Em dashes removed**
+- All 138 em dash characters replaced across source files with grammatically appropriate alternatives (commas, colons, periods, hyphens, or reworded sentences)
+- 0 em dashes remain in source files
 
-#### Crawl updates
-- Added `/case-studies`, `/privacy`, `/terms` to `public/sitemap.xml`
+**STYLE-02: Emoji replaced with SVG icon**
+- Replaced 22 U+2726 (four-pointed star) characters in `src/components/Marquee.jsx` with inline SVG four-pointed star icons wrapped in `<i className="mq-dot">` elements
 
-#### Footer update
-- Added `.foot-legal-links` with Privacy Policy and Terms of Service links
-- CSS for legal links in `styles.css`
 
-#### Hero padding (consistency fix)
-- `.pd-hero` (product detail pages): `clamp(80px, 11vh, 128px)` to `clamp(120px, 15vh, 168px)`; tablet 80px to 100px; mobile 72px to 88px
-- `.ihero` (all inner pages): `6.5rem` to `7.5rem`
+### 7. Git hygiene (GIT-01, GIT-03)
 
-### Commit 2: `6c6bf56` - Vercel SPA routing
+**GIT-01: .gitignore updated**
+- Merged full organization standard (all required categories) into `.gitignore`
+- Kept all project-specific entries (Vite, Vercel, legacy files)
+- Added: OS files, secret patterns, IDE files, Python, Frappe, Docker, temp files, build artifacts, 20+ AI tool directories, testing output, local dev, backups, auditor output
 
-- Created `vercel.json` with `rewrites` rule so all routes serve `index.html` (required for React Router client-side routing on Vercel)
+**GIT-03: README rewritten**
+- Replaced default Vite template with project-specific content
+- Includes: project description, tech stack, prerequisites, setup/dev/build commands, project structure, linting, deployment notes
 
-### Commit 3: `6f4fdd7` - Leadership LinkedIn profiles + Person schema (EEAT-02)
+### 8. Crawl and discovery updates
 
-- Added individual LinkedIn URLs to all 4 leadership cards in `AboutPage.jsx`:
-  - Amol Sane (CEO): `linkedin.com/in/amol-sane-b8675316/`
-  - Ekansh Jain (CTO): `linkedin.com/in/jainekansh1512/`
-  - Amit Thakur (CBO): `linkedin.com/in/amitthakurtechbirdit/`
-  - Shubham Agarwal (CFO): `linkedin.com/in/shubham-a-54aa78271/`
-- Added `founder` and `employee` arrays with Person JSON-LD (`name`, `jobTitle`, `sameAs`) to Organization schema in `SEO.jsx`
+- Added `/case-studies`, `/privacy`, and `/terms` to `public/sitemap.xml`
+- Footer now links Privacy Policy and Terms of Service
 
-## Files created (9 total)
+### 9. Footer update
+
+- Added `.foot-legal` wrapper with `.foot-legal-links` containing Privacy Policy and Terms of Service links
+- Added CSS for legal links in `src/styles/styles.css`
+
+## Files created
 
 | File | Purpose |
 | --- | --- |
@@ -116,64 +97,58 @@ Build: Vite 8, all builds pass cleanly.
 | `public/_headers` | Cache-Control headers for static hosting |
 | `src/pages/PrivacyPage.jsx` | Privacy policy page |
 | `src/pages/TermsPage.jsx` | Terms of service page |
-| `vercel.json` | SPA rewrite rules for Vercel |
 
-## Files modified (31 total)
+## Files modified
 
 | File | What changed |
 | --- | --- |
-| `index.html` | Self-hosted @font-face + preload (replaced Google Fonts CDN) |
+| `index.html` | Replaced Google Fonts CDN with self-hosted @font-face + preload |
 | `src/App.jsx` | Added /privacy and /terms routes |
-| `src/components/SEO.jsx` | Added founder/employee Person JSON-LD to Organization schema |
-| `src/components/Footer.jsx` | type="button" on scroll-top; privacy/terms links in footer bar |
-| `src/components/Marquee.jsx` | Replaced emoji with inline SVG icons |
+| `src/components/Footer.jsx` | Added type="button" to scroll-top; added privacy/terms links |
+| `src/components/Marquee.jsx` | Replaced emoji with SVG icons |
 | `src/components/Contact.jsx` | Em dash fixes in comments |
-| `src/components/Clients.jsx` | Em dash fix in comment |
-| `src/components/Testimonials.jsx` | Em dash fixes in quote content + comment |
+| `src/components/Testimonials.jsx` | Em dash fixes in quote content |
 | `src/components/ServicePageLayout.jsx` | Em dash fix in comment |
-| `src/components/StaggeredMenu.css` | Em dash fix in comment |
-| `src/pages/AboutPage.jsx` | Leadership LinkedIn URLs; button type; em dash fixes |
-| `src/pages/ContactPage.jsx` | Form validation; button types; em dash fixes |
-| `src/pages/HomePage.jsx` | Em dash fix in comment |
-| `src/pages/CaseStudiesPage.jsx` | Em dash fixes in content |
+| `src/pages/ContactPage.jsx` | Form validation attributes + button types + em dash fixes |
+| `src/pages/AboutPage.jsx` | Button type + em dash fixes |
 | `src/pages/CaseStudyDetailPage.jsx` | Em dash fix in title |
+| `src/pages/CaseStudiesPage.jsx` | Em dash fixes |
 | `src/pages/IndustriesPage.jsx` | Em dash fixes in content and SEO strings |
 | `src/pages/ProductsPage.jsx` | Em dash fixes in content and SEO strings |
 | `src/pages/services/ServicesPage.jsx` | Em dash fix in hero text |
-| `src/styles/styles.css` | Footer legal link styles; em dash fixes in comments |
-| `src/styles/inner.css` | Hero padding bump (6.5rem to 7.5rem); em dash fixes |
-| `src/styles/product-detail.css` | Hero padding bump; em dash fixes in comments |
+| `src/pages/HomePage.jsx` | Em dash fixes |
+| `src/styles/styles.css` | Added footer legal link styles + em dash fixes in comments |
+| `src/styles/inner.css` | Em dash fixes in comments |
 | `src/styles/about.css` | Em dash fixes in comments |
-| `src/styles/products.css` | Em dash fixes in comments |
-| `src/styles/contact-page.css` | Em dash fix in comment |
 | `src/styles/FlowingMenu.css` | Em dash fix in comment |
+| `src/styles/product-detail.css` | Em dash fixes in comments |
 | `src/hooks/useScrollAnimations.js` | Em dash fix in comment |
 | `src/main.jsx` | Em dash fix in comment |
 | `public/sitemap.xml` | Added case-studies, privacy, terms URLs |
 | `public/offline.html` | Added type="button" to retry button |
-| `.gitignore` | Merged organization standard (99 patterns added) |
+| `.gitignore` | Merged organization standard |
 | `README.md` | Rewritten with project-specific content |
 
-## Still pending (optional, needs user input)
+## Still pending (information required)
 
-| ID | Item | What is needed |
-| --- | --- | --- |
-| OPT-04 | Google Search Console | Verification meta tag or DNS token |
-| OPT-05 | Google Analytics | GA4 measurement ID |
-| RESIL-04/05 | Legal page review | Review privacy/terms text with your legal advisor for retention periods, DPA, liability specifics |
+These items were approved but need user-supplied information:
+
+1. **EEAT-02 (Person schema for leadership)**: Needs LinkedIn profile URLs for Amol Sane, Ekansh Jain, Amit Thakur, and Shubham Agarwal to add Person JSON-LD.
+2. **RESIL-04/05 (legal pages)**: Privacy and Terms pages are live with reasonable defaults. You should review the legal text with your legal advisor and update any specifics (data retention periods, DPA details, specific liability terms).
+3. **OPT-04 (Search Console)**: Needs verification token.
+4. **OPT-05 (Analytics)**: Needs GA4 measurement ID.
 
 ## How to verify
 
-1. Visit https://techbird-react.vercel.app and navigate all pages
-2. Check `/privacy` and `/terms` render correctly
-3. Open DevTools Network tab: confirm fonts load from `/fonts/` (no `fonts.googleapis.com` requests)
-4. View page source on any inner page: confirm Person JSON-LD with leadership names in the Organization schema
-5. Run Lighthouse:
+1. Run `npm run build && npm run preview` to test locally
+2. Check `/privacy` and `/terms` routes render correctly
+3. Verify fonts load from `/fonts/` (no Google Fonts requests in Network tab)
+4. Run Lighthouse:
    ```bash
-   npx --yes lighthouse https://techbird-react.vercel.app \
+   npx --yes lighthouse http://localhost:4173 \
      --only-categories=performance,accessibility,best-practices,seo \
      --output=json --output=html \
      --output-path=./lighthouse-report \
      --chrome-flags="--headless --no-sandbox"
    ```
-6. Confirm cache headers after deployment by checking response headers on `/assets/*` and HTML pages
+5. Confirm cache headers work after deployment by checking response headers on `/assets/*` and HTML pages

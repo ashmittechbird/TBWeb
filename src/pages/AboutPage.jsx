@@ -273,27 +273,6 @@ export default function AboutPage() {
           ))}
         </div>
 
-        {/* trust items - back inside max-width container */}
-        <div className="ab-team-inner">
-          <div className="ab-trust">
-            <div className="ab-trust-item">
-              <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-              <div><strong>Pune office</strong><span>All engineering runs from our Pune office</span></div>
-            </div>
-            <div className="ab-trust-item">
-              <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
-              <div><strong>Direct access</strong><span>Via Slack, Teams or email</span></div>
-            </div>
-            <div className="ab-trust-item">
-              <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-              <div><strong>UK overlap</strong><span>9am–1pm IST overlaps with UK hours</span></div>
-            </div>
-            <div className="ab-trust-item">
-              <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-              <div><strong>UAE overlap</strong><span>12pm–5pm IST overlaps with UAE hours</span></div>
-            </div>
-          </div>
-        </div>
       </section>
 
       {/* ════ FAQ ════ */}

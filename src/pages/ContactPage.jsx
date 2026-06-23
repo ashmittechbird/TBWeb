@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import InnerNavbar from '../components/InnerNavbar';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
+import useFrappeLead from '../hooks/useFrappeLead';
 import '../styles/inner.css';
 import '../styles/contact-page.css';
 
@@ -23,6 +24,7 @@ export default function ContactPage() {
   const [openFaq, setOpenFaq] = useState(null);
   const [formState, setFormState] = useState({ name: '', email: '', phone: '', company: '', service: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
+  const { createLead, loading: submitting, error: submitError } = useFrappeLead();
 
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
@@ -51,13 +53,12 @@ export default function ContactPage() {
 
   const handleChange = (e) => setFormState(prev => ({ ...prev, [e.target.name]: e.target.value }));
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const { name, email, phone, company, service, message } = formState;
-    const subject = encodeURIComponent(`Project Inquiry from ${name}`);
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nCompany: ${company}\nService: ${service}\n\nMessage:\n${message}`);
-    window.location.href = `mailto:connect@techbirdit.in?subject=${subject}&body=${body}`;
-    setSubmitted(true);
+    const result = await createLead(formState);
+    if (result.ok) {
+      setSubmitted(true);
+    }
   };
 
   return (
@@ -157,8 +158,8 @@ export default function ContactPage() {
                   <div className="cp-success-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                   </div>
-                  <h3>Message prepared!</h3>
-                  <p>Your email client should have opened. If not, email us at <a href="mailto:connect@techbirdit.in">connect@techbirdit.in</a></p>
+                  <h3>Message sent!</h3>
+                  <p>Thank you for reaching out. We'll get back to you within 24 hours.</p>
                   <button type="button" className="cp-again-btn" onClick={() => { setSubmitted(false); setFormState({ name: '', email: '', phone: '', company: '', service: '', message: '' }); }}>Send another</button>
                 </div>
               ) : (
@@ -201,8 +202,9 @@ export default function ContactPage() {
                     <label htmlFor="cp-msg">Tell us about your project *</label>
                     <textarea id="cp-msg" name="message" required rows="5" minLength={10} maxLength={2000} value={formState.message} onChange={handleChange} placeholder="What are you building? What's the timeline?" />
                   </div>
-                  <button type="submit" className="cp-submit-btn">
-                    <span>Send Message</span>
+                  {submitError && <p className="cp-error">{submitError}</p>}
+                  <button type="submit" className="cp-submit-btn" disabled={submitting}>
+                    <span>{submitting ? 'Sending...' : 'Send Message'}</span>
                     <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 10h12M12 4l6 6-6 6"/></svg>
                   </button>
                 </form>

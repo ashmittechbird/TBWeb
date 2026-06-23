@@ -188,7 +188,14 @@ a.cp-info-item:hover {
 }
 .cp-submit-btn:hover { background: #1a1a2e; }
 .cp-submit-btn:active { transform: scale(0.98); }
+.cp-submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 .cp-submit-btn svg { width: 18px; height: 18px; }
+
+.cp-error {
+  color: #ef4444;
+  font-size: 0.875rem;
+  margin-top: 4px;
+}
 
 /* Success */
 .cp-success {
