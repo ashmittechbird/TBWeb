@@ -208,12 +208,20 @@ export default function InnerNavbar() {
 
           <div className="mega-right">
             <div className="mega-grid mega-grid--4">
-              {PRODUCTS.map((p) => (
-                <Link key={p.label} to={p.to} className="mega-item mega-item--pro">
-                  <ProIcon path={p.icon} color={p.color} />
-                  <span className="mega-item-name">{p.label}</span>
-                </Link>
-              ))}
+              {PRODUCTS.map((p) => {
+                const enabled = p.to === '/products/hrms';
+                return enabled ? (
+                  <Link key={p.label} to={p.to} className="mega-item mega-item--pro">
+                    <ProIcon path={p.icon} color={p.color} />
+                    <span className="mega-item-name">{p.label}</span>
+                  </Link>
+                ) : (
+                  <span key={p.label} className="mega-item mega-item--pro mega-item--disabled">
+                    <ProIcon path={p.icon} color={p.color} />
+                    <span className="mega-item-name">{p.label}</span>
+                  </span>
+                );
+              })}
             </div>
             <div className="mega-bar">
               <Link to="/contact" className="mega-bar-link">

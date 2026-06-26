@@ -54,20 +54,6 @@ export default function ProductPageLayout({
   const heroArtRef = useRef(null);
   const [laserReady, setLaserReady] = useState(false);
 
-  /* subtle 3D tilt on the hero product as the cursor moves */
-  const onHeroTilt = useCallback((e) => {
-    const el = heroArtRef.current;
-    if (!el) return;
-    const r = e.currentTarget.getBoundingClientRect();
-    const x = (e.clientX - r.left) / r.width - 0.5;
-    const y = (e.clientY - r.top) / r.height - 0.5;
-    el.style.transform = `rotateY(${x * 9}deg) rotateX(${-y * 7}deg) translateZ(0)`;
-  }, []);
-  const onHeroLeave = useCallback(() => {
-    const el = heroArtRef.current;
-    if (el) el.style.transform = 'rotateY(0deg) rotateX(0deg)';
-  }, []);
-
   /* mount the WebGL beam only after layout has settled, so it measures
      its container at full height (avoids a squished landscape buffer) */
   useEffect(() => {
@@ -108,13 +94,11 @@ export default function ProductPageLayout({
 
       /* hero entrance */
       const tl = gsap.timeline({ defaults: { ease } });
-      tl.from('.pd-bc', { opacity: 0, y: 10, duration: 0.5 }, 0.1)
-        .from('.pd-hero-head .pd-eyebrow', { opacity: 0, y: 22, duration: 0.55 }, 0.18)
-        .from('.pd-word', { yPercent: 115, opacity: 0, duration: 0.8, stagger: 0.05 }, 0.26)
-        .from('.pd-hero-cta > *', { opacity: 0, y: 18, stagger: 0.1, duration: 0.5 }, 0.5)
+      tl.from('.pd-word', { yPercent: 115, opacity: 0, duration: 0.8, stagger: 0.05 }, 0.15)
+        .from('.pd-hero-lead', { opacity: 0, y: 16, duration: 0.6 }, 0.4)
         .fromTo('.pd-hero-art',
-          { opacity: 0, clipPath: 'inset(0 0 100% 0 round 14px)' },
-          { opacity: 1, clipPath: 'inset(0 0 0% 0 round 14px)', duration: 1.1, ease: 'power3.inOut' }, 0.4);
+          { opacity: 0, y: 50 },
+          { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }, 0.5);
 
       gsap.from('.pd-statband-item', {
         scrollTrigger: { trigger: '.pd-statband', start: 'top 88%', once: true },
@@ -187,18 +171,13 @@ export default function ProductPageLayout({
     <div className="pd-root" ref={root} style={accentVars}>
       <InnerNavbar />
 
-      {/* ════ HERO - full-width headline, beam splashes on the panel's top edge ════ */}
+      {/* ════ HERO - laser-style beam + centered headline + full mockup ════ */}
       <section className="pd-hero">
-        {/* one continuous beam from the very top, behind the content */}
-        <div className="pd-hero-skybeam" aria-hidden="true"><span className="pd-hero-pulse" /></div>
+        <div className="pd-hero-cssbeam" aria-hidden="true" />
+        <div className="pd-hero-beamcore" aria-hidden="true" />
+
         <div className="pd-wrap">
-          <div className="pd-hero-head">
-            <nav className="pd-bc">
-              <Link to="/">Home</Link><ChevR />
-              <Link to="/products">Products</Link><ChevR />
-              <span>{breadcrumbLabel || category}</span>
-            </nav>
-            <span className="pd-eyebrow">{category}</span>
+          <div className="pd-hero-center">
             <h1 className="pd-hero-title pd-display">
               {titleParts.map((seg, i) => (
                 <WordWrap key={i} text={seg.text} grad={seg.gradient} />
@@ -207,38 +186,7 @@ export default function ProductPageLayout({
             {lead && <p className="pd-hero-lead">{lead}</p>}
           </div>
 
-          <div className="pd-hero-cta">
-            {(heroActions || []).map((a, i) => (
-              <Link key={i} to={a.to} className={`btn-pill${i === 0 ? '' : ' ghost'}`}>
-                <span>{a.label}</span><i className="arrow"></i>
-              </Link>
-            ))}
-          </div>
-
-          <div className="pd-hero-showcase" onMouseMove={onHeroTilt} onMouseLeave={onHeroLeave}>
-            {/* beam lives only in the zone ABOVE the panel; it terminates on the border */}
-            <div className="pd-hero-beamzone" aria-hidden="true">
-              <div className="pd-hero-laser2">
-                {laserReady && (
-                  <LaserFlow
-                    color={accent}
-                    dpr={1}
-                    horizontalBeamOffset={0.0}
-                    verticalBeamOffset={0.55}
-                    verticalSizing={1.5}
-                    horizontalSizing={0.5}
-                    wispDensity={1.1}
-                    wispSpeed={16}
-                    wispIntensity={4.5}
-                    fogIntensity={0.3}
-                    flowSpeed={0.38}
-                    flowStrength={0.28}
-                    decay={1.15}
-                  />
-                )}
-              </div>
-            </div>
-            <div className="pd-hero-impact" aria-hidden="true" />
+          <div className="pd-hero-showcase">
             <div className="pd-hero-art" ref={heroArtRef}>
               <div className="pd-frame">{heroMockup}</div>
             </div>

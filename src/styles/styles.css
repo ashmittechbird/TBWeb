@@ -384,6 +384,13 @@ li:hover .nav-chev,
 .mega-pro-icon svg { width: 15px; height: 15px; }
 .mega-item--pro:hover .mega-pro-icon { transform: scale(1.1) rotate(-3deg); }
 
+/* disabled product items */
+.mega-item--disabled {
+  opacity: 0.35;
+  pointer-events: none;
+  cursor: default;
+}
+
 /* item text */
 .mega-item-name {
   font-family: 'Manrope', system-ui, sans-serif;

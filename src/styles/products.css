@@ -484,3 +484,23 @@
   .px-cta-btn { width: 100%; justify-content: center; }
   .px-muted-text { font-size: 14px; }
 }
+
+/* disabled product rows */
+.px-row--disabled {
+  cursor: default;
+  opacity: 0.45;
+  pointer-events: none;
+}
+.px-row-soon {
+  display: inline-block;
+  margin-left: 12px;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: rgba(255,255,255,.06);
+  color: rgba(255,255,255,.4);
+  vertical-align: middle;
+}

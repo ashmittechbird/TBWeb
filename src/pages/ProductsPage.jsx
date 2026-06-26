@@ -187,17 +187,22 @@ export default function ProductsPage() {
             <span className="px-ey">All Platforms</span>
           </div>
           <div className="px-list">
-            {PRODUCTS.map((p, i) => (
-              <Link to={ROUTES[p.id]} className="px-row" key={p.id} data-reveal>
+            {PRODUCTS.map((p, i) => {
+              const enabled = p.id === 'hrms'; /* only HRMS is live — uncomment routes in App.jsx to re-enable others */
+              const Tag = enabled ? Link : 'div';
+              const tagProps = enabled ? { to: ROUTES[p.id] } : {};
+              return (
+              <Tag {...tagProps} className={`px-row${enabled ? '' : ' px-row--disabled'}`} key={p.id} data-reveal>
                 <span className="px-row-num">{String(i + 1).padStart(2, '0')}</span>
                 <div className="px-row-content">
-                  <h3 className="px-row-name">{p.name}</h3>
+                  <h3 className="px-row-name">{p.name}{!enabled && <span className="px-row-soon">Coming Soon</span>}</h3>
                   <p className="px-row-desc">{p.desc}</p>
                 </div>
                 <span className="px-row-cat">{p.cat}</span>
-                <span className="px-row-go"><ArrowUpRight /></span>
-              </Link>
-            ))}
+                {enabled && <span className="px-row-go"><ArrowUpRight /></span>}
+              </Tag>
+              );
+            })}
           </div>
         </div>
       </section>
