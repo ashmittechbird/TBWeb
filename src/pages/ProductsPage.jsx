@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import InnerNavbar from '../components/InnerNavbar';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
+import { LIVE_PRODUCTS, LIVE_PRODUCT_COUNT } from '../data/products';
+import { scrollToTarget } from '../lib/smoothScroll';
 import '../styles/inner.css';
 import '../styles/products.css';
 
@@ -23,49 +25,11 @@ const ChevDown = () => (
   </svg>
 );
 
-/* ── All 8 products ── */
-const PRODUCTS = [
-  {
-    id: 'hrms', name: 'HRMS', cat: 'HR Automation',
-    desc: 'Payroll, attendance, leave, recruitment, appraisals and statutory compliance: the full employee lifecycle in one system.',
-    caps: ['Automated payroll with statutory deductions', 'Biometric & mobile attendance', 'Leave and holiday management', 'Performance appraisal workflows', 'Recruitment and digital onboarding', 'ESI, PF, compliance reports'],
-  },
-  {
-    id: 'practice', name: 'Practice Management', cat: 'Healthcare & Legal',
-    desc: 'Appointments, patient or case records, billing and compliance for clinics, hospitals and law firms at any scale.',
-    caps: ['Appointment scheduling and reminders', 'Patient/client record management', 'Invoice generation and payments', 'Clinical notes and case files', 'Insurance and regulatory tools', 'Multi-branch, multi-practitioner'],
-  },
-  {
-    id: 'dms', name: 'Document Management', cat: 'Enterprise DMS',
-    desc: 'Centralised storage, version control, approval workflows, e-signatures and role-based access, eliminating paper chaos at scale.',
-    caps: ['Centralised storage with folder hierarchy', 'Version control and audit trail', 'Multi-stage approval workflows', 'Digital e-signature integration', 'Role-based access permissions', 'Full-text search across all docs'],
-  },
-  {
-    id: 'visitor', name: 'Visitor Management', cat: 'Front-Desk Automation',
-    desc: 'Digital check-in, ID verification, host alerts, badge printing and visitor log analytics, replacing paper registers.',
-    caps: [],
-  },
-  {
-    id: 'litigation', name: 'Litigation Management', cat: 'Legal Case Tracking',
-    desc: 'Court dates, case files, document linking, task assignment and billing. Built specifically for law firms and in-house legal teams.',
-    caps: [],
-  },
-  {
-    id: 'crm', name: 'Lead & Sales CRM', cat: 'Pipeline Intelligence',
-    desc: 'Full-funnel CRM with lead capture, pipeline management, deal scoring, activity tracking and automated follow-up sequences.',
-    caps: [],
-  },
-  {
-    id: 'ecommerce', name: 'E-Commerce Platform', cat: 'Multi-Vendor Commerce',
-    desc: 'Multi-vendor marketplace or single-brand storefront with inventory, payments, shipping integration and analytics.',
-    caps: [],
-  },
-  {
-    id: 'erp', name: 'Custom ERP', cat: 'ERPNext-Powered',
-    desc: 'Full-suite ERP on ERPNext covering manufacturing, finance, HR, supply chain and CRM, configured to your workflows.',
-    caps: [],
-  },
-];
+/* Products come from the single source of truth in src/data/products.js */
+const PRODUCTS = LIVE_PRODUCTS;
+
+/* First three live products get the spotlight treatment */
+const SPOTLIGHT = LIVE_PRODUCTS.slice(0, 3);
 
 /* ── FAQ ── */
 const FAQS = [
@@ -90,18 +54,6 @@ const FAQS = [
     a: 'Standard deployments run 4–8 weeks from sign-off to go-live. Complex implementations with data migration and integration run 10–16 weeks.',
   },
 ];
-
-/* ── product → detail route map ── */
-const ROUTES = {
-  hrms:       '/products/hrms',
-  crm:        '/products/crm',
-  erp:        '/products/erp',
-  dms:        '/products/document-management',
-  practice:   '/products/practice-management',
-  visitor:    '/products/visitor-management',
-  litigation: '/products/litigation-management',
-  ecommerce:  '/products/ecommerce',
-};
 
 /* ── FAQ accordion ── */
 function FaqSection() {
@@ -156,8 +108,8 @@ export default function ProductsPage() {
     <>
       <SEO
         title="Our Products"
-        description="Eight production-grade enterprise platforms by TechBird - HRMS, CRM, ERP, Document Management, Practice Management, Visitor Management, Litigation Management and E-Commerce."
-        keywords="TechBird products, enterprise software, HRMS, CRM, ERP, document management, practice management, visitor management, litigation management, ecommerce platform"
+        description="Five production-grade enterprise platforms by TechBird - HRMS, Lead & Sales CRM, Document Management, Litigation Management and Travel & Expense Management."
+        keywords="TechBird products, enterprise software, HRMS, sales CRM, document management system, litigation management, travel and expense management"
         faqItems={FAQS}
       />
       <InnerNavbar />
@@ -168,10 +120,17 @@ export default function ProductsPage() {
           <div className="ihero-text">
             <p className="ihero-ey">Our Platforms</p>
             <h1 className="ihero-h1">Products built for<br /><span>enterprise reality.</span></h1>
-            <p className="ihero-sub">Eight production-grade platforms, deployed on-premise or cloud, each solving a distinct operational problem. Built on ERPNext and modern stacks. Configured to your workflows.</p>
+            <p className="ihero-sub">Five production-grade platforms, deployed on-premise or cloud, each solving a distinct operational problem. Built on ERPNext and modern stacks. Configured to your workflows.</p>
             <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1.5rem' }}>
               <Link to="/contact" className="icta-btn" style={{ fontSize: '0.78rem', padding: '0.7rem 1.4rem' }}>Request a Demo</Link>
-              <a href="#products" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', fontFamily: 'var(--body)', fontSize: '0.78rem', color: 'rgba(255,255,255,0.6)', textDecoration: 'none' }}>See in Action →</a>
+              <a
+                href="#products"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToTarget(document.getElementById('products'));
+                }}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', fontFamily: 'var(--body)', fontSize: '0.78rem', color: 'rgba(255,255,255,0.6)', textDecoration: 'none' }}
+              >See in Action →</a>
             </div>
           </div>
           <div className="ihero-img-side">
@@ -187,22 +146,17 @@ export default function ProductsPage() {
             <span className="px-ey">All Platforms</span>
           </div>
           <div className="px-list">
-            {PRODUCTS.map((p, i) => {
-              const enabled = p.id === 'hrms'; /* only HRMS is live — uncomment routes in App.jsx to re-enable others */
-              const Tag = enabled ? Link : 'div';
-              const tagProps = enabled ? { to: ROUTES[p.id] } : {};
-              return (
-              <Tag {...tagProps} className={`px-row${enabled ? '' : ' px-row--disabled'}`} key={p.id} data-reveal>
+            {PRODUCTS.map((p, i) => (
+              <Link to={p.route} className="px-row" key={p.id} data-reveal>
                 <span className="px-row-num">{String(i + 1).padStart(2, '0')}</span>
                 <div className="px-row-content">
-                  <h3 className="px-row-name">{p.name}{!enabled && <span className="px-row-soon">Coming Soon</span>}</h3>
+                  <h3 className="px-row-name">{p.name}</h3>
                   <p className="px-row-desc">{p.desc}</p>
                 </div>
                 <span className="px-row-cat">{p.cat}</span>
-                {enabled && <span className="px-row-go"><ArrowUpRight /></span>}
-              </Tag>
-              );
-            })}
+                <span className="px-row-go"><ArrowUpRight /></span>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
@@ -216,33 +170,17 @@ export default function ProductsPage() {
             <p className="px-muted-text px-muted-text--dark">Each built for a specific domain. Deployed across 50+ enterprise clients.</p>
           </div>
           <div className="px-bento">
-            <Link to="/products/hrms" className="px-card" data-reveal data-num="01">
-              <span className="px-card-cat">HR Automation</span>
-              <h3 className="px-card-name">HRMS</h3>
-              <p className="px-card-desc">The full employee lifecycle, from offer letter to exit clearance. Payroll in minutes. Attendance synced. Leave balances in real time.</p>
-              <ul className="px-card-caps">
-                {PRODUCTS[0].caps.slice(0, 5).map((c) => <li key={c}>{c}</li>)}
-              </ul>
-              <span className="px-card-link">Explore HRMS <ArrowUpRight /></span>
-            </Link>
-            <Link to="/products/practice-management" className="px-card" data-reveal data-num="02">
-              <span className="px-card-cat">Healthcare & Legal</span>
-              <h3 className="px-card-name">Practice Management</h3>
-              <p className="px-card-desc">Scheduling, records, billing and compliance in one interface for clinics, hospitals and law firms.</p>
-              <ul className="px-card-caps">
-                {PRODUCTS[1].caps.slice(0, 5).map((c) => <li key={c}>{c}</li>)}
-              </ul>
-              <span className="px-card-link">Explore <ArrowUpRight /></span>
-            </Link>
-            <Link to="/products/document-management" className="px-card" data-reveal data-num="03">
-              <span className="px-card-cat">Enterprise DMS</span>
-              <h3 className="px-card-name">Document Management</h3>
-              <p className="px-card-desc">Centralised storage with version control, approvals, e-signatures and role-based access.</p>
-              <ul className="px-card-caps">
-                {PRODUCTS[2].caps.slice(0, 5).map((c) => <li key={c}>{c}</li>)}
-              </ul>
-              <span className="px-card-link">Explore <ArrowUpRight /></span>
-            </Link>
+            {SPOTLIGHT.map((p, i) => (
+              <Link to={p.route} className="px-card" key={p.id} data-reveal data-num={String(i + 1).padStart(2, '0')}>
+                <span className="px-card-cat">{p.cat}</span>
+                <h3 className="px-card-name">{p.name}</h3>
+                <p className="px-card-desc">{p.desc}</p>
+                <ul className="px-card-caps">
+                  {p.caps.slice(0, 5).map((c) => <li key={c}>{c}</li>)}
+                </ul>
+                <span className="px-card-link">Explore {p.name} <ArrowUpRight /></span>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
@@ -252,7 +190,7 @@ export default function ProductsPage() {
         <div className="px-wrap">
           <div className="px-nums-row">
             {[
-              { val: '8',     label: 'Production-grade platforms' },
+              { val: String(LIVE_PRODUCT_COUNT), label: 'Production-grade platforms' },
               { val: '50+',   label: 'Enterprise clients deployed' },
               { val: '20+',   label: 'Countries served globally' },
               { val: '99.9%', label: 'Uptime SLA guaranteed' },

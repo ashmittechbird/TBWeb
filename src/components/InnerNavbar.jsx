@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import StaggeredMenu from './StaggeredMenu';
+import { productNavItems, productSubItems, LIVE_PRODUCT_COUNT } from '../data/products';
 
 const Chev = () => (
   <svg className="nav-chev" viewBox="0 0 10 6" fill="none">
@@ -33,16 +34,7 @@ const SERVICES = [
   { label: 'Marketing Strategy',   desc: 'GTM · SEO · SEM · Social',     to: '/services/marketing',            color: '#22d3ee', icon: 'M22 12a10 10 0 11-20 0 10 10 0 0120 0zM17.66 12a5.66 5.66 0 11-11.32 0 5.66 5.66 0 0111.32 0zM14 12a2 2 0 11-4 0 2 2 0 014 0z' },
 ];
 
-const PRODUCTS = [
-  { label: 'Custom ERP',           to: '/products/erp', color: '#a78bfa', icon: 'M3 3h7v7H3zM14 3h7v7H14zM3 14h7v7H3zM14 14h7v7H14z' },
-  { label: 'HRMS',                 to: '/products/hrms', color: '#34d399', icon: 'M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75' },
-  { label: 'Lead & Sales CRM',     to: '/products/crm', color: '#38bdf8', icon: 'M22 3H2l8 9.46V19l4 2V12.46L22 3z' },
-  { label: 'Practice Management',  to: '/products/practice-management', color: '#fbbf24', icon: 'M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zM9 8h6M9 12h6M9 16h4' },
-  { label: 'E-commerce Platform',  to: '/products/ecommerce', color: '#f472b6', icon: 'M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0' },
-  { label: 'Document Management',  to: '/products/document-management', color: '#22d3ee', icon: 'M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8zM14 2v6h6M16 13H8M16 17H8M10 9H8' },
-  { label: 'Litigation Management',to: '/products/litigation-management', color: '#fb923c', icon: 'M12 3v18M5 6l7-3 7 3M3 18h18M6 14l3-3M18 14l-3-3' },
-  { label: 'Visitor Management',   to: '/products/visitor-management', color: '#a3e635', icon: 'M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0zM12 13a3 3 0 100-6 3 3 0 000 6z' },
-];
+const PRODUCTS = productNavItems();
 
 const LeftDeco = () => (
   <svg className="mega-left-deco" viewBox="0 0 180 140" fill="none">
@@ -55,8 +47,10 @@ const LeftDeco = () => (
 
 export default function InnerNavbar() {
   const [mega, setMega] = useState(null);
+  const [pill, setPill] = useState(null);
   const [scrolled, setScrolled] = useState(false);
   const timer = useRef(null);
+  const pillTimer = useRef(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -64,9 +58,19 @@ export default function InnerNavbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  useEffect(() => () => { clearTimeout(timer.current); clearTimeout(pillTimer.current); }, []);
+
+  /* The pill nav is only on screen once scrolled, so derive the open panel
+     rather than clearing it from an effect - no extra render pass. */
+  const pillOpen = scrolled ? pill : null;
+
   const open  = (name) => { clearTimeout(timer.current); setMega(name); };
   const close = ()     => { timer.current = setTimeout(() => setMega(null), 130); };
   const hold  = ()     => clearTimeout(timer.current);
+
+  const openPill  = (name) => { clearTimeout(pillTimer.current); setPill(name); };
+  const closePill = ()     => { pillTimer.current = setTimeout(() => setPill(null), 160); };
+  const holdPill  = ()     => clearTimeout(pillTimer.current);
 
   const menuItems = [
     { label: 'Home', ariaLabel: 'Go to home page', link: '/' },
@@ -83,16 +87,7 @@ export default function InnerNavbar() {
     },
     {
       label: 'Products', ariaLabel: 'View our products', link: '/products',
-      subItems: [
-        { label: 'Custom ERP',            link: '/products/erp' },
-        { label: 'HRMS',                  link: '/products/hrms' },
-        { label: 'Lead & Sales CRM',      link: '/products/crm' },
-        { label: 'Practice Management',   link: '/products/practice-management' },
-        { label: 'E-commerce Platform',   link: '/products/ecommerce' },
-        { label: 'Document Management',   link: '/products/document-management' },
-        { label: 'Litigation Management', link: '/products/litigation-management' },
-        { label: 'Visitor Management',    link: '/products/visitor-management' },
-      ]
+      subItems: productSubItems()
     },
     { label: 'Industries', ariaLabel: 'View industries we serve', link: '/industries' },
     { label: 'Case Studies', ariaLabel: 'View case studies', link: '/case-studies' },
@@ -112,8 +107,56 @@ export default function InnerNavbar() {
           <img src="/logo.webp" alt="TechBird" />
         </Link>
         <Link to="/">Home</Link>
-        <Link to="/services">Services</Link>
-        <Link to="/products">Products</Link>
+
+        <span className="pill-group" onMouseEnter={() => openPill('svc')} onMouseLeave={closePill}>
+          <Link to="/services" className={`pill-trigger${pillOpen === 'svc' ? ' open' : ''}`}>
+            Services <Chev />
+          </Link>
+          {pillOpen === 'svc' && (
+            <div className="pill-drop" onMouseEnter={holdPill} onMouseLeave={closePill}>
+              <div className="pill-drop-card">
+                {SERVICES.map((s) => (
+                  <Link key={s.to} to={s.to} className="pill-drop-item" onClick={() => setPill(null)}>
+                    <SvcIcon path={s.icon} color={s.color} />
+                    <span className="pill-drop-text">
+                      <span className="pill-drop-name">{s.label}</span>
+                      <span className="pill-drop-desc">{s.desc}</span>
+                    </span>
+                  </Link>
+                ))}
+                <Link to="/services" className="pill-drop-all" onClick={() => setPill(null)}>
+                  View all services
+                  <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                </Link>
+              </div>
+            </div>
+          )}
+        </span>
+
+        <span className="pill-group" onMouseEnter={() => openPill('pro')} onMouseLeave={closePill}>
+          <Link to="/products" className={`pill-trigger${pillOpen === 'pro' ? ' open' : ''}`}>
+            Products <Chev />
+          </Link>
+          {pillOpen === 'pro' && (
+            <div className="pill-drop" onMouseEnter={holdPill} onMouseLeave={closePill}>
+              <div className="pill-drop-card">
+                {PRODUCTS.map((p) => (
+                  <Link key={p.to} to={p.to} className="pill-drop-item" onClick={() => setPill(null)}>
+                    <ProIcon path={p.icon} color={p.color} />
+                    <span className="pill-drop-text">
+                      <span className="pill-drop-name">{p.label}</span>
+                    </span>
+                  </Link>
+                ))}
+                <Link to="/products" className="pill-drop-all" onClick={() => setPill(null)}>
+                  View all products
+                  <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                </Link>
+              </div>
+            </div>
+          )}
+        </span>
+
         <Link to="/industries">Industries</Link>
         <Link to="/case-studies">Case Studies</Link>
         <Link to="/about">About</Link>
@@ -199,7 +242,7 @@ export default function InnerNavbar() {
             <LeftDeco />
             <span className="mega-left-eye">Our platforms</span>
             <h3 className="mega-left-title">Platforms<br/>ready to<br/>deploy.</h3>
-            <p className="mega-left-sub">8 products.<br/>50+ enterprise clients.</p>
+            <p className="mega-left-sub">{LIVE_PRODUCT_COUNT} products.<br/>50+ enterprise clients.</p>
             <Link to="/contact" className="mega-left-cta">
               Request a demo
               <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
@@ -208,20 +251,12 @@ export default function InnerNavbar() {
 
           <div className="mega-right">
             <div className="mega-grid mega-grid--4">
-              {PRODUCTS.map((p) => {
-                const enabled = p.to === '/products/hrms';
-                return enabled ? (
-                  <Link key={p.label} to={p.to} className="mega-item mega-item--pro">
-                    <ProIcon path={p.icon} color={p.color} />
-                    <span className="mega-item-name">{p.label}</span>
-                  </Link>
-                ) : (
-                  <span key={p.label} className="mega-item mega-item--pro mega-item--disabled">
-                    <ProIcon path={p.icon} color={p.color} />
-                    <span className="mega-item-name">{p.label}</span>
-                  </span>
-                );
-              })}
+              {PRODUCTS.map((p) => (
+                <Link key={p.to} to={p.to} className="mega-item mega-item--pro">
+                  <ProIcon path={p.icon} color={p.color} />
+                  <span className="mega-item-name">{p.label}</span>
+                </Link>
+              ))}
             </div>
             <div className="mega-bar">
               <Link to="/contact" className="mega-bar-link">

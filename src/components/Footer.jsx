@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { LIVE_PRODUCTS } from '../data/products';
+import { getLenis } from '../lib/smoothScroll';
 
 const InstagramIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
@@ -91,10 +93,9 @@ export default function Footer() {
           <div className="foot-col">
             <p className="foot-col-head">Products</p>
             <ul>
-              <li><Link to="/products/erp">Custom ERP</Link></li>
-              <li><Link to="/products/hrms">HRMS</Link></li>
-              <li><Link to="/products/crm">Lead &amp; Sales CRM</Link></li>
-              <li><Link to="/products/document-management">Document Management</Link></li>
+              {LIVE_PRODUCTS.map((p) => (
+                <li key={p.id}><Link to={p.route}>{p.navLabel}</Link></li>
+              ))}
               <li><Link to="/products">See All Products</Link></li>
             </ul>
           </div>
@@ -123,7 +124,11 @@ export default function Footer() {
       <button
         type="button"
         className={`foot-scroll-top${showTop ? ' visible' : ''}`}
-        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        onClick={() => {
+          const lenis = getLenis();
+          if (lenis) lenis.scrollTo(0);
+          else window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
         aria-label="Scroll to top"
       >
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>

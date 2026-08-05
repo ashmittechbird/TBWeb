@@ -19,14 +19,14 @@ const CARDS = [
         <circle cx="400" cy="70" r="110" stroke="rgba(255,255,255,.07)" strokeWidth="1" fill="none" />
         <path d="M-60 240 C80 120 200 180 320 100 S480 40 580 80" stroke="rgba(255,255,255,.1)" strokeWidth="1.5" fill="none" />
         <rect x="60" y="90" width="200" height="150" rx="8" stroke="rgba(255,255,255,.07)" strokeWidth="1" fill="none" />
-        <circle cx="80" cy="80" r="40" stroke="rgba(167,139,250,.25)" strokeWidth="1" fill="none" />
+        <circle cx="80" cy="80" r="40" stroke="rgba(45,139,206,.28)" strokeWidth="1" fill="none" />
       </>
     ),
     svgBack: (
       <>
         <circle cx="400" cy="70" r="190" stroke="rgba(0,0,0,.06)" strokeWidth="1" fill="none" />
         <path d="M-60 240 C80 120 200 180 320 100 S480 40 580 80" stroke="rgba(0,0,0,.05)" strokeWidth="1.5" fill="none" />
-        <circle cx="80" cy="80" r="40" stroke="rgba(124,58,237,.15)" strokeWidth="1" fill="none" />
+        <circle cx="80" cy="80" r="40" stroke="rgba(26,75,140,.18)" strokeWidth="1" fill="none" />
       </>
     ),
     desc: 'Custom ERP systems, web apps, APIs and SaaS platforms - built for enterprise scale across 50+ countries.',
@@ -43,14 +43,14 @@ const CARDS = [
       <>
         <path d="M-80 200 C60 60 180 240 320 150 S480 40 620 100" stroke="rgba(255,255,255,.1)" strokeWidth="1.5" fill="none" />
         <ellipse cx="380" cy="130" rx="200" ry="155" stroke="rgba(255,255,255,.08)" strokeWidth="1" fill="none" />
-        <circle cx="460" cy="60" r="55" stroke="rgba(56,189,248,.28)" strokeWidth="1" fill="none" />
+        <circle cx="460" cy="60" r="55" stroke="rgba(45,106,207,.32)" strokeWidth="1" fill="none" />
       </>
     ),
     svgBack: (
       <>
         <path d="M-80 200 C60 60 180 240 320 150 S480 40 620 100" stroke="rgba(0,0,0,.05)" strokeWidth="1.5" fill="none" />
         <ellipse cx="380" cy="130" rx="200" ry="155" stroke="rgba(0,0,0,.04)" strokeWidth="1" fill="none" />
-        <circle cx="460" cy="60" r="55" stroke="rgba(14,165,233,.15)" strokeWidth="1" fill="none" />
+        <circle cx="460" cy="60" r="55" stroke="rgba(45,106,207,.18)" strokeWidth="1" fill="none" />
       </>
     ),
     to: '/services/ai-solutions',
@@ -68,14 +68,14 @@ const CARDS = [
       <>
         <circle cx="240" cy="90" r="210" stroke="rgba(255,255,255,.08)" strokeWidth="1" fill="none" />
         <path d="M-60 160 C80 20 200 160 320 80 S480 -20 580 40" stroke="rgba(255,255,255,.1)" strokeWidth="1.5" fill="none" />
-        <circle cx="380" cy="280" r="60" stroke="rgba(52,211,153,.28)" strokeWidth="1" fill="none" />
+        <circle cx="380" cy="280" r="60" stroke="rgba(45,139,206,.32)" strokeWidth="1" fill="none" />
       </>
     ),
     svgBack: (
       <>
         <circle cx="240" cy="90" r="210" stroke="rgba(0,0,0,.05)" strokeWidth="1" fill="none" />
         <path d="M-60 160 C80 20 200 160 320 80 S480 -20 580 40" stroke="rgba(0,0,0,.05)" strokeWidth="1.5" fill="none" />
-        <circle cx="380" cy="280" r="60" stroke="rgba(16,185,129,.15)" strokeWidth="1" fill="none" />
+        <circle cx="380" cy="280" r="60" stroke="rgba(45,139,206,.18)" strokeWidth="1" fill="none" />
       </>
     ),
     to: '/services/cloud-devops',
@@ -94,14 +94,14 @@ const CARDS = [
         <circle cx="80" cy="280" r="180" stroke="rgba(255,255,255,.08)" strokeWidth="1" fill="none" />
         <path d="M0 100 C140 -20 280 120 420 60 S560 0 640 40" stroke="rgba(255,255,255,.1)" strokeWidth="1.5" fill="none" />
         <rect x="220" y="40" width="180" height="130" rx="10" stroke="rgba(255,255,255,.07)" strokeWidth="1" fill="none" />
-        <circle cx="400" cy="300" r="50" stroke="rgba(251,191,36,.28)" strokeWidth="1" fill="none" />
+        <circle cx="400" cy="300" r="50" stroke="rgba(26,75,140,.3)" strokeWidth="1" fill="none" />
       </>
     ),
     svgBack: (
       <>
         <circle cx="80" cy="280" r="180" stroke="rgba(0,0,0,.04)" strokeWidth="1" fill="none" />
         <path d="M0 100 C140 -20 280 120 420 60 S560 0 640 40" stroke="rgba(0,0,0,.05)" strokeWidth="1.5" fill="none" />
-        <circle cx="400" cy="300" r="50" stroke="rgba(245,158,11,.15)" strokeWidth="1" fill="none" />
+        <circle cx="400" cy="300" r="50" stroke="rgba(22,63,124,.18)" strokeWidth="1" fill="none" />
       </>
     ),
     to: '/services/animation',
@@ -119,14 +119,14 @@ const CARDS = [
       <>
         <ellipse cx="300" cy="200" rx="220" ry="170" stroke="rgba(255,255,255,.07)" strokeWidth="1" fill="none" />
         <path d="M-40 300 C100 160 220 260 360 180 S500 80 600 120" stroke="rgba(255,255,255,.1)" strokeWidth="1.5" fill="none" />
-        <circle cx="120" cy="80" r="65" stroke="rgba(236,72,153,.28)" strokeWidth="1" fill="none" />
+        <circle cx="120" cy="80" r="65" stroke="rgba(29,95,196,.32)" strokeWidth="1" fill="none" />
       </>
     ),
     svgBack: (
       <>
         <ellipse cx="300" cy="200" rx="220" ry="170" stroke="rgba(0,0,0,.04)" strokeWidth="1" fill="none" />
         <path d="M-40 300 C100 160 220 260 360 180 S500 80 600 120" stroke="rgba(0,0,0,.05)" strokeWidth="1.5" fill="none" />
-        <circle cx="120" cy="80" r="65" stroke="rgba(236,72,153,.12)" strokeWidth="1" fill="none" />
+        <circle cx="120" cy="80" r="65" stroke="rgba(29,95,196,.16)" strokeWidth="1" fill="none" />
       </>
     ),
     to: '/services/martech',
@@ -145,14 +145,14 @@ const CARDS = [
         <circle cx="350" cy="180" r="200" stroke="rgba(255,255,255,.07)" strokeWidth="1" fill="none" />
         <path d="M-20 200 C80 80 200 200 320 120 S480 40 580 80" stroke="rgba(255,255,255,.1)" strokeWidth="1.5" fill="none" />
         <rect x="40" y="60" width="160" height="120" rx="8" stroke="rgba(255,255,255,.07)" strokeWidth="1" fill="none" />
-        <circle cx="60" cy="290" r="55" stroke="rgba(6,182,212,.28)" strokeWidth="1" fill="none" />
+        <circle cx="60" cy="290" r="55" stroke="rgba(27,83,200,.32)" strokeWidth="1" fill="none" />
       </>
     ),
     svgBack: (
       <>
         <circle cx="350" cy="180" r="200" stroke="rgba(0,0,0,.04)" strokeWidth="1" fill="none" />
         <path d="M-20 200 C80 80 200 200 320 120 S480 40 580 80" stroke="rgba(0,0,0,.05)" strokeWidth="1.5" fill="none" />
-        <circle cx="60" cy="290" r="55" stroke="rgba(6,182,212,.12)" strokeWidth="1" fill="none" />
+        <circle cx="60" cy="290" r="55" stroke="rgba(27,83,200,.16)" strokeWidth="1" fill="none" />
       </>
     ),
     to: '/services/marketing',

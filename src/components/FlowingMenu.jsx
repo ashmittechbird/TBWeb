@@ -1,17 +1,9 @@
 import { useRef, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
+import { LIVE_PRODUCTS } from '../data/products';
 
-const PRODUCTS = [
-  { link: '/products/erp',                    text: 'Custom ERP',           image: '/assets/products/erp.webp' },
-  { link: '/products/hrms',                   text: 'HRMS',                 image: '/assets/products/hrms.webp' },
-  { link: '/products/crm',                    text: 'Lead & Sales CRM',     image: '/assets/products/crm.webp' },
-  { link: '/products/practice-management',    text: 'Practice Management',  image: '/assets/products/practice.webp' },
-  { link: '/products/ecommerce',              text: 'E-commerce Platform',  image: '/assets/products/ecommerce.webp' },
-  { link: '/products/document-management',    text: 'Document Management',  image: '/assets/products/dms.webp' },
-  { link: '/products/litigation-management',  text: 'Litigation Management',image: '/assets/products/litigation.webp' },
-  { link: '/products/visitor-management',     text: 'Visitor Management',   image: '/assets/products/visitor.webp' },
-];
+const PRODUCTS = LIVE_PRODUCTS.map((p) => ({ link: p.route, text: p.name, image: p.image }));
 
 function dist(x, y, x2, y2) { return (x - x2) ** 2 + (y - y2) ** 2; }
 function closestEdge(mx, my, w, h) {

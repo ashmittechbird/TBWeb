@@ -4,4 +4,11 @@ Allow: /
 Disallow: /api/
 Disallow: /_debug/
 
+# Products that are not launched yet - routes still resolve for old
+# inbound links, but they are not advertised or indexed.
+Disallow: /products/erp
+Disallow: /products/practice-management
+Disallow: /products/visitor-management
+Disallow: /products/ecommerce
+
 Sitemap: https://www.techbird.in/sitemap.xml

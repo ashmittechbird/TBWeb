@@ -177,14 +177,6 @@
   max-width: 38rem;
 }
 
-.hrms-hero-actions {
-  display: flex;
-  justify-content: center;
-  gap: 14px;
-  margin-top: clamp(28px, 4vh, 40px);
-}
-.hrms-hero-actions .btn-pill { margin: 0; }
-
 /* hero product shot */
 .hrms-hero-shot {
   position: relative;
@@ -641,8 +633,6 @@
   .hrms-cta-body { max-width: none; }
   .hrms-cta .btn-pill { margin: 0 auto; }
   .hrms-tabs { flex-wrap: wrap; }
-  .hrms-hero-actions { flex-wrap: wrap; }
-  .hrms-hero-actions .btn-pill { width: 100%; justify-content: center; }
 }
 @media (max-width: 560px) {
   .hrms-hero { padding-top: 96px; }
@@ -655,3 +645,24 @@
 @media (prefers-reduced-motion: reduce) {
   .hrms * { animation: none !important; transition: none !important; }
 }
+
+/* ════ Product accent variants ════ */
+.hrms.pp--crm    { --accent: #3b82f6; --accent-soft: rgba(59,130,246,.10); --accent-line: rgba(59,130,246,.25); }
+.hrms.pp--dms    { --accent: #f59e0b; --accent-soft: rgba(245,158,11,.10); --accent-line: rgba(245,158,11,.25); }
+.hrms.pp--lms    { --accent: #6366f1; --accent-soft: rgba(99,102,241,.10); --accent-line: rgba(99,102,241,.25); }
+.hrms.pp--travel { --accent: #06b6d4; --accent-soft: rgba(6,182,212,.10);  --accent-line: rgba(6,182,212,.25);  }
+/* orb color variants */
+.hrms.pp--crm .hrms-hero-orb--1 { background: radial-gradient(circle, rgba(59,130,246,.15) 0%, transparent 70%); }
+.hrms.pp--dms .hrms-hero-orb--1 { background: radial-gradient(circle, rgba(245,158,11,.15) 0%, transparent 70%); }
+.hrms.pp--lms .hrms-hero-orb--1 { background: radial-gradient(circle, rgba(99,102,241,.15) 0%, transparent 70%); }
+.hrms.pp--travel .hrms-hero-orb--1 { background: radial-gradient(circle, rgba(6,182,212,.15) 0%, transparent 70%); }
+/* hero shot border variant */
+.hrms.pp--crm .hrms-hero-shot    { border-color: rgba(59,130,246,.18); box-shadow: 0 0 0 1px rgba(59,130,246,.05), 0 8px 32px -6px rgba(59,130,246,.15), 0 40px 100px -24px rgba(0,0,0,.65); }
+.hrms.pp--dms .hrms-hero-shot    { border-color: rgba(245,158,11,.18); box-shadow: 0 0 0 1px rgba(245,158,11,.05), 0 8px 32px -6px rgba(245,158,11,.15), 0 40px 100px -24px rgba(0,0,0,.65); }
+.hrms.pp--lms .hrms-hero-shot    { border-color: rgba(99,102,241,.18); box-shadow: 0 0 0 1px rgba(99,102,241,.05), 0 8px 32px -6px rgba(99,102,241,.15), 0 40px 100px -24px rgba(0,0,0,.65); }
+.hrms.pp--travel .hrms-hero-shot { border-color: rgba(6,182,212,.18);  box-shadow: 0 0 0 1px rgba(6,182,212,.05),  0 8px 32px -6px rgba(6,182,212,.15),  0 40px 100px -24px rgba(0,0,0,.65); }
+/* hero accent line variant */
+.hrms.pp--crm .hrms-hero-bg::after    { background: linear-gradient(90deg, transparent 0%, rgba(59,130,246,.12) 20%, rgba(59,130,246,.20) 50%, rgba(59,130,246,.12) 80%, transparent 100%); }
+.hrms.pp--dms .hrms-hero-bg::after    { background: linear-gradient(90deg, transparent 0%, rgba(245,158,11,.12) 20%, rgba(245,158,11,.20) 50%, rgba(245,158,11,.12) 80%, transparent 100%); }
+.hrms.pp--lms .hrms-hero-bg::after    { background: linear-gradient(90deg, transparent 0%, rgba(99,102,241,.12) 20%, rgba(99,102,241,.20) 50%, rgba(99,102,241,.12) 80%, transparent 100%); }
+.hrms.pp--travel .hrms-hero-bg::after { background: linear-gradient(90deg, transparent 0%, rgba(6,182,212,.12)  20%, rgba(6,182,212,.20)  50%, rgba(6,182,212,.12)  80%, transparent 100%); }

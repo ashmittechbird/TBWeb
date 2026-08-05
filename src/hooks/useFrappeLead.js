@@ -25,7 +25,7 @@ export default function useFrappeLead() {
       const body = encodeURIComponent(
         `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nCompany: ${formData.company}\nService: ${formData.service}\n\nMessage:\n${formData.message}`
       );
-      window.location.href = `mailto:connect@techbirdit.in?subject=${subject}&body=${body}`;
+      window.location.assign(`mailto:connect@techbirdit.in?subject=${subject}&body=${body}`);
       return { ok: true, fallback: true };
     }
 

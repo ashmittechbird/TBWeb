@@ -38,9 +38,11 @@
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+/* No `scroll-behavior: smooth` here on purpose.
+   It makes the browser ease every scroll change, which fights GSAP
+   ScrollTrigger's scrub animations - both drive the scroll position each
+   frame and the result reads as rough/stuttery. Anchor jumps do their own
+   smooth scroll in JS instead (see ScrollToTop and #anchor handlers). */
 
 body {
   font-family: var(--body);
@@ -383,13 +385,6 @@ li:hover .nav-chev,
 }
 .mega-pro-icon svg { width: 15px; height: 15px; }
 .mega-item--pro:hover .mega-pro-icon { transform: scale(1.1) rotate(-3deg); }
-
-/* disabled product items */
-.mega-item--disabled {
-  opacity: 0.35;
-  pointer-events: none;
-  cursor: default;
-}
 
 /* item text */
 .mega-item-name {
@@ -1257,7 +1252,7 @@ body.loaded .scroll-hint {
 
 /* contact */
 .contact {
-  padding-bottom: clamp(40px, 6vh, 60px);
+  padding-bottom: clamp(80px, 12vh, 150px);
 }
 
 .contact-card {
@@ -2128,46 +2123,46 @@ body.loaded .scroll-hint {
   stroke: #fff;
 }
 
-/* Card 1 - Purple / Software Dev */
+/* Card 1 - Software Dev — deep navy, darkest */
 .rc-1 { width: min(28vw, 380px); aspect-ratio: 4/3; left: 2%; top: 3%; z-index: 4; }
 .rc-1 .rc-front {
-  background: linear-gradient(145deg, #160d35 0%, #3b0764 55%, #7c3aed 100%);
-  box-shadow: 0 32px 72px -18px rgba(124,58,237,.65), 0 0 0 1px rgba(124,58,237,.25);
+  background: linear-gradient(145deg, #060c1a 0%, #0f2b5c 55%, #1a4b8c 100%);
+  box-shadow: 0 32px 72px -18px rgba(26,75,140,.72), 0 0 0 1px rgba(26,75,140,.3);
 }
 
-/* Card 2 - Sky blue / AI */
+/* Card 2 - AI Solutions — cobalt, brighter mid */
 .rc-2 { width: min(26vw, 360px); aspect-ratio: 4/3; right: 2%; top: 1%; z-index: 5; }
 .rc-2 .rc-front {
-  background: linear-gradient(145deg, #051828 0%, #0369a1 55%, #0ea5e9 100%);
-  box-shadow: 0 32px 72px -18px rgba(14,165,233,.6), 0 0 0 1px rgba(14,165,233,.22);
+  background: linear-gradient(155deg, #060e22 0%, #1240a0 50%, #2d6acf 100%);
+  box-shadow: 0 32px 72px -18px rgba(45,106,207,.65), 0 0 0 1px rgba(45,106,207,.24);
 }
 
-/* Card 3 - Emerald / Cloud */
+/* Card 3 - Cloud & DevOps — lightest / most open blue */
 .rc-3 { width: min(31vw, 420px); aspect-ratio: 4/3; left: calc(50% - min(15.5vw, 210px)); top: 18%; z-index: 6; }
 .rc-3 .rc-front {
-  background: linear-gradient(145deg, #051a0f 0%, #065f46 55%, #10b981 100%);
-  box-shadow: 0 32px 72px -18px rgba(16,185,129,.6), 0 0 0 1px rgba(16,185,129,.22);
+  background: linear-gradient(135deg, #050d1e 0%, #17508e 50%, #2d8bce 100%);
+  box-shadow: 0 32px 72px -18px rgba(45,139,206,.65), 0 0 0 1px rgba(45,139,206,.24);
 }
 
-/* Card 4 - Amber / Animation */
+/* Card 4 - Animation — almost-black navy, subtlest tint */
 .rc-4 { width: min(26vw, 360px); aspect-ratio: 4/3; left: 3%; top: 50%; z-index: 7; }
 .rc-4 .rc-front {
-  background: linear-gradient(145deg, #1c0e00 0%, #92400e 55%, #f59e0b 100%);
-  box-shadow: 0 32px 72px -18px rgba(245,158,11,.55), 0 0 0 1px rgba(245,158,11,.22);
+  background: linear-gradient(150deg, #04080f 0%, #0c2246 55%, #163f7c 100%);
+  box-shadow: 0 32px 72px -18px rgba(22,63,124,.78), 0 0 0 1px rgba(22,63,124,.28);
 }
 
-/* Card 5 - Pink / MarTech */
+/* Card 5 - MarTech — royal blue, saturated */
 .rc-5 { width: min(28vw, 380px); aspect-ratio: 4/3; right: 3%; top: 46%; z-index: 9; }
 .rc-5 .rc-front {
-  background: linear-gradient(145deg, #1a0010 0%, #831843 55%, #ec4899 100%);
-  box-shadow: 0 32px 72px -18px rgba(236,72,153,.6), 0 0 0 1px rgba(236,72,153,.22);
+  background: linear-gradient(140deg, #05091c 0%, #0f2c7e 52%, #1d5fc4 100%);
+  box-shadow: 0 32px 72px -18px rgba(29,95,196,.68), 0 0 0 1px rgba(29,95,196,.25);
 }
 
-/* Card 6 - Cyan / Marketing */
+/* Card 6 - Marketing Strategy — steel navy, angled */
 .rc-6 { width: min(30vw, 400px); aspect-ratio: 4/3; left: calc(50% - min(15vw, 200px)); top: 60%; z-index: 8; }
 .rc-6 .rc-front {
-  background: linear-gradient(145deg, #00111a 0%, #0e5f6e 55%, #06b6d4 100%);
-  box-shadow: 0 32px 72px -18px rgba(6,182,212,.6), 0 0 0 1px rgba(6,182,212,.22);
+  background: linear-gradient(160deg, #050c1e 0%, #133292 52%, #1b53c8 100%);
+  box-shadow: 0 32px 72px -18px rgba(27,83,200,.65), 0 0 0 1px rgba(27,83,200,.24);
 }
 
 .rc-svg {
@@ -2190,8 +2185,8 @@ body.loaded .scroll-hint {
 
 .rc-label {
   font-family: var(--display);
-  font-size: clamp(17px, 1.8vw, 26px);
-  font-weight: 600;
+  font-size: clamp(22px, 2.4vw, 34px);
+  font-weight: 700;
   letter-spacing: -.02em;
   line-height: 1.2;
   color: #fff;
@@ -2539,7 +2534,7 @@ body.loaded .scroll-hint {
 
 /* ===================== CLIENTS: marquee logo tiles ===================== */
 .cl-section {
-  padding: clamp(3rem, 6vh, 5rem) 0;
+  padding: clamp(80px, 12vh, 150px) 0;
   background: #f3f4f6;
   overflow: hidden;
 }
@@ -2641,7 +2636,7 @@ body.loaded .scroll-hint {
 
 /* ===================== CASE STUDIES: compact, single viewport ===================== */
 .cs-section {
-  padding: clamp(48px, 8vh, 100px) 18px;
+  padding: clamp(80px, 12vh, 150px) 18px;
 }
 
 /* Glassmorphism card wrapper */
@@ -2766,7 +2761,7 @@ body.loaded .scroll-hint {
 
 /* ===================== TESTIMONIALS: auto-sliding carousel ===================== */
 .tm-section {
-  padding: clamp(48px, 8vh, 100px) 0;
+  padding: clamp(80px, 12vh, 150px) 0;
   overflow: hidden;
   border-top: 1px solid rgba(255,255,255,0.06);
 }

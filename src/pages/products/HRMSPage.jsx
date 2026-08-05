@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import InnerNavbar from '../../components/InnerNavbar';
 import Footer from '../../components/Footer';
 import SEO from '../../components/SEO';
+import { onShotError } from '../../utils/shotFallback';
 import '../../styles/inner.css';
 import '../../styles/hrms-page.css';
 
@@ -77,10 +78,9 @@ export default function HRMSPage() {
       const ease = 'power3.out';
 
       // hero
-      gsap.from('.hrms-hero-eyebrow', { opacity: 0, y: 12, duration: 0.5 }, );
+      gsap.from('.hrms-hero-eyebrow', { opacity: 0, y: 12, duration: 0.5 });
       gsap.from('.hrms-hero h1', { opacity: 0, y: 24, duration: 0.7, delay: 0.1 });
       gsap.from('.hrms-hero-sub', { opacity: 0, y: 16, duration: 0.6, delay: 0.25 });
-      gsap.from('.hrms-hero-actions > *', { opacity: 0, y: 14, stagger: 0.1, duration: 0.5, delay: 0.35, ease });
       gsap.from('.hrms-hero-shot', { opacity: 0, y: 40, duration: 0.9, delay: 0.4, ease });
 
       // modules
@@ -151,16 +151,8 @@ export default function HRMSPage() {
             Payroll, attendance, leave, recruitment, appraisals and statutory compliance  - automated end-to-end.
             Hire to retire, without the spreadsheets.
           </p>
-          <div className="hrms-hero-actions">
-            <Link to="/contact" className="btn-pill">
-              <span>Request a Demo</span><i className="arrow"></i>
-            </Link>
-            <Link to="/contact" className="btn-pill ghost">
-              <span>See Pricing</span><i className="arrow"></i>
-            </Link>
-          </div>
           <div className="hrms-hero-shot">
-            <img src="/products/hrms/hero-dashboard.png" alt="TechBird HRMS Dashboard  - Manage your workforce with confidence" loading="eager" />
+            <img src="/products/hrms/hero-dashboard.png" alt="TechBird HRMS Dashboard  - Manage your workforce with confidence" loading="eager" onError={onShotError} />
           </div>
         </div>
       </section>
@@ -234,6 +226,7 @@ export default function HRMSPage() {
               src={currentScreen.src}
               alt={currentScreen.caption}
               key={currentScreen.id}
+              onError={onShotError}
             />
             <div className="hrms-screen-caption">
               <span>{currentScreen.caption}</span>

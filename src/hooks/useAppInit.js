@@ -94,21 +94,49 @@ export default function useAppInit() {
       sections.forEach(s => navIO.observe(s));
     }
 
-    /* ── Scroll-progress bar ──────────────────────────────── */
+    /* ── Scroll-progress bar ──────────────────────────────────
+       Reading scrollHeight inside the scroll handler forces a synchronous
+       reflow on every event, so the height is measured up front (and again
+       whenever the document actually resizes) and the write is batched into
+       one rAF per frame. */
     const progressBar = document.getElementById('scrollProgress');
-    function onScroll() {
-      if (!progressBar) return;
-      const docH = document.documentElement.scrollHeight - window.innerHeight;
+    let docH = 0;
+    let progressRaf = 0;
+    let bodyRO;
+
+    const measureDocH = () => {
+      docH = document.documentElement.scrollHeight - window.innerHeight;
+    };
+    function paintProgress() {
+      progressRaf = 0;
       if (docH > 0) progressBar.style.width = (window.scrollY / docH * 100) + '%';
     }
-    window.addEventListener('scroll', onScroll, { passive: true });
+    function onScroll() {
+      if (progressRaf) return;            // already scheduled for this frame
+      progressRaf = requestAnimationFrame(paintProgress);
+    }
+
+    if (progressBar) {
+      measureDocH();
+      paintProgress();
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', measureDocH);
+      // content growing (lazy images, fonts) changes the scrollable height
+      if (typeof ResizeObserver !== 'undefined') {
+        bodyRO = new ResizeObserver(measureDocH);
+        bodyRO.observe(document.body);
+      }
+    }
 
     return () => {
       clearTimeout(t);
       cancelAnimationFrame(rafId);
+      if (progressRaf) cancelAnimationFrame(progressRaf);
+      if (bodyRO) bodyRO.disconnect();
       if (navIO) navIO.disconnect();
       if (scrollListener) window.removeEventListener('scroll', scrollListener);
       window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', measureDocH);
       window.removeEventListener('load', onLoad);
       if (dragListeners && indWrap) {
         indWrap.removeEventListener('mousedown', dragListeners.onMouseDown);

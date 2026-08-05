@@ -397,7 +397,6 @@ function Visual6({ color }) {
 /* 7 - SEO / Search Rankings */
 function Visual7({ color }) {
   const c = color !== '#ffffff' ? color : '#22d3ee';
-  const bars = [85,60,72,48,90,65,55,78];
   return (
     <svg viewBox="0 0 480 320" fill="none" xmlns="http://www.w3.org/2000/svg" className="ip2-row-svg">
       <rect width="480" height="320" fill="#0c0c10" />
@@ -481,7 +480,6 @@ function Visual9({ color }) {
 /* 10 - Email / Automation Workflow */
 function Visual10({ color }) {
   const c = color !== '#ffffff' ? color : '#22d3ee';
-  const steps = [[80,160],[180,100],[280,160],[380,100]];
   return (
     <svg viewBox="0 0 480 320" fill="none" xmlns="http://www.w3.org/2000/svg" className="ip2-row-svg">
       <rect width="480" height="320" fill="#0c0c10" />
@@ -549,7 +547,7 @@ function Visual12({ color }) {
       <text x="240" y="260" textAnchor="middle" fill={c} fillOpacity="0.7" fontSize="22" fontFamily="JetBrains Mono, monospace" fontWeight="700">60%</text>
       <text x="240" y="278" textAnchor="middle" fill="rgba(255,255,255,0.35)" fontSize="9" fontFamily="JetBrains Mono, monospace">COST REDUCTION</text>
       {/* savings cards */}
-      {[[-1,1],[1,1]].map(([dx,i],k)=>(
+      {[[-1,1],[1,1]].map(([dx],k)=>(
         <g key={k} opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.4s" begin={`${1.5+k*0.2}s`} fill="freeze" />
           <rect x={dx<0?60:310} y="100" width="110" height="48" rx="8" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" strokeWidth="1" />
           <text x={dx<0?115:365} y="120" textAnchor="middle" fill={c} fillOpacity="0.6" fontSize="14" fontFamily="JetBrains Mono, monospace" fontWeight="700">{dx<0?'↓40%':'↑2.3×'}</text>

@@ -2,17 +2,18 @@ import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import NotFoundPage from './pages/NotFoundPage';
+import ScrollToTop from './components/ScrollToTop';
 
 const ProductsPage              = lazy(() => import('./pages/ProductsPage'));
 const HRMSPage                  = lazy(() => import('./pages/products/HRMSPage'));
-/* disabled product pages - uncomment to re-enable */
-// const CRMPage                   = lazy(() => import('./pages/products/CRMPage'));
-// const ERPPage                   = lazy(() => import('./pages/products/ERPPage'));
-// const DocumentManagementPage    = lazy(() => import('./pages/products/DocumentManagementPage'));
-// const PracticeManagementPage    = lazy(() => import('./pages/products/PracticeManagementPage'));
-// const VisitorManagementPage     = lazy(() => import('./pages/products/VisitorManagementPage'));
-// const LitigationManagementPage  = lazy(() => import('./pages/products/LitigationManagementPage'));
-// const EcommercePage             = lazy(() => import('./pages/products/EcommercePage'));
+const CRMPage                   = lazy(() => import('./pages/products/CRMPage'));
+const ERPPage                   = lazy(() => import('./pages/products/ERPPage'));
+const DocumentManagementPage    = lazy(() => import('./pages/products/DocumentManagementPage'));
+const PracticeManagementPage    = lazy(() => import('./pages/products/PracticeManagementPage'));
+const VisitorManagementPage     = lazy(() => import('./pages/products/VisitorManagementPage'));
+const LitigationManagementPage  = lazy(() => import('./pages/products/LitigationManagementPage'));
+const EcommercePage             = lazy(() => import('./pages/products/EcommercePage'));
+const TravelExpensePage         = lazy(() => import('./pages/products/TravelExpensePage'));
 const AboutPage                 = lazy(() => import('./pages/AboutPage'));
 const IndustriesPage            = lazy(() => import('./pages/IndustriesPage'));
 const ServicesPage              = lazy(() => import('./pages/services/ServicesPage'));
@@ -35,6 +36,7 @@ const Fallback = () => (
 export default function App() {
   return (
     <>
+      <ScrollToTop />
       <Suspense fallback={<Fallback />}>
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -42,14 +44,14 @@ export default function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/industries" element={<IndustriesPage />} />
         <Route path="/products/hrms" element={<HRMSPage />} />
-        {/* disabled product pages - uncomment to re-enable */}
-        {/* <Route path="/products/crm" element={<CRMPage />} /> */}
-        {/* <Route path="/products/erp" element={<ERPPage />} /> */}
-        {/* <Route path="/products/document-management" element={<DocumentManagementPage />} /> */}
-        {/* <Route path="/products/practice-management" element={<PracticeManagementPage />} /> */}
-        {/* <Route path="/products/visitor-management" element={<VisitorManagementPage />} /> */}
-        {/* <Route path="/products/litigation-management" element={<LitigationManagementPage />} /> */}
-        {/* <Route path="/products/ecommerce" element={<EcommercePage />} /> */}
+        <Route path="/products/crm" element={<CRMPage />} />
+        <Route path="/products/erp" element={<ERPPage />} />
+        <Route path="/products/document-management" element={<DocumentManagementPage />} />
+        <Route path="/products/practice-management" element={<PracticeManagementPage />} />
+        <Route path="/products/visitor-management" element={<VisitorManagementPage />} />
+        <Route path="/products/litigation-management" element={<LitigationManagementPage />} />
+        <Route path="/products/ecommerce" element={<EcommercePage />} />
+        <Route path="/products/travel-expense" element={<TravelExpensePage />} />
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/services/ai-solutions" element={<AISolutionsPage />} />
         <Route path="/services/software-development" element={<SoftwareDevPage />} />

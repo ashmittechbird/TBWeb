@@ -1,4 +1,3 @@
-import { lazy, Suspense } from 'react';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import About from '../components/About';
@@ -16,8 +15,6 @@ import SEO from '../components/SEO';
 import useAppInit from '../hooks/useAppInit';
 import useScrollAnimations from '../hooks/useScrollAnimations';
 
-/* Only lazy-load the heavy GPU canvas: it self-disables on mobile anyway */
-const SplashCursor = lazy(() => import('../components/SplashCursor'));
 
 export default function HomePage() {
   useAppInit();
@@ -57,9 +54,7 @@ export default function HomePage() {
         <Footer />
       </main>
 
-      <Suspense fallback={null}>
-        <SplashCursor />
-      </Suspense>
+
     </>
   );
 }

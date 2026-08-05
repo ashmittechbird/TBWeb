@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
 import StaggeredMenu from './StaggeredMenu';
+import { productNavItems, productSubItems, LIVE_PRODUCT_COUNT } from '../data/products';
 
 /* ── chevron ── */
 const Chev = () => (
@@ -37,16 +38,7 @@ const SERVICES = [
   { label: 'Marketing Strategy',   desc: 'GTM · SEO · SEM · Social',     to: '/services/marketing',            color: '#22d3ee', icon: 'M22 12a10 10 0 11-20 0 10 10 0 0120 0zM17.66 12a5.66 5.66 0 11-11.32 0 5.66 5.66 0 0111.32 0zM14 12a2 2 0 11-4 0 2 2 0 014 0z' },
 ];
 
-const PRODUCTS = [
-  { label: 'Custom ERP',           to: '/products/erp', color: '#a78bfa', icon: 'M3 3h7v7H3zM14 3h7v7H14zM3 14h7v7H3zM14 14h7v7H14z' },
-  { label: 'HRMS',                 to: '/products/hrms', color: '#34d399', icon: 'M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75' },
-  { label: 'Lead & Sales CRM',     to: '/products/crm', color: '#38bdf8', icon: 'M22 3H2l8 9.46V19l4 2V12.46L22 3z' },
-  { label: 'Practice Management',  to: '/products/practice-management', color: '#fbbf24', icon: 'M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zM9 8h6M9 12h6M9 16h4' },
-  { label: 'E-commerce Platform',  to: '/products/ecommerce', color: '#f472b6', icon: 'M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0' },
-  { label: 'Document Management',  to: '/products/document-management', color: '#22d3ee', icon: 'M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8zM14 2v6h6M16 13H8M16 17H8M10 9H8' },
-  { label: 'Litigation Management',to: '/products/litigation-management', color: '#fb923c', icon: 'M12 3v18M5 6l7-3 7 3M3 18h18M6 14l3-3M18 14l-3-3' },
-  { label: 'Visitor Management',   to: '/products/visitor-management', color: '#a3e635', icon: 'M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0zM12 13a3 3 0 100-6 3 3 0 000 6z' },
-];
+const PRODUCTS = productNavItems();
 
 /* decoration SVG for left panel */
 const LeftDeco = () => (
@@ -81,16 +73,7 @@ export default function Navbar() {
     },
     {
       label: 'Products', ariaLabel: 'View our products', link: '/products',
-      subItems: [
-        { label: 'Custom ERP',            link: '/products/erp' },
-        { label: 'HRMS',                  link: '/products/hrms' },
-        { label: 'Lead & Sales CRM',      link: '/products/crm' },
-        { label: 'Practice Management',   link: '/products/practice-management' },
-        { label: 'E-commerce Platform',   link: '/products/ecommerce' },
-        { label: 'Document Management',   link: '/products/document-management' },
-        { label: 'Litigation Management', link: '/products/litigation-management' },
-        { label: 'Visitor Management',    link: '/products/visitor-management' },
-      ]
+      subItems: productSubItems()
     },
     { label: 'Industries', ariaLabel: 'View industries we serve', link: '/industries' },
     { label: 'Case Studies', ariaLabel: 'View case studies', link: '/case-studies' },
@@ -184,7 +167,7 @@ export default function Navbar() {
             <LeftDeco />
             <span className="mega-left-eye">Our platforms</span>
             <h3 className="mega-left-title">Platforms<br/>ready to<br/>deploy.</h3>
-            <p className="mega-left-sub">8 products.<br/>50+ enterprise clients.</p>
+            <p className="mega-left-sub">{LIVE_PRODUCT_COUNT} products.<br/>50+ enterprise clients.</p>
             <Link to="/contact" className="mega-left-cta">
               Request a demo
               <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
@@ -194,20 +177,12 @@ export default function Navbar() {
           {/* right grid */}
           <div className="mega-right">
             <div className="mega-grid mega-grid--4">
-              {PRODUCTS.map((p) => {
-                const enabled = p.to === '/products/hrms';
-                return enabled ? (
-                  <Link key={p.label} to={p.to} className="mega-item mega-item--pro">
-                    <ProIcon path={p.icon} color={p.color} />
-                    <span className="mega-item-name">{p.label}</span>
-                  </Link>
-                ) : (
-                  <span key={p.label} className="mega-item mega-item--pro mega-item--disabled">
-                    <ProIcon path={p.icon} color={p.color} />
-                    <span className="mega-item-name">{p.label}</span>
-                  </span>
-                );
-              })}
+              {PRODUCTS.map((p) => (
+                <Link key={p.to} to={p.to} className="mega-item mega-item--pro">
+                  <ProIcon path={p.icon} color={p.color} />
+                  <span className="mega-item-name">{p.label}</span>
+                </Link>
+              ))}
             </div>
 
             <div className="mega-bar">
