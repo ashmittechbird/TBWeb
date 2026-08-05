@@ -49,8 +49,7 @@ const FEATURES = [
 ];
 
 const SCREENS = [
-  { id: 'dashboard', label: 'CRM Dashboard', src: '/products/crm/hero.png',       caption: 'Lead pipeline with lifecycle stages, activity feed and conversion analytics' },
-  { id: 'lead',      label: 'Lead Detail',   src: '/products/crm/lead-detail.png', caption: 'Full lead record — lifecycle stages, contact info, sales activity and WhatsApp history' },
+  { id: 'lead', label: 'Lead Detail', src: '/products/crm/lead-detail.png', caption: 'Full lead record — lifecycle stages, contact info, sales activity and WhatsApp history' },
 ];
 
 const INTEGRATIONS = [
@@ -70,7 +69,7 @@ const FAQ = [
 
 export default function CRMPage() {
   const root = useRef(null);
-  const [activeScreen, setActiveScreen] = useState('dashboard');
+  const [activeScreen, setActiveScreen] = useState('lead');
 
   useLayoutEffect(() => { window.scrollTo(0, 0); }, []);
 
@@ -145,7 +144,7 @@ export default function CRMPage() {
             Full-funnel CRM with lead capture, lifecycle tracking, sales activity, call logs and WhatsApp follow-ups — built for sales teams that can&apos;t afford to miss a deal.
           </p>
           <div className="hrms-hero-shot">
-            <img src="/products/crm/hero.png" alt="TechBird CRM Dashboard — Lead pipeline and sales activity" loading="eager" onError={onShotError} />
+            <img src="/products/crm/lead-detail.png" alt="TechBird CRM — Lead record with lifecycle stages, contact details and sales activity" loading="eager" onError={onShotError} />
           </div>
         </div>
       </section>
