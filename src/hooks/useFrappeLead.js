@@ -1,111 +1,119 @@
 import { useState } from 'react';
-import { isFrappeEnabled, FRAPPE_URL } from '../lib/frappe';
+import {
+  isFrappeEnabled,
+  FRAPPE_URL,
+  FRAPPE_WEB_FORM,
+  REQUEST_TIMEOUT_MS,
+  buildLeadPayload,
+  buildMailtoUrl,
+} from '../lib/frappe';
 
 /**
- * Hook to create a Lead in Frappe CRM / ERPNext.
+ * Submits the contact form as a Lead in Frappe / ERPNext.
  *
- * Maps contact form fields to Frappe Lead DocType fields:
- *   name      → lead_name
- *   email     → email_id
- *   phone     → phone
- *   company   → company_name
- *   service   → source (or custom field)
- *   message   → notes (child table) or description
+ * Returns a discriminated outcome rather than a boolean, because the
+ * three cases need different things said to the visitor:
  *
- * Falls back to mailto when Frappe is not configured.
+ *   { status: 'created'  }  the lead is in Frappe
+ *   { status: 'fallback' }  Frappe is not configured; the visitor's mail
+ *                           client was opened. We CANNOT know whether
+ *                           anything was actually sent, so the UI must
+ *                           not claim it was.
+ *   { status: 'error', message }  submission failed; show a way to reach
+ *                           us directly.
+ *
+ * See src/lib/frappe.js for the go-live checklist.
  */
 export default function useFrappeLead() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const createLead = async (formData) => {
+  const submit = async (form) => {
+    setError(null);
+
+    // Not wired up yet - hand off to the mail client and say so.
     if (!isFrappeEnabled()) {
-      // Fallback: open mailto
-      const subject = encodeURIComponent(`Project Inquiry from ${formData.name}`);
-      const body = encodeURIComponent(
-        `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nCompany: ${formData.company}\nService: ${formData.service}\n\nMessage:\n${formData.message}`
-      );
-      window.location.assign(`mailto:connect@techbirdit.in?subject=${subject}&body=${body}`);
-      return { ok: true, fallback: true };
+      window.location.assign(buildMailtoUrl(form));
+      return { status: 'fallback' };
     }
 
     setLoading(true);
-    setError(null);
-
     try {
-      const res = await fetch(`${FRAPPE_URL}/api/resource/Lead`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        credentials: 'include',
-        body: JSON.stringify({
-          lead_name: formData.name,
-          email_id: formData.email,
-          phone: formData.phone || undefined,
-          company_name: formData.company || undefined,
-          source: 'Website',
-          website_service_interest: formData.service || undefined,
-          notes: formData.message || undefined,
-        }),
-      });
+      const res = await postJson(`${FRAPPE_URL}/api/resource/Lead`, buildLeadPayload(form));
 
-      if (!res.ok) {
-        // If guest access is blocked, try Web Form submission instead
-        if (res.status === 403 || res.status === 401) {
-          return await submitViaWebForm(formData);
-        }
-        const errData = await res.json().catch(() => ({}));
-        throw new Error(errData._server_messages || errData.message || 'Failed to submit');
+      // Anonymous writes are usually blocked; the Web Form route exists
+      // precisely for guest submissions.
+      if (res.status === 401 || res.status === 403) {
+        return await submitViaWebForm(form);
       }
+      if (!res.ok) throw new Error(await describeFailure(res));
 
-      const data = await res.json();
-      return { ok: true, data: data.data };
+      return { status: 'created' };
     } catch (err) {
-      setError(err.message);
-      return { ok: false, error: err.message };
+      const message = friendlyMessage(err);
+      setError(message);
+      return { status: 'error', message };
     } finally {
       setLoading(false);
     }
   };
 
-  /**
-   * Fallback: submit via Frappe Web Form (guest-accessible).
-   * Requires a Web Form named "website-lead" to be set up in Frappe.
-   */
-  const submitViaWebForm = async (formData) => {
+  const submitViaWebForm = async (form) => {
     try {
-      const res = await fetch(`${FRAPPE_URL}/api/method/frappe.website.doctype.web_form.web_form.accept`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify({
-          web_form: 'website-lead',
-          data: JSON.stringify({
-            lead_name: formData.name,
-            email_id: formData.email,
-            phone: formData.phone,
-            company_name: formData.company,
-            source: 'Website',
-            notes: formData.message,
-          }),
-        }),
-      });
-
-      if (!res.ok) {
-        throw new Error('Web Form submission failed');
-      }
-
-      const data = await res.json();
-      return { ok: true, data: data.message };
+      const res = await postJson(
+        `${FRAPPE_URL}/api/method/frappe.website.doctype.web_form.web_form.accept`,
+        { web_form: FRAPPE_WEB_FORM, data: JSON.stringify(buildLeadPayload(form)) },
+      );
+      if (!res.ok) throw new Error(await describeFailure(res));
+      return { status: 'created' };
     } catch (err) {
-      setError(err.message);
-      return { ok: false, error: err.message };
+      const message = friendlyMessage(err);
+      setError(message);
+      return { status: 'error', message };
     }
   };
 
-  return { createLead, loading, error };
+  return { submit, loading, error };
+}
+
+/* ── helpers ─────────────────────────────────────────────────────── */
+
+/* No `credentials: 'include'`. This is an anonymous lead form, and
+   sending credentials would require Frappe to echo back the exact
+   origin plus Access-Control-Allow-Credentials - a common reason these
+   integrations fail CORS on the day they go live. */
+async function postJson(url, body) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+  try {
+    return await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(body),
+      signal: controller.signal,
+    });
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+/* Frappe returns _server_messages as a JSON-encoded array of JSON
+   strings. Unwrap it for the console; visitors get friendlyMessage(). */
+async function describeFailure(res) {
+  const data = await res.json().catch(() => ({}));
+  let detail = data.message || data.exception || '';
+  try {
+    const msgs = JSON.parse(data._server_messages || '[]');
+    detail = msgs.map(m => JSON.parse(m).message || m).join(' ') || detail;
+  } catch { /* leave detail as-is */ }
+  return `Frappe responded ${res.status}${detail ? `: ${detail}` : ''}`;
+}
+
+function friendlyMessage(err) {
+  // Log the real cause; the visitor sees something actionable instead.
+  console.error('[contact] lead submission failed:', err);
+  if (err?.name === 'AbortError') {
+    return 'That took too long to send. Please try again, or email us directly.';
+  }
+  return "We couldn't send your message just now. Please try again, or email us directly.";
 }

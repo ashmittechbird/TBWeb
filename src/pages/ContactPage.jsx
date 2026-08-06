@@ -5,6 +5,7 @@ import InnerNavbar from '../components/InnerNavbar';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import useFrappeLead from '../hooks/useFrappeLead';
+import { CONTACT_EMAIL } from '../lib/frappe';
 import '../styles/inner.css';
 import '../styles/contact-page.css';
 
@@ -21,9 +22,11 @@ const FAQS = [
 export default function ContactPage() {
   const root = useRef(null);
   const [openFaq, setOpenFaq] = useState(null);
-  const [formState, setFormState] = useState({ name: '', email: '', phone: '', company: '', service: '', message: '' });
-  const [submitted, setSubmitted] = useState(false);
-  const { createLead, loading: submitting, error: submitError } = useFrappeLead();
+  const EMPTY_FORM = { name: '', email: '', phone: '', company: '', service: '', message: '' };
+  const [formState, setFormState] = useState(EMPTY_FORM);
+  /* null while editing, otherwise 'created' | 'fallback' - see useFrappeLead */
+  const [outcome, setOutcome] = useState(null);
+  const { submit, loading: submitting, error: submitError } = useFrappeLead();
 
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
@@ -54,11 +57,12 @@ export default function ContactPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const result = await createLead(formState);
-    if (result.ok) {
-      setSubmitted(true);
-    }
+    const result = await submit(formState);
+    // 'error' keeps the filled-in form on screen so nothing is retyped.
+    if (result.status !== 'error') setOutcome(result.status);
   };
+
+  const resetForm = () => { setOutcome(null); setFormState(EMPTY_FORM); };
 
   return (
     <div className="cp-root" ref={root}>
@@ -152,14 +156,31 @@ export default function ContactPage() {
               <h2>Send us a message</h2>
               <p className="cp-form-sub">Fill out the form below. We typically respond within 24 hours.</p>
 
-              {submitted ? (
+              {outcome === 'created' ? (
                 <div className="cp-success">
                   <div className="cp-success-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                   </div>
                   <h3>Message sent!</h3>
                   <p>Thank you for reaching out. We'll get back to you within 24 hours.</p>
-                  <button type="button" className="cp-again-btn" onClick={() => { setSubmitted(false); setFormState({ name: '', email: '', phone: '', company: '', service: '', message: '' }); }}>Send another</button>
+                  <button type="button" className="cp-again-btn" onClick={resetForm}>Send another</button>
+                </div>
+              ) : outcome === 'fallback' ? (
+                /* The mail client was opened, but we have no way to know if
+                   anything was actually sent - browsers report nothing back,
+                   and desktop webmail users often have no handler at all.
+                   So this must not claim the message was delivered. */
+                <div className="cp-success">
+                  <div className="cp-success-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                  </div>
+                  <h3>Finish in your email app</h3>
+                  <p>
+                    We've opened your email app with the message ready to send  -  please hit send there.
+                    If nothing opened, email us directly at{' '}
+                    <a href={`mailto:${CONTACT_EMAIL}`} className="cp-inline-link">{CONTACT_EMAIL}</a>.
+                  </p>
+                  <button type="button" className="cp-again-btn" onClick={resetForm}>Back to form</button>
                 </div>
               ) : (
                 <form className="cp-form" onSubmit={handleSubmit}>
@@ -201,7 +222,12 @@ export default function ContactPage() {
                     <label htmlFor="cp-msg">Tell us about your project *</label>
                     <textarea id="cp-msg" name="message" required rows="5" minLength={10} maxLength={2000} value={formState.message} onChange={handleChange} placeholder="What are you building? What's the timeline?" />
                   </div>
-                  {submitError && <p className="cp-error">{submitError}</p>}
+                  {submitError && (
+                    <p className="cp-error" role="alert">
+                      {submitError}{' '}
+                      <a href={`mailto:${CONTACT_EMAIL}`} className="cp-inline-link">{CONTACT_EMAIL}</a>
+                    </p>
+                  )}
                   <button type="submit" className="cp-submit-btn" disabled={submitting}>
                     <span>{submitting ? 'Sending...' : 'Send Message'}</span>
                     <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 10h12M12 4l6 6-6 6"/></svg>

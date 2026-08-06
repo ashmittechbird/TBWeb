@@ -195,7 +195,18 @@ a.cp-info-item:hover {
   color: #ef4444;
   font-size: 0.875rem;
   margin-top: 4px;
+  line-height: 1.55;
 }
+
+/* Inline mailto shown alongside an error or the mail-client handoff, so
+   the visitor always has a way through when submission is unavailable. */
+.cp-inline-link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  white-space: nowrap;
+}
+.cp-inline-link:hover { opacity: 0.8; }
 
 /* Success */
 .cp-success {
