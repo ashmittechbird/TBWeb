@@ -40,12 +40,9 @@ const TEAM = [
   { name: 'Ankit Patil',       role: 'Software Developer',      img: '/assets/team/Ankit-Patil.webp',       li: 'https://www.linkedin.com/company/techbird-it-services/' },
   { name: 'Ashmit Singh',      role: 'Software Developer',      img: '/assets/team/Ashmit-singh.webp',      li: 'https://www.linkedin.com/company/techbird-it-services/' },
   { name: 'Mehul Rathi',       role: 'Software Developer',      img: '/assets/team/Mehul-Rathi.webp',       li: 'https://www.linkedin.com/company/techbird-it-services/' },
-  { name: 'Namrata',           role: 'HR',                      img: '/assets/team/Namrata.webp',           li: 'https://www.linkedin.com/company/techbird-it-services/' },
   { name: 'Paridhi Jhabak',    role: 'Software Developer',      img: '/assets/team/Paridhi-Jhabak.webp',    li: 'https://www.linkedin.com/company/techbird-it-services/' },
   { name: 'Purvesh Jain',      role: 'Software Developer',      img: '/assets/team/Purvesh-Jain.webp',      li: 'https://www.linkedin.com/company/techbird-it-services/' },
   { name: 'Sanjukta Barik',    role: 'Software Developer',      img: '/assets/team/Sanjukta-Barik.webp',    li: 'https://www.linkedin.com/company/techbird-it-services/' },
-  { name: 'Shrikant Maharana', role: 'Software Developer',      img: '/assets/team/Shrikant-Maharana.webp', li: 'https://www.linkedin.com/company/techbird-it-services/' },
-  { name: 'Snehal Sukhadeve',  role: 'Software Developer',      img: '/assets/team/Snehal-Sukhadeve.webp',  li: 'https://www.linkedin.com/company/techbird-it-services/' },
 ];
 
 const FAQS = [
