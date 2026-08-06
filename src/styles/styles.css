@@ -2916,3 +2916,29 @@ body.loaded .scroll-hint {
 @media (prefers-reduced-motion: reduce) {
   .tm-track { will-change: auto; }
 }
+
+/* ════════════════════════════════════════
+   Touch target sizing (mobile)
+   ────────────────────────────────────────
+   Footer links sat at 16-22px tall, below the 24px minimum in WCAG 2.2
+   AA "Target Size". These are list/nav links rather than links inside a
+   sentence, so the inline exception does not apply. Padding grows the
+   hit area without changing type size or the desktop layout.
+   ════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .foot-col ul a,
+  .foot-contact-item a {
+    display: inline-block;
+    padding-block: 7px;
+  }
+  .foot-legal-links a {
+    display: inline-block;
+    padding-block: 6px;
+  }
+  /* standalone section link, not inline prose - padded above the border
+     so the underline stays tight to the text */
+  .cs-cta { padding-top: 6px; }
+  /* the list already has its own gap; reclaim it so the footer does not
+     grow by the full padding on every row */
+  .foot-col ul { gap: 0; }
+}

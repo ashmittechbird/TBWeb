@@ -2605,3 +2605,13 @@
   .iblock { padding: 3.5rem 0; }
   .iblock-h2 { font-size: clamp(1.4rem, 5.5vw, 2rem); }
 }
+
+
+/* Breadcrumb links were 15px tall on mobile - under the WCAG 2.2 AA
+   24px minimum. Padding only; the type size is unchanged. */
+@media (max-width: 768px) {
+  .ip2-bc a {
+    display: inline-block;
+    padding-block: 5px;
+  }
+}

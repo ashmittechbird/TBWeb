@@ -439,6 +439,14 @@
   position: relative; z-index: 1;
   background: var(--ab-void);
   padding: clamp(80px, 13vh, 160px) clamp(1.5rem, 5vw, 4.5rem) clamp(20px, 4vh, 50px);
+  /* The cut-out portraits are deliberately wider than their card and spill
+     past the grid (see .ab-lead-img). Between roughly 700-1200px the
+     outermost one spilled past the viewport and gave the whole page a
+     horizontal scrollbar. Clip on the x axis only - `clip` rather than
+     `hidden` because hidden would force overflow-y to auto and turn this
+     section into a nested scroll container, and y must stay visible so the
+     heads can still rise out of the cards. */
+  overflow-x: clip;
 }
 /* faint blue glow behind the pebble row */
 .ab-leadership::after {
