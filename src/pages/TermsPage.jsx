@@ -28,7 +28,7 @@ export default function TermsPage() {
 
           <h2 style={{ fontFamily: 'var(--display, "Space Grotesk", sans-serif)', fontSize: 'clamp(20px, 3vw, 28px)', marginTop: '2.5rem', marginBottom: '1rem' }}>1. Acceptance of Terms</h2>
           <p style={{ color: 'var(--ip-dim)' }}>
-            By accessing and using the TechBird IT Services website (www.techbird.in), you agree to be bound by these Terms of Service. If you do not agree, please do not use this website.
+            By accessing and using the TechBird IT Services website (techbird.in), you agree to be bound by these Terms of Service. If you do not agree, please do not use this website.
           </p>
 
           <h2 style={{ fontFamily: 'var(--display, "Space Grotesk", sans-serif)', fontSize: 'clamp(20px, 3vw, 28px)', marginTop: '2.5rem', marginBottom: '1rem' }}>2. Services</h2>
