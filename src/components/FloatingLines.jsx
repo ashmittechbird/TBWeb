@@ -331,10 +331,34 @@ export default function FloatingLines({
       renderer.domElement.addEventListener('pointerleave', handlePointerLeave);
     }
 
+    /* Only render while the canvas is actually on screen and the tab is
+       foregrounded. Without this the shader kept drawing for the whole page,
+       which is the dominant cost while scrolling past the hero.
+
+       iTime is offset by however long we spent paused, so the waves resume
+       where they left off instead of jumping forward by the paused duration
+       (Clock keeps accumulating regardless, and Clock.start() would reset
+       elapsedTime to zero). */
+    let inView = true;
+    let pausedAt = 0;
+    let pausedTotal = 0;
+    const io = typeof IntersectionObserver !== 'undefined'
+      ? new IntersectionObserver(e => { inView = e[0]?.isIntersecting ?? true; }, { threshold: 0 })
+      : null;
+    if (io) io.observe(renderer.domElement);
+
     let raf = 0;
     const renderLoop = () => {
       if (!active) return;
-      uniforms.iTime.value = clock.getElapsedTime();
+      raf = requestAnimationFrame(renderLoop);
+
+      if (!inView || document.hidden) {
+        if (!pausedAt) pausedAt = clock.getElapsedTime();
+        return;
+      }
+      if (pausedAt) { pausedTotal += clock.getElapsedTime() - pausedAt; pausedAt = 0; }
+
+      uniforms.iTime.value = clock.getElapsedTime() - pausedTotal;
       if (interactive) {
         currentMouseRef.current.lerp(targetMouseRef.current, mouseDamping);
         uniforms.iMouse.value.copy(currentMouseRef.current);
@@ -346,13 +370,13 @@ export default function FloatingLines({
         uniforms.parallaxOffset.value.copy(currentParallaxRef.current);
       }
       renderer.render(scene, camera);
-      raf = requestAnimationFrame(renderLoop);
     };
     renderLoop();
 
     return () => {
       active = false;
       cancelAnimationFrame(raf);
+      if (io) io.disconnect();
       if (ro) ro.disconnect();
       if (interactive) {
         renderer.domElement.removeEventListener('pointermove', handlePointerMove);

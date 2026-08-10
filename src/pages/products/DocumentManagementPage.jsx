@@ -6,6 +6,7 @@ import InnerNavbar from '../../components/InnerNavbar';
 import Footer from '../../components/Footer';
 import SEO from '../../components/SEO';
 import { onShotError } from '../../utils/shotFallback';
+import useIdleOffscreen from '../../hooks/useIdleOffscreen';
 import '../../styles/inner.css';
 import '../../styles/hrms-page.css';
 
@@ -49,7 +50,7 @@ const FEATURES = [
 ];
 
 const SCREENS = [
-  { id: 'library', label: 'Document Library', src: '/products/dms/hero.png', caption: 'Folder-organised document library with search, upload and attachment management' },
+  { id: 'library', label: 'Document Library', src: '/products/dms/hero.webp', caption: 'Folder-organised document library with search, upload and attachment management' },
 ];
 
 const INTEGRATIONS = [
@@ -69,6 +70,8 @@ const FAQ = [
 
 export default function DocumentManagementPage() {
   const root = useRef(null);
+  /* pauses the blurred hero orbs once the hero scrolls away */
+  const heroRef = useIdleOffscreen();
   const [activeScreen, setActiveScreen] = useState('library');
 
   useLayoutEffect(() => { window.scrollTo(0, 0); }, []);
@@ -130,7 +133,7 @@ export default function DocumentManagementPage() {
       <InnerNavbar />
 
       {/* ── HERO ── */}
-      <section className="hrms-hero">
+      <section className="hrms-hero" ref={heroRef}>
         <div className="hrms-hero-bg" aria-hidden="true">
           <div className="hrms-hero-orb hrms-hero-orb--1" />
           <div className="hrms-hero-orb hrms-hero-orb--2" />
@@ -144,7 +147,7 @@ export default function DocumentManagementPage() {
             Centralised document library with folder management, search, upload and role-based access — replacing scattered drives and paper registers with one secure system.
           </p>
           <div className="hrms-hero-shot">
-            <img src="/products/dms/hero.png" alt="TechBird DMS — Document library with folder management and search" loading="eager" onError={onShotError} />
+            <img src="/products/dms/hero.webp" alt="TechBird DMS — Document library with folder management and search" loading="eager" onError={onShotError} />
           </div>
         </div>
       </section>

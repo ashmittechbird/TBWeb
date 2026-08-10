@@ -10,6 +10,7 @@ const CRMPage                   = lazy(() => import('./pages/products/CRMPage'))
 const ERPPage                   = lazy(() => import('./pages/products/ERPPage'));
 const DocumentManagementPage    = lazy(() => import('./pages/products/DocumentManagementPage'));
 const PracticeManagementPage    = lazy(() => import('./pages/products/PracticeManagementPage'));
+const PropertyManagementPage    = lazy(() => import('./pages/products/PropertyManagementPage'));
 const VisitorManagementPage     = lazy(() => import('./pages/products/VisitorManagementPage'));
 const LitigationManagementPage  = lazy(() => import('./pages/products/LitigationManagementPage'));
 const EcommercePage             = lazy(() => import('./pages/products/EcommercePage'));
@@ -48,6 +49,7 @@ export default function App() {
         <Route path="/products/erp" element={<ERPPage />} />
         <Route path="/products/document-management" element={<DocumentManagementPage />} />
         <Route path="/products/practice-management" element={<PracticeManagementPage />} />
+        <Route path="/products/property-management" element={<PropertyManagementPage />} />
         <Route path="/products/visitor-management" element={<VisitorManagementPage />} />
         <Route path="/products/litigation-management" element={<LitigationManagementPage />} />
         <Route path="/products/ecommerce" element={<EcommercePage />} />

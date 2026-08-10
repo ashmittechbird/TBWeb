@@ -40,12 +40,22 @@ export default function Clients() {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    /* `in-view` latches on first sight (it drives the entrance reveal), but
+       `is-idle` toggles both ways so the two logo marquees stop animating
+       while off screen instead of compositing for the whole page. */
     const io = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) { el.classList.add('in-view'); io.disconnect(); } },
-      { threshold: 0.15 }
+      ([e]) => {
+        if (e.isIntersecting) el.classList.add('in-view');
+        el.classList.toggle('is-idle', !e.isIntersecting);
+      },
+      { threshold: 0, rootMargin: '150px' }
     );
     io.observe(el);
-    return () => io.disconnect();
+
+    const onVis = () => el.classList.toggle('is-idle', document.hidden);
+    document.addEventListener('visibilitychange', onVis);
+
+    return () => { io.disconnect(); document.removeEventListener('visibilitychange', onVis); };
   }, []);
 
   return (

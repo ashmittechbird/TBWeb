@@ -110,6 +110,48 @@ export const PRODUCTS = [
     ],
   },
 
+  {
+    id: 'pms',
+    name: 'Property Management',
+    navLabel: 'Property Management',
+    route: '/products/property-management',
+    cat: 'Hotel & Resort PMS',
+    color: '#f43f5e',
+    icon: 'M3 21h18M5 21V7l7-4 7 4v14M9 9h2M13 9h2M9 13h2M13 13h2M9 17h2M13 17h2',
+    image: '/assets/products/pms.webp',
+    live: true,
+    desc: 'Front desk, reservations, housekeeping, rate calendar and night audit across every property - with RevPAR, ADR and occupancy rolled up portfolio-wide.',
+    caps: [
+      'Multi-property portfolio dashboard',
+      'Front desk with tape chart and check-ins',
+      'Reservations and guest directory',
+      'Housekeeping and maintenance status matrix',
+      'Rate calendar with RevPAR and ADR',
+      'Night audit and billing folio review',
+    ],
+  },
+
+  {
+    id: 'practice',
+    name: 'Practice Management',
+    navLabel: 'Practice Management',
+    route: '/products/practice-management',
+    cat: 'CA & CS Firms',
+    color: '#8b5cf6',
+    icon: 'M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11',
+    image: '/assets/products/practice.webp',
+    live: true,
+    desc: 'Clients, engagements, statutory compliance, assignments, time and billing for accounting and company-secretarial firms - with a DSC registry that never lets an expiry slip.',
+    caps: [
+      'Client master with engagement tracking',
+      'Compliance pipeline: in progress, filed, overdue',
+      'Assignment allocation across staff',
+      'Time tracking with staff utilisation',
+      'Billing, invoicing and outstanding recovery',
+      'Vault & DSC registry with expiry alerts',
+    ],
+  },
+
   /* ── Not launched: routes still resolve for old inbound links,
         but these never appear in any menu, listing or sitemap. ── */
   {
@@ -123,19 +165,6 @@ export const PRODUCTS = [
     image: '/assets/products/erp.webp',
     live: false,
     desc: 'Full-suite ERP on ERPNext covering manufacturing, finance, HR, supply chain and CRM, configured to your workflows.',
-    caps: [],
-  },
-  {
-    id: 'practice',
-    name: 'Practice Management',
-    navLabel: 'Practice Management',
-    route: '/products/practice-management',
-    cat: 'Healthcare & Legal',
-    color: '#fbbf24',
-    icon: 'M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zM9 8h6M9 12h6M9 16h4',
-    image: '/assets/products/practice.webp',
-    live: false,
-    desc: 'Appointments, patient or case records, billing and compliance for clinics, hospitals and law firms at any scale.',
     caps: [],
   },
   {

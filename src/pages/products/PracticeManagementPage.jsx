@@ -1,314 +1,297 @@
-import ProductPageLayout from '../../components/ProductPageLayout';
+import { useState, useLayoutEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import InnerNavbar from '../../components/InnerNavbar';
+import Footer from '../../components/Footer';
 import SEO from '../../components/SEO';
+import { onShotError } from '../../utils/shotFallback';
+import useIdleOffscreen from '../../hooks/useIdleOffscreen';
+import '../../styles/inner.css';
+import '../../styles/hrms-page.css';
 
-const A = '#38bdf8';            // Practice accent - sky blue
-const A2 = '#a78bfa';          // violet secondary
+gsap.registerPlugin(ScrollTrigger);
 
-const I = {
-  calendar: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg>,
-  record:   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2z"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>,
-  invoice:  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M6 2h9l5 5v15H6z"/><path d="M15 2v5h5M10 13h4M10 17h4"/></svg>,
-  bell:     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 01-3.4 0"/></svg>,
-  shield:   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>,
-  portal:   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>,
-  pulse:    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>,
-  link:     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M10 13a5 5 0 007 0l3-3a5 5 0 00-7-7l-1 1M14 11a5 5 0 00-7 0l-3 3a5 5 0 007 7l1-1"/></svg>,
+const ChevD = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 18, height: 18 }}><path d="M6 9l6 6 6-6" /></svg>
+);
+
+function Faq({ q, a }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className={`hrms-faq-item${open ? ' open' : ''}`} onClick={() => setOpen(o => !o)}>
+      <div className="hrms-faq-row">
+        <span className="hrms-faq-q">{q}</span>
+        <span className="hrms-faq-chev"><ChevD /></span>
+      </div>
+      <div className="hrms-faq-body"><div><p className="hrms-faq-a">{a}</p></div></div>
+    </div>
+  );
+}
+
+const ICONS = {
+  dashboard:  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>,
+  clients:    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>,
+  engagement: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2M2 13h20"/></svg>,
+  compliance: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>,
+  assignment: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M9 2h6v4H9zM16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><path d="M9 12h6M9 16h4"/></svg>,
+  timer:      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/></svg>,
+  billing:    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M6 2h9l5 5v15H6z"/><path d="M15 2v5h5M10 13h4M10 17h4"/></svg>,
+  docs:       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8"/></svg>,
+  staff:      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM19 8v6M22 11h-6"/></svg>,
+  vault:      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4M12 15v3"/></svg>,
+  reports:    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3v18h18M7 14l4-4 3 3 5-6"/></svg>,
 };
 
-function MockHeroDash() {
-  return (
-    <svg viewBox="0 0 560 400" xmlns="http://www.w3.org/2000/svg">
-      <rect width="560" height="400" rx="14" fill="#0d0d13"/>
-      <rect width="560" height="34" fill="#121219"/>
-      <circle cx="18" cy="17" r="4.5" fill="#ff5f57"/><circle cx="33" cy="17" r="4.5" fill="#febc2e"/><circle cx="48" cy="17" r="4.5" fill="#28c840"/>
-      <text x="280" y="21" textAnchor="middle" fill="rgba(255,255,255,.4)" fontSize="10" fontFamily="system-ui">Practice - Today</text>
-      <rect x="0" y="34" width="120" height="366" fill="#0a0a10"/>
-      <rect x="14" y="50" width="92" height="26" rx="6" fill={A} fillOpacity=".14"/>
-      <circle cx="28" cy="63" r="5" fill={A}/><rect x="40" y="59" width="54" height="6" rx="3" fill={A} fillOpacity=".8"/>
-      {[0,1,2,3,4].map(i=>(<g key={i}><circle cx="28" cy={98+i*30} r="5" fill="rgba(255,255,255,.14)"/><rect x="40" y={94+i*30} width={[48,60,42,54,50][i]} height="6" rx="3" fill="rgba(255,255,255,.12)"/></g>))}
-      {[['APPTS TODAY','28',A],['PATIENTS','4,210',A2],['REVENUE','₹1.8L',A]].map(([l,v,c],i)=>(
-        <g key={i}>
-          <rect x={138+i*138} y="50" width="126" height="78" rx="9" fill="#13131b" stroke="rgba(255,255,255,.06)"/>
-          <text x={154+i*138} y="74" fill="rgba(255,255,255,.4)" fontSize="9" fontFamily="system-ui" letterSpacing="1">{l}</text>
-          <text x={154+i*138} y="102" fill={c} fontSize="22" fontFamily="'Space Grotesk',sans-serif" fontWeight="700">{v}</text>
-          <circle cx={250+i*138} cy="64" r="4" fill={c} fillOpacity=".7"/>
-        </g>
-      ))}
-      <rect x="138" y="144" width="264" height="156" rx="10" fill="#13131b" stroke="rgba(255,255,255,.06)"/>
-      <text x="154" y="166" fill="rgba(255,255,255,.45)" fontSize="10" fontFamily="system-ui">Today's schedule</text>
-      {[['09:00','Riya Sen',A],['09:30',' Amit K',A2],['10:15','Neha P','#34d399'],['11:00','Sims R','#fb923c']].map(([t,n,c],i)=>(
-        <g key={i}>
-          <rect x="154" y={178+i*28} width="234" height="22" rx="5" fill="#0f0f16"/>
-          <rect x="154" y={178+i*28} width="3" height="22" rx="1.5" fill={c}/>
-          <text x="166" y={193+i*28} fill="rgba(255,255,255,.4)" fontSize="8.5" fontFamily="'JetBrains Mono',monospace">{t}</text>
-          <text x="210" y={193+i*28} fill="rgba(255,255,255,.6)" fontSize="9" fontFamily="system-ui">{n}</text>
-        </g>
-      ))}
-      <rect x="414" y="144" width="132" height="156" rx="10" fill="#13131b" stroke="rgba(255,255,255,.06)"/>
-      <text x="430" y="166" fill="rgba(255,255,255,.45)" fontSize="10" fontFamily="system-ui">Queue</text>
-      {['Waiting','In consult','Billing'].map((t,i)=>(
-        <g key={i}>
-          <text x="430" y={188+i*40} fill="rgba(255,255,255,.4)" fontSize="8.5" fontFamily="system-ui">{t}</text>
-          <text x="530" y={188+i*40} textAnchor="end" fill={A} fontSize="14" fontFamily="'Space Grotesk'" fontWeight="700">{[6,2,3][i]}</text>
-          <rect x="430" y={194+i*40} width="100" height="5" rx="2.5" fill="rgba(255,255,255,.08)"/>
-          <rect x="430" y={194+i*40} width={[80,40,52][i]} height="5" rx="2.5" fill={A} fillOpacity=".7"/>
-        </g>
-      ))}
-      <rect x="138" y="316" width="408" height="68" rx="10" fill="#13131b" stroke="rgba(255,255,255,.06)"/>
-      <text x="154" y="338" fill="rgba(255,255,255,.45)" fontSize="10" fontFamily="system-ui">Chair / room utilisation</text>
-      <rect x="154" y="350" width="300" height="7" rx="3.5" fill="rgba(255,255,255,.08)"/>
-      <rect x="154" y="350" width="258" height="7" rx="3.5" fill={A} fillOpacity=".85"/>
-      <text x="500" y="356" textAnchor="end" fill={A} fontSize="11" fontFamily="'Space Grotesk'" fontWeight="700">86%</text>
-    </svg>
-  );
-}
+const FEATURES = [
+  { icon: 'dashboard',  title: 'Firm-at-a-Glance Dashboard', text: 'Revenue MTD, outstanding receivables, new clients and expiring DSCs on one screen — filtered to a single branch or rolled up across the firm.' },
+  { icon: 'compliance', title: 'Compliance Pipeline',        text: 'Every GST, TDS, ROC and income-tax obligation generated per client with owner and due date, split live across in progress, filed and overdue.' },
+  { icon: 'assignment', title: 'Assignment Management',      text: 'Allocate work across staff and track it from unassigned through in-progress, partner review and filed — with the acknowledgement stored against the client.' },
+  { icon: 'timer',      title: 'Time Tracking & Utilisation', text: 'Staff run timers against an assignment or log hours after the fact, feeding both monthly utilisation and the invoice.' },
+  { icon: 'billing',    title: 'Billing & Invoicing',         text: 'Invoice straight from logged hours, then track what is raised versus what is still outstanding without a separate spreadsheet.' },
+  { icon: 'vault',      title: 'Vault & DSC Registry',        text: 'Client documents plus every Digital Signature Certificate the firm holds, tracked by holder, token and expiry — flagged before a filing gets blocked.' },
+];
 
-function ArtCalendar() {
-  const slots = [['Dr. Rao', [1,1,0,1,0]], ['Dr. Sen', [0,1,1,0,1]], ['Dr. Iyer', [1,0,1,1,0]]];
-  return (
-    <svg viewBox="0 0 360 150" xmlns="http://www.w3.org/2000/svg">
-      <rect width="360" height="150" rx="8" fill="#0a0a10"/>
-      <text x="14" y="22" fill="rgba(255,255,255,.45)" fontSize="10" fontFamily="system-ui">Appointment grid</text>
-      {['9','10','11','12','1'].map((h,i)=>(<text key={i} x={92+i*52} y="40" textAnchor="middle" fill="rgba(255,255,255,.3)" fontSize="7.5" fontFamily="'JetBrains Mono',monospace">{h}:00</text>))}
-      {slots.map(([dr, row], r) => (
-        <g key={r}>
-          <text x="14" y={62 + r * 30} fill="rgba(255,255,255,.5)" fontSize="8.5" fontFamily="system-ui">{dr}</text>
-          {row.map((on, c) => (
-            <rect key={c} x={72 + c * 52} y={50 + r * 30} width="44" height="18" rx="4" fill={on ? A : 'rgba(255,255,255,.05)'} fillOpacity={on ? 0.7 : 1}/>
-          ))}
-        </g>
-      ))}
-    </svg>
-  );
-}
-function ArtRecord() {
-  return (
-    <svg viewBox="0 0 220 150" xmlns="http://www.w3.org/2000/svg">
-      <rect width="220" height="150" rx="8" fill="#0a0a10"/>
-      <circle cx="30" cy="34" r="14" fill={A} fillOpacity=".2"/>
-      <text x="30" y="39" textAnchor="middle" fill={A} fontSize="12" fontFamily="'Space Grotesk'" fontWeight="700">RS</text>
-      <text x="52" y="30" fill="rgba(255,255,255,.7)" fontSize="11" fontFamily="'Space Grotesk'" fontWeight="600">Riya Sen</text>
-      <text x="52" y="44" fill="rgba(255,255,255,.35)" fontSize="8.5" fontFamily="system-ui">ID #4821 · 34F · O+</text>
-      {[['Allergies', 'Penicillin'], ['Last visit', '12 May'], ['Next', 'Today 09:00'], ['Plan', 'Follow-up']].map(([k, v], i) => (
-        <g key={i}>
-          <text x="14" y={74 + i * 18} fill="rgba(255,255,255,.35)" fontSize="8.5" fontFamily="system-ui">{k}</text>
-          <text x="206" y={74 + i * 18} textAnchor="end" fill="rgba(255,255,255,.6)" fontSize="8.5" fontFamily="system-ui">{v}</text>
-        </g>
-      ))}
-    </svg>
-  );
-}
-function ArtBilling() {
-  const rows = [['Consultation', '₹ 800'], ['Lab - CBC', '₹ 450'], ['Pharmacy', '₹ 1,240']];
-  return (
-    <svg viewBox="0 0 220 150" xmlns="http://www.w3.org/2000/svg">
-      <rect width="220" height="150" rx="8" fill="#0a0a10"/>
-      <text x="14" y="24" fill="rgba(255,255,255,.45)" fontSize="10" fontFamily="system-ui">Invoice #INV-2210</text>
-      <rect x="158" y="13" width="48" height="16" rx="8" fill={A} fillOpacity=".15"/>
-      <text x="182" y="24" textAnchor="middle" fill={A} fontSize="8" fontFamily="system-ui">PAID</text>
-      {rows.map(([k, v], i) => (
-        <g key={i}>
-          <text x="14" y={50 + i * 20} fill="rgba(255,255,255,.5)" fontSize="9.5" fontFamily="system-ui">{k}</text>
-          <text x="206" y={50 + i * 20} textAnchor="end" fill="rgba(255,255,255,.65)" fontSize="9.5" fontFamily="'JetBrains Mono',monospace">{v}</text>
-        </g>
-      ))}
-      <line x1="14" y1="118" x2="206" y2="118" stroke="rgba(255,255,255,.08)"/>
-      <text x="14" y="136" fill={A} fontSize="11" fontFamily="'Space Grotesk'" fontWeight="700">Total</text>
-      <text x="206" y="136" textAnchor="end" fill={A} fontSize="11" fontFamily="'JetBrains Mono',monospace" fontWeight="700">₹ 2,490</text>
-    </svg>
-  );
-}
+const SCREENS = [
+  { id: 'dashboard', label: 'Firm Dashboard', src: '/products/practice/hero.webp', caption: 'Firm dashboard — revenue MTD, outstanding, new clients, expiring DSCs, compliance pipeline and staff utilisation' },
+];
 
-function MockScheduleBoard() {
-  const cols = [
-    { head: 'Booked', tone: A, cards: [['Riya Sen', '09:00 · Dr. Rao'], ['Amit K', '09:30 · Dr. Sen']] },
-    { head: 'Checked-in', tone: A2, cards: [['Neha P', 'Waiting 8m'], ['Sims R', 'Waiting 3m']] },
-    { head: 'In consult', tone: '#fb923c', cards: [['Vikram J', 'Dr. Iyer']] },
-    { head: 'Completed', tone: '#34d399', cards: [['Anita D', 'Billed'], ['Rahul M', 'Billed']] },
-  ];
-  return (
-    <svg viewBox="0 0 960 360" xmlns="http://www.w3.org/2000/svg">
-      <rect width="960" height="360" rx="14" fill="#0c0c12"/>
-      <rect width="960" height="40" fill="#101018"/>
-      <circle cx="22" cy="20" r="5" fill="#ff5f57"/><circle cx="40" cy="20" r="5" fill="#febc2e"/><circle cx="58" cy="20" r="5" fill="#28c840"/>
-      <text x="480" y="25" textAnchor="middle" fill="rgba(255,255,255,.4)" fontSize="11" fontFamily="system-ui">Practice - Patient Flow</text>
-      {cols.map((col, ci) => {
-        const x = 24 + ci * 234;
-        return (
-          <g key={ci}>
-            <circle cx={x + 6} cy="66" r="4" fill={col.tone}/>
-            <text x={x + 18} y="70" fill="rgba(255,255,255,.55)" fontSize="11" fontFamily="'Space Grotesk'" fontWeight="600">{col.head}</text>
-            <text x={x + 212} y="70" textAnchor="end" fill="rgba(255,255,255,.25)" fontSize="10" fontFamily="'JetBrains Mono',monospace">{col.cards.length}</text>
-            {col.cards.map((c, i) => (
-              <g key={i}>
-                <rect x={x} y={84 + i * 78} width="214" height="66" rx="9" fill="#15151d" stroke="rgba(255,255,255,.06)"/>
-                <circle cx={x + 22} cy={117 + i * 78} r="11" fill={col.tone} fillOpacity=".7"/>
-                <text x={x + 22} y={121 + i * 78} textAnchor="middle" fill="#04141a" fontSize="10" fontFamily="'Space Grotesk'" fontWeight="700">{c[0][0]}</text>
-                <text x={x + 42} y={113 + i * 78} fill="rgba(255,255,255,.8)" fontSize="11" fontFamily="'Space Grotesk'" fontWeight="600">{c[0]}</text>
-                <text x={x + 42} y={129 + i * 78} fill="rgba(255,255,255,.35)" fontSize="9" fontFamily="system-ui">{c[1]}</text>
-              </g>
-            ))}
-          </g>
-        );
-      })}
-    </svg>
-  );
-}
+const INTEGRATIONS = [
+  { label: 'Statutory portals', tech: 'GST, income tax, TRACES and MCA filing references against each obligation' },
+  { label: 'Accounting',        tech: 'Tally, ERPNext and Zoho Books for invoice and receivable sync' },
+  { label: 'Documents',         tech: 'TechBird DMS for client records, working papers and filed returns' },
+  { label: 'Communication',     tech: 'Email and WhatsApp for due-date reminders and document requests' },
+];
 
-function MockConsole() {
-  return (
-    <svg viewBox="0 0 940 540" xmlns="http://www.w3.org/2000/svg">
-      <rect width="940" height="540" rx="16" fill="#0c0c12"/>
-      <rect width="940" height="42" fill="#101018"/>
-      <circle cx="24" cy="21" r="5" fill="#ff5f57"/><circle cx="43" cy="21" r="5" fill="#febc2e"/><circle cx="62" cy="21" r="5" fill="#28c840"/>
-      <rect x="360" y="11" width="220" height="20" rx="10" fill="#181820"/>
-      <text x="470" y="25" textAnchor="middle" fill="rgba(255,255,255,.4)" fontSize="10" fontFamily="system-ui">app.techbirdit.in/practice</text>
-      <rect x="0" y="42" width="180" height="498" fill="#0a0a10"/>
-      <text x="22" y="74" fill="#fff" fontSize="13" fontFamily="'Space Grotesk'" fontWeight="700">TechBird Practice</text>
-      <rect x="16" y="94" width="148" height="30" rx="7" fill={A} fillOpacity=".14"/>
-      <circle cx="32" cy="109" r="5" fill={A}/><text x="46" y="113" fill={A} fontSize="11" fontFamily="system-ui">Schedule</text>
-      {['Patients','Appointments','Clinical','Billing','Pharmacy','Reports','Settings'].map((t,i)=>(
-        <g key={i}><circle cx="32" cy={146+i*32} r="5" fill="rgba(255,255,255,.18)"/><text x="46" y={150+i*32} fill="rgba(255,255,255,.45)" fontSize="11" fontFamily="system-ui">{t}</text></g>
-      ))}
-      <text x="206" y="78" fill="#fff" fontSize="17" fontFamily="'Space Grotesk'" fontWeight="700">Today's Schedule</text>
-      <text x="206" y="96" fill="rgba(255,255,255,.35)" fontSize="11" fontFamily="system-ui">Tue 10 Jun · 3 practitioners</text>
-      <rect x="772" y="60" width="144" height="32" rx="16" fill={A}/>
-      <text x="844" y="80" textAnchor="middle" fill="#04141a" fontSize="11" fontFamily="'Space Grotesk'" fontWeight="700">Book Appt</text>
-      {[['APPTS','28','today',A],['CHECKED-IN','11','waiting',A2],['REVENUE','₹1.8L','today','#34d399'],['NO-SHOWS','2','1.6%','#fb923c']].map(([l,v,s,c],i)=>{
-        const x=206+i*180;
-        return (
-          <g key={i}>
-            <rect x={x} y="116" width="166" height="86" rx="11" fill="#13131b" stroke="rgba(255,255,255,.06)"/>
-            <text x={x+16} y="140" fill="rgba(255,255,255,.4)" fontSize="9" fontFamily="'JetBrains Mono',monospace" letterSpacing="1">{l}</text>
-            <text x={x+16} y="172" fill={c} fontSize="24" fontFamily="'Space Grotesk'" fontWeight="700">{v}</text>
-            <text x={x+16} y="190" fill="rgba(255,255,255,.3)" fontSize="9" fontFamily="system-ui">{s}</text>
-          </g>
-        );
-      })}
-      {/* schedule timeline */}
-      <rect x="206" y="218" width="430" height="296" rx="12" fill="#13131b" stroke="rgba(255,255,255,.06)"/>
-      <text x="224" y="244" fill="rgba(255,255,255,.5)" fontSize="11" fontFamily="system-ui">Dr. Rao · Room 2</text>
-      {['09:00','09:30','10:00','10:30','11:00','11:30'].map((t,i)=>(
-        <g key={i}>
-          <text x="232" y={272+i*38} fill="rgba(255,255,255,.3)" fontSize="9" fontFamily="'JetBrains Mono',monospace">{t}</text>
-          <line x1="272" y1={268+i*38} x2="616" y2={268+i*38} stroke="rgba(255,255,255,.05)"/>
-          {[0,1,3,4].includes(i) && (
-            <g>
-              <rect x="278" y={258+i*38} width="330" height="24" rx="6" fill={[A,A2,A,'#34d399',A,A2][i]} fillOpacity=".16" stroke={[A,A2,A,'#34d399',A,A2][i]} strokeWidth="0.5" strokeOpacity=".4"/>
-              <text x="290" y={274+i*38} fill="rgba(255,255,255,.7)" fontSize="9.5" fontFamily="system-ui">{['Riya Sen - Follow-up','Amit K - Consult','','Neha P - Review','Sims R - New','' ][i]}</text>
-            </g>
-          )}
-        </g>
-      ))}
-      {/* patient record panel */}
-      <rect x="652" y="218" width="264" height="296" rx="12" fill="#13131b" stroke="rgba(255,255,255,.06)"/>
-      <circle cx="684" cy="252" r="18" fill={A} fillOpacity=".2"/>
-      <text x="684" y="258" textAnchor="middle" fill={A} fontSize="14" fontFamily="'Space Grotesk'" fontWeight="700">RS</text>
-      <text x="712" y="246" fill="rgba(255,255,255,.8)" fontSize="13" fontFamily="'Space Grotesk'" fontWeight="600">Riya Sen</text>
-      <text x="712" y="262" fill="rgba(255,255,255,.35)" fontSize="9.5" fontFamily="system-ui">#4821 · 34F · O+</text>
-      {[['Allergies','Penicillin'],['BP','118 / 76'],['Last visit','12 May 2026'],['Diagnosis','Hypertension'],['Plan','Continue Rx']].map(([k,v],i)=>(
-        <g key={i}>
-          <text x="672" y={296+i*30} fill="rgba(255,255,255,.35)" fontSize="9" fontFamily="system-ui">{k}</text>
-          <text x="900" y={296+i*30} textAnchor="end" fill="rgba(255,255,255,.65)" fontSize="9.5" fontFamily="system-ui">{v}</text>
-          <line x1="672" y1={306+i*30} x2="900" y2={306+i*30} stroke="rgba(255,255,255,.05)"/>
-        </g>
-      ))}
-      <rect x="672" y="476" width="228" height="26" rx="13" fill={A} fillOpacity=".16"/>
-      <text x="786" y="493" textAnchor="middle" fill={A} fontSize="10" fontFamily="'Space Grotesk'" fontWeight="600">Start consultation</text>
-    </svg>
-  );
-}
-
-const faqItems = [
-  { q: 'Is this for clinics, hospitals or law firms?', a: 'All three. The same engine - scheduling, records, billing, compliance - adapts to a single-doctor clinic, a multi-department hospital, or a law firm managing client matters and appointments. We configure terminology and workflows to your domain.' },
-  { q: 'Can patients or clients book online themselves?', a: 'Yes. A self-service portal and booking widget let people see availability and book without calling. They also get reminders, reports and online payment links, which cuts front-desk load significantly.' },
-  { q: 'How does it reduce no-shows?', a: 'Automated reminders go out over WhatsApp, SMS and email at configurable intervals before each appointment, with easy reschedule links. Practices typically see no-shows drop by a third or more.' },
-  { q: 'Is patient data kept private and compliant?', a: 'Yes. Role-based access controls who can see what, consent is captured and logged, and every record access is audited. Data can be hosted on-premise or in a private cloud for sovereignty requirements.' },
-  { q: 'On-premise or cloud, and how long to go live?', a: 'Deploy on-premise or on a private cloud. A single-location practice can go live in 3–5 weeks; multi-location or hospital deployments with diagnostics and insurance integrations run 8–14 weeks.' },
+const FAQ = [
+  { q: 'Who is this built for?',                a: 'Chartered accountancy, company-secretarial and tax practices — from a two-partner firm to a multi-branch setup running thousands of filings a year. Clients, engagements, compliance, assignments, time and billing sit in one system instead of across spreadsheets and WhatsApp groups.' },
+  { q: 'How does the compliance pipeline work?', a: 'Every recurring obligation — GST returns, TDS, ROC filings, income tax — is generated against the client with its own due date and owner. The dashboard rolls the whole firm into in progress, filed and overdue, so a partner sees what is slipping without asking anyone.' },
+  { q: 'What does the DSC registry do?',         a: 'It tracks every Digital Signature Certificate the firm holds on behalf of clients, with holder, token location and expiry date. Certificates approaching expiry surface on the dashboard well before renewal, so a filing is never blocked by a dead DSC.' },
+  { q: 'Can it handle multiple branches?',       a: 'Yes. Each branch has its own clients, staff and assignments, and the dashboard filters to one branch or rolls every branch into a single view. Revenue and staff utilisation read per branch or firm-wide.' },
+  { q: 'How is time tracking tied to billing?',  a: 'Staff run a timer against an assignment, or log hours afterwards. Those hours drive both the utilisation report and the invoice, so billable work is captured where it happened rather than reconstructed at month end.' },
+  { q: 'On-premise or cloud?',                   a: 'Either. A single-branch practice typically goes live in 3–5 weeks including client data migration. Multi-branch rollouts with historical filing history and DSC inventory run 8–12 weeks.' },
 ];
 
 export default function PracticeManagementPage() {
+  const root = useRef(null);
+  /* pauses the blurred hero orbs once the hero scrolls away */
+  const heroRef = useIdleOffscreen();
+  const [activeScreen, setActiveScreen] = useState('dashboard');
+
+  useLayoutEffect(() => { window.scrollTo(0, 0); }, []);
+
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      const ease = 'power3.out';
+
+      gsap.from('.hrms-hero-eyebrow', { opacity: 0, y: 12, duration: 0.5 });
+      gsap.from('.hrms-hero h1',      { opacity: 0, y: 24, duration: 0.7, delay: 0.1 });
+      gsap.from('.hrms-hero-sub',     { opacity: 0, y: 16, duration: 0.6, delay: 0.25 });
+      gsap.from('.hrms-hero-shot',    { opacity: 0, y: 40, duration: 0.9, delay: 0.4, ease });
+
+      gsap.from('.hrms-module', {
+        scrollTrigger: { trigger: '.hrms-modules', start: 'top 88%', once: true },
+        opacity: 0, y: 16, stagger: 0.05, duration: 0.45, ease,
+      });
+
+      gsap.from('.hrms-feat', {
+        scrollTrigger: { trigger: '.hrms-features-grid', start: 'top 82%', once: true },
+        opacity: 0, y: 30, stagger: 0.07, duration: 0.6, ease,
+      });
+
+      gsap.from('.hrms-screen', {
+        scrollTrigger: { trigger: '.hrms-showcase', start: 'top 78%', once: true },
+        opacity: 0, y: 40, duration: 0.8, ease,
+      });
+
+      gsap.from('.hrms-integ-item', {
+        scrollTrigger: { trigger: '.hrms-integ-grid', start: 'top 85%', once: true },
+        opacity: 0, y: 24, stagger: 0.07, duration: 0.5, ease,
+      });
+
+      gsap.from('.hrms-faq-item', {
+        scrollTrigger: { trigger: '.hrms-faq-list', start: 'top 84%', once: true },
+        opacity: 0, y: 20, stagger: 0.06, duration: 0.5, ease,
+      });
+
+      gsap.from('.hrms-cta-inner > *', {
+        scrollTrigger: { trigger: '.hrms-cta', start: 'top 80%', once: true },
+        opacity: 0, y: 30, stagger: 0.12, duration: 0.6, ease,
+      });
+    }, root);
+
+    return () => ctx.revert();
+  }, []);
+
+  const currentScreen = SCREENS.find(s => s.id === activeScreen);
+
   return (
-    <>
-    <SEO
-      title="Practice Management"
-      description="TechBird Practice Management - appointments, patient and client records, billing and compliance for clinics, hospitals and law firms. Reduce no-shows, streamline billing and run your practice from one interface."
-      keywords="practice management software, clinic management, hospital management, appointment scheduling, patient records, medical billing, law firm management, healthcare software, practice automation India"
-      faqItems={faqItems}
-      softwareSchema={{ name: 'TechBird Practice Management', description: 'Client management, time tracking, billing and compliance for law/CA firms.', category: 'BusinessApplication' }}
-    />
-    <ProductPageLayout
-      accent={A}
-      category="Healthcare & Legal"
-      breadcrumbLabel="Practice Management"
-      title="Run the practice, *not the paperwork.*"
-      lead="Appointments, patient or client records, billing and compliance in one interface - for clinics, hospitals and law firms. Less front-desk chaos, more time with the people who matter."
-      heroActions={[
-        { label: 'Request a Demo', to: '/contact', variant: 'accent' },
-        { label: 'See it in action', to: '/contact', variant: 'white' },
-      ]}
-      heroMockup={<MockHeroDash />}
-      stats={[
-        { value: '–35%', label: 'No-shows with automated reminders' },
-        { value: '<em>1</em>', label: 'Record per patient or client' },
-        { value: '2×', label: 'Faster check-in to billing' },
-        { value: '24/7', label: 'Self-service booking & portal' },
-      ]}
-      bento={{
-        eyebrow: 'Capabilities',
-        heading: 'Front desk to follow-up, handled.',
-        sub: 'Scheduling, records, billing and reminders share one patient/client profile - so the whole visit flows without re-entering anything.',
-        items: [
-          { icon: I.calendar, title: 'Smart scheduling', text: 'Multi-practitioner, multi-room calendars with online booking and waitlists.', art: <ArtCalendar />, span: true },
-          { icon: I.record, title: 'Patient / case records', text: 'Complete history, notes, documents and prescriptions in one profile.', art: <ArtRecord /> },
-          { icon: I.invoice, title: 'Billing & payments', text: 'Itemised invoices, insurance, packages and online payment collection.', art: <ArtBilling /> },
-          { icon: I.bell, title: 'Reminders', text: 'Automated WhatsApp, SMS and email reminders cut no-shows sharply.' },
-          { icon: I.shield, title: 'Compliance & privacy', text: 'Role-based access, consent capture and audit trails for regulated data.' },
-        ],
-      }}
-      light={{
-        eyebrow: 'The visit',
-        heading: 'Booked to billed, in one flow.',
-        sub: 'A patient moves from booking through check-in, consultation and billing - each step updating one shared record with no duplicate entry.',
-        mockup: <MockScheduleBoard />,
-        columns: [
-          { icon: I.calendar, title: 'Book & remind', text: 'Online or front-desk booking with automatic reminders to reduce no-shows.' },
-          { icon: I.record, title: 'Consult & document', text: 'Notes, vitals, prescriptions and documents captured against the record.' },
-          { icon: I.invoice, title: 'Bill & follow up', text: 'Invoice, collect payment and schedule the next visit before they leave.' },
-        ],
-      }}
-      laser={{
-        eyebrow: 'Live Product',
-        heading: 'See the platform in action.',
-        sub: 'One console for the whole practice - schedule, patient queue, records and billing, live. Hover to explore.',
-        mockup: <MockConsole />,
-        features: [
-          { icon: I.calendar, title: 'Appointment scheduling', text: 'Multi-practitioner calendars, online booking, reminders and waitlists.' },
-          { icon: I.record, title: 'Records & clinical notes', text: 'Full history, documents, vitals and prescriptions in one secure profile.' },
-          { icon: I.invoice, title: 'Billing & insurance', text: 'Itemised invoicing, packages, insurance claims and online payments.' },
-          { icon: I.bell, title: 'Automated reminders', text: 'WhatsApp, SMS and email reminders and recalls that cut no-shows.' },
-          { icon: I.portal, title: 'Patient portal', text: 'Self-service booking, reports and payment access for patients and clients.' },
-          { icon: I.shield, title: 'Compliance-ready', text: 'Consent, audit trails and role-based access for regulated environments.' },
-        ],
-      }}
-      integrations={{
-        eyebrow: 'Connects with',
-        heading: 'Fits your existing stack.',
-        items: [
-          { label: 'Communication', tech: 'WhatsApp, SMS and email for reminders and reports' },
-          { label: 'Payments', tech: 'UPI, cards and payment gateways with auto-reconcile' },
-          { label: 'Diagnostics', tech: 'Lab/imaging systems and HL7/FHIR data exchange' },
-          { label: 'Accounting', tech: 'Tally, ERPNext and Zoho Books exports' },
-        ],
-      }}
-      faqItems={faqItems}
-      cta={{
-        label: 'Get started',
-        heading: 'Ready to streamline your practice?',
-        body: 'A focused walkthrough mapped to your appointment types, billing and the way your front desk actually runs.',
-        button: { label: 'Book a Demo', to: '/contact' },
-      }}
-    />
-    </>
+    <div className="hrms pp--practice" ref={root}>
+      <SEO
+        title="Practice Management"
+        description="TechBird Practice Management — client management, engagements, statutory compliance tracking, assignments, time tracking, billing and a DSC registry for chartered accountancy and company-secretarial firms."
+        keywords="practice management software, CA firm software, chartered accountant practice management, company secretary software, compliance tracking, DSC registry, statutory compliance software, GST return tracking, firm billing software India"
+        faqItems={FAQ}
+        softwareSchema={{ name: 'TechBird Practice Management', description: 'Client management, compliance tracking, time tracking, billing and DSC registry for CA and CS firms.', category: 'BusinessApplication' }}
+      />
+      <InnerNavbar />
+
+      {/* ── HERO ── */}
+      <section className="hrms-hero" ref={heroRef}>
+        <div className="hrms-hero-bg" aria-hidden="true">
+          <div className="hrms-hero-orb hrms-hero-orb--1" />
+          <div className="hrms-hero-orb hrms-hero-orb--2" />
+          <div className="hrms-hero-orb hrms-hero-orb--3" />
+          <div className="hrms-hero-grid" />
+        </div>
+        <div className="hrms-wrap">
+          <span className="hrms-hero-eyebrow">CA &amp; CS Firms</span>
+          <h1 className="hrms-display">Run the firm, <em>not the follow-ups.</em></h1>
+          <p className="hrms-hero-sub">
+            Clients, engagements, statutory compliance, assignments, time and billing in one system — with a compliance pipeline that shows what is filed, in progress and overdue, and a DSC registry that never lets an expiry block a filing.
+          </p>
+          <div className="hrms-hero-shot">
+            <img src="/products/practice/hero.webp" alt="TechBird Practice Management dashboard — compliance pipeline, staff utilisation and DSC expiry tracking" loading="eager" onError={onShotError} />
+          </div>
+        </div>
+      </section>
+
+      {/* ── MODULES STRIP ── */}
+      <section className="hrms-modules">
+        <div className="hrms-wrap">
+          <div className="hrms-modules-grid">
+            {[
+              { icon: ICONS.dashboard,  label: 'Dashboard' },
+              { icon: ICONS.clients,    label: 'Client Management' },
+              { icon: ICONS.engagement, label: 'Engagements' },
+              { icon: ICONS.compliance, label: 'Compliance' },
+              { icon: ICONS.assignment, label: 'Assignments' },
+              { icon: ICONS.timer,      label: 'Time Tracking' },
+              { icon: ICONS.billing,    label: 'Billing & Invoicing' },
+              { icon: ICONS.docs,       label: 'Documents' },
+              { icon: ICONS.staff,      label: 'Staff Management' },
+              { icon: ICONS.vault,      label: 'Vault & DSC Registry' },
+            ].map((m, i) => (
+              <div className="hrms-module" key={i}>
+                <span className="hrms-module-ico">{m.icon}</span>
+                <span className="hrms-module-label">{m.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── FEATURES ── */}
+      <section className="hrms-features">
+        <div className="hrms-wrap">
+          <div className="hrms-features-head">
+            <span className="hrms-eyebrow">Capabilities</span>
+            <h2 className="hrms-display">Every obligation, owned and dated.</h2>
+            <p>Clients, engagements, filings and assignments share one record — so a due date, the person on it and the hours against it are never in three different places.</p>
+          </div>
+          <div className="hrms-features-grid">
+            {FEATURES.map((f, i) => (
+              <div className="hrms-feat" key={i}>
+                <span className="hrms-feat-ico">{ICONS[f.icon]}</span>
+                <h3>{f.title}</h3>
+                <p>{f.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── PRODUCT SHOWCASE ── */}
+      <section className="hrms-showcase">
+        <div className="hrms-wrap">
+          <div className="hrms-showcase-head">
+            <span className="hrms-eyebrow">Product</span>
+            <h2 className="hrms-display">See the platform in action.</h2>
+            <p>One console for the whole practice — compliance pipeline, staff utilisation, revenue and DSC expiries, read per branch or across every branch at once.</p>
+          </div>
+
+          <div className="hrms-tabs">
+            {SCREENS.map(s => (
+              <button
+                key={s.id}
+                className={`hrms-tab${activeScreen === s.id ? ' active' : ''}`}
+                onClick={() => setActiveScreen(s.id)}
+              >
+                {s.label}
+              </button>
+            ))}
+          </div>
+
+          <div className="hrms-screen">
+            <img
+              src={currentScreen.src}
+              alt={currentScreen.caption}
+              key={currentScreen.id}
+              onError={onShotError}
+            />
+            <div className="hrms-screen-caption">
+              <span>{currentScreen.caption}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── INTEGRATIONS ── */}
+      <section className="hrms-integ">
+        <div className="hrms-wrap">
+          <div className="hrms-integ-head">
+            <span className="hrms-eyebrow">Connects with</span>
+            <h2 className="hrms-display">Fits your existing stack.</h2>
+          </div>
+          <div className="hrms-integ-grid">
+            {INTEGRATIONS.map((it, i) => (
+              <div className="hrms-integ-item" key={i}>
+                <span className="hrms-integ-num">0{i + 1}</span>
+                <h4>{it.label}</h4>
+                <p>{it.tech}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── FAQ ── */}
+      <section className="hrms-faq">
+        <div className="hrms-wrap">
+          <div className="hrms-faq-inner">
+            <div className="hrms-faq-left">
+              <span className="hrms-eyebrow">FAQ</span>
+              <h2 className="hrms-display">Questions, answered.</h2>
+              <p>Everything you need to know before you move the practice onto it.</p>
+            </div>
+            <div className="hrms-faq-list">
+              {FAQ.map((f, i) => <Faq key={i} q={f.q} a={f.a} />)}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── CTA ── */}
+      <section className="hrms-cta">
+        <div className="hrms-wrap">
+          <div className="hrms-cta-inner">
+            <div>
+              <p className="hrms-cta-label">Get started</p>
+              <h2 className="hrms-display">Ready to see your firm at a glance?</h2>
+            </div>
+            <div>
+              <p className="hrms-cta-body">
+                A walkthrough mapped to your compliance calendar, engagement types and the way your branches actually work.
+              </p>
+              <Link to="/contact" className="btn-pill">
+                <span>Book a Demo</span><i className="arrow"></i>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
   );
 }

@@ -191,6 +191,23 @@ a.cp-info-item:hover {
 .cp-submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 .cp-submit-btn svg { width: 18px; height: 18px; }
 
+/* Honeypot: taken out of the layout and off-screen, but still rendered
+   and focusable-by-script so bots that fill every input trip it.
+   Deliberately NOT display:none or hidden - both are commonly skipped. */
+.cp-honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Cloudflare Turnstile. Fixed height reserves the widget's space so the
+   form does not jump when the challenge finishes loading. */
+.cp-turnstile {
+  min-height: 65px;
+}
+
 .cp-error {
   color: #ef4444;
   font-size: 0.875rem;

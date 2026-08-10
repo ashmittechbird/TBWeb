@@ -4,8 +4,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import InnerNavbar from '../components/InnerNavbar';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
-import useFrappeLead from '../hooks/useFrappeLead';
-import { CONTACT_EMAIL } from '../lib/frappe';
+import Turnstile from '../components/Turnstile';
+import useContactEnquiry from '../hooks/useContactEnquiry';
+import { CONTACT_EMAIL, TURNSTILE_SITE_KEY, isTurnstileEnabled } from '../lib/mailbird';
 import '../styles/inner.css';
 import '../styles/contact-page.css';
 
@@ -22,11 +23,18 @@ const FAQS = [
 export default function ContactPage() {
   const root = useRef(null);
   const [openFaq, setOpenFaq] = useState(null);
-  const EMPTY_FORM = { name: '', email: '', phone: '', company: '', service: '', message: '' };
+  /* `website_url` is the endpoint's honeypot - it must reach the server
+     empty. It is a real field so a bot that fills every input gets
+     caught; humans never see it. */
+  const EMPTY_FORM = { name: '', email: '', phone: '', company: '', service: '', message: '', website_url: '' };
   const [formState, setFormState] = useState(EMPTY_FORM);
-  /* null while editing, otherwise 'created' | 'fallback' - see useFrappeLead */
+  /* null while editing, otherwise 'created' | 'fallback' - see useContactEnquiry */
   const [outcome, setOutcome] = useState(null);
-  const { submit, loading: submitting, error: submitError } = useFrappeLead();
+  const [turnstileToken, setTurnstileToken] = useState('');
+  /* Bumped after a rejected submission to force a fresh challenge - the
+     server has already consumed the previous token. */
+  const [turnstileReset, setTurnstileReset] = useState(0);
+  const { submit, loading: submitting, error: submitError } = useContactEnquiry();
 
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
@@ -57,12 +65,23 @@ export default function ContactPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const result = await submit(formState);
-    // 'error' keeps the filled-in form on screen so nothing is retyped.
-    if (result.status !== 'error') setOutcome(result.status);
+    const result = await submit(formState, turnstileToken);
+    // 'error' keeps the filled-in form on screen so nothing is retyped,
+    // but the spent captcha token has to be replaced before a retry.
+    if (result.status === 'error') {
+      setTurnstileToken('');
+      setTurnstileReset(n => n + 1);
+      return;
+    }
+    setOutcome(result.status);
   };
 
-  const resetForm = () => { setOutcome(null); setFormState(EMPTY_FORM); };
+  const resetForm = () => {
+    setOutcome(null);
+    setFormState(EMPTY_FORM);
+    setTurnstileToken('');
+    setTurnstileReset(n => n + 1);
+  };
 
   return (
     <div className="cp-root" ref={root}>
@@ -222,13 +241,40 @@ export default function ContactPage() {
                     <label htmlFor="cp-msg">Tell us about your project *</label>
                     <textarea id="cp-msg" name="message" required rows="5" minLength={10} maxLength={2000} value={formState.message} onChange={handleChange} placeholder="What are you building? What's the timeline?" />
                   </div>
+                  {/* Honeypot. Off-screen rather than display:none, which
+                      some bots skip over. */}
+                  <div className="cp-honeypot" aria-hidden="true">
+                    <label htmlFor="cp-website-url">Website</label>
+                    <input
+                      id="cp-website-url"
+                      name="website_url"
+                      type="text"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      value={formState.website_url}
+                      onChange={handleChange}
+                    />
+                  </div>
+
+                  {isTurnstileEnabled() && (
+                    <Turnstile
+                      siteKey={TURNSTILE_SITE_KEY}
+                      onToken={setTurnstileToken}
+                      resetSignal={turnstileReset}
+                    />
+                  )}
+
                   {submitError && (
                     <p className="cp-error" role="alert">
                       {submitError}{' '}
                       <a href={`mailto:${CONTACT_EMAIL}`} className="cp-inline-link">{CONTACT_EMAIL}</a>
                     </p>
                   )}
-                  <button type="submit" className="cp-submit-btn" disabled={submitting}>
+                  <button
+                    type="submit"
+                    className="cp-submit-btn"
+                    disabled={submitting || (isTurnstileEnabled() && !turnstileToken)}
+                  >
                     <span>{submitting ? 'Sending...' : 'Send Message'}</span>
                     <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 10h12M12 4l6 6-6 6"/></svg>
                   </button>

@@ -242,10 +242,6 @@ export default function ERPPage() {
       breadcrumbLabel="Custom ERP"
       title="One system to run the *whole business.*"
       lead="A full-suite ERP on ERPNext - finance, inventory, manufacturing, sales, purchase and HR on a single data layer, configured to your workflows instead of forcing you onto someone else's."
-      heroActions={[
-        { label: 'Request a Demo', to: '/contact', variant: 'accent' },
-        { label: 'See it in action', to: '/contact', variant: 'white' },
-      ]}
       heroMockup={<MockHeroDash />}
       stats={[
         { value: '6+', label: 'Core modules on one platform' },

@@ -1,22 +1,36 @@
-import FloatingLines from './FloatingLines';
+import { lazy, Suspense } from 'react';
+import useIdleOffscreen from '../hooks/useIdleOffscreen';
+
+/* FloatingLines pulls in three.js (~500 kB), which as a static import sat on
+   the homepage's critical path and blocked the headline from painting. Lazily
+   loaded, the hero text and capabilities render immediately and the animated
+   backdrop streams in behind them a moment later.
+
+   No Suspense fallback art is needed: the panel already has its own dark
+   background and the vignette on top, so the gap reads as the intended
+   backdrop rather than a hole. */
+const FloatingLines = lazy(() => import('./FloatingLines'));
 
 export default function Hero() {
+  const panelRef = useIdleOffscreen();
   return (
     <>
-      <div className="hero-panel" id="heroPanel">
-        <FloatingLines
-          linesGradient={['#2a1a5e', '#3b1f8e', '#5227FF', '#1a103a']}
-          enabledWaves={['top', 'middle', 'bottom']}
-          lineCount={[8, 12, 16]}
-          lineDistance={[8, 6, 4]}
-          bendRadius={5.0}
-          bendStrength={-0.5}
-          interactive={true}
-          parallax={true}
-          parallaxStrength={0.2}
-          animationSpeed={0.8}
-          mixBlendMode="normal"
-        />
+      <div className="hero-panel" id="heroPanel" ref={panelRef}>
+        <Suspense fallback={null}>
+          <FloatingLines
+            linesGradient={['#2a1a5e', '#3b1f8e', '#5227FF', '#1a103a']}
+            enabledWaves={['top', 'middle', 'bottom']}
+            lineCount={[8, 12, 16]}
+            lineDistance={[8, 6, 4]}
+            bendRadius={5.0}
+            bendStrength={-0.5}
+            interactive={true}
+            parallax={true}
+            parallaxStrength={0.2}
+            animationSpeed={0.8}
+            mixBlendMode="normal"
+          />
+        </Suspense>
         <div className="hero-vignette"></div>
 
         <div className="hero-center" id="heroCenter">

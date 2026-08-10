@@ -6,6 +6,7 @@ import InnerNavbar from '../../components/InnerNavbar';
 import Footer from '../../components/Footer';
 import SEO from '../../components/SEO';
 import { onShotError } from '../../utils/shotFallback';
+import useIdleOffscreen from '../../hooks/useIdleOffscreen';
 import '../../styles/inner.css';
 import '../../styles/hrms-page.css';
 
@@ -47,9 +48,9 @@ const ICONS = {
 };
 
 const SCREENS = [
-  { id: 'dashboard', label: 'HR Dashboard', src: '/products/hrms/hero-dashboard.png', caption: 'Workforce dashboard with real-time metrics and quick actions' },
-  { id: 'employee', label: 'Employee Details', src: '/products/hrms/employee-details.png', caption: 'Complete employee profile with tasks, career history and assets' },
-  { id: 'overview', label: 'Org Overview', src: '/products/hrms/org-overview.png', caption: 'Organization-wide overview  - attendance, approvals and headcount at a glance' },
+  { id: 'dashboard', label: 'HR Dashboard', src: '/products/hrms/hero-dashboard.webp', caption: 'Workforce dashboard with real-time metrics and quick actions' },
+  { id: 'employee', label: 'Employee Details', src: '/products/hrms/employee-details.webp', caption: 'Complete employee profile with tasks, career history and assets' },
+  { id: 'overview', label: 'Org Overview', src: '/products/hrms/org-overview.webp', caption: 'Organization-wide overview  - attendance, approvals and headcount at a glance' },
 ];
 
 const INTEGRATIONS = [
@@ -69,6 +70,8 @@ const FAQ = [
 
 export default function HRMSPage() {
   const root = useRef(null);
+  /* pauses the blurred hero orbs once the hero scrolls away */
+  const heroRef = useIdleOffscreen();
   const [activeScreen, setActiveScreen] = useState('dashboard');
 
   useLayoutEffect(() => { window.scrollTo(0, 0); }, []);
@@ -137,7 +140,7 @@ export default function HRMSPage() {
       <InnerNavbar />
 
       {/* ── HERO ── */}
-      <section className="hrms-hero">
+      <section className="hrms-hero" ref={heroRef}>
         <div className="hrms-hero-bg" aria-hidden="true">
           <div className="hrms-hero-orb hrms-hero-orb--1" />
           <div className="hrms-hero-orb hrms-hero-orb--2" />
@@ -152,7 +155,7 @@ export default function HRMSPage() {
             Hire to retire, without the spreadsheets.
           </p>
           <div className="hrms-hero-shot">
-            <img src="/products/hrms/hero-dashboard.png" alt="TechBird HRMS Dashboard  - Manage your workforce with confidence" loading="eager" onError={onShotError} />
+            <img src="/products/hrms/hero-dashboard.webp" alt="TechBird HRMS Dashboard  - Manage your workforce with confidence" loading="eager" onError={onShotError} />
           </div>
         </div>
       </section>

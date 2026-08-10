@@ -249,10 +249,6 @@ export default function EcommercePage() {
       breadcrumbLabel="E-Commerce Platform"
       title="Sell everywhere, *manage from one place.*"
       lead="A multi-vendor marketplace or single-brand storefront with catalog, inventory, payments, shipping and analytics - one back office for every channel you sell on."
-      heroActions={[
-        { label: 'Request a Demo', to: '/contact', variant: 'accent' },
-        { label: 'See it in action', to: '/contact', variant: 'white' },
-      ]}
       heroMockup={<MockHeroDash />}
       stats={[
         { value: '<em>1</em>', label: 'Back office for every channel' },

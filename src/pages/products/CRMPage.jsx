@@ -6,6 +6,7 @@ import InnerNavbar from '../../components/InnerNavbar';
 import Footer from '../../components/Footer';
 import SEO from '../../components/SEO';
 import { onShotError } from '../../utils/shotFallback';
+import useIdleOffscreen from '../../hooks/useIdleOffscreen';
 import '../../styles/inner.css';
 import '../../styles/hrms-page.css';
 
@@ -49,7 +50,7 @@ const FEATURES = [
 ];
 
 const SCREENS = [
-  { id: 'lead', label: 'Lead Detail', src: '/products/crm/lead-detail.png', caption: 'Full lead record — lifecycle stages, contact info, sales activity and WhatsApp history' },
+  { id: 'lead', label: 'Lead Detail', src: '/products/crm/lead-detail.webp', caption: 'Full lead record — lifecycle stages, contact info, sales activity and WhatsApp history' },
 ];
 
 const INTEGRATIONS = [
@@ -69,6 +70,8 @@ const FAQ = [
 
 export default function CRMPage() {
   const root = useRef(null);
+  /* pauses the blurred hero orbs once the hero scrolls away */
+  const heroRef = useIdleOffscreen();
   const [activeScreen, setActiveScreen] = useState('lead');
 
   useLayoutEffect(() => { window.scrollTo(0, 0); }, []);
@@ -130,7 +133,7 @@ export default function CRMPage() {
       <InnerNavbar />
 
       {/* ── HERO ── */}
-      <section className="hrms-hero">
+      <section className="hrms-hero" ref={heroRef}>
         <div className="hrms-hero-bg" aria-hidden="true">
           <div className="hrms-hero-orb hrms-hero-orb--1" />
           <div className="hrms-hero-orb hrms-hero-orb--2" />
@@ -144,7 +147,7 @@ export default function CRMPage() {
             Full-funnel CRM with lead capture, lifecycle tracking, sales activity, call logs and WhatsApp follow-ups — built for sales teams that can&apos;t afford to miss a deal.
           </p>
           <div className="hrms-hero-shot">
-            <img src="/products/crm/lead-detail.png" alt="TechBird CRM — Lead record with lifecycle stages, contact details and sales activity" loading="eager" onError={onShotError} />
+            <img src="/products/crm/lead-detail.webp" alt="TechBird CRM — Lead record with lifecycle stages, contact details and sales activity" loading="eager" onError={onShotError} />
           </div>
         </div>
       </section>

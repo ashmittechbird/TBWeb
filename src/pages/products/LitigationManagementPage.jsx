@@ -6,6 +6,7 @@ import InnerNavbar from '../../components/InnerNavbar';
 import Footer from '../../components/Footer';
 import SEO from '../../components/SEO';
 import { onShotError } from '../../utils/shotFallback';
+import useIdleOffscreen from '../../hooks/useIdleOffscreen';
 import '../../styles/inner.css';
 import '../../styles/hrms-page.css';
 
@@ -49,7 +50,7 @@ const FEATURES = [
 ];
 
 const SCREENS = [
-  { id: 'dashboard', label: 'LMS Dashboard', src: '/products/lms/hero.png', caption: 'Real-time dashboard — total cases, open notices, demand value and stage-wise case intelligence' },
+  { id: 'dashboard', label: 'LMS Dashboard', src: '/products/lms/hero.webp', caption: 'Real-time dashboard — total cases, open notices, demand value and stage-wise case intelligence' },
 ];
 
 const INTEGRATIONS = [
@@ -69,6 +70,8 @@ const FAQ = [
 
 export default function LitigationManagementPage() {
   const root = useRef(null);
+  /* pauses the blurred hero orbs once the hero scrolls away */
+  const heroRef = useIdleOffscreen();
   const [activeScreen, setActiveScreen] = useState('dashboard');
 
   useLayoutEffect(() => { window.scrollTo(0, 0); }, []);
@@ -130,7 +133,7 @@ export default function LitigationManagementPage() {
       <InnerNavbar />
 
       {/* ── HERO ── */}
-      <section className="hrms-hero">
+      <section className="hrms-hero" ref={heroRef}>
         <div className="hrms-hero-bg" aria-hidden="true">
           <div className="hrms-hero-orb hrms-hero-orb--1" />
           <div className="hrms-hero-orb hrms-hero-orb--2" />
@@ -144,7 +147,7 @@ export default function LitigationManagementPage() {
             LMS Dashboard with real-time key metrics — total cases, open notices, total demand, overdue notices, active appeals and contingent liability — with stage-wise case intelligence.
           </p>
           <div className="hrms-hero-shot">
-            <img src="/products/lms/hero.png" alt="TechBird LMS Dashboard — Litigation case tracking and demand monitoring" loading="eager" onError={onShotError} />
+            <img src="/products/lms/hero.webp" alt="TechBird LMS Dashboard — Litigation case tracking and demand monitoring" loading="eager" onError={onShotError} />
           </div>
         </div>
       </section>

@@ -380,8 +380,11 @@ export const LaserFlow = ({
 
     const animate = () => {
       raf = requestAnimationFrame(animate);
+      /* Gate BEFORE sizing: setSizeNow() measures the container, so calling it
+         first meant a forced layout read every frame even while the beam was
+         off screen and not being drawn. */
+      if (pausedRef.current || !inViewRef.current || document.hidden) return;
       setSizeNow(); // keep the drawing buffer matched to the (possibly late-laid-out) container
-      if (pausedRef.current || !inViewRef.current) return;
       const t = clock.getElapsedTime();
       const dt = Math.max(0, t - prevTime);
       prevTime = t;

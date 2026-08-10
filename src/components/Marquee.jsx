@@ -1,6 +1,9 @@
+import useIdleOffscreen from '../hooks/useIdleOffscreen';
+
 export default function Marquee() {
+  const ref = useIdleOffscreen();
   return (
-    <section className="marquee" aria-hidden="true">
+    <section className="marquee" aria-hidden="true" ref={ref}>
       <div className="marquee-track" id="marqueeTrack">
         <span>ERP Solutions</span><i className="mq-dot" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M5 0l1.12 3.88L10 5 6.12 6.12 5 10 3.88 6.12 0 5l3.88-1.12z" fill="currentColor"/></svg></i><span>Frappe &amp; ERPNext</span><i className="mq-dot" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M5 0l1.12 3.88L10 5 6.12 6.12 5 10 3.88 6.12 0 5l3.88-1.12z" fill="currentColor"/></svg></i>
         <span>AI Integrations</span><i className="mq-dot" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M5 0l1.12 3.88L10 5 6.12 6.12 5 10 3.88 6.12 0 5l3.88-1.12z" fill="currentColor"/></svg></i><span>Custom Web Apps</span><i className="mq-dot" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M5 0l1.12 3.88L10 5 6.12 6.12 5 10 3.88 6.12 0 5l3.88-1.12z" fill="currentColor"/></svg></i>

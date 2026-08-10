@@ -256,10 +256,6 @@ export default function VisitorManagementPage() {
       breadcrumbLabel="Visitor Management"
       title="A front desk that *runs itself.*"
       lead="Digital check-in, ID verification, instant host alerts, badge printing and a searchable visitor log - replacing the paper register with a fast, secure, on-brand arrival experience."
-      heroActions={[
-        { label: 'Request a Demo', to: '/contact', variant: 'accent' },
-        { label: 'See it in action', to: '/contact', variant: 'white' },
-      ]}
       heroMockup={<MockHeroDash />}
       stats={[
         { value: '<em>40s</em>', label: 'Average self check-in time' },

@@ -6,6 +6,7 @@ import InnerNavbar from '../../components/InnerNavbar';
 import Footer from '../../components/Footer';
 import SEO from '../../components/SEO';
 import { onShotError } from '../../utils/shotFallback';
+import useIdleOffscreen from '../../hooks/useIdleOffscreen';
 import '../../styles/inner.css';
 import '../../styles/hrms-page.css';
 
@@ -56,7 +57,7 @@ const FEATURES = [
 ];
 
 const SCREENS = [
-  { id: 'dashboard', label: 'Travel Dashboard', src: '/products/travel/hero.png', caption: 'Trip management dashboard — plan, approve, track spend and settle in one workflow' },
+  { id: 'dashboard', label: 'Travel Dashboard', src: '/products/travel/hero.webp', caption: 'Trip management dashboard — plan, approve, track spend and settle in one workflow' },
 ];
 
 const INTEGRATIONS = [
@@ -76,6 +77,8 @@ const FAQ = [
 
 export default function TravelExpensePage() {
   const root = useRef(null);
+  /* pauses the blurred hero orbs once the hero scrolls away */
+  const heroRef = useIdleOffscreen();
   const [activeScreen, setActiveScreen] = useState('dashboard');
 
   useLayoutEffect(() => { window.scrollTo(0, 0); }, []);
@@ -137,7 +140,7 @@ export default function TravelExpensePage() {
       <InnerNavbar />
 
       {/* ── HERO ── */}
-      <section className="hrms-hero">
+      <section className="hrms-hero" ref={heroRef}>
         <div className="hrms-hero-bg" aria-hidden="true">
           <div className="hrms-hero-orb hrms-hero-orb--1" />
           <div className="hrms-hero-orb hrms-hero-orb--2" />
@@ -151,7 +154,7 @@ export default function TravelExpensePage() {
             From trip creation to settlement — one unified workflow for business travel. Plan trips, get approvals, log expenses and get reimbursed without chasing spreadsheets.
           </p>
           <div className="hrms-hero-shot">
-            <img src="/products/travel/hero.png" alt="TechBird Travel & Expense — Trip management dashboard" loading="eager" onError={onShotError} />
+            <img src="/products/travel/hero.webp" alt="TechBird Travel & Expense — Trip management dashboard" loading="eager" onError={onShotError} />
           </div>
         </div>
       </section>
