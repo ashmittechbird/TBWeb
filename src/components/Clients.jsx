@@ -3,19 +3,22 @@ import { useEffect, useRef } from 'react';
 const ROW1 = [
   { name: 'Build Ideas',      img: '/assets/clients/build-ideas.webp' },
   { name: 'Cafe Rova',        img: '/assets/clients/cafe-rova.webp' },
-  { name: 'GLS',              img: '/assets/clients/gls.webp' },
+  { name: 'GLS',              img: '/assets/clients/gls.webp', url: 'https://www.glsadvisors.com/home' },
   { name: 'Kelvino',          img: '/assets/clients/kelvino.webp' },
-  { name: 'Rishabh Builders', img: '/assets/clients/rishabh-builders.webp' },
-  { name: 'Smart Choice',     img: '/assets/clients/smart-choice.webp' },
+  { name: 'Rishabh Builders', img: '/assets/clients/rishabh-builders.webp', url: 'https://www.rishabhbuilders.co.in/' },
+  { name: 'Smart Choice',     img: '/assets/clients/smart-choice.webp', url: 'https://smartchoiceindia.com/' },
+  { name: 'La Pinoz',         img: '/assets/clients/la-pinoz.png', url: 'https://lapinozpizza.in/' },
+  { name: 'Pillar',           img: '/assets/clients/pillar.webp', url: 'https://www.pillar.co.nz/' },
 ];
 
 const ROW2 = [
-  { name: 'Starbird',     img: '/assets/clients/starbird.webp' },
-  { name: 'Staybird',     img: '/assets/clients/staybird.webp' },
-  { name: 'Tranqvillas',  img: '/assets/clients/tranqvillas.webp' },
-  { name: 'Blupijn',      img: '/assets/clients/blupijn.webp' },
-  { name: 'Blents',       img: '/assets/clients/blents.webp' },
-  { name: 'KJ Capital',   img: '/assets/clients/kj-capital.webp' },
+  { name: 'Starbird',      img: '/assets/clients/starbird.webp' },
+  { name: 'Staybird',      img: '/assets/clients/staybird.webp', url: 'https://staybird.in/' },
+  { name: 'Tranqvillas',   img: '/assets/clients/tranqvillas.webp' },
+  { name: 'Blupijn',       img: '/assets/clients/blupijn.webp' },
+  { name: 'Blents',        img: '/assets/clients/blents.webp' },
+  { name: 'KJ Capital',    img: '/assets/clients/kj-capital.webp' },
+  { name: 'Abhishek Soni', img: '/assets/clients/abhishek-soni.png', url: 'https://abhisheksoni.in/' },
 ];
 
 function MarqueeRow({ items, reverse }) {
@@ -24,11 +27,15 @@ function MarqueeRow({ items, reverse }) {
   return (
     <div className={`cl-marquee${reverse ? ' cl-marquee--rev' : ''}`}>
       <div className="cl-track">
-        {tripled.map((c, i) => (
-          <div className="cl-tile" key={`${c.name}-${i}`}>
-            <img src={c.img} alt={c.name} className="cl-tile-img" loading="lazy" />
-          </div>
-        ))}
+        {tripled.map((c, i) => {
+          const Tag = c.url ? 'a' : 'div';
+          const linkProps = c.url ? { href: c.url, target: '_blank', rel: 'noopener noreferrer' } : {};
+          return (
+            <Tag className="cl-tile" key={`${c.name}-${i}`} {...linkProps}>
+              <img src={c.img} alt={c.name} className="cl-tile-img" loading="lazy" />
+            </Tag>
+          );
+        })}
       </div>
     </div>
   );

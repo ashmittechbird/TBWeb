@@ -26,8 +26,8 @@ export default function Contact() {
                 <a className="contact-row" href="mailto:connect@techbirdit.in">
                   <span>Email</span><strong>connect@techbirdit.in</strong>
                 </a>
-                <a className="contact-row" href="https://techbirdit.in" target="_blank" rel="noopener">
-                  <span>Web</span><strong>techbirdit.in</strong>
+                <a className="contact-row" href="https://techbird.in" target="_blank" rel="noopener">
+                  <span>Web</span><strong>techbird.in</strong>
                 </a>
               </div>
             </div>

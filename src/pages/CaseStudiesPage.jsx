@@ -32,8 +32,8 @@ export default function CaseStudiesPage() {
     <>
       <SEO
         title="Case Studies"
-        description="Real results from real engagements. See how TechBird has helped enterprises automate HR, digitise documents, and deploy full-suite ERP systems."
-        keywords="TechBird case studies, HRMS implementation, ERP deployment, document management, enterprise software results"
+        description="Real results from real engagements. See how TechBird has helped businesses automate HR, deploy full ERP stacks with payment automation, and go paperless on GST compliance."
+        keywords="TechBird case studies, HR automation, ERP deployment, payment automation, GST compliance, paperless documentation, enterprise software results"
       />
       <InnerNavbar />
 
