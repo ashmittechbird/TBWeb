@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
 
-const SITE = 'https://www.techbird.in';
+const SITE = 'https://techbird.in';
 const SITE_NAME = 'TechBird IT Services';
 const DEFAULT_TITLE = 'TechBird IT Services - Driving Digital Transformation';
 const DEFAULT_DESC = 'Premier technology partner for startups to enterprises. Custom software development, AI solutions, cloud & DevOps, ERP (ERPNext), mobile apps, and marketing technology. 50+ enterprise clients in Pune, India.';

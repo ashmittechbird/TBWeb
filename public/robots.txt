@@ -11,4 +11,4 @@ Disallow: /products/practice-management
 Disallow: /products/visitor-management
 Disallow: /products/ecommerce
 
-Sitemap: https://www.techbird.in/sitemap.xml
+Sitemap: https://techbird.in/sitemap.xml

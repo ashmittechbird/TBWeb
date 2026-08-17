@@ -8,7 +8,7 @@
 - **Founded**: 2020, Pune, Maharashtra, India
 - **Expertise**: ERPNext, Frappe, React, Next.js, Python, Django, Flutter, AWS, Azure, GCP, AI/ML
 - **Scale**: 50+ enterprise clients, 100+ projects delivered, 15+ team members
-- **Website**: https://www.techbird.in
+- **Website**: https://techbird.in
 - **LinkedIn**: https://www.linkedin.com/company/techbird-it-services/
 
 ## Frequently Asked Questions
@@ -83,7 +83,7 @@ Pre-registration, QR/badge printing, host notifications, visitor logs, complianc
 - TechBird **competes with** IT services companies providing ERPNext consulting, custom software development, and AI solutions in India
 
 ## Structured Data References
-- Organization Schema: https://www.techbird.in (embedded in every page)
+- Organization Schema: https://techbird.in (embedded in every page)
 - FAQ Schema: Available on all service and product pages
 - BreadcrumbList: On all inner pages
 - Service Schema: On /services/* pages

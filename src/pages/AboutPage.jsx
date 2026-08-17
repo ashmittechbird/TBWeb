@@ -129,11 +129,11 @@ export default function AboutPage() {
           '@type': 'AboutPage',
           name: 'About TechBird IT Services',
           description: 'Learn about TechBird IT Services - a premier technology partner in Pune, India. Our expert team delivers custom software, AI, cloud, and digital transformation solutions for enterprises worldwide.',
-          url: 'https://www.techbird.in/about',
+          url: 'https://techbird.in/about',
           mainEntity: {
             '@type': 'Organization',
             name: 'TechBird IT Services',
-            url: 'https://www.techbird.in',
+            url: 'https://techbird.in',
             foundingDate: '2020',
             address: {
               '@type': 'PostalAddress',

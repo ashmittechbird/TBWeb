@@ -94,11 +94,11 @@ export default function ContactPage() {
           '@context': 'https://schema.org',
           '@type': 'ContactPage',
           name: 'Contact TechBird IT Services',
-          url: 'https://www.techbird.in/contact',
+          url: 'https://techbird.in/contact',
           mainEntity: {
             '@type': 'Organization',
             name: 'TechBird IT Services',
-            url: 'https://www.techbird.in',
+            url: 'https://techbird.in',
             telephone: '+919766661836',
             email: 'connect@techbirdit.in',
             address: { '@type': 'PostalAddress', streetAddress: 'Unit 312-314, SOHO by Panchsheel', addressLocality: 'Kharadi, Pune', postalCode: '411014', addressRegion: 'Maharashtra', addressCountry: 'IN' },
