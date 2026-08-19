@@ -9,6 +9,10 @@ export default defineConfig({
      VITE_MAILBIRD_URL=/mailbird in .env to route through this.
      Production does not use it - see .env.example. */
   server: {
+    /* Vite does not read PORT on its own. Honouring it lets the dev server
+       move off 5173 when that port is already taken, without needing a
+       --port flag on the command. Falls back to Vite's default. */
+    port: Number(process.env.PORT) || undefined,
     proxy: {
       '/mailbird': {
         target: 'https://mailbird.techbird.in',

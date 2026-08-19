@@ -71,7 +71,7 @@ export default function SEO({
     },
     founder: [
       { '@type': 'Person', name: 'Amol Sane', jobTitle: 'Co-Founder & CEO', sameAs: 'https://www.linkedin.com/in/amol-sane-b8675316/' },
-      { '@type': 'Person', name: 'Ekansh Jain', jobTitle: 'Co-Founder & CTO', sameAs: 'https://www.linkedin.com/in/jainekansh1512/' },
+      { '@type': 'Person', name: 'Ekansh Jain', jobTitle: 'Co-Founder & CTO', sameAs: ['https://www.linkedin.com/in/jainekansh1512/', 'https://ekanshjain.com'] },
     ],
     employee: [
       { '@type': 'Person', name: 'Amit Thakur', jobTitle: 'Partner & CBO', sameAs: 'https://www.linkedin.com/in/amitthakurtechbirdit/' },

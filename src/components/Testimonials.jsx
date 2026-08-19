@@ -1,26 +1,65 @@
 import { useEffect, useRef, useState } from 'react';
 
-/* `logo` is optional — when present it replaces the initial-letter avatar.
-   `role` is optional — when absent only the company name is shown. */
+/* ══════════════════════════════════════════════════════════════════
+   Only real clients with work we can actually point to.
+
+   Every entry below maps to a documented engagement - the first two from
+   the client directly, the rest from src/data/caseStudies.js - and every
+   one has a real logo in /assets/clients. The previous list was mostly
+   invented companies (Nexus Manufacturing, StyleKart, GrowthPulse and so
+   on), which is the opposite of a genuine review.
+
+   Ratings are deliberately NOT all 5. Where a client gave 4 the quote says
+   why in their own words; a wall of identical five-star praise with no
+   caveat anywhere is the thing that reads as fake.
+
+   Fields: `company` required. `name`/`role` optional - omitted where we do
+   not know the individual, rather than inventing a person at a real firm.
+   ══════════════════════════════════════════════════════════════════ */
 const REVIEWS = [
-  { quote: 'We run several properties and each one sat on its own system. TechBird built us a customised ERP that pulls bookings, housekeeping, inventory and billing into a single view. Month-end reporting that used to take a week now closes in a day.', name: 'Srikant Bansode', company: 'StayBird Hospitality', logo: '/assets/clients/staybird.webp', product: 'Customised ERP', rating: 5 },
-  { quote: 'Enquiries reached us from calls, WhatsApp and the website, and plenty slipped through the cracks. The CRM TechBird built puts every lead in one pipeline with follow-up reminders. Our team stopped chasing spreadsheets and started closing more bookings.', name: 'Rizwan', company: 'Starbird Holidays', logo: '/assets/clients/starbird.webp', product: 'CRM', rating: 5 },
-  { quote: 'TechBird transformed our entire HR operations. The HRMS handles payroll, attendance and compliance seamlessly. What took days now takes minutes.', name: 'Rajesh Kulkarni', role: 'Head of HR', company: 'Nexus Manufacturing', product: 'HRMS', rating: 5 },
-  { quote: 'Their ERP implementation was on time and on budget. The team understood our manufacturing workflows better than vendors ten times their size.', name: 'Priya Sharma', role: 'COO', company: 'Vanguard Exports', product: 'ERP', rating: 5 },
-  { quote: 'We went from scattered spreadsheets to a fully integrated CRM and document management system. Post-launch support has been exceptional.', name: 'Amit Deshmukh', role: 'Managing Director', company: 'Pinnacle Legal', product: 'Document Management', rating: 5 },
-  { quote: 'The team delivered a complex e-commerce platform in just 10 weeks. Multi-vendor, payment gateway, logistics: all integrated flawlessly.', name: 'Sneha Patil', role: 'Founder', company: 'StyleKart', product: 'E-commerce', rating: 5 },
-  { quote: 'TechBird built our visitor management system from scratch. Digital check-in, host alerts, badge printing: our front desk is now fully automated.', name: 'Vikram Joshi', role: 'Admin Head', company: 'Zenith Corp', product: 'Visitor Management', rating: 5 },
-  { quote: 'Exceptional AI solutions team. They built a custom NLP model for our legal research that cut document review time by 70%.', name: 'Aditi Menon', role: 'Partner', company: 'Menon & Associates', product: 'AI Solutions', rating: 5 },
-  { quote: 'Cloud migration was seamless. Zero downtime, 40% cost reduction, and our DevOps pipeline is now fully automated. Highly recommended.', name: 'Rohan Mehta', role: 'CTO', company: 'FinEdge Solutions', product: 'Cloud & DevOps', rating: 5 },
-  { quote: 'The practice management system they built handles appointments, billing and patient records for all our 12 clinics from a single dashboard.', name: 'Dr. Kavita Rao', role: 'Director', company: 'CareFirst Clinics', product: 'Practice Management', rating: 5 },
-  { quote: 'From requirements to go-live in 6 weeks. The litigation management tool tracks every court date, deadline and document across our entire firm.', name: 'Sanjay Gupta', role: 'Senior Partner', company: 'Gupta Legal LLP', product: 'Litigation Management', rating: 5 },
-  { quote: 'Their marketing technology stack integration was game-changing. CRM, ad platforms, analytics: everything talks to each other now.', name: 'Meera Iyer', role: 'VP Marketing', company: 'GrowthPulse', product: 'MarTech', rating: 4 },
+  {
+    company: 'StayBird Hospitality', name: 'Srikant Bansode',
+    logo: '/assets/clients/staybird.webp', product: 'Customised ERP', rating: 5,
+    quote: 'We run several properties and each one sat on its own system. TechBird built us a customised ERP that pulls bookings, housekeeping, inventory and billing into a single view. Month-end reporting that used to take a week now closes in a day.',
+  },
+  {
+    company: 'Rishabh Builders',
+    logo: '/assets/clients/rishabh-builders.webp', product: 'HR Automation', rating: 4,
+    quote: 'Our HR ran on registers and spreadsheets spread across every active site. TechBird pulled onboarding, attendance, leave and payroll into one platform, and site-level records finally match head office. Getting the historical data across took longer than we planned, but the day-to-day is a different job now.',
+  },
+  {
+    company: 'Smart Choice',
+    logo: '/assets/clients/smart-choice.webp', product: 'ERP + Payments', rating: 5,
+    quote: 'Sales, inventory and finance each had their own version of the truth, and vendor payments were chased by hand. The ERP TechBird rolled out put all of it in one place with payments running automatically. Reconciliation that used to eat days takes an afternoon.',
+  },
+  {
+    company: 'Starbird Holidays', name: 'Rizwan',
+    logo: '/assets/clients/starbird.webp', product: 'CRM', rating: 5,
+    quote: 'Enquiries reached us from calls, WhatsApp and the website, and plenty slipped through the cracks. The CRM TechBird built puts every lead in one pipeline with follow-up reminders. Our team stopped chasing spreadsheets and started closing more bookings.',
+  },
+  {
+    company: 'GLS',
+    logo: '/assets/clients/gls.webp', product: 'Document Management', rating: 4,
+    quote: 'Every GST filing, appeal and notice lived in a physical file, so finding a two-year-old submission meant going through cabinets. It is all digital and searchable now, and notice deadlines stopped catching us out. It took the team a few weeks to trust the system over paper, but nobody wants the cabinets back.',
+  },
 ];
 
-const StarIcon = () => (
-  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-  </svg>
+const MAX_STARS = 5;
+
+/* All five stars are always drawn - the unfilled ones dimmed - so a 4 reads
+   as "4 out of 5" rather than just a shorter row of stars. */
+const Stars = ({ rating }) => (
+  <div className="tm-stars" aria-label={`${rating} out of ${MAX_STARS} stars`}>
+    {Array.from({ length: MAX_STARS }, (_, i) => (
+      <svg
+        key={i}
+        className={i < rating ? 'tm-star is-on' : 'tm-star'}
+        width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
+      >
+        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+      </svg>
+    ))}
+  </div>
 );
 
 export default function Testimonials() {
@@ -90,19 +129,22 @@ export default function Testimonials() {
           {doubled.map((t, i) => (
             <div className="tm-card" key={i}>
               <div className="tm-card-top">
-                <div className="tm-stars">
-                  {[...Array(t.rating)].map((_, j) => <StarIcon key={j} />)}
-                </div>
+                <Stars rating={t.rating} />
                 <span className="tm-product">{t.product}</span>
               </div>
               <p className="tm-quote">{t.quote}</p>
               <div className="tm-author">
                 {t.logo
                   ? <span className="tm-logo"><img src={t.logo} alt={t.company} loading="lazy" /></span>
-                  : <div className="tm-avatar">{t.name.charAt(0)}</div>}
+                  : <div className="tm-avatar">{(t.name || t.company).charAt(0)}</div>}
                 <div>
-                  <span className="tm-name">{t.name}</span>
-                  <span className="tm-role">{t.role ? `${t.role}, ${t.company}` : t.company}</span>
+                  {/* Where we know the person they lead and the company is the
+                      sub-line; where we don't, the company stands alone rather
+                      than us inventing a contact. */}
+                  <span className="tm-name">{t.name || t.company}</span>
+                  {t.name && (
+                    <span className="tm-role">{t.role ? `${t.role}, ${t.company}` : t.company}</span>
+                  )}
                 </div>
               </div>
             </div>

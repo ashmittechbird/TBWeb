@@ -28,7 +28,8 @@ const PILLARS = [
 
 const LEADERSHIP = [
   { name: 'Amol Sane',       role: 'Co-Founder & CEO', img: '/assets/team/amol-sane-cut.webp', li: 'https://www.linkedin.com/in/amol-sane-b8675316/' },
-  { name: 'Ekansh Jain',     role: 'Co-Founder & CTO', img: '/assets/team/ekansh-jain-cut.webp', li: 'https://www.linkedin.com/in/jainekansh1512/' },
+  /* `site` is optional - renders a second icon link next to LinkedIn. */
+  { name: 'Ekansh Jain',     role: 'Co-Founder & CTO', img: '/assets/team/ekansh-jain-cut.webp', li: 'https://www.linkedin.com/in/jainekansh1512/', site: 'https://ekanshjain.com' },
   { name: 'Shubham Agarwal', role: 'CFO',              img: '/assets/team/shubham-cut.webp', li: 'https://www.linkedin.com/in/shubham-a-54aa78271/' },
   { name: 'Amit Thakur',     role: 'Partner & CBO',    img: '/assets/team/amit-cut.webp', li: 'https://www.linkedin.com/in/amitthakurtechbirdit/' },
 ];
@@ -214,14 +215,29 @@ export default function AboutPage() {
                     <h3>{m.name}</h3>
                     <span>{m.role}</span>
                   </div>
-                  <a
-                    className="ab-lead-li"
-                    href={m.li || 'https://www.linkedin.com/company/techbird-it-services/'}
-                    target="_blank" rel="noopener noreferrer"
-                    aria-label={`${m.name} on LinkedIn`}
-                  >
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 11.001-4.13 2.06 2.06 0 01-.001 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .78 0 1.73v20.53C0 23.22.8 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.74V1.73C24 .78 23.2 0 22.22 0z"/></svg>
-                  </a>
+                  <div className="ab-lead-links">
+                    <a
+                      className="ab-lead-li"
+                      href={m.li || 'https://www.linkedin.com/company/techbird-it-services/'}
+                      target="_blank" rel="noopener noreferrer"
+                      aria-label={`${m.name} on LinkedIn`}
+                    >
+                      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 11.001-4.13 2.06 2.06 0 01-.001 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .78 0 1.73v20.53C0 23.22.8 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.74V1.73C24 .78 23.2 0 22.22 0z"/></svg>
+                    </a>
+                    {m.site && (
+                      <a
+                        className="ab-lead-li"
+                        href={m.site}
+                        target="_blank" rel="noopener noreferrer"
+                        aria-label={`${m.name}'s personal website`}
+                      >
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+                          <circle cx="12" cy="12" r="9" />
+                          <path d="M3.6 9h16.8M3.6 15h16.8M12 3a15 15 0 010 18M12 3a15 15 0 000 18" />
+                        </svg>
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
             ))}

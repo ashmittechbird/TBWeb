@@ -2829,7 +2829,11 @@ body.loaded .scroll-hint {
   margin-bottom: 14px;
 }
 
-.tm-stars { display: flex; gap: 2px; color: #fbbf24; }
+/* All five stars are rendered; the unearned ones stay visible but dim so a
+   4-star review reads as 4 of 5 instead of a mysteriously shorter row. */
+.tm-stars { display: flex; gap: 2px; }
+.tm-star { color: rgba(255, 255, 255, 0.16); flex-shrink: 0; }
+.tm-star.is-on { color: #fbbf24; }
 
 .tm-product {
   display: inline-flex;

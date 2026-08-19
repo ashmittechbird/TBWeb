@@ -520,6 +520,14 @@
 .ab-lead-card:hover .ab-lead-li { transform: scale(1.08); }
 .ab-lead-li svg { width: 18px; height: 18px; }
 
+/* Holds LinkedIn plus an optional personal-site link. Wraps rather than
+   squeezing the name column when a card carries two icons. */
+.ab-lead-links {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
 /* ════ TEAM ════ */
 .ab-team {
   position: relative; z-index: 1;
