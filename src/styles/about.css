@@ -465,27 +465,33 @@
      broken. */
   display: grid; grid-template-columns: repeat(5, 1fr);
   gap: clamp(18px, 2vw, 32px);
-  align-items: stretch;
+  /* `start`, not `stretch`: the cards set their own height below, and stretching
+     a grid item interacts badly with ratio-based sizing on WebKit. */
+  align-items: start;
 }
-/* card is transparent; the head rises out of the top, the pebble sits at the bottom */
+/* card is transparent; the head rises out of the top, the pebble sits at the bottom
+ *
+ * Height comes from `height: 0` + a percentage `padding-top` - the ratio-box
+ * technique that predates `aspect-ratio` and behaves identically in every
+ * engine. Percentage padding resolves against the containing block's width, so
+ * the card is always 4/3 of its column.
+ *
+ * This deliberately does NOT use `aspect-ratio`. Every child (pebble, cut-out
+ * photo, info bar) is absolutely positioned, so the card has no in-flow content
+ * and `aspect-ratio` was the only thing giving it height - and iOS Safari
+ * resolved that to zero, collapsing all five cards so their info bars piled up
+ * on each other and the section intro. An in-flow ::before spacer with the same
+ * padding trick did not fix it either, which is why the ratio now lives on the
+ * card itself and `aspect-ratio` is gone entirely rather than layered with
+ * fallbacks.
+ *
+ * Absolutely positioned children resolve against the PADDING box, so
+ * `bottom: 0`, `height: 100%` and the pebble's `height: 72%` all still measure
+ * against the full visual card exactly as before. */
 .ab-lead-card {
   position: relative;
-  aspect-ratio: 3 / 4;
-}
-/* Every child of the card (pebble, cut-out photo, info bar) is absolutely
-   positioned, so the card has no in-flow content and its height came purely
-   from aspect-ratio. Combined with `align-items: stretch` on the grid, iOS
-   Safari resolves that to zero: the card collapses and all four info bars pile
-   up on top of each other and the section intro.
-
-   This spacer puts a real in-flow box in the card so the height is derived
-   from ordinary layout, which every engine honours. 133.333% == 4/3, the same
-   ratio as above, so the two agree and nothing doubles where aspect-ratio
-   does work. */
-.ab-lead-card::before {
-  content: "";
-  display: block;
-  padding-top: 133.333%;
+  height: 0;
+  padding-top: 133.333%; /* 4 / 3 */
 }
 /* the blue→dark pebble (lower portion of the card) */
 .ab-lead-pebble {
