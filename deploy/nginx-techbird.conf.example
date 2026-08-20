@@ -10,13 +10,15 @@
 # receives an HTML page instead of the JSON it expects.
 # ══════════════════════════════════════════════════════════════════════
 
-# ── 1. Contact-form proxy ─────────────────────────────────────────────
-# The form posts to /mailbird/api/method/mailbird.api.send_website_enquiry
-# on this origin. mailbird.techbird.in sends no Access-Control-Allow-Origin,
-# so a direct browser call is blocked by CORS; proxying keeps it same-origin.
+# ── 1. Contact-form proxy - OPTIONAL, NOT NEEDED ──────────────────────
+# allow_cors is now configured on mailbird.techbird.in, so the form calls it
+# directly and the browser is permitted to read the response. Verified: the
+# endpoint returns Access-Control-Allow-Origin: https://techbird.in.
 #
-# Without this block the POST falls through to index.html, the response is
-# HTML rather than JSON, and every submission fails.
+# Keep this block ONLY if you set VITE_MAILBIRD_URL=/mailbird to route through
+# a proxy instead. Note the trade-off: proxied, every enquiry reaches the
+# endpoint from this server's IP, so its 5-requests-per-minute-per-IP limit
+# becomes a budget shared by all visitors.
 location /mailbird/ {
     proxy_pass         https://mailbird.techbird.in/;
     proxy_http_version 1.1;

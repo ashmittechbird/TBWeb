@@ -19,25 +19,29 @@ needs is either committed or derived at runtime (see below). Serve `dist/`.
 
 ### nginx
 
-Copy the location blocks from [`nginx-techbird.conf.example`](./nginx-techbird.conf.example)
-into the `server { … }` block for techbird.in, then:
+**No proxy is needed for the contact form.** The form calls
+`https://mailbird.techbird.in` directly, and `allow_cors` is configured there,
+so the browser is allowed to read the response. Verified: the endpoint returns
+`Access-Control-Allow-Origin: https://techbird.in`.
+
+All nginx has to do is serve `dist/` and send unknown paths to `index.html`, so
+React Router can handle them:
+
+```nginx
+location / {
+    try_files $uri $uri/ /index.html;
+}
+```
+
+[`nginx-techbird.conf.example`](./nginx-techbird.conf.example) has that plus
+optional cache headers, and a `/mailbird/` proxy block that is **no longer
+required** — keep it only if you ever set `VITE_MAILBIRD_URL=/mailbird`.
+
+After changing nginx:
 
 ```bash
 sudo nginx -t && sudo systemctl reload nginx
 ```
-
-The `/mailbird/` proxy is what makes the contact form work. Without it the POST
-falls through to `index.html`, the form gets HTML instead of JSON, and every
-submission fails. It **must** be ordered before the SPA fallback.
-
-Verify — this should return JSON, not HTML:
-
-```bash
-curl -sS -X POST https://techbird.in/mailbird/api/method/mailbird.api.send_website_enquiry -H "Content-Type: application/x-www-form-urlencoded" --data-urlencode "site=techbird.in" --data-urlencode "website_url="
-```
-
-`{"message":{"success":false,"error":"Missing required fields: …"}}` is the
-success signal: the proxy reached the endpoint.
 
 ### Mailbird
 
@@ -74,7 +78,7 @@ to be configured here and would silently break the form if forgotten.
 
 | value | default | override |
 |---|---|---|
-| endpoint base | `/mailbird` (same-origin proxy) | `VITE_MAILBIRD_URL` |
+| endpoint base | `https://mailbird.techbird.in` (direct, CORS allowed) | `VITE_MAILBIRD_URL` |
 | `site` | `window.location.hostname` → `techbird.in` | `VITE_MAILBIRD_SITE` |
 | Turnstile site key | committed in `src/lib/mailbird.js` | `VITE_TURNSTILE_SITE_KEY` |
 

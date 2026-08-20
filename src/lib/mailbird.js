@@ -38,19 +38,29 @@
    changes nothing until you redeploy.
    ══════════════════════════════════════════════════════════════════ */
 
-/* Defaults to the same-origin proxy path, which sidesteps CORS entirely.
-   `/mailbird` is served by the Vite dev proxy locally (vite.config.js) and
-   by a Vercel rewrite in production (vercel.json) - one code path, no CORS
-   in either environment.
+/* Calls the Mailbird host directly. allow_cors is now configured there, so the
+   browser gets an Access-Control-Allow-Origin echoing the calling origin -
+   verified for both https://techbird.in and https://techbird-react.vercel.app.
 
-   Set VITE_MAILBIRD_URL=https://mailbird.techbird.in to call the host
-   directly instead. Only do that once allow_cors is configured there; see
-   the CORS note in .env.example for why direct is preferable.
+   This replaces an earlier same-origin `/mailbird` proxy default, which needed
+   a rewrite on every host that serves the form. techbird.in had no such nginx
+   block, so the POST 404'd there. Direct is also the better end state: a proxy
+   makes every enquiry arrive from one server IP, collapsing the endpoint's
+   5-requests-per-minute-per-IP limit into a shared budget.
+
+   No credentials are sent, so the response only needs the origin header - the
+   request stays a CORS "simple request" because it posts
+   application/x-www-form-urlencoded, so no OPTIONS preflight is made either.
+
+   Set VITE_MAILBIRD_URL=/mailbird to go back through a proxy - the Vite dev
+   proxy (vite.config.js) and the Vercel rewrite (vercel.json) both still serve
+   that path, which is the only way to reach the endpoint from localhost, whose
+   origin is not in allow_cors.
 
    Trailing slash trimmed so `${MAILBIRD_URL}/api/...` cannot produce a
    double slash, which some proxies 404 on. */
 export const MAILBIRD_URL = (
-  import.meta.env.VITE_MAILBIRD_URL || '/mailbird'
+  import.meta.env.VITE_MAILBIRD_URL || 'https://mailbird.techbird.in'
 ).replace(/\/+$/, '');
 
 /* Must match an active Website Master domain_name on the Mailbird instance -
