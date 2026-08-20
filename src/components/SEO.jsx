@@ -76,6 +76,7 @@ export default function SEO({
     employee: [
       { '@type': 'Person', name: 'Amit Thakur', jobTitle: 'Partner & CBO', sameAs: 'https://www.linkedin.com/in/amitthakurtechbirdit/' },
       { '@type': 'Person', name: 'Shubham Agarwal', jobTitle: 'CFO', sameAs: 'https://www.linkedin.com/in/shubham-a-54aa78271/' },
+      { '@type': 'Person', name: 'Purvesh Jain', jobTitle: 'CMO', sameAs: 'https://www.linkedin.com/in/jainpurvesh/' },
     ],
   };
 

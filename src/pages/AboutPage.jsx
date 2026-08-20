@@ -32,6 +32,7 @@ const LEADERSHIP = [
   { name: 'Ekansh Jain',     role: 'Co-Founder & CTO', img: '/assets/team/ekansh-jain-cut.webp', li: 'https://www.linkedin.com/in/jainekansh1512/', site: 'https://ekanshjain.com' },
   { name: 'Shubham Agarwal', role: 'CFO',              img: '/assets/team/shubham-cut.webp', li: 'https://www.linkedin.com/in/shubham-a-54aa78271/' },
   { name: 'Amit Thakur',     role: 'Partner & CBO',    img: '/assets/team/amit-cut.webp', li: 'https://www.linkedin.com/in/amitthakurtechbirdit/' },
+  { name: 'Purvesh Jain',    role: 'CMO',              img: '/assets/team/purvesh-cut.webp', li: 'https://www.linkedin.com/in/jainpurvesh/' },
 ];
 
 const TEAM = [
@@ -42,7 +43,6 @@ const TEAM = [
   { name: 'Ashmit Singh',      role: 'Software Developer',      img: '/assets/team/Ashmit-singh.webp',      li: 'https://www.linkedin.com/company/techbird-it-services/' },
   { name: 'Mehul Rathi',       role: 'Software Developer',      img: '/assets/team/Mehul-Rathi.webp',       li: 'https://www.linkedin.com/company/techbird-it-services/' },
   { name: 'Paridhi Jhabak',    role: 'Software Developer',      img: '/assets/team/Paridhi-Jhabak.webp',    li: 'https://www.linkedin.com/company/techbird-it-services/' },
-  { name: 'Purvesh Jain',      role: 'Software Developer',      img: '/assets/team/Purvesh-Jain.webp',      li: 'https://www.linkedin.com/company/techbird-it-services/' },
   { name: 'Sanjukta Barik',    role: 'Software Developer',      img: '/assets/team/Sanjukta-Barik.webp',    li: 'https://www.linkedin.com/company/techbird-it-services/' },
 ];
 

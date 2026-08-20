@@ -459,7 +459,11 @@
 .ab-lead-grid {
   position: relative; z-index: 1;
   max-width: 1180px; margin: clamp(56px, 8vh, 96px) auto 0;
-  display: grid; grid-template-columns: repeat(4, 1fr);
+  /* Five leaders. At four columns the fifth dropped onto its own row next to
+     three empty cells; five keeps them in a single row. The narrower
+     breakpoints stay at two columns, where 5 wraps 2+2+1 without looking
+     broken. */
+  display: grid; grid-template-columns: repeat(5, 1fr);
   gap: clamp(18px, 2vw, 32px);
   align-items: stretch;
 }
@@ -515,11 +519,14 @@
 .ab-lead-info {
   position: absolute; left: 0; right: 0; bottom: 0; z-index: 3;
   display: flex; align-items: flex-end; justify-content: space-between;
-  gap: 12px; padding: 20px clamp(16px, 1.8vw, 24px) clamp(18px, 2.4vw, 26px);
+  /* Tighter than it looks like it should be: at five columns the cards are
+     ~207px, and the old 24px side padding plus a 12px gap left too little for
+     "Shubham Agarwal" and "Ekansh Jain", which wrapped onto the photo. */
+  gap: 8px; padding: 20px clamp(12px, 1.1vw, 16px) clamp(18px, 2.4vw, 26px);
 }
 .ab-lead-meta h3 {
   font-family: var(--display, 'Space Grotesk', sans-serif);
-  font-size: clamp(.98rem, 1.25vw, 1.1rem); font-weight: 700; color: #fff;
+  font-size: clamp(.86rem, 1.05vw, 1.02rem); font-weight: 700; color: #fff;
   margin: 0 0 3px; letter-spacing: -0.01em;
   text-shadow: 0 1px 8px rgba(0,0,0,.5);
 }
@@ -534,11 +541,16 @@
 .ab-lead-card:hover .ab-lead-li { transform: scale(1.08); }
 .ab-lead-li svg { width: 18px; height: 18px; }
 
-/* Holds LinkedIn plus an optional personal-site link. Wraps rather than
-   squeezing the name column when a card carries two icons. */
+/* Holds LinkedIn plus an optional personal-site link.
+   Stacked, not side by side: two icons in a row cost 76px of a ~207px card and
+   squeezed the role text into three wrapped lines on the one card that has
+   both. A stacked pair is ~76px tall, about the same as the name + role block
+   beside it, so the info bar does not get taller either. Single-icon cards look
+   identical either way. */
 .ab-lead-links {
   display: flex;
-  gap: 8px;
+  flex-direction: column;
+  gap: 6px;
   flex-shrink: 0;
 }
 
@@ -782,10 +794,7 @@
   .ab-lead-meta span { font-size: 10.5px; }
   .ab-lead-li { width: 28px; height: 28px; border-radius: 7px; }
   .ab-lead-li svg { width: 15px; height: 15px; }
-  /* Cards are ~158px wide here. Two icons side by side eat 64px of that and
-     squeeze the name into three wrapped lines, so stack them instead - a
-     single-icon card looks identical either way. */
-  .ab-lead-links { flex-direction: column; gap: 6px; }
+  /* .ab-lead-links already stacks at every width - see the base rule. */
 
   /* Mobile: horizontal scroll cards */
   .ab-fan-strip {
