@@ -148,7 +148,12 @@ function visitorMessage(serverError, status) {
   const text = String(serverError || '');
 
   if (/captcha|turnstile|recaptcha/i.test(text)) {
-    return 'Captcha verification failed. Please complete the check and try again.';
+    /* Only tell them to complete the check if there is one to complete. When
+       the build has no sitekey no widget was rendered, so "complete the check"
+       points at nothing - that is our misconfiguration, not their mistake. */
+    return isTurnstileEnabled()
+      ? 'Captcha verification failed. Please complete the check and try again.'
+      : "We couldn't send your message just now. Please email us directly.";
   }
   if (/website not found|inactive/i.test(text)) {
     return "We couldn't send your message just now. Please email us directly.";
