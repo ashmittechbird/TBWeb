@@ -39,19 +39,32 @@ function loadTurnstile() {
  * Bump `resetSignal` to force a fresh challenge. Needed after a rejected
  * submission, because the server has already consumed the old token.
  */
-export default function Turnstile({ siteKey, onToken, resetSignal = 0, theme = 'light' }) {
+export default function Turnstile({ siteKey, onToken, onUnavailable, resetSignal = 0, theme = 'light' }) {
   const holder = useRef(null);
   const widgetId = useRef(null);
-  /* Kept in a ref so the render effect does not depend on the callback
-     identity and re-create the widget on every parent render. Assigned in
-     an effect, not during render - refs must not be written while
-     rendering. */
+  /* Kept in refs so the render effect does not depend on callback identity
+     and re-create the widget on every parent render. Assigned in an effect,
+     not during render - refs must not be written while rendering. */
   const onTokenRef = useRef(onToken);
   useEffect(() => { onTokenRef.current = onToken; }, [onToken]);
+  const onUnavailableRef = useRef(onUnavailable);
+  useEffect(() => { onUnavailableRef.current = onUnavailable; }, [onUnavailable]);
 
   useEffect(() => {
     if (!siteKey) return;
     let cancelled = false;
+
+    /* A failed challenge leaves the token empty, which keeps the submit
+       button disabled. Without telling the parent, the visitor is left with a
+       dead button and no explanation - so report unavailability separately
+       from "not solved yet". Causes seen in the wild: Turnstile error 110200
+       (the hostname is not on the widget's allowlist in Cloudflare), a
+       blocked challenges.cloudflare.com, or a Cloudflare outage. */
+    const fail = (why) => {
+      console.error('[contact] Turnstile unavailable:', why);
+      onTokenRef.current('');
+      if (onUnavailableRef.current) onUnavailableRef.current(why);
+    };
 
     loadTurnstile()
       .then((turnstile) => {
@@ -60,15 +73,14 @@ export default function Turnstile({ siteKey, onToken, resetSignal = 0, theme = '
           sitekey: siteKey,
           theme,
           callback: (token) => onTokenRef.current(token),
+          /* Expiry and timeout are recoverable - the widget re-challenges by
+             itself, so clear the token but do not declare it broken. */
           'expired-callback': () => onTokenRef.current(''),
           'timeout-callback': () => onTokenRef.current(''),
-          'error-callback': () => onTokenRef.current(''),
+          'error-callback': (code) => fail(`error-callback ${code ?? ''}`.trim()),
         });
       })
-      .catch((err) => {
-        console.error('[contact]', err.message);
-        onTokenRef.current('');
-      });
+      .catch((err) => fail(err.message));
 
     return () => {
       cancelled = true;

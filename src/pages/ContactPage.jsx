@@ -31,6 +31,10 @@ export default function ContactPage() {
   /* null while editing, otherwise 'created' | 'fallback' - see useContactEnquiry */
   const [outcome, setOutcome] = useState(null);
   const [turnstileToken, setTurnstileToken] = useState('');
+  /* Set when the captcha cannot load at all. The server rejects tokenless
+     submissions, so we cannot just let the visitor through - but we can say
+     what happened and point at email instead of leaving a dead button. */
+  const [captchaDown, setCaptchaDown] = useState(false);
   /* Bumped after a rejected submission to force a fresh challenge - the
      server has already consumed the previous token. */
   const [turnstileReset, setTurnstileReset] = useState(0);
@@ -80,6 +84,9 @@ export default function ContactPage() {
     setOutcome(null);
     setFormState(EMPTY_FORM);
     setTurnstileToken('');
+    /* Clear the failure flag so a fresh challenge gets a fair chance - a
+       transient Cloudflare blip should not latch the message on forever. */
+    setCaptchaDown(false);
     setTurnstileReset(n => n + 1);
   };
 
@@ -259,9 +266,18 @@ export default function ContactPage() {
                   {isTurnstileEnabled() && (
                     <Turnstile
                       siteKey={TURNSTILE_SITE_KEY}
-                      onToken={setTurnstileToken}
+                      onToken={(t) => { setTurnstileToken(t); if (t) setCaptchaDown(false); }}
+                      onUnavailable={() => setCaptchaDown(true)}
                       resetSignal={turnstileReset}
                     />
+                  )}
+
+                  {captchaDown && (
+                    <p className="cp-error" role="alert">
+                      The verification check couldn&apos;t load, so the form can&apos;t be submitted
+                      right now. Please email us directly at{' '}
+                      <a href={`mailto:${CONTACT_EMAIL}`} className="cp-inline-link">{CONTACT_EMAIL}</a>.
+                    </p>
                   )}
 
                   {submitError && (
