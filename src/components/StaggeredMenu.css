@@ -32,7 +32,17 @@
 .staggered-menu-wrapper.fixed-wrapper:not([data-open]) {
   height: auto;
   min-height: 70px;
-  overflow: visible;
+  /* The closed panel and its prelayers are parked off-screen to the right. With
+     `overflow: visible` nothing clipped them, so every page could be scrolled
+     sideways to reveal the menu - `body { overflow-x: hidden }` alone does not
+     stop it while `html` stays visible.
+
+     Clip on the x axis only, and `clip` rather than `hidden`: `hidden` would
+     force overflow-y to auto and trap the header in a nested scroll container,
+     and y must stay visible so the header strip is fully shown and clickable.
+     Same reasoning as .ab-leadership in about.css. */
+  overflow-x: clip;
+  overflow-y: visible;
   background: rgba(8, 8, 10, 0.82);
   backdrop-filter: blur(20px) saturate(160%);
   -webkit-backdrop-filter: blur(20px) saturate(160%);

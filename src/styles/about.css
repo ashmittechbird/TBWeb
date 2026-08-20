@@ -467,7 +467,21 @@
 .ab-lead-card {
   position: relative;
   aspect-ratio: 3 / 4;
-  min-height: 0; /* let aspect-ratio control height */
+}
+/* Every child of the card (pebble, cut-out photo, info bar) is absolutely
+   positioned, so the card has no in-flow content and its height came purely
+   from aspect-ratio. Combined with `align-items: stretch` on the grid, iOS
+   Safari resolves that to zero: the card collapses and all four info bars pile
+   up on top of each other and the section intro.
+
+   This spacer puts a real in-flow box in the card so the height is derived
+   from ordinary layout, which every engine honours. 133.333% == 4/3, the same
+   ratio as above, so the two agree and nothing doubles where aspect-ratio
+   does work. */
+.ab-lead-card::before {
+  content: "";
+  display: block;
+  padding-top: 133.333%;
 }
 /* the blue→dark pebble (lower portion of the card) */
 .ab-lead-pebble {
@@ -768,6 +782,10 @@
   .ab-lead-meta span { font-size: 10.5px; }
   .ab-lead-li { width: 28px; height: 28px; border-radius: 7px; }
   .ab-lead-li svg { width: 15px; height: 15px; }
+  /* Cards are ~158px wide here. Two icons side by side eat 64px of that and
+     squeeze the name into three wrapped lines, so stack them instead - a
+     single-icon card looks identical either way. */
+  .ab-lead-links { flex-direction: column; gap: 6px; }
 
   /* Mobile: horizontal scroll cards */
   .ab-fan-strip {
