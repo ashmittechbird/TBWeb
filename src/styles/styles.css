@@ -44,17 +44,14 @@
    frame and the result reads as rough/stuttery. Anchor jumps do their own
    smooth scroll in JS instead (see ScrollToTop and #anchor handlers). */
 
-/* `overflow-x` on body alone does not stop iOS Safari panning the document
-   sideways - it happily scrolls past the right edge, which is how visitors
-   could drag the off-canvas menu into view on any page. The root element has
-   to clip too.
+/* Do NOT put overflow-x on `html`. `clip` there breaks `position: sticky` in
+   descendants - it made the About hero scroll away instead of pinning, leaving
+   its scroll runway as a tall empty gap. `hidden` is worse still, turning the
+   root into a scroll container and breaking ScrollTrigger pinning too.
 
-   `clip` rather than `hidden`: hidden on the root would turn it into a scroll
-   container, which breaks ScrollTrigger pinning and the Lenis setup. `clip`
-   removes the scrollable overflow region without creating one. */
-html {
-  overflow-x: clip;
-}
+   Horizontal overflow is contained at the element that causes it instead - see
+   the `overflow-x: clip` on .staggered-menu-wrapper, which is what parks the
+   off-canvas menu out of reach. */
 
 body {
   font-family: var(--body);
