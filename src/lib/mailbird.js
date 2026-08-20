@@ -53,9 +53,26 @@ export const MAILBIRD_URL = (
   import.meta.env.VITE_MAILBIRD_URL || '/mailbird'
 ).replace(/\/+$/, '');
 
-/* Must match an active Website Master domain_name on the Mailbird
-   instance. Not the URL of this site - just the bare domain. */
-export const MAILBIRD_SITE = import.meta.env.VITE_MAILBIRD_SITE || 'techbird.in';
+/* Must match an active Website Master domain_name on the Mailbird instance -
+   a bare domain, not a URL.
+
+   Defaults to the host the page is actually served from. Mailbird keeps one
+   Website Master per domain, each with its own allowed-origins list, so the
+   record that should receive an enquiry is by definition the one for the host
+   the form is on. Hardcoding a single domain meant the Vercel deployment sent
+   `techbird.in` from a Vercel origin and was rejected as a cross-origin
+   request.
+
+   Verified against the live endpoint: techbird.in and techbird-react.vercel.app
+   each have their own record and each accepts its own origin.
+
+   VITE_MAILBIRD_SITE still wins where it is set, for the case where a host
+   should post to a record that is not named after it. The literal fallback
+   only applies to non-browser contexts, where there is no location to read. */
+export const MAILBIRD_SITE =
+  import.meta.env.VITE_MAILBIRD_SITE ||
+  (typeof window !== 'undefined' && window.location.hostname) ||
+  'techbird.in';
 
 /* Cloudflare Turnstile sitekey. Empty means "no captcha configured";
    the widget is not rendered and no token is sent. */
