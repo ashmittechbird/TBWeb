@@ -74,9 +74,23 @@ export const MAILBIRD_SITE =
   (typeof window !== 'undefined' && window.location.hostname) ||
   'techbird.in';
 
-/* Cloudflare Turnstile sitekey. Empty means "no captcha configured";
-   the widget is not rendered and no token is sent. */
-export const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY || '';
+/* Cloudflare Turnstile SITE key.
+   Turnstile is enforced server-side, so a build without this sends no token and
+   every enquiry is rejected.
+
+   The real key is the default rather than living only in a gitignored .env,
+   because VITE_* values are baked in at build time and the production build
+   runs on the server after a `git pull` - an env-only key meant the deploy
+   silently produced a broken form. A site key is public by design: it ships in
+   the HTML of every page that renders the widget, so committing it exposes
+   nothing. The matching SECRET key stays on the Mailbird server.
+
+   VITE_TURNSTILE_SITE_KEY overrides it - set it to a different key per
+   environment, or to an empty value to disable the widget entirely (useful
+   locally, where this key is not allowlisted for localhost and the challenge
+   fails with error 110200). */
+export const TURNSTILE_SITE_KEY =
+  import.meta.env.VITE_TURNSTILE_SITE_KEY ?? '0x4AAAAAAEWZvKKke_zrCucP';
 
 export const ENQUIRY_ENDPOINT =
   `${MAILBIRD_URL}/api/method/mailbird.api.send_website_enquiry`;

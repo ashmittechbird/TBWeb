@@ -1,0 +1,77 @@
+# ══════════════════════════════════════════════════════════════════════
+# nginx for techbird.in - the two blocks the site actually needs
+#
+# Copy the location blocks into the existing `server { ... }` for
+# techbird.in, then:
+#     sudo nginx -t && sudo systemctl reload nginx
+#
+# Order matters: /mailbird/ must come BEFORE the SPA fallback, or the
+# `try_files ... /index.html` rule swallows the POST and the contact form
+# receives an HTML page instead of the JSON it expects.
+# ══════════════════════════════════════════════════════════════════════
+
+# ── 1. Contact-form proxy ─────────────────────────────────────────────
+# The form posts to /mailbird/api/method/mailbird.api.send_website_enquiry
+# on this origin. mailbird.techbird.in sends no Access-Control-Allow-Origin,
+# so a direct browser call is blocked by CORS; proxying keeps it same-origin.
+#
+# Without this block the POST falls through to index.html, the response is
+# HTML rather than JSON, and every submission fails.
+location /mailbird/ {
+    proxy_pass         https://mailbird.techbird.in/;
+    proxy_http_version 1.1;
+
+    # Frappe routes by Host, so it must name the Mailbird site, not ours.
+    proxy_set_header   Host              mailbird.techbird.in;
+
+    # The endpoint validates the request origin against the Website Master
+    # record. Forward the browser's Origin and Referer unchanged - rewriting
+    # or dropping them turns a valid request into "Request origin not allowed".
+    proxy_set_header   Origin            $http_origin;
+    proxy_set_header   Referer           $http_referer;
+
+    # The endpoint rate limits 5 requests/minute per IP. Pass the real client
+    # IP so the limit applies per visitor rather than to this server as a
+    # whole. Only takes effect if the Mailbird nginx trusts this hop
+    # (set_real_ip_from + real_ip_header X-Forwarded-For over there).
+    proxy_set_header   X-Real-IP         $remote_addr;
+    proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
+    proxy_set_header   X-Forwarded-Proto $scheme;
+
+    # Required for TLS to the upstream: without SNI the handshake fails.
+    proxy_ssl_server_name on;
+
+    proxy_connect_timeout 10s;
+    proxy_read_timeout    20s;
+}
+
+# ── 2. SPA fallback ───────────────────────────────────────────────────
+# React Router owns the routes, so any path that is not a real file has to
+# return index.html. Keep this LAST.
+location / {
+    try_files $uri $uri/ /index.html;
+}
+
+# ── Optional: cache headers matching vercel.json ──────────────────────
+# Build output is content-hashed, so it can be cached hard.
+location ~* ^/assets/.*\.(js|css|woff2?|ttf)$ {
+    add_header Cache-Control "public, max-age=31536000, immutable";
+    try_files $uri =404;
+}
+location ~* \.(webp|png|jpe?g|svg|ico|avif)$ {
+    add_header Cache-Control "public, max-age=604800, stale-while-revalidate=86400";
+    try_files $uri =404;
+}
+
+# ══════════════════════════════════════════════════════════════════════
+# Verify after reloading - this must return JSON, not HTML:
+#
+#   curl -sS -X POST https://techbird.in/mailbird/api/method/mailbird.api.send_website_enquiry \
+#     -H "Content-Type: application/x-www-form-urlencoded" \
+#     --data-urlencode "site=techbird.in" --data-urlencode "website_url="
+#
+# Expected: {"message":{"success":false,"error":"Missing required fields: ..."}}
+# That error means the proxy works and the endpoint was reached.
+# Getting HTML back means this block is missing or ordered after the SPA
+# fallback.
+# ══════════════════════════════════════════════════════════════════════
