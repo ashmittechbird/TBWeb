@@ -338,13 +338,13 @@ export default function ServicesPage() {
           <div className="ip2-stack-grid">
             {[
               { num: '01', title: 'Manufacturing', desc: 'ERP, production planning, quality control, supply chain visibility and IoT integration.' },
-              { num: '02', title: 'Healthcare & Pharma', desc: 'Practice management, LIMS, patient portals, regulatory compliance and clinical data systems.' },
-              { num: '03', title: 'Retail & E-Commerce', desc: 'Omnichannel platforms, inventory management, POS integration and customer data platforms.' },
-              { num: '04', title: 'Legal & Professional Services', desc: 'Litigation management, document automation, client portals and time-billing systems.' },
-              { num: '05', title: 'Finance & BFSI', desc: 'Fintech apps, loan origination systems, compliance dashboards and secure data infrastructure.' },
-              { num: '06', title: 'Real Estate & Construction', desc: 'Project management ERP, CRM, site inspection apps and investor reporting dashboards.' },
-              { num: '07', title: 'Logistics & Transport', desc: 'Fleet tracking, route optimisation, delivery apps and warehouse management systems.' },
-              { num: '08', title: 'Education & EdTech', desc: 'LMS platforms, admissions portals, student information systems and e-learning products.' },
+              { num: '02', title: 'Retail & E-Commerce', desc: 'Omnichannel platforms, inventory management, POS integration and customer data platforms.' },
+              { num: '03', title: 'Legal & Professional Services', desc: 'Litigation management, document automation, client portals and time-billing systems.' },
+              { num: '04', title: 'Finance & BFSI', desc: 'Fintech apps, loan origination systems, compliance dashboards and secure data infrastructure.' },
+              { num: '05', title: 'Real Estate & Construction', desc: 'Project management ERP, CRM, site inspection apps and investor reporting dashboards.' },
+              { num: '06', title: 'Logistics & Transport', desc: 'Fleet tracking, route optimisation, delivery apps and warehouse management systems.' },
+              { num: '07', title: 'Education & EdTech', desc: 'LMS platforms, admissions portals, student information systems and e-learning products.' },
+              { num: '08', title: 'Hospitality & Travel', desc: 'Property management systems, reservations, front-desk operations and guest experience platforms.' },
             ].map((ind) => (
               <div className="ip2-stack-item" key={ind.num} data-reveal>
                 <span className="ip2-stack-num">{ind.num}</span>

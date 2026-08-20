@@ -79,7 +79,7 @@ export default function CloudDevOpsPage() {
           color: '#fbbf24',
           heading: 'Cloud Security & Compliance',
           paragraphs: [
-            'Security misconfigurations are the leading cause of cloud breaches. We conduct comprehensive cloud security audits - IAM policy review, network security group analysis, encryption at rest and in transit, secret management and compliance mapping. For regulated industries, we design infrastructure that meets SOC 2, ISO 27001, HIPAA and PCI-DSS requirements.',
+            'Security misconfigurations are the leading cause of cloud breaches. We conduct comprehensive cloud security audits - IAM policy review, network security group analysis, encryption at rest and in transit, secret management and compliance mapping. For regulated industries, we design infrastructure that meets SOC 2, ISO 27001 and PCI-DSS requirements.',
           ],
           useCases: 'Security audits, IAM hardening, SOC 2 readiness, Secrets management, VPC design',
         },

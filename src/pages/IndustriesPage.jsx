@@ -49,14 +49,14 @@ export default function IndustriesPage() {
     <div ref={ref} className="ind-page">
       <SEO
         title="Industries We Serve - IT Solutions by TechBird"
-        description="TechBird delivers IT solutions across education, healthcare, BPO, hospitality, legal and financial services, retail and e-commerce, manufacturing and technology - industry-specific ERP, AI and cloud."
-        keywords="education technology, healthcare IT, BPO automation, hospitality software, legal tech, fintech, retail e-commerce, manufacturing ERP, DevOps, Pune India"
+        description="TechBird delivers IT solutions across education, BPO, hospitality, legal and financial services, retail and e-commerce, manufacturing and technology - industry-specific ERP, AI and cloud."
+        keywords="education technology, BPO automation, hospitality software, legal tech, fintech, retail e-commerce, manufacturing ERP, DevOps, Pune India"
         faqItems={[
-          { q: 'What industries does TechBird serve?', a: 'Education, Healthcare, BPO & Call Centers, Hospitality, Legal & Financial, Retail & E-commerce, Manufacturing, and IT & Technology.' },
+          { q: 'What industries does TechBird serve?', a: 'Education, BPO & Call Centers, Hospitality, Legal & Financial, Retail & E-commerce, Manufacturing, and IT & Technology.' },
           { q: 'Does TechBird build industry-specific software?', a: 'Yes. Each industry gets solutions built around its own workflows, compliance requirements and growth patterns rather than a generic template.' },
           { q: 'Where is TechBird located?', a: 'Pune, India, serving clients in India, UK, US and UAE.' },
         ]}
-        serviceSchema={{ name: 'Industry-Specific IT Solutions', description: 'ERP, AI and cloud solutions across education, healthcare, BPO, hospitality, legal, retail, manufacturing and technology.', category: 'Technology Consulting' }}
+        serviceSchema={{ name: 'Industry-Specific IT Solutions', description: 'ERP, AI and cloud solutions across education, BPO, hospitality, legal, retail, manufacturing and technology.', category: 'Technology Consulting' }}
       />
       <div className="ip2-overlay" />
       <InnerNavbar />
@@ -81,7 +81,8 @@ export default function IndustriesPage() {
           <div className="ipg-head">
             <span className="ipg-eyebrow">Sectors</span>
             <h2 className="ipg-h2">Built for every sector.</h2>
-            <p className="ipg-sub">Eight industries where we already run production systems. Each one gets the same engineering, shaped to how that sector actually works.</p>
+            {/* Count comes from the data so it cannot drift when the list changes. */}
+            <p className="ipg-sub">{INDUSTRIES.length} industries where we already run production systems. Each one gets the same engineering, shaped to how that sector actually works.</p>
           </div>
 
           <div className="ipg-grid">

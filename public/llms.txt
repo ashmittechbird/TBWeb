@@ -23,7 +23,7 @@ TechBird is headquartered in Pune, Maharashtra, India and serves clients across 
 Primary stack: ERPNext/Frappe (Python), React, Next.js, Vue.js, Node.js, Django, FastAPI, Flutter, React Native, PostgreSQL, MariaDB, AWS, Azure, GCP, Docker, Kubernetes, TensorFlow, PyTorch.
 
 ### What industries does TechBird serve?
-Manufacturing, Healthcare, Legal & Compliance, Retail & E-commerce, Education, Real Estate, Professional Services, Logistics & Supply Chain, Finance, and Government.
+Manufacturing, Legal & Compliance, Retail & E-commerce, Education, Hospitality & Travel, Real Estate, Professional Services, Logistics & Supply Chain, Finance, and Government.
 
 ### How long does a typical project take?
 Discovery: 2-4 weeks. MVP: 8-12 weeks. Full enterprise deployment: 16-24 weeks. ERPNext implementation: 8-16 weeks depending on module count.
@@ -78,7 +78,7 @@ Pre-registration, QR/badge printing, host notifications, visitor logs, complianc
 - TechBird **provides** Software Development, AI Solutions, Cloud & DevOps, Animation, MarTech, Marketing Strategy
 - TechBird **builds** Custom ERP, HRMS, CRM, Practice Management, E-commerce, DMS, Litigation Management, VMS
 - TechBird **uses** ERPNext, Frappe, React, Python, AWS, Azure, Flutter, TensorFlow
-- TechBird **serves** Manufacturing, Healthcare, Legal, Retail, Education, Real Estate, Professional Services, Logistics
+- TechBird **serves** Manufacturing, Legal, Retail, Education, Hospitality, Real Estate, Professional Services, Logistics
 - TechBird **is located in** Pune, Maharashtra, India
 - TechBird **competes with** IT services companies providing ERPNext consulting, custom software development, and AI solutions in India
 
