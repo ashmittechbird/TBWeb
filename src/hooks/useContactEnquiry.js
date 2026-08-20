@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import {
   ENQUIRY_ENDPOINT,
+  MAILBIRD_SITE,
   REQUEST_TIMEOUT_MS,
   buildEnquiryPayload,
   buildMailtoUrl,
+  isTurnstileEnabled,
   readEnquiryResult,
 } from '../lib/mailbird';
 
@@ -55,6 +57,7 @@ export default function useContactEnquiry() {
       if (!result.ok) {
         const message = visitorMessage(result.error, res.status);
         console.error('[contact] enquiry rejected:', result.error || `HTTP ${res.status}`);
+        explainConfigFault(result.error);
         setError(message);
         return { status: 'error', message };
       }
@@ -107,6 +110,33 @@ async function postForm(url, fields) {
     });
   } finally {
     clearTimeout(timer);
+  }
+}
+
+/* Two server rejections are pure configuration faults that look like nothing
+   in particular from the visitor's side. Spell them out in the console so
+   whoever is debugging does not have to rediscover the cause. */
+function explainConfigFault(serverError) {
+  const text = String(serverError || '');
+
+  if (/captcha|turnstile|recaptcha/i.test(text) && !isTurnstileEnabled()) {
+    console.error(
+      '[contact] The server requires a captcha but this build has no ' +
+      'VITE_TURNSTILE_SITE_KEY, so no widget was rendered and no token was ' +
+      'sent. The visitor sees "complete the check" with nothing to complete. ' +
+      'Set the variable on the machine that runs `npm run build` - VITE_* ' +
+      'values are baked in, not read at runtime.'
+    );
+  }
+
+  if (/origin not allowed/i.test(text)) {
+    console.error(
+      `[contact] The Mailbird Website Master for "${MAILBIRD_SITE}" does not ` +
+      `allow this origin (${window.location.origin}). Requests are proxied, ` +
+      'but the browser\'s Origin header is forwarded as-is, so every host the ' +
+      'form is served from - production, preview deployments and localhost - ' +
+      'has to be on that record\'s allowed-origins list.'
+    );
   }
 }
 
