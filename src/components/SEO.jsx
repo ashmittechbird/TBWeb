@@ -64,7 +64,7 @@ export default function SEO({
     ],
     contactPoint: {
       '@type': 'ContactPoint',
-      telephone: '+919766661836',
+      telephone: '+919767623456',
       email: 'connect@techbirdit.in',
       contactType: 'sales',
       availableLanguage: ['English', 'Hindi'],

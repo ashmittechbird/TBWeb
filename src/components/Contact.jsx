@@ -20,8 +20,8 @@ export default function Contact() {
             {/* Right: contact details */}
             <div className="contact-right">
               <div className="contact-rows">
-                <a className="contact-row" href="tel:+919766661836">
-                  <span>Phone</span><strong>+91 97666 61836</strong>
+                <a className="contact-row" href="tel:+919767623456">
+                  <span>Phone</span><strong>+91 97676 23456</strong>
                 </a>
                 <a className="contact-row" href="mailto:connect@techbirdit.in">
                   <span>Email</span><strong>connect@techbirdit.in</strong>

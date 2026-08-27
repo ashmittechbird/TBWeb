@@ -107,7 +107,7 @@ export default function ContactPage() {
             '@type': 'Organization',
             name: 'TechBird IT Services',
             url: 'https://techbird.in',
-            telephone: '+919766661836',
+            telephone: '+919767623456',
             email: 'connect@techbirdit.in',
             address: { '@type': 'PostalAddress', streetAddress: 'Unit 312-314, SOHO by Panchsheel', addressLocality: 'Kharadi, Pune', postalCode: '411014', addressRegion: 'Maharashtra', addressCountry: 'IN' },
           },
@@ -133,13 +133,13 @@ export default function ContactPage() {
       <section className="cp-info-strip">
         <div className="cp-inner">
           <div className="cp-info-grid">
-            <a className="cp-info-item" href="tel:+919766661836">
+            <a className="cp-info-item" href="tel:+919767623456">
               <div className="cp-info-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
               </div>
               <div className="cp-info-text">
                 <span className="cp-info-label">Call Us</span>
-                <strong>+91 97666 61836</strong>
+                <strong>+91 97676 23456</strong>
               </div>
             </a>
             <a className="cp-info-item" href="mailto:connect@techbirdit.in">
@@ -316,9 +316,9 @@ export default function ContactPage() {
               <div className="cp-connect-card">
                 <h3>Prefer a quick chat?</h3>
                 <p>Book a 30-minute discovery call. No commitment, no sales pitch, just a direct conversation about your project.</p>
-                <a href="tel:+919766661836" className="cp-call-btn">
+                <a href="tel:+919767623456" className="cp-call-btn">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-                  <span>Call +91 97666 61836</span>
+                  <span>Call +91 97676 23456</span>
                 </a>
               </div>
 

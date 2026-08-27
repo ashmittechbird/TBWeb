@@ -23,7 +23,7 @@ const SECTIONS = [
         <p>
           Unit 312-314, SOHO by Panchsheel, Kharadi, Pune 411014, Maharashtra, India<br />
           Email: {mail}<br />
-          Phone: <a href="tel:+919766661836">+91 97666 61836</a>
+          Phone: <a href="tel:+919767623456">+91 97676 23456</a>
         </p>
       </>
     ),
