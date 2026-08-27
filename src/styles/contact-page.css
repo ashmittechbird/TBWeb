@@ -278,6 +278,78 @@ a.cp-info-item:hover {
 }
 .cp-map-card iframe { display: block; }
 
+/* Click-to-load placeholder. Matches the loaded map's height so choosing to
+   load it does not shift the rest of the column. Drawn locally - no tile
+   image, so nothing is requested from Google until the button is pressed. */
+.cp-map-placeholder {
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 22px 20px;
+  text-align: center;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(45,106,207,.14) 0%, transparent 70%),
+    rgba(255,255,255,.03);
+}
+.cp-map-pin {
+  width: 26px; height: 26px;
+  color: rgba(255,255,255,.5);
+  margin-bottom: 2px;
+}
+.cp-map-pin svg { width: 100%; height: 100%; }
+.cp-map-address {
+  margin: 0;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: rgba(255,255,255,.86);
+  line-height: 1.45;
+  max-width: 22rem;
+}
+.cp-map-note {
+  margin: 0;
+  font-size: 0.74rem;
+  color: rgba(255,255,255,.45);
+  line-height: 1.5;
+  max-width: 21rem;
+}
+.cp-map-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 14px;
+  margin-top: 8px;
+}
+.cp-map-btn {
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #08080a;
+  background: #fff;
+  border: 0;
+  border-radius: 9999px;
+  padding: 8px 18px;
+  cursor: pointer;
+  transition: transform .2s ease, opacity .2s ease;
+  /* WCAG 2.2 target size - the row is otherwise short enough to be fiddly. */
+  min-height: 34px;
+}
+.cp-map-btn:hover { transform: translateY(-1px); }
+.cp-map-btn:active { transform: none; }
+.cp-map-link {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,.6);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+}
+.cp-map-link:hover { color: #fff; }
+
 .cp-connect-card {
   background: rgba(255,255,255,.04);
   border: 1px solid rgba(255,255,255,.07);

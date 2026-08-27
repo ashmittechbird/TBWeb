@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import InnerNavbar from '../components/InnerNavbar';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
+import MapEmbed from '../components/MapEmbed';
 import Turnstile from '../components/Turnstile';
 import useContactEnquiry from '../hooks/useContactEnquiry';
 import { CONTACT_EMAIL, TURNSTILE_SITE_KEY, isTurnstileEnabled } from '../lib/mailbird';
@@ -301,18 +302,15 @@ export default function ContactPage() {
             {/* Right: Side info */}
             <div className="cp-side">
               {/* Map */}
-              <div className="cp-map-card">
-                <iframe
-                  title="TechBird Office"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.531!2d73.9402!3d18.5578!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c3c3c3c3c3c3%3A0x0!2sSOHO%20by%20Panchsheel%2C%20Kharadi!5e0!3m2!1sen!2sin"
-                  width="100%"
-                  height="220"
-                  style={{ border: 0 }}
-                  allowFullScreen=""
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
-              </div>
+              {/* Not loaded until asked - see MapEmbed. Google is the only
+                  third party on the site that is not required for the page to
+                  work, so it is the one that gets a consent step. */}
+              <MapEmbed
+                title="TechBird Office"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.531!2d73.9402!3d18.5578!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c3c3c3c3c3c3%3A0x0!2sSOHO%20by%20Panchsheel%2C%20Kharadi!5e0!3m2!1sen!2sin"
+                externalUrl="https://www.google.com/maps/search/?api=1&query=SOHO+by+Panchsheel%2C+Kharadi%2C+Pune+411014"
+                address="Unit 312-314, SOHO by Panchsheel, Kharadi, Pune 411014"
+              />
 
               {/* Quick connect */}
               <div className="cp-connect-card">

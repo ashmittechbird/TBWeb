@@ -10,20 +10,27 @@ const SECTIONS = [
   {
     heading: 'What we set ourselves',
     body: (
-      <p>
-        Nothing. This site sets no cookies of its own — no analytics, no advertising, no
-        session tracking. There is no Google Analytics, advertising pixel or session-recording
-        tool anywhere on it.
-      </p>
+      <>
+        <p>
+          No cookies at all — no analytics, no advertising, no session tracking. There is no
+          Google Analytics, advertising pixel or session-recording tool anywhere on this site.
+        </p>
+        <p>
+          One thing is stored: if you choose to load the map on our contact page, we remember
+          that choice in your browser&apos;s local storage so you are not asked again. It holds
+          a single value, it is readable only by this site, it never reaches us, and clearing
+          your browser&apos;s site data removes it.
+        </p>
+      </>
     ),
   },
   {
-    heading: 'What third parties can set',
+    heading: 'The full list',
     body: (
       <>
         <p>
-          Two features on the site are provided by third parties, and loading them can set
-          cookies or similar browser storage from those providers:
+          Everything this site can cause to be stored in your browser, first-party and
+          third-party:
         </p>
         <div className="lgl-table-wrap">
           <table className="lgl-table">
@@ -46,13 +53,24 @@ const SECTIONS = [
                 <td>Strictly necessary</td>
               </tr>
               <tr>
-                <td>Google Maps</td>
+                <td>TechBird (us)</td>
                 <td>Contact page map</td>
+                <td>
+                  Remembers that you chose to load the map, so you are not asked on every
+                  visit. Local storage, one value, never sent to us.
+                </td>
+                <td>Functional, first-party</td>
+              </tr>
+              <tr>
+                <td>Google Maps</td>
+                <td>
+                  Contact page map — <strong>only after you click &ldquo;Load map&rdquo;</strong>
+                </td>
                 <td>
                   Renders the embedded map of our office. Google may set cookies and use them
                   under its own terms, including for its own purposes.
                 </td>
-                <td>Third-party functional</td>
+                <td>Third-party, opt-in</td>
               </tr>
             </tbody>
           </table>
@@ -62,6 +80,11 @@ const SECTIONS = [
           all, because our enquiry endpoint rejects submissions that carry no verification
           token.
         </p>
+        <p>
+          The Google Map is not loaded with the page. Until you press &ldquo;Load map&rdquo;,
+          no request is made to Google and nothing of theirs is stored — the placeholder you
+          see instead is drawn by us.
+        </p>
       </>
     ),
   },
@@ -70,14 +93,19 @@ const SECTIONS = [
     body: (
       <>
         <p>
-          We do not show a consent banner because we set no analytics or advertising cookies of
-          our own, and the Turnstile check is strictly necessary to operate the contact form.
+          Because there is nothing to consent to up front. We set no analytics or advertising
+          cookies, the Turnstile check is strictly necessary to operate the contact form, and the
+          one genuinely optional third party — the Google Map — is behind a button rather than
+          loaded on arrival.
         </p>
         <p>
-          The embedded Google Map is the one genuinely optional third party. If you would rather
-          not load it, avoid the contact page and reach us by{' '}
-          <a href={`mailto:${EMAIL}`}>email</a> or phone instead — every other page on the site
-          loads no Google content.
+          That means consent is asked exactly where it is needed, in place, instead of a banner
+          covering the page. If you never press &ldquo;Load map&rdquo;, no third-party content is
+          ever loaded from anywhere on this site other than the anti-bot check on the form.
+        </p>
+        <p>
+          To undo the choice, clear this site&apos;s data in your browser and the map will ask
+          again.
         </p>
       </>
     ),
@@ -88,8 +116,9 @@ const SECTIONS = [
       <>
         <p>
           You can block or delete cookies in your browser settings, and block third-party
-          cookies specifically, which stops the Google Maps embed from storing anything. Every
-          major browser supports this under its privacy or site-data settings.
+          cookies specifically, which stops the Google Maps embed from storing anything even if
+          you do load it. Every major browser supports this under its privacy or site-data
+          settings.
         </p>
         <p>
           Blocking third-party cookies does not break this site. Blocking scripts from

@@ -97,7 +97,9 @@ const SECTIONS = [
           </li>
           <li>
             <strong>Google</strong> — the map on our contact page is embedded from Google Maps.
-            Loading that page contacts Google and is subject to Google&apos;s own privacy terms.
+            It is <strong>not</strong> loaded with the page: nothing is requested from Google
+            unless you press &ldquo;Load map&rdquo;, and if you do, that embed is subject to
+            Google&apos;s own privacy terms.
           </li>
           <li>
             <strong>Our hosting provider</strong> — serves the site and keeps standard access
@@ -117,9 +119,9 @@ const SECTIONS = [
     body: (
       <>
         <p>
-          We set no cookies of our own for analytics or advertising. Third-party cookies and
-          similar storage can still be set by the embedded Google Map and by the Turnstile
-          check.
+          We set no cookies of our own for analytics or advertising. The Turnstile check on the
+          contact form can set third-party storage, and so can the Google Map — but only if you
+          choose to load it. We store one value locally to remember that choice.
         </p>
         <p>
           Our <a href="/cookies">Cookie Policy</a> lists each one, what it is for, and how to
