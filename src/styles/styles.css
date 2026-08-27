@@ -2640,6 +2640,29 @@ body.loaded .scroll-hint {
   pointer-events: none;
 }
 
+/* Marks that are a monogram or a bare symbol carry no name of their own, so
+   the tile stacks the logo over a caption. The tile size is unchanged - the
+   logo gives up the height the caption needs. */
+.cl-tile--named {
+  flex-direction: column;
+  gap: 5px;
+}
+
+.cl-tile--named .cl-tile-img {
+  max-height: 40%;
+}
+
+.cl-tile-name {
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: #14141a;
+  white-space: nowrap;
+  user-select: none;
+  pointer-events: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .cl-track { animation: none !important; }
 }
@@ -2649,6 +2672,9 @@ body.loaded .scroll-hint {
   .cl-head-wrap { margin-bottom: 1.5rem; padding: 0 1rem; }
   .cl-tile { width: 130px; height: 66px; border-radius: 10px; margin-right: 10px; }
   .cl-tile-img { max-width: 55%; max-height: 48%; }
+  .cl-tile--named { gap: 3px; }
+  .cl-tile--named .cl-tile-img { max-height: 34%; }
+  .cl-tile-name { font-size: 9px; letter-spacing: 0.02em; }
   .cl-rows { gap: 10px; }
   .cl-track { animation-duration: 25s !important; }
 }
