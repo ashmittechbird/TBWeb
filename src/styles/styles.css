@@ -1525,7 +1525,9 @@ body.loaded .scroll-hint {
 .foot-legal-links {
   display: flex;
   align-items: center;
-  gap: 10px;
+  /* Four links no longer fit one line on a phone. */
+  flex-wrap: wrap;
+  gap: 8px 18px;
   font-size: 12px;
 }
 .foot-legal-links a {
@@ -1534,6 +1536,9 @@ body.loaded .scroll-hint {
   transition: color .2s;
 }
 .foot-legal-links a:hover { color: rgba(255,255,255,.7); }
+/* No dot separators here. With four links the row wraps on a phone, and a
+   separator either dangles at the end of the first line or leads the second -
+   both look like a mistake. Spacing alone carries the separation. */
 
 /* ── Regions ── */
 .foot-regions {

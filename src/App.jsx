@@ -29,6 +29,8 @@ const CaseStudyDetailPage       = lazy(() => import('./pages/CaseStudyDetailPage
 const ContactPage               = lazy(() => import('./pages/ContactPage'));
 const PrivacyPage               = lazy(() => import('./pages/PrivacyPage'));
 const TermsPage                 = lazy(() => import('./pages/TermsPage'));
+const CookiePolicyPage          = lazy(() => import('./pages/CookiePolicyPage'));
+const DisclaimerPage            = lazy(() => import('./pages/DisclaimerPage'));
 
 const Fallback = () => (
   <div style={{ minHeight: '60vh', background: '#08080a' }} />
@@ -66,6 +68,8 @@ export default function App() {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="/terms" element={<TermsPage />} />
+        <Route path="/cookies" element={<CookiePolicyPage />} />
+        <Route path="/disclaimer" element={<DisclaimerPage />} />
         {/* 404 catch-all */}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

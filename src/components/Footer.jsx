@@ -105,10 +105,14 @@ export default function Footer() {
         <div className="foot-bar">
           <div className="foot-legal">
             <p className="foot-copy">&copy; {new Date().getFullYear()} TechBird IT Services. All rights reserved.</p>
+            {/* All four legal pages, so none is reachable only by URL.
+                Separators are drawn in CSS on each link after the first, so a
+                wrapped line never ends on a dangling dot. */}
             <div className="foot-legal-links">
               <Link to="/privacy">Privacy Policy</Link>
-              <span className="foot-dot" />
               <Link to="/terms">Terms of Service</Link>
+              <Link to="/cookies">Cookie Policy</Link>
+              <Link to="/disclaimer">Disclaimer</Link>
             </div>
           </div>
           <div className="foot-regions">

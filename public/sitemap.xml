@@ -37,7 +37,9 @@
   <url><loc>https://techbird.in/case-studies/gls-paperless-gst-compliance</loc><lastmod>2026-08-17</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 
   <!-- ── Legal ── -->
-  <url><loc>https://techbird.in/privacy</loc><lastmod>2026-08-05</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://techbird.in/terms</loc><lastmod>2026-08-05</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://techbird.in/privacy</loc><lastmod>2026-08-20</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://techbird.in/terms</loc><lastmod>2026-08-20</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://techbird.in/cookies</loc><lastmod>2026-08-20</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://techbird.in/disclaimer</loc><lastmod>2026-08-20</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
 
 </urlset>
