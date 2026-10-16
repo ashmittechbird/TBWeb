@@ -42,7 +42,7 @@ export default function Footer() {
             </p>
             <div className="foot-socials">
               <a href="https://www.instagram.com/techbirdit/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><InstagramIcon /></a>
-              <a href="https://www.linkedin.com/company/techbird-it-services/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><LinkedInIcon /></a>
+              <a href="https://www.linkedin.com/company/techbirdit/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><LinkedInIcon /></a>
             </div>
           </div>
 

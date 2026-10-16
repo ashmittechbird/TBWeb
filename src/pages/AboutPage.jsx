@@ -36,14 +36,14 @@ const LEADERSHIP = [
 ];
 
 const TEAM = [
-  { name: 'Abhishek Chougule', role: 'Software Developer',      img: '/assets/team/Abhishek-Chougule.webp', li: 'https://www.linkedin.com/company/techbird-it-services/' },
-  { name: 'Aditi Patade',      role: 'Software Developer',      img: '/assets/team/Aditi-Patade.webp',      li: 'https://www.linkedin.com/company/techbird-it-services/' },
-  { name: 'Amol Aaghade',      role: 'Software Developer',       img: '/assets/team/Amol-Aaghade.webp',      li: 'https://www.linkedin.com/company/techbird-it-services/' },
-  { name: 'Ankit Patil',       role: 'Software Developer',      img: '/assets/team/Ankit-Patil.webp',       li: 'https://www.linkedin.com/company/techbird-it-services/' },
-  { name: 'Ashmit Singh',      role: 'Software Developer',      img: '/assets/team/Ashmit-singh.webp',      li: 'https://www.linkedin.com/company/techbird-it-services/' },
-  { name: 'Mehul Rathi',       role: 'Software Developer',      img: '/assets/team/Mehul-Rathi.webp',       li: 'https://www.linkedin.com/company/techbird-it-services/' },
-  { name: 'Paridhi Jhabak',    role: 'Software Developer',      img: '/assets/team/Paridhi-Jhabak.webp',    li: 'https://www.linkedin.com/company/techbird-it-services/' },
-  { name: 'Sanjukta Barik',    role: 'Software Developer',      img: '/assets/team/Sanjukta-Barik.webp',    li: 'https://www.linkedin.com/company/techbird-it-services/' },
+  { name: 'Abhishek Chougule', role: 'Software Developer',      img: '/assets/team/Abhishek-Chougule.webp', li: 'https://www.linkedin.com/company/techbirdit/' },
+  { name: 'Aditi Patade',      role: 'Software Developer',      img: '/assets/team/Aditi-Patade.webp',      li: 'https://www.linkedin.com/company/techbirdit/' },
+  { name: 'Amol Aaghade',      role: 'Software Developer',       img: '/assets/team/Amol-Aaghade.webp',      li: 'https://www.linkedin.com/company/techbirdit/' },
+  { name: 'Ankit Patil',       role: 'Software Developer',      img: '/assets/team/Ankit-Patil.webp',       li: 'https://www.linkedin.com/company/techbirdit/' },
+  { name: 'Ashmit Singh',      role: 'Software Developer',      img: '/assets/team/Ashmit-singh.webp',      li: 'https://www.linkedin.com/company/techbirdit/' },
+  { name: 'Mehul Rathi',       role: 'Software Developer',      img: '/assets/team/Mehul-Rathi.webp',       li: 'https://www.linkedin.com/company/techbirdit/' },
+  { name: 'Paridhi Jhabak',    role: 'Software Developer',      img: '/assets/team/Paridhi-Jhabak.webp',    li: 'https://www.linkedin.com/company/techbirdit/' },
+  { name: 'Sanjukta Barik',    role: 'Software Developer',      img: '/assets/team/Sanjukta-Barik.webp',    li: 'https://www.linkedin.com/company/techbirdit/' },
 ];
 
 const FAQS = [
@@ -218,7 +218,7 @@ export default function AboutPage() {
                   <div className="ab-lead-links">
                     <a
                       className="ab-lead-li"
-                      href={m.li || 'https://www.linkedin.com/company/techbird-it-services/'}
+                      href={m.li || 'https://www.linkedin.com/company/techbirdit/'}
                       target="_blank" rel="noopener noreferrer"
                       aria-label={`${m.name} on LinkedIn`}
                     >

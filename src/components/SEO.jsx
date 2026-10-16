@@ -59,7 +59,7 @@ export default function SEO({
       'Digital Transformation', 'SaaS', 'Marketing Technology',
     ],
     sameAs: [
-      'https://www.linkedin.com/company/techbird-it-services/',
+      'https://www.linkedin.com/company/techbirdit/',
       'https://www.instagram.com/techbirdit/',
     ],
     contactPoint: {

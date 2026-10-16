@@ -96,7 +96,7 @@ export default function InnerNavbar() {
   ];
 
   const socialItems = [
-    { label: 'LinkedIn', link: 'https://www.linkedin.com/company/techbird-it-services/' }
+    { label: 'LinkedIn', link: 'https://www.linkedin.com/company/techbirdit/' }
   ];
 
   return (
