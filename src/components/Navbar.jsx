@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
 import StaggeredMenu from './StaggeredMenu';
+import useIsClient from '../hooks/useIsClient';
 import { productNavItems, productSubItems, LIVE_PRODUCT_COUNT } from '../data/products';
 
 /* ── chevron ── */
@@ -52,6 +53,7 @@ const LeftDeco = () => (
 
 export default function Navbar() {
   const [mega, setMega] = useState(null);
+  const isClient = useIsClient();
   const timer = useRef(null);
 
   const open  = (name) => { clearTimeout(timer.current); setMega(name); };
@@ -201,7 +203,8 @@ export default function Navbar() {
     </nav>
 
     {/* ── Mobile Staggered Navigation Menu (portalled to body to escape stacking context) ── */}
-    {createPortal(
+    {/* Needs document.body, so it is client-only and not in the prerendered HTML. */}
+    {isClient && createPortal(
       <StaggeredMenu
         position="right"
         isFixed={true}

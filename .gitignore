@@ -49,6 +49,7 @@ service-account.json
 # -------------------------
 node_modules/
 dist/
+dist-ssr/
 build/
 .next/
 out/

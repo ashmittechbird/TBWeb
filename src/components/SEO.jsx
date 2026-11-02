@@ -28,7 +28,9 @@ export default function SEO({
   softwareSchema,      // { name, description, category, os } - for /products/* pages
 }) {
   const { pathname } = useLocation();
-  const canonical = `${SITE}${pathname === '/' ? '' : pathname}`;
+  /* The home page's canonical keeps its trailing slash (https://techbird.in/),
+     matching the sitemap and og:url. Every other route has none. */
+  const canonical = `${SITE}${pathname}`;
   const pageTitle = title ? `${title} | ${SITE_NAME}` : DEFAULT_TITLE;
   const pageDesc = description || DEFAULT_DESC;
   const pageImg = image || DEFAULT_IMG;
@@ -169,7 +171,15 @@ export default function SEO({
       <meta name="description" content={pageDesc} />
       {keywords && <meta name="keywords" content={keywords} />}
       <link rel="canonical" href={canonical} />
-      {noindex && <meta name="robots" content="noindex,nofollow" />}
+      {/* Exactly one robots tag per page. This used to live in index.html as a
+          site-wide "index, follow" and the not-found page added "noindex" on top,
+          leaving two conflicting directives. */}
+      <meta
+        name="robots"
+        content={noindex
+          ? 'noindex,nofollow'
+          : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'}
+      />
 
       {/* ── Open Graph ── */}
       <meta property="og:type" content={type} />

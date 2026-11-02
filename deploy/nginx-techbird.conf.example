@@ -47,11 +47,19 @@ location /mailbird/ {
     proxy_read_timeout    20s;
 }
 
-# ── 2. SPA fallback ───────────────────────────────────────────────────
-# React Router owns the routes, so any path that is not a real file has to
-# return index.html. Keep this LAST.
+# ── 2. Prerendered pages + SPA fallback ───────────────────────────────
+# `npm run build` prerenders every public route to its own file: /about is
+# dist/about.html, /products/crm is dist/products/crm.html, / is index.html.
+# $uri.html maps the clean URL to that file so crawlers that do not run
+# JavaScript get each page's own title, canonical, headings and schema.
+#
+# $uri.html must come BEFORE the /index.html fallback, or every URL gets the
+# home page's HTML. $uri/ is left out on purpose: it would 301 /about to
+# /about/, disagreeing with the page's canonical.
+#
+# Keep this LAST.
 location / {
-    try_files $uri $uri/ /index.html;
+    try_files $uri $uri.html /index.html;
 }
 
 # ── Optional: cache headers matching vercel.json ──────────────────────

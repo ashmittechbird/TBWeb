@@ -5,32 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <!-- Primary Meta -->
-    <title>TechBird IT Services - Driving Digital Transformation</title>
-    <meta name="description" content="Premier technology partner for startups to enterprises. Custom software development, AI solutions, cloud & DevOps, ERP (ERPNext), mobile apps, and marketing technology. 50+ enterprise clients in Pune, India." />
-    <meta name="keywords" content="software development company, ERP solutions, ERPNext, AI solutions, cloud DevOps, custom software, web development, mobile app development, IT services India, Pune" />
-    <meta name="author" content="TechBird IT Services" />
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-    <link rel="canonical" href="https://techbird.in/" />
+    <!-- Per-page SEO tags (title, description, canonical, robots, Open Graph,
+         Twitter, geo, author) are NOT written here. Every page renders them
+         from <SEO> in src/components/SEO.jsx, and scripts/prerender.mjs
+         injects each page's own set at build time, in place of the marker
+         below.
 
-    <!-- GEO / Local SEO -->
-    <meta name="geo.region" content="IN-MH" />
-    <meta name="geo.placename" content="Pune" />
-
-    <!-- Open Graph -->
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="TechBird IT Services" />
-    <meta property="og:title" content="TechBird IT Services - Driving Digital Transformation" />
-    <meta property="og:description" content="Premier technology partner for startups to enterprises. Custom software, AI, cloud, ERP & marketing technology." />
-    <meta property="og:url" content="https://techbird.in/" />
-    <meta property="og:image" content="https://techbird.in/og-image.png" />
-    <meta property="og:locale" content="en_IN" />
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="TechBird IT Services - Driving Digital Transformation" />
-    <meta name="twitter:description" content="Custom software development, AI solutions, cloud & DevOps, ERP, and marketing technology." />
-    <meta name="twitter:image" content="https://techbird.in/og-image.png" />
+         They used to be hardcoded here with the home page's values. Every
+         route then shipped the home page's title and canonical in its raw
+         HTML, and once JS ran the client added the page's real tags beside
+         them - two titles, two descriptions, two canonicals on every page.
+         Keep this file free of them. -->
+    <!--app-head-->
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -56,17 +42,14 @@
       @font-face { font-family: 'Manrope'; font-style: normal; font-weight: 400 700; font-display: swap; src: url('/fonts/manrope-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
     </style>
 
-    <!-- Preload critical above-fold assets -->
-    <link rel="preload" as="image" href="/logo.webp" type="image/webp" />
+    <!-- The logo preload comes from the page itself (its <img> is fetchpriority=high),
+         so it is injected with each prerendered page rather than repeated here. -->
   </head>
   <body>
     <div id="root"></div>
-    <noscript>
-      <div style="padding:2rem;text-align:center;background:#08080a;color:#fff;min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;font-family:system-ui,sans-serif">
-        <h1>JavaScript Required</h1>
-        <p style="opacity:0.6;margin-top:1rem">TechBird IT Services requires JavaScript to run. Please enable JavaScript in your browser settings.</p>
-      </div>
-    </noscript>
+    <!-- No <noscript> fallback: pages are prerendered, so their content is already
+         in the HTML. The old one put an H1 telling crawlers to enable scripts into
+         every route's raw HTML. -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

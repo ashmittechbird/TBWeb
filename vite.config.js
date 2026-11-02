@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-export default defineConfig({
+export default defineConfig(({ isSsrBuild }) => ({
   plugins: [react()],
   /* The Mailbird host sends no Access-Control-Allow-Origin, so a direct
      browser call from localhost is blocked. Proxying through the dev
@@ -23,9 +23,13 @@ export default defineConfig({
     },
   },
   build: {
+    /* The server bundle (dist-ssr, built only so scripts/prerender.mjs can
+       render pages) is a build tool, not something that is served: no copy of
+       public/ into it, and none of the browser chunking below. */
+    copyPublicDir: !isSsrBuild,
     rollupOptions: {
       output: {
-        manualChunks(id) {
+        manualChunks: isSsrBuild ? undefined : (id) => {
           if (id.includes('node_modules/react-dom')) return 'vendor';
           if (id.includes('node_modules/react/') || id.includes('node_modules/react-router')) return 'vendor';
           if (id.includes('node_modules/gsap')) return 'gsap';
@@ -37,4 +41,4 @@ export default defineConfig({
     cssCodeSplit: true,
     sourcemap: false,
   },
-})
+}))

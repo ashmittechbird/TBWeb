@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useSyncExternalStore } from 'react';
 
 /* Click-to-load wrapper for the Google Maps embed.
  *
@@ -23,6 +23,10 @@ function readConsent() {
     return false;
   }
 }
+/* The stored choice only changes through this component, which tracks its own
+   click in state, so there is nothing to subscribe to. */
+const subscribeNever = () => () => {};
+
 function saveConsent() {
   try {
     window.localStorage.setItem(STORAGE_KEY, 'granted');
@@ -42,13 +46,20 @@ export default function MapEmbed({
   externalUrl,
   address,
 }) {
-  /* Read the stored choice during initialisation rather than in an effect, so
-     a returning visitor never sees the placeholder flash before the map
-     appears. Safe here because the app is client-rendered only - there is no
-     server pass for this to disagree with. */
-  const [loaded, setLoaded] = useState(readConsent);
+  /* The page is prerendered, and the prerendered HTML cannot know whether this
+     visitor has already allowed the map. Reading localStorage in the initial
+     state would make a returning visitor's first client render disagree with
+     the server markup (iframe vs placeholder) and break hydration.
 
-  const load = () => { saveConsent(); setLoaded(true); };
+     useSyncExternalStore resolves that: it renders the server snapshot
+     (not granted) first, so the markup matches, then re-renders with the
+     stored choice. A returning visitor therefore sees the placeholder for one
+     frame before the map loads - the price of a static page. */
+  const remembered = useSyncExternalStore(subscribeNever, readConsent, () => false);
+  const [clicked, setClicked] = useState(false);
+  const loaded = remembered || clicked;
+
+  const load = () => { saveConsent(); setClicked(true); };
 
   if (loaded) {
     return (

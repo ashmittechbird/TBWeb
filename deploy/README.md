@@ -24,14 +24,35 @@ needs is either committed or derived at runtime (see below). Serve `dist/`.
 so the browser is allowed to read the response. Verified: the endpoint returns
 `Access-Control-Allow-Origin: https://techbird.in`.
 
-All nginx has to do is serve `dist/` and send unknown paths to `index.html`, so
-React Router can handle them:
+The build **prerenders every public route** to its own file: `/about` is
+`dist/about.html`, `/products/crm` is `dist/products/crm.html`, and `/` is
+`dist/index.html`. That is what lets crawlers that do not run JavaScript (Bing,
+ChatGPT, Perplexity, Claude) read each page's own title, canonical, headings
+and schema. nginx has to map the clean URL to that file:
 
 ```nginx
 location / {
-    try_files $uri $uri/ /index.html;
+    try_files $uri $uri.html /index.html;
 }
 ```
+
+> **Change this line when you deploy this build.** The old
+> `try_files $uri $uri/ /index.html` still *works* - the browser recovers and
+> shows the right page - but it answers every URL with the home page's HTML,
+> so crawlers see the home page's title and canonical on every route and the
+> prerendering is wasted. Check it with:
+>
+> ```bash
+> curl -s https://techbird.in/about | grep -o '<title>[^<]*'
+> # want: <title>About Us | TechBird IT Services
+> ```
+>
+> `$uri.html` goes before the `/index.html` fallback, and `$uri/` is dropped on
+> purpose: with it, `/about` would be 301-redirected to `/about/`, which
+> disagrees with the page's canonical.
+
+The build also writes `dist-ssr/`, a server bundle that exists only so the
+prerender step can run. It is not served and is ignored by git.
 
 [`nginx-techbird.conf.example`](./nginx-techbird.conf.example) has that plus
 optional cache headers, and a `/mailbird/` proxy block that is **no longer
