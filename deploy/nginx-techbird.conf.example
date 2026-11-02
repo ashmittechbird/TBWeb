@@ -10,6 +10,16 @@
 # receives an HTML page instead of the JSON it expects.
 # ══════════════════════════════════════════════════════════════════════
 
+# ── 0. Server level - add these inside the `server { ... }` block ─────
+# Stops the Server header advertising "nginx/1.24.0 (Ubuntu)": the exact
+# version and OS tell an attacker which known vulnerabilities to try.
+# (Can also go once in the `http { }` block of nginx.conf.)
+server_tokens off;
+
+# Security headers - see nginx-security-headers.conf.example for what each one
+# does and for the rule about including this file in every location too.
+include snippets/techbird-security-headers.conf;
+
 # ── 1. Contact-form proxy - OPTIONAL, NOT NEEDED ──────────────────────
 # allow_cors is now configured on mailbird.techbird.in, so the form calls it
 # directly and the browser is permitted to read the response. Verified: the
@@ -74,14 +84,29 @@ location / {
     try_files $uri $uri.html $uri/index.html =404;
 }
 
+# ── security.txt (RFC 9116) ───────────────────────────────────────────
+# Served from dist/.well-known/security.txt. `^~` makes this prefix win over a
+# regex such as the common `location ~ /\. { deny all; }`, which would otherwise
+# hide every dot-directory, /.well-known included.
+location ^~ /.well-known/ {
+    default_type text/plain;
+    charset utf-8;
+    include snippets/techbird-security-headers.conf;
+    try_files $uri =404;
+}
+
 # ── Optional: cache headers matching vercel.json ──────────────────────
-# Build output is content-hashed, so it can be cached hard.
+# Build output is content-hashed, so it can be cached hard. Each of these has
+# its own add_header, so each must include the security headers again - nginx
+# does not inherit them from the server block once a location sets one.
 location ~* ^/assets/.*\.(js|css|woff2?|ttf)$ {
     add_header Cache-Control "public, max-age=31536000, immutable";
+    include snippets/techbird-security-headers.conf;
     try_files $uri =404;
 }
 location ~* \.(webp|png|jpe?g|svg|ico|avif)$ {
     add_header Cache-Control "public, max-age=604800, stale-while-revalidate=86400";
+    include snippets/techbird-security-headers.conf;
     try_files $uri =404;
 }
 
@@ -96,4 +121,16 @@ location ~* \.(webp|png|jpe?g|svg|ico|avif)$ {
 # That error means the proxy works and the endpoint was reached.
 # Getting HTML back means this block is missing or ordered after the SPA
 # fallback.
+#
+# Security hardening - after `nginx -t && systemctl reload nginx`:
+#
+#   curl -sI https://techbird.in/about | grep -iE '^server|content-security|permissions-policy|referrer-policy|x-frame|strict-transport|x-content-type'
+#     want: "Server: nginx" (no version, no "(Ubuntu)"), one line each, and
+#           a Content-Security-Policy and Permissions-Policy that were missing before.
+#
+#   curl -sI https://techbird.in/assets/$(ls dist/assets | grep -m1 '\.js$') | grep -i content-security
+#     want: the CSP is present on assets too (the include inside the location).
+#
+#   curl -s https://techbird.in/.well-known/security.txt
+#     want: the file's text, not the home page.
 # ══════════════════════════════════════════════════════════════════════

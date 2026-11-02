@@ -1,0 +1,11 @@
+# TechBird IT Services - how to report a security issue (RFC 9116)
+#
+# If you believe you have found a vulnerability in techbird.in, please email us
+# with enough detail to reproduce it. We will acknowledge your report and keep you
+# informed. Please do not access or modify other people's data, and give us a
+# reasonable chance to fix the issue before disclosing it publicly.
+
+Contact: mailto:connect@techbirdit.in
+Expires: 2027-09-30T18:29:59.000Z
+Preferred-Languages: en
+Canonical: https://techbird.in/.well-known/security.txt

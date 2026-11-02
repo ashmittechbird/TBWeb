@@ -102,6 +102,53 @@ After changing nginx:
 sudo nginx -t && sudo systemctl reload nginx
 ```
 
+### Security headers, `server_tokens` and security.txt
+
+Three things live outside the repo's build and have to be done on the box:
+
+1. **`server_tokens off;`** in the `server` (or `http`) block. Without it every
+   response says `Server: nginx/1.24.0 (Ubuntu)`: the exact version and OS.
+2. **The security headers.** Copy
+   [`nginx-security-headers.conf.example`](./nginx-security-headers.conf.example)
+   to `/etc/nginx/snippets/techbird-security-headers.conf` and `include` it in the
+   `server` block **and** inside every `location` that has its own `add_header`
+   (nginx does not inherit `add_header` into a location that sets one, so assets
+   would silently lose them). Delete the `add_header` lines the box already has for
+   the same headers, or they are sent twice - `Referrer-Policy` already is.
+3. **`/.well-known/`.** `dist/.well-known/security.txt` is built from
+   `public/.well-known/`; the `location ^~ /.well-known/` block in the example
+   makes sure a "deny dotfiles" rule does not hide it.
+
+Check it:
+
+```bash
+curl -sI https://techbird.in/about | grep -iE '^server|content-security|permissions-policy|referrer-policy|x-frame|strict-transport|x-content-type'
+curl -s  https://techbird.in/.well-known/security.txt
+```
+
+You want `Server: nginx` with no version, exactly one of each header, and the
+security.txt text rather than the home page.
+
+**What the Content-Security-Policy allows.** Own scripts and styles; Cloudflare
+Turnstile and the click-to-load Google map as frames; Turnstile's script; the
+Mailbird endpoint for the contact form. Everything else - another site's script,
+`eval`, a foreign iframe, a form posting elsewhere - is blocked. It is the same
+policy in `vercel.json` and the snippet, and `npm run check:security` fails if the
+two differ, if the policy picks up `unsafe-eval`, a wildcard or an `http:` source,
+or if security.txt is invalid or expired.
+
+**If the contact form or map ever stops working after a change**, the CSP is the
+first thing to suspect: open the browser console and look for "Refused to ...
+Content Security Policy". To roll back quickly, remove the one
+`Content-Security-Policy` line from the snippet and reload nginx. When a new
+third-party script, frame or API is added, add its origin to **both** files and run
+`npm run check:security`.
+
+**security.txt expires** (`Expires:`, currently 2027-09-30). The build warns 60 days
+ahead; renew the date in `public/.well-known/security.txt`. Its `Contact:` is the
+general `connect@techbirdit.in` mailbox - point it at a dedicated security mailbox
+if one is set up.
+
 ### Mailbird
 
 The contact form needs a **Website Master** record whose `domain_name` is

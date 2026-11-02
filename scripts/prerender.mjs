@@ -26,6 +26,7 @@ import { ROOT, SITE, discoverRoutes } from './lib/routes.mjs';
 import { contentHash, readManifest, diffAgainstManifest, updatedManifest, writeManifest, MANIFEST } from './lib/lastmod.mjs';
 import { buildSitemap } from './lib/sitemap.mjs';
 import { buildLlmsTxt } from './lib/llms.mjs';
+import { inspectSecurityTxt, RENEW_WARNING_DAYS } from './lib/securitytxt.mjs';
 
 const DIST = path.join(ROOT, 'dist');
 const SSR_ENTRY = path.join(ROOT, 'dist-ssr', 'entry-server.js');
@@ -182,6 +183,20 @@ async function main() {
   const lastmod = Object.fromEntries(Object.entries(manifest).map(([route, e]) => [route, e.lastmod]));
   await fs.writeFile(path.join(DIST, 'sitemap.xml'), buildSitemap(pages, lastmod));
   await fs.writeFile(path.join(DIST, 'llms.txt'), await buildLlmsTxt());
+
+  /* security.txt is copied from public/ by the client build. Its Expires date
+     has to be renewed; say so before it lapses rather than after. */
+  try {
+    const txt = inspectSecurityTxt(await fs.readFile(path.join(DIST, '.well-known', 'security.txt'), 'utf8'));
+    if (txt.problems.length) {
+      console.warn(`\n⚠ security.txt: ${txt.problems.join('; ')}`);
+    } else if (txt.daysLeft < RENEW_WARNING_DAYS) {
+      console.warn(`\n⚠ security.txt expires in ${txt.daysLeft} days (${txt.expires}) - renew its Expires field in public/.well-known/security.txt.`);
+    }
+  } catch (err) {
+    if (err.code !== 'ENOENT') throw err;
+    console.warn('\n⚠ dist/.well-known/security.txt is missing.');
+  }
 
   const w = Math.max(...written.map((r) => r.route.length));
   console.log(`\nPrerendered ${written.length} pages:`);
