@@ -47,19 +47,31 @@ location /mailbird/ {
     proxy_read_timeout    20s;
 }
 
-# ── 2. Prerendered pages + SPA fallback ───────────────────────────────
+# ── 2. Prerendered pages, and a real 404 for everything else ──────────
 # `npm run build` prerenders every public route to its own file: /about is
 # dist/about.html, /products/crm is dist/products/crm.html, / is index.html.
-# $uri.html maps the clean URL to that file so crawlers that do not run
+# $uri.html maps the clean URL to that file, so crawlers that do not run
 # JavaScript get each page's own title, canonical, headings and schema.
 #
-# $uri.html must come BEFORE the /index.html fallback, or every URL gets the
-# home page's HTML. $uri/ is left out on purpose: it would 301 /about to
-# /about/, disagreeing with the page's canonical.
+# There is deliberately NO /index.html fallback any more. Every real route has
+# its own file, so a path that matches none of them is a URL that does not
+# exist and must answer 404 - not 200 with the home page, which search engines
+# treat as a soft 404 and crawl forever. The 404 body is dist/404.html, the
+# prerendered not-found page (noindex, no canonical).
+#
+# $uri.html must come before =404. $uri/ is left out on purpose: it would 301
+# /about to /about/, disagreeing with the page's canonical; trailing slashes are
+# stripped with the explicit redirect instead.
 #
 # Keep this LAST.
+error_page 404 /404.html;
+location = /404.html { internal; }
+
+# /about/ -> /about (one redirect, matches the canonical)
+rewrite ^/(.+)/$ /$1 permanent;
+
 location / {
-    try_files $uri $uri.html /index.html;
+    try_files $uri $uri.html $uri/index.html =404;
 }
 
 # ── Optional: cache headers matching vercel.json ──────────────────────

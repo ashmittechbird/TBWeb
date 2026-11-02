@@ -22,6 +22,9 @@ const DIST = path.join(ROOT, 'dist');
 const SSR_ENTRY = path.join(ROOT, 'dist-ssr', 'entry-server.js');
 const SITE = 'https://techbird.in';
 
+/* Not a path any route can match, so it always renders the not-found page. */
+const NOT_FOUND_URL = '/__not-found__';
+
 const HEAD_MARKER = '<!--app-head-->';
 const ROOT_DIV = '<div id="root"></div>';
 
@@ -62,14 +65,21 @@ function count(haystack, re) {
   return (haystack.match(re) || []).length;
 }
 
-function validate(route, { head, html }) {
+function validate(route, { head, html }, kind = 'page') {
   const problems = [];
   const expectedCanonical = `${SITE}${route}`;
+  const isNotFound = kind === 'not-found';
 
   if (count(head, /<title\b/g) !== 1) problems.push(`expected exactly 1 <title>, found ${count(head, /<title\b/g)}`);
   if (count(head, /<meta[^>]*name="description"/g) !== 1) problems.push('expected exactly 1 meta description');
   if (count(head, /<meta[^>]*name="robots"/g) !== 1) problems.push('expected exactly 1 meta robots');
-  if (count(head, /<link[^>]*rel="canonical"/g) !== 1) {
+  if (isNotFound) {
+    /* noindex with a canonical is contradictory, and a canonical here would
+       point at whatever URL the visitor mistyped. */
+    if (count(head, /<link[^>]*rel="canonical"/g) !== 0) problems.push('not-found page must not carry a canonical');
+    if (!/<meta[^>]*name="robots"[^>]*content="noindex/.test(head)) problems.push('not-found page must be noindex');
+    if (!/Page Not Found/.test(head)) problems.push('not-found page has the wrong title');
+  } else if (count(head, /<link[^>]*rel="canonical"/g) !== 1) {
     problems.push('expected exactly 1 canonical');
   } else if (!head.includes(`href="${expectedCanonical}"`)) {
     problems.push(`canonical should be ${expectedCanonical}`);
@@ -86,7 +96,8 @@ function validate(route, { head, html }) {
   if (/rel="canonical"/.test(html)) problems.push('a canonical was left in the body markup');
 
   const text = html.replace(/<script[\s\S]*?<\/script>/g, '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
-  if (text.length < 400) problems.push(`only ${text.length} characters of visible text - looks empty`);
+  const minText = isNotFound ? 60 : 400;
+  if (text.length < minText) problems.push(`only ${text.length} characters of visible text - looks empty`);
 
   return problems;
 }
@@ -106,23 +117,33 @@ async function main() {
   }
 
   const { render } = await import(pathToFileURL(SSR_ENTRY).href);
-  const routes = await discoverRoutes();
+
+  const jobs = (await discoverRoutes()).map((route) => ({
+    label: route, url: route, file: outputFile(route), kind: 'page', dataRoute: route,
+  }));
+
+  /* The not-found page. A URL that matches no route renders NotFoundPage, so
+     this is that page. The web server returns it with a real 404 status for
+     any path that is not a file - see deploy/ and vercel.json. */
+  jobs.push({
+    label: '(not found)', url: NOT_FOUND_URL, file: path.join(DIST, '404.html'), kind: 'not-found', dataRoute: '404',
+  });
 
   const failures = [];
   const written = [];
 
-  for (const route of routes) {
+  for (const job of jobs) {
     let page;
     try {
-      page = await render(route);
+      page = await render(job.url);
     } catch (err) {
-      failures.push(`${route}: render threw - ${err && err.message ? err.message.split('\n')[0] : err}`);
+      failures.push(`${job.label}: render threw - ${err && err.message ? err.message.split('\n')[0] : err}`);
       continue;
     }
 
-    const problems = validate(route, page);
+    const problems = validate(job.url, page, job.kind);
     if (problems.length) {
-      failures.push(`${route}: ${problems.join('; ')}`);
+      failures.push(`${job.label}: ${problems.join('; ')}`);
       continue;
     }
 
@@ -131,23 +152,22 @@ async function main() {
     const headBlock = `<!--prerender:start-->\n    ${page.head}\n    <!--prerender:end-->`;
     const out = template
       .replace(HEAD_MARKER, headBlock)
-      .replace(ROOT_DIV, `<div id="root" data-route="${route}">${page.html}</div>`);
+      .replace(ROOT_DIV, `<div id="root" data-route="${job.dataRoute}">${page.html}</div>`);
 
-    const file = outputFile(route);
-    await fs.mkdir(path.dirname(file), { recursive: true });
-    await fs.writeFile(file, out);
-    written.push({ route, file: path.relative(DIST, file), kb: (Buffer.byteLength(out) / 1024).toFixed(0) });
+    await fs.mkdir(path.dirname(job.file), { recursive: true });
+    await fs.writeFile(job.file, out);
+    written.push({ route: job.label, file: path.relative(DIST, job.file), kb: (Buffer.byteLength(out) / 1024).toFixed(0) });
   }
 
   if (failures.length) {
-    console.error(`\nPrerender failed for ${failures.length} of ${routes.length} route(s):\n`);
+    console.error(`\nPrerender failed for ${failures.length} of ${jobs.length} page(s):\n`);
     failures.forEach((f) => console.error(`  ✗ ${f}`));
     console.error('\nNothing was shipped for the failing routes. Fix them or the build stays red.\n');
     process.exit(1);
   }
 
   const w = Math.max(...written.map((r) => r.route.length));
-  console.log(`\nPrerendered ${written.length} routes:`);
+  console.log(`\nPrerendered ${written.length} pages:`);
   written.forEach((r) => console.log(`  ✓ ${r.route.padEnd(w)}  ->  ${r.file}  (${r.kb} kB)`));
 }
 

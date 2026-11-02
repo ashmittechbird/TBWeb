@@ -31,25 +31,44 @@ ChatGPT, Perplexity, Claude) read each page's own title, canonical, headings
 and schema. nginx has to map the clean URL to that file:
 
 ```nginx
+error_page 404 /404.html;
+location = /404.html { internal; }
+
+rewrite ^/(.+)/$ /$1 permanent;
+
 location / {
-    try_files $uri $uri.html /index.html;
+    try_files $uri $uri.html $uri/index.html =404;
 }
 ```
 
-> **Change this line when you deploy this build.** The old
+> **Change `location /` when you deploy this build.** The old
 > `try_files $uri $uri/ /index.html` still *works* - the browser recovers and
-> shows the right page - but it answers every URL with the home page's HTML,
-> so crawlers see the home page's title and canonical on every route and the
-> prerendering is wasted. Check it with:
+> shows the right page - but it answers every URL, including ones that do not
+> exist, with `200` and the home page's HTML. Crawlers then see the home page's
+> title and canonical on every route (the prerendering is wasted), and treat
+> every mistyped URL as a live page.
+>
+> Check it with:
 >
 > ```bash
 > curl -s https://techbird.in/about | grep -o '<title>[^<]*'
 > # want: <title>About Us | TechBird IT Services
+>
+> curl -s -o /dev/null -w '%{http_code}\n' https://techbird.in/no-such-page
+> # want: 404
 > ```
 >
-> `$uri.html` goes before the `/index.html` fallback, and `$uri/` is dropped on
-> purpose: with it, `/about` would be 301-redirected to `/about/`, which
-> disagrees with the page's canonical.
+> Why each part:
+> - `$uri.html` maps `/about` to `about.html`. It goes before `=404`.
+> - There is **no `/index.html` fallback**: every real route has its own file, so
+>   a path that matches none is a URL that does not exist.
+> - `$uri/` is not used for pages: it would 301 `/about` to `/about/`, against the
+>   page's canonical. The `rewrite` strips a trailing slash with one redirect
+>   instead. (`$uri/index.html` is only there so `/` itself resolves.)
+> - `404.html` is the prerendered not-found page: `noindex`, no canonical.
+>
+> On Vercel the same behaviour comes from `cleanUrls`, `trailingSlash: false`
+> and the absence of a catch-all rewrite in `vercel.json`.
 
 The build also writes `dist-ssr/`, a server bundle that exists only so the
 prerender step can run. It is not served and is ignored by git.

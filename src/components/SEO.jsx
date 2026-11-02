@@ -170,7 +170,9 @@ export default function SEO({
       <title>{pageTitle}</title>
       <meta name="description" content={pageDesc} />
       {keywords && <meta name="keywords" content={keywords} />}
-      <link rel="canonical" href={canonical} />
+      {/* A noindex page has nothing to consolidate, and a canonical alongside
+          noindex sends search engines two opposing signals about the URL. */}
+      {!noindex && <link rel="canonical" href={canonical} />}
       {/* Exactly one robots tag per page. This used to live in index.html as a
           site-wide "index, follow" and the not-found page added "noindex" on top,
           leaving two conflicting directives. */}
