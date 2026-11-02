@@ -1997,12 +1997,6 @@ body.loaded .scroll-hint {
   clip-path: inset(0);
 }
 
-/* recognition used as grid (awards section) */
-.recognition-grid {
-  height: auto;
-  clip-path: none;
-}
-
 .recog-inner {
   position: sticky;
   top: 0;

@@ -1,6 +1,6 @@
 {
   "/": {
-    "hash": "cb37dcd0b1d10c44",
+    "hash": "74bcc8b5c0bca601",
     "lastmod": "2026-11-02"
   },
   "/about": {
@@ -44,7 +44,7 @@
     "lastmod": "2026-11-02"
   },
   "/products": {
-    "hash": "5582df668c4d4388",
+    "hash": "a0d2e3028672ee38",
     "lastmod": "2026-11-02"
   },
   "/products/crm": {
@@ -76,7 +76,7 @@
     "lastmod": "2026-11-02"
   },
   "/services": {
-    "hash": "8c0c16b96b63ce2b",
+    "hash": "4d23efd248c4dbf5",
     "lastmod": "2026-11-02"
   },
   "/services/ai-solutions": {
@@ -88,15 +88,15 @@
     "lastmod": "2026-11-02"
   },
   "/services/cloud-devops": {
-    "hash": "7b1daae38545ecc3",
+    "hash": "f841727c3b9ce19c",
     "lastmod": "2026-11-02"
   },
   "/services/marketing": {
-    "hash": "1c16abfe4c35f911",
+    "hash": "263d0c1fc2eda410",
     "lastmod": "2026-11-02"
   },
   "/services/martech": {
-    "hash": "d056d3f0014a5901",
+    "hash": "b27ce0bec3c2e502",
     "lastmod": "2026-11-02"
   },
   "/services/software-development": {

@@ -48,7 +48,7 @@ const TEXT_CARDS = [
     icon: <IconCloud />,
     cat: 'AWS · GCP · Azure · CI/CD',
     title: <>Cloud &amp;<br />DevOps</>,
-    desc: 'Robust cloud environments and DevOps pipelines designed for 99.9% uptime and secure growth.',
+    desc: 'Robust cloud environments and DevOps pipelines designed for secure growth.',
     to: '/services/cloud-devops',
     bgImg: '/assets/svc-cloud.webp',
   },

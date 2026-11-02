@@ -37,11 +37,6 @@ export default function MarketingPage() {
       title="Marketing Strategies That Drive Growth, Not Just Impressions"
       subtitle="GTM strategy, SEO, paid media, content and social - designed as a system that connects channel activity to revenue, not just reporting dashboards."
       breadcrumbLabel="Marketing Strategy"
-      metrics={[
-        { number: '3.4×', label: 'Average ROAS improvement across accounts' },
-        { number: '60d', label: 'Typical GTM strategy to first qualified lead' },
-        { number: '85%', label: 'Client retention rate on ongoing retainers' },
-      ]}
       introParagraphs={[
         'Impressions, clicks and followers are not business outcomes. Too many companies spend months running campaigns that look busy in reporting dashboards but never move the metrics that matter - pipeline, revenue and customer acquisition cost. The disconnect is usually strategic: channels are managed in silos, creative is produced without audience insight, and budgets are allocated based on last year\'s plan rather than this quarter\'s data.',
         'TechBird approaches marketing as a systems problem. We design the strategy, set up the attribution infrastructure, build the campaigns and measure what actually drives revenue - not what looks impressive in a deck.',

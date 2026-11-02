@@ -3,7 +3,6 @@ import Hero from '../components/Hero';
 import About from '../components/About';
 import Marquee from '../components/Marquee';
 import Services from '../components/Services';
-import Recognition from '../components/Recognition';
 import Products from '../components/Products';
 import Industries from '../components/Industries';
 import Clients from '../components/Clients';
@@ -43,7 +42,6 @@ export default function HomePage() {
         <About />
         <Marquee />
         <Services />
-        <Recognition />
         <Products />
         <Industries />
         <Clients />

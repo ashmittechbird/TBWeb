@@ -37,9 +37,6 @@ export default function MartechPage() {
       title="MarTech Stacks That Connect Your CRM, Analytics and Advertising"
       subtitle="CRM implementation, analytics infrastructure, marketing automation and customer data platforms - designed as an integrated system, not a collection of disconnected subscriptions."
       breadcrumbLabel="MarTech"
-      metrics={[
-        { number: '80%', label: 'Average data quality improvement' },
-      ]}
       introParagraphs={[
         'Marketing teams today operate across a dozen or more tools - a CRM for contacts, a separate platform for email campaigns, another for social scheduling, ad managers for each channel, and analytics dashboards that never quite agree on the numbers. The result is fragmented data, duplicated effort, and campaigns that rely on gut feeling rather than a unified view of the customer journey.',
         'TechBird designs and builds MarTech stacks that work as a system, not a collection of disconnected subscriptions. We audit what you have, identify the gaps and redundancies, design the integrations, and implement the tools that give your team a single, accurate picture of customer behaviour from first touch to closed deal.',

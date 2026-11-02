@@ -25,7 +25,7 @@ export default function CloudDevOpsPage() {
     <>
       <SEO
         title="Cloud & DevOps"
-        description="Cloud infrastructure and DevOps services - cloud migration, CI/CD pipelines, Kubernetes orchestration, cloud security, compliance and cost optimisation. 99.9% uptime SLA on managed infrastructure."
+        description="Cloud infrastructure and DevOps services - cloud migration, CI/CD pipelines, Kubernetes orchestration, cloud security, compliance and cost optimisation."
         keywords="cloud computing, DevOps, CI/CD, cloud migration, Kubernetes, AWS, Azure, Google Cloud, infrastructure as code, cloud security, TechBird"
         faqItems={faqItems}
         serviceSchema={{ name: 'Cloud & DevOps', description: 'AWS/Azure/GCP infrastructure, CI/CD pipelines, Kubernetes, monitoring and security.', category: 'Cloud Computing' }}
@@ -37,10 +37,6 @@ export default function CloudDevOpsPage() {
       title="Cloud Infrastructure That Scales Without Breaking the Budget"
       subtitle="Designing and managing robust cloud environments - migration, DevOps pipelines, Kubernetes, security and cost optimisation - so your team can ship faster."
       breadcrumbLabel="Cloud & DevOps"
-      metrics={[
-        { number: '99.9%', label: 'Uptime SLA on managed infrastructure' },
-        { number: '60%', label: 'Average cost reduction post-migration' },
-      ]}
       introParagraphs={[
         'Cloud infrastructure is not a checkbox - it is the foundation everything else runs on. A misconfigured VPC costs you a security breach. An unoptimised instance type costs you thousands per month. A manual deployment process costs you hours of downtime every release cycle. Yet most companies treat infrastructure as an afterthought until something breaks at 2 AM.',
         'TechBird designs cloud infrastructure the way experienced engineers build production systems - with failure modes mapped, costs tracked and processes automated. Your infrastructure should be boring: reliable, predictable and not something you think about unless you choose to.',
@@ -87,7 +83,7 @@ export default function CloudDevOpsPage() {
           color: '#f472b6',
           heading: 'Cost Optimisation & FinOps',
           paragraphs: [
-            'Cloud bills grow faster than awareness of what is driving them. We perform cost audits that identify waste - idle instances, oversized reservations, orphaned resources, inefficient data transfer - and implement rightsizing, reserved instance strategies and autoscaling policies. Clients consistently see 30–60% cost reductions within the first 90 days.',
+            'Cloud bills grow faster than awareness of what is driving them. We perform cost audits that identify waste - idle instances, oversized reservations, orphaned resources, inefficient data transfer - and implement rightsizing, reserved instance strategies and autoscaling policies.',
           ],
           useCases: 'Cost audits, Reserved instance planning, Rightsizing, FinOps dashboards, Budget alerts',
         },
