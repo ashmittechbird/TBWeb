@@ -22,8 +22,8 @@ export default function Recognition() {
           <article className="svc-card reveal-up">
             <div className="svc-no">03</div>
             <h3>Global Trust</h3>
-            <p className="svc-tags">50+ Countries · 10+ Years · 150+ Projects</p>
-            <p className="svc-desc">10+ years of trust built across 50+ countries with 150+ projects delivered.</p>
+            <p className="svc-tags">Enterprise · Delivery · Support</p>
+            <p className="svc-desc">Trust built with enterprise clients through delivery and long-term support.</p>
           </article>
         </div>
       </div>

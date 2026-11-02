@@ -2,12 +2,11 @@
    cannot disagree with itself between the page copy, the schema.org markup
    and llms.txt (which scripts/prerender.mjs generates from this file).
 
-   Only figures that are CONFIRMED belong here. The site currently states other
-   numbers in several places that disagree with each other - project count
-   (150+ on the home page, 100+ in llms.txt), countries (50+, 20+, and "4
-   markets"), team size, and "10+ years" against a 2020 founding date. They stay
-   where they are until the business confirms the real figures, and then move
-   here in one change rather than being guessed at. */
+   Only figures that are CONFIRMED belong here. The site deliberately states no
+   project count, country count, team size or years-in-business figure: earlier
+   versions printed numbers for these that disagreed with each other and could
+   not be supported, so they were removed rather than reconciled. Add one here
+   only once the business can stand behind it. */
 
 /* Enterprise clients. Stated as "50+" everywhere it appears today. */
 export const CLIENTS = '50+';

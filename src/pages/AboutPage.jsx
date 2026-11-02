@@ -14,8 +14,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 const STORY_STATS = [
   { val: '<em>6</em>',   label: 'Service Lines',        sub: 'ERP, AI, Web, Cloud, Animation, Marketing' },
-  { val: '<em>4</em>',   label: 'Markets Served',       sub: 'India, United Kingdom, United States, UAE' },
-  { val: '<em>5</em>+',  label: 'Proprietary Products', sub: 'Custom ERP, HRMS, DMS, Practice Management and more' },
 ];
 
 const PILLARS = [

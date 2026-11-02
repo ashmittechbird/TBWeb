@@ -38,8 +38,6 @@ export default function MartechPage() {
       subtitle="CRM implementation, analytics infrastructure, marketing automation and customer data platforms - designed as an integrated system, not a collection of disconnected subscriptions."
       breadcrumbLabel="MarTech"
       metrics={[
-        { number: '40+', label: 'CRM implementations delivered' },
-        { number: '12+', label: 'Analytics platforms supported' },
         { number: '80%', label: 'Average data quality improvement' },
       ]}
       introParagraphs={[

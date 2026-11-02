@@ -42,9 +42,7 @@ export default function AnimationPage() {
       subtitle="Animation, modelling, CGI, VFX and AR/VR experiences for global brands that demand production quality and stop-scroll impact."
       breadcrumbLabel="2D & 3D Animation"
       metrics={[
-        { number: '500+', label: 'Productions delivered across formats' },
         { number: '4K', label: 'Maximum resolution output standard' },
-        { number: '30+', label: 'Global brand and agency clients' },
       ]}
       introParagraphs={[
         'Static imagery no longer captures attention in a world of infinite scrolling. Brands that communicate through motion - whether a 30-second explainer, a photorealistic product render or an augmented reality experience - earn more engagement, higher recall and stronger emotional connection with their audience.',

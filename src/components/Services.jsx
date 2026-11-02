@@ -29,7 +29,7 @@ const CARDS = [
         <circle cx="80" cy="80" r="40" stroke="rgba(26,75,140,.18)" strokeWidth="1" fill="none" />
       </>
     ),
-    desc: 'Custom ERP systems, web apps, APIs and SaaS platforms - built for enterprise scale across 50+ countries.',
+    desc: 'Custom ERP systems, web apps, APIs and SaaS platforms - built for enterprise scale.',
     cta: 'See our work',
     vbFront: '0 0 480 360',
     vbBack: '0 0 480 360',

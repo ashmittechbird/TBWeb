@@ -236,7 +236,7 @@ export default function ServicesPage() {
                 <span className="b-center-cat">ERP · WebApp · APIs · SaaS</span>
                 <h3 className="b-center-title">Build.<br />Scale.<br />Dominate.</h3>
                 <p className="b-center-desc">
-                  Custom ERP systems, enterprise web apps, mobile platforms and SaaS solutions - engineered for scale across 50+ countries.
+                  Custom ERP systems, enterprise web apps, mobile platforms and SaaS solutions - engineered for scale.
                 </p>
                 <span className="b-center-cta">
                   Explore our work

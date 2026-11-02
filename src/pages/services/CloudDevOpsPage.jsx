@@ -40,7 +40,6 @@ export default function CloudDevOpsPage() {
       metrics={[
         { number: '99.9%', label: 'Uptime SLA on managed infrastructure' },
         { number: '60%', label: 'Average cost reduction post-migration' },
-        { number: '100+', label: 'Cloud environments designed and managed' },
       ]}
       introParagraphs={[
         'Cloud infrastructure is not a checkbox - it is the foundation everything else runs on. A misconfigured VPC costs you a security breach. An unoptimised instance type costs you thousands per month. A manual deployment process costs you hours of downtime every release cycle. Yet most companies treat infrastructure as an afterthought until something breaks at 2 AM.',

@@ -193,7 +193,6 @@ export default function ProductsPage() {
             {[
               { val: String(LIVE_PRODUCT_COUNT), label: 'Production-grade platforms' },
               { val: CLIENTS, label: 'Enterprise clients deployed' },
-              { val: '20+',   label: 'Countries served globally' },
               { val: '99.9%', label: 'Uptime SLA guaranteed' },
             ].map((s) => (
               <div className="px-num" key={s.val} data-reveal>

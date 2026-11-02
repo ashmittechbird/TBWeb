@@ -11,7 +11,7 @@
 - **Email**: {{EMAIL}}
 - **Working hours**: {{HOURS}}
 - **Expertise**: ERPNext, Frappe, React, Next.js, Python, Django, Flutter, AWS, Azure, GCP, AI/ML
-- **Scale**: {{CLIENTS_PHRASE}}, 100+ projects delivered, 15+ team members
+- **Scale**: {{CLIENTS_PHRASE}}
 - **Website**: https://techbird.in
 - **LinkedIn**: https://www.linkedin.com/company/techbirdit/
 
