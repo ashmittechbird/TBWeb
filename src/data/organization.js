@@ -19,7 +19,7 @@ export const SITE_NAME = 'TechBird IT Services';
 
 /* ── Office ────────────────────────────────────────────────────────── */
 export const OFFICE = {
-  streetAddress: 'Unit 312-314, SOHO by Panchsheel, Kharadi',
+  streetAddress: 'Unit 312-314, SOHO by Panchshil, Kharadi',
   locality: 'Pune',
   region: 'Maharashtra',
   postalCode: '411014',
@@ -45,7 +45,7 @@ export const OFFICE = {
   },
 };
 
-/* "Unit 312-314, SOHO by Panchsheel, Kharadi, Pune 411014" - the form used on
+/* "Unit 312-314, SOHO by Panchshil, Kharadi, Pune 411014" - the form used on
    the contact page and in the footer. */
 export const ADDRESS_LINE = `${OFFICE.streetAddress}, ${OFFICE.locality} ${OFFICE.postalCode}`;
 /* The same address with state and country, as the legal pages print it. */
