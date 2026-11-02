@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import StaggeredMenu from './StaggeredMenu';
 import { productNavItems, productSubItems, LIVE_PRODUCT_COUNT } from '../data/products';
+import { CLIENTS_PHRASE } from '../data/siteFacts';
 
 const Chev = () => (
   <svg className="nav-chev" viewBox="0 0 10 6" fill="none">
@@ -242,7 +243,7 @@ export default function InnerNavbar() {
             <LeftDeco />
             <span className="mega-left-eye">Our platforms</span>
             <h3 className="mega-left-title">Platforms<br/>ready to<br/>deploy.</h3>
-            <p className="mega-left-sub">{LIVE_PRODUCT_COUNT} products.<br/>50+ enterprise clients.</p>
+            <p className="mega-left-sub">{LIVE_PRODUCT_COUNT} products.<br/>{CLIENTS_PHRASE}.</p>
             <Link to="/contact" className="mega-left-cta">
               Request a demo
               <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>

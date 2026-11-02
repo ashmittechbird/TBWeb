@@ -15,6 +15,25 @@ npm run build
 That's it. No environment variables are required: everything the contact form
 needs is either committed or derived at runtime (see below). Serve `dist/`.
 
+The build also **generates** `dist/sitemap.xml` and `dist/llms.txt`. Neither is
+edited by hand: the sitemap lists every indexable page and leaves out
+`noindex` ones (unlaunched products), and `llms.txt` takes its product list from
+`src/data/products.js`, so it cannot claim a product that is not live.
+
+### Sitemap dates
+
+`<lastmod>` comes from `scripts/lastmod.json` and moves only when a page's
+content actually changes. The build never edits that file (so it cannot dirty the
+checkout `git pull` needs). When you change a page, on your own machine:
+
+```bash
+npm run seo:lastmod        # pages whose content changed get today's date
+git add scripts/lastmod.json
+```
+
+A normal `npm run build` prints a warning listing any page that has changed since
+its recorded date, so a forgotten update is visible rather than silent.
+
 ## One-time setup
 
 ### nginx

@@ -1,7 +1,9 @@
 /* ══════════════════════════════════════════════════════════════════
    SINGLE SOURCE OF TRUTH for every product surface on the site.
 
-   Consumed by: Navbar, InnerNavbar, Footer, ProductsPage, FlowingMenu.
+   Consumed by: Navbar, InnerNavbar, Footer, ProductsPage, FlowingMenu, SEO
+   (noindex for unlaunched products), and scripts/prerender.mjs, which
+   generates llms.txt from it and leaves unlaunched pages out of the sitemap.
    Never hardcode a product list anywhere else - import from here.
 
    To launch a product:  set live: true  (and add its route in App.jsx)
@@ -201,6 +203,10 @@ export const LIVE_PRODUCTS = PRODUCTS.filter((p) => p.live);
 /* Convenience lookups */
 export const PRODUCT_BY_ID = Object.fromEntries(PRODUCTS.map((p) => [p.id, p]));
 export const LIVE_PRODUCT_COUNT = LIVE_PRODUCTS.length;
+
+/* Routes that exist but are not launched. SEO marks these noindex so a page
+   reached through an old link is not indexed, and the sitemap leaves them out. */
+export const UNLAUNCHED_ROUTES = new Set(PRODUCTS.filter((p) => !p.live).map((p) => p.route));
 
 /* Nav/menu shape: { label, to, color, icon } */
 export const productNavItems = () =>

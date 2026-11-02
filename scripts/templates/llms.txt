@@ -7,7 +7,7 @@
 - **Type**: IT Services & Product Company
 - **Founded**: 2020, Pune, Maharashtra, India
 - **Expertise**: ERPNext, Frappe, React, Next.js, Python, Django, Flutter, AWS, Azure, GCP, AI/ML
-- **Scale**: 50+ enterprise clients, 100+ projects delivered, 15+ team members
+- **Scale**: {{CLIENTS_PHRASE}}, 100+ projects delivered, 15+ team members
 - **Website**: https://techbird.in
 - **LinkedIn**: https://www.linkedin.com/company/techbirdit/
 
@@ -48,35 +48,13 @@ CRM implementation & customization, AdTech integration, analytics dashboards, ma
 ### 6. Marketing Strategy
 Go-to-market (GTM) strategy, SEO/SEM, paid media (Google Ads, Meta Ads), content marketing, social media management, brand positioning, conversion rate optimization, marketing analytics, competitor analysis.
 
-## Products (8 Platforms)
+## Products ({{PRODUCT_COUNT}} Platforms)
 
-### Custom ERP
-Full-suite enterprise resource planning built on ERPNext/Frappe. Modules: accounting, inventory, manufacturing, HR, CRM, projects, procurement. Multi-company, multi-currency. Replaces Tally, SAP Business One.
-
-### HRMS (Human Resource Management System)
-Payroll processing, attendance & leave management, recruitment pipeline, performance reviews, employee self-service portal, tax compliance (India). Integrates with biometric devices and ERPNext.
-
-### Lead & Sales CRM
-Lead capture from web/phone/email, pipeline management, quotation builder, sales forecasting, territory management, WhatsApp integration, automated follow-ups, real-time dashboards.
-
-### Practice Management
-For law firms, CA firms, consultancies. Client & matter management, time tracking, billing, document management, court date tracking, compliance calendars.
-
-### E-commerce Platform
-Multi-vendor marketplace or single-brand storefront. Catalog management, inventory sync across channels, payment gateway integration (Razorpay, Stripe, PayU), shipping integration (Shiprocket, Delhivery), analytics.
-
-### Document Management System
-Version-controlled document storage, OCR & full-text search, access control, audit trails, workflow approvals, digital signatures, compliance archiving, integration with ERP.
-
-### Litigation Management
-Case lifecycle tracking, court calendar management, document filing, deadline alerts, client communication logs, legal research integration, billing & time tracking for legal teams.
-
-### Visitor Management System
-Pre-registration, QR/badge printing, host notifications, visitor logs, compliance reporting, multi-location support, integration with access control and CCTV systems.
+{{PRODUCTS_SECTION}}
 
 ## Entity Relationships
 - TechBird **provides** Software Development, AI Solutions, Cloud & DevOps, Animation, MarTech, Marketing Strategy
-- TechBird **builds** Custom ERP, HRMS, CRM, Practice Management, E-commerce, DMS, Litigation Management, VMS
+- TechBird **builds** {{PRODUCT_NAMES}}
 - TechBird **uses** ERPNext, Frappe, React, Python, AWS, Azure, Flutter, TensorFlow
 - TechBird **serves** Manufacturing, Legal, Retail, Education, Hospitality, Real Estate, Professional Services, Logistics
 - TechBird **is located in** Pune, Maharashtra, India

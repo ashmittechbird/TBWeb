@@ -24,7 +24,6 @@ export default function HomePage() {
     <>
       <SEO
         title={null}
-        description="Premier technology partner for startups to enterprises. Custom software development, AI solutions, cloud & DevOps, ERP (ERPNext), mobile apps, and marketing technology. 50+ enterprise clients in Pune, India."
         keywords="software development company, ERP solutions, ERPNext, Frappe, AI solutions, cloud DevOps, custom software, web development, mobile app development, IT services India, Pune, digital transformation, SaaS, enterprise software"
       />
       <div className="scroll-progress" id="scrollProgress"></div>

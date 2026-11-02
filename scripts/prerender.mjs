@@ -1,4 +1,5 @@
-/* Prerenders every public route to its own HTML file.
+/* Prerenders every public route to its own HTML file, and generates the files
+   that describe the site to crawlers: sitemap.xml and llms.txt.
 
    Runs as the last step of `npm run build`, after the client build (dist/)
    and the server bundle (dist-ssr/) exist. For each route it writes a file
@@ -11,16 +12,24 @@
 
    Output layout - /about is served from dist/about.html (and / from
    dist/index.html). The web server maps clean URLs to those files; see
-   deploy/nginx-techbird.conf.example and vercel.json (cleanUrls). */
+   deploy/nginx-techbird.conf.example and vercel.json (cleanUrls).
+
+   Flags
+     --update-lastmod   also rewrite scripts/lastmod.json so every page whose
+                        content changed gets today's sitemap <lastmod>
+                        (`npm run seo:lastmod`). A normal build never edits it. */
 
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { pathToFileURL } from 'node:url';
+import { ROOT, SITE, discoverRoutes } from './lib/routes.mjs';
+import { contentHash, readManifest, diffAgainstManifest, updatedManifest, writeManifest, MANIFEST } from './lib/lastmod.mjs';
+import { buildSitemap } from './lib/sitemap.mjs';
+import { buildLlmsTxt } from './lib/llms.mjs';
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DIST = path.join(ROOT, 'dist');
 const SSR_ENTRY = path.join(ROOT, 'dist-ssr', 'entry-server.js');
-const SITE = 'https://techbird.in';
+const UPDATE_LASTMOD = process.argv.includes('--update-lastmod');
 
 /* Not a path any route can match, so it always renders the not-found page. */
 const NOT_FOUND_URL = '/__not-found__';
@@ -28,42 +37,14 @@ const NOT_FOUND_URL = '/__not-found__';
 const HEAD_MARKER = '<!--app-head-->';
 const ROOT_DIV = '<div id="root"></div>';
 
-/* ── routes ────────────────────────────────────────────────────────────
-   App.jsx is the single source of truth: read its <Route path="..."> list
-   instead of keeping a second one that can drift out of date. */
-async function discoverRoutes() {
-  const app = await fs.readFile(path.join(ROOT, 'src', 'App.jsx'), 'utf8');
-  const declared = [...app.matchAll(/<Route\s+path="([^"]+)"/g)].map((m) => m[1]);
-
-  /* Parameterised routes have to be expanded to the real URLs. */
-  const expanders = {
-    '/case-studies/:slug': async () => {
-      const { CASES } = await import(pathToFileURL(path.join(ROOT, 'src', 'data', 'caseStudies.js')).href);
-      return CASES.map((c) => `/case-studies/${c.slug}`);
-    },
-  };
-
-  const routes = [];
-  for (const p of declared) {
-    if (p === '*') continue; // the not-found page is not a real URL
-    if (p.includes(':')) {
-      if (!expanders[p]) {
-        throw new Error(`Route "${p}" has a parameter but scripts/prerender.mjs does not know its values. Add an entry to \`expanders\`.`);
-      }
-      routes.push(...(await expanders[p]()));
-    } else {
-      routes.push(p);
-    }
-  }
-  return routes;
-}
-
 /* ── per-page checks ───────────────────────────────────────────────────
    The point of this step is that the raw HTML is right. If a page comes out
    wrong, fail the build rather than ship an empty or mislabelled page. */
 function count(haystack, re) {
   return (haystack.match(re) || []).length;
 }
+
+const isNoindex = (head) => /<meta[^>]*name="robots"[^>]*content="noindex/.test(head);
 
 function validate(route, { head, html }, kind = 'page') {
   const problems = [];
@@ -73,16 +54,22 @@ function validate(route, { head, html }, kind = 'page') {
   if (count(head, /<title\b/g) !== 1) problems.push(`expected exactly 1 <title>, found ${count(head, /<title\b/g)}`);
   if (count(head, /<meta[^>]*name="description"/g) !== 1) problems.push('expected exactly 1 meta description');
   if (count(head, /<meta[^>]*name="robots"/g) !== 1) problems.push('expected exactly 1 meta robots');
-  if (isNotFound) {
-    /* noindex with a canonical is contradictory, and a canonical here would
-       point at whatever URL the visitor mistyped. */
-    if (count(head, /<link[^>]*rel="canonical"/g) !== 0) problems.push('not-found page must not carry a canonical');
-    if (!/<meta[^>]*name="robots"[^>]*content="noindex/.test(head)) problems.push('not-found page must be noindex');
-    if (!/Page Not Found/.test(head)) problems.push('not-found page has the wrong title');
-  } else if (count(head, /<link[^>]*rel="canonical"/g) !== 1) {
-    problems.push('expected exactly 1 canonical');
+
+  const canonicals = count(head, /<link[^>]*rel="canonical"/g);
+  if (isNoindex(head)) {
+    /* A noindex page has nothing to consolidate; a canonical beside it is two
+       opposing signals, and on the not-found page would name whatever URL the
+       visitor mistyped. */
+    if (canonicals !== 0) problems.push('a noindex page must not carry a canonical');
+  } else if (canonicals !== 1) {
+    problems.push(`expected exactly 1 canonical, found ${canonicals}`);
   } else if (!head.includes(`href="${expectedCanonical}"`)) {
     problems.push(`canonical should be ${expectedCanonical}`);
+  }
+
+  if (isNotFound) {
+    if (!isNoindex(head)) problems.push('not-found page must be noindex');
+    if (!/Page Not Found/.test(head)) problems.push('not-found page has the wrong title');
   }
   if (count(head, /<meta[^>]*property="og:title"/g) !== 1) problems.push('expected exactly 1 og:title');
 
@@ -131,6 +118,7 @@ async function main() {
 
   const failures = [];
   const written = [];
+  const pages = []; // real pages only: these feed the sitemap and the lastmod manifest
 
   for (const job of jobs) {
     let page;
@@ -156,7 +144,10 @@ async function main() {
 
     await fs.mkdir(path.dirname(job.file), { recursive: true });
     await fs.writeFile(job.file, out);
-    written.push({ route: job.label, file: path.relative(DIST, job.file), kb: (Buffer.byteLength(out) / 1024).toFixed(0) });
+    written.push({ route: job.label, file: path.relative(DIST, job.file), kb: (Buffer.byteLength(out) / 1024).toFixed(0), noindex: isNoindex(page.head) });
+    if (job.kind === 'page') {
+      pages.push({ route: job.url, hash: contentHash(page.head, page.html), noindex: isNoindex(page.head) });
+    }
   }
 
   if (failures.length) {
@@ -166,9 +157,36 @@ async function main() {
     process.exit(1);
   }
 
+  /* ── sitemap.xml ──────────────────────────────────────────────────────
+     <lastmod> comes from the committed manifest, so it moves only when a page's
+     content does - see scripts/lib/lastmod.mjs. */
+  const indexed = pages.filter((p) => !p.noindex);
+  let manifest = await readManifest();
+
+  if (UPDATE_LASTMOD) {
+    const before = manifest;
+    manifest = updatedManifest(indexed, manifest);
+    await writeManifest(manifest);
+    const { changed, added, removed } = diffAgainstManifest(indexed, before);
+    console.log(`\nlastmod manifest updated (${path.relative(ROOT, MANIFEST)}): ${changed.length} changed, ${added.length} new, ${removed.length} removed.`);
+    [...changed, ...added].forEach((r) => console.log(`  ~ ${r}`));
+  } else {
+    const { changed, added } = diffAgainstManifest(indexed, manifest);
+    if (changed.length || added.length) {
+      console.warn(`\n⚠ ${changed.length + added.length} page(s) changed since their recorded sitemap date (or have none):`);
+      [...changed, ...added].forEach((r) => console.warn(`    ${r}`));
+      console.warn('  Run `npm run seo:lastmod` and commit scripts/lastmod.json so <lastmod> reflects the change.\n');
+    }
+  }
+
+  const lastmod = Object.fromEntries(Object.entries(manifest).map(([route, e]) => [route, e.lastmod]));
+  await fs.writeFile(path.join(DIST, 'sitemap.xml'), buildSitemap(pages, lastmod));
+  await fs.writeFile(path.join(DIST, 'llms.txt'), await buildLlmsTxt());
+
   const w = Math.max(...written.map((r) => r.route.length));
   console.log(`\nPrerendered ${written.length} pages:`);
-  written.forEach((r) => console.log(`  ✓ ${r.route.padEnd(w)}  ->  ${r.file}  (${r.kb} kB)`));
+  written.forEach((r) => console.log(`  ✓ ${r.route.padEnd(w)}  ->  ${r.file}  (${r.kb} kB)${r.noindex ? '  noindex' : ''}`));
+  console.log(`\nGenerated sitemap.xml (${indexed.length} URLs) and llms.txt.`);
 }
 
 main().catch((err) => {

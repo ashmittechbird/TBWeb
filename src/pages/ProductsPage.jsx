@@ -4,6 +4,7 @@ import InnerNavbar from '../components/InnerNavbar';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import { LIVE_PRODUCTS, LIVE_PRODUCT_COUNT } from '../data/products';
+import { CLIENTS, CLIENTS_PHRASE } from '../data/siteFacts';
 import { scrollToTarget } from '../lib/smoothScroll';
 import '../styles/inner.css';
 import '../styles/products.css';
@@ -167,7 +168,7 @@ export default function ProductsPage() {
           <div className="px-spot-head" data-reveal>
             <span className="px-ey px-ey--dark">Featured</span>
             <h2 className="px-h2 px-h2--dark">A closer look at<br />three flagship products.</h2>
-            <p className="px-muted-text px-muted-text--dark">Each built for a specific domain. Deployed across 50+ enterprise clients.</p>
+            <p className="px-muted-text px-muted-text--dark">Each built for a specific domain. Deployed across {CLIENTS_PHRASE}.</p>
           </div>
           <div className="px-bento">
             {SPOTLIGHT.map((p, i) => (
@@ -191,7 +192,7 @@ export default function ProductsPage() {
           <div className="px-nums-row">
             {[
               { val: String(LIVE_PRODUCT_COUNT), label: 'Production-grade platforms' },
-              { val: '50+',   label: 'Enterprise clients deployed' },
+              { val: CLIENTS, label: 'Enterprise clients deployed' },
               { val: '20+',   label: 'Countries served globally' },
               { val: '99.9%', label: 'Uptime SLA guaranteed' },
             ].map((s) => (

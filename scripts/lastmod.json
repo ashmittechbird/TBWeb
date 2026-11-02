@@ -1,0 +1,110 @@
+{
+  "/": {
+    "hash": "91baea953eb5eb26",
+    "lastmod": "2026-08-05"
+  },
+  "/about": {
+    "hash": "024c506080abfa7b",
+    "lastmod": "2026-10-16"
+  },
+  "/case-studies": {
+    "hash": "25cbc910516ee01f",
+    "lastmod": "2026-08-17"
+  },
+  "/case-studies/erp-payment-automation-smart-choice": {
+    "hash": "fe7e2ea5ed3aa877",
+    "lastmod": "2026-08-17"
+  },
+  "/case-studies/gls-paperless-gst-compliance": {
+    "hash": "76a9f1a6bd208384",
+    "lastmod": "2026-08-17"
+  },
+  "/case-studies/hr-automation-builders": {
+    "hash": "1ab3a4e0ed9732c9",
+    "lastmod": "2026-08-17"
+  },
+  "/contact": {
+    "hash": "668c29d844b7bddd",
+    "lastmod": "2026-10-16"
+  },
+  "/cookies": {
+    "hash": "d5d085f3b9b76dd5",
+    "lastmod": "2026-08-27"
+  },
+  "/disclaimer": {
+    "hash": "7a9638652685fd3d",
+    "lastmod": "2026-08-27"
+  },
+  "/industries": {
+    "hash": "65b6d0d258d00ab8",
+    "lastmod": "2026-08-20"
+  },
+  "/privacy": {
+    "hash": "fb8853fad075c51b",
+    "lastmod": "2026-08-27"
+  },
+  "/products": {
+    "hash": "e7435ba56974c745",
+    "lastmod": "2026-08-05"
+  },
+  "/products/crm": {
+    "hash": "7c743882b0b3e3d4",
+    "lastmod": "2026-08-10"
+  },
+  "/products/document-management": {
+    "hash": "25ce1d52c78c1358",
+    "lastmod": "2026-08-10"
+  },
+  "/products/hrms": {
+    "hash": "5c436e9c852cd838",
+    "lastmod": "2026-08-10"
+  },
+  "/products/litigation-management": {
+    "hash": "8fb88cc7df2d4690",
+    "lastmod": "2026-08-10"
+  },
+  "/products/practice-management": {
+    "hash": "3ed4e1ac141c6712",
+    "lastmod": "2026-08-10"
+  },
+  "/products/property-management": {
+    "hash": "d8d5acad4a3da27f",
+    "lastmod": "2026-08-10"
+  },
+  "/products/travel-expense": {
+    "hash": "b4323f7b25c4cf0f",
+    "lastmod": "2026-08-10"
+  },
+  "/services": {
+    "hash": "3f91db1c62507f35",
+    "lastmod": "2026-08-20"
+  },
+  "/services/ai-solutions": {
+    "hash": "0d1e900610fb8d56",
+    "lastmod": "2026-06-23"
+  },
+  "/services/animation": {
+    "hash": "51ee6fd586e924b4",
+    "lastmod": "2026-06-19"
+  },
+  "/services/cloud-devops": {
+    "hash": "0c5b8e8bb273abcb",
+    "lastmod": "2026-08-20"
+  },
+  "/services/marketing": {
+    "hash": "ef1d0abab518623b",
+    "lastmod": "2026-06-19"
+  },
+  "/services/martech": {
+    "hash": "8156a9d3c772a3e6",
+    "lastmod": "2026-06-19"
+  },
+  "/services/software-development": {
+    "hash": "b1c503e739b7b4ef",
+    "lastmod": "2026-06-19"
+  },
+  "/terms": {
+    "hash": "c9d4b650408ccc40",
+    "lastmod": "2026-08-27"
+  }
+}

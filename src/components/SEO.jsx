@@ -1,10 +1,12 @@
 import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
+import { UNLAUNCHED_ROUTES } from '../data/products';
+import { CLIENTS_PHRASE } from '../data/siteFacts';
 
 const SITE = 'https://techbird.in';
 const SITE_NAME = 'TechBird IT Services';
 const DEFAULT_TITLE = 'TechBird IT Services - Driving Digital Transformation';
-const DEFAULT_DESC = 'Premier technology partner for startups to enterprises. Custom software development, AI solutions, cloud & DevOps, ERP (ERPNext), mobile apps, and marketing technology. 50+ enterprise clients in Pune, India.';
+const DEFAULT_DESC = `Premier technology partner for startups to enterprises. Custom software development, AI solutions, cloud & DevOps, ERP (ERPNext), mobile apps, and marketing technology. ${CLIENTS_PHRASE} in Pune, India.`;
 const DEFAULT_IMG = `${SITE}/og-image.png`;
 
 /* Provider entity (reused across schemas) */
@@ -20,7 +22,7 @@ export default function SEO({
   keywords,
   type = 'website',
   image,
-  noindex = false,
+  noindex: noindexProp = false,
   schema,
   faqItems,
   /* GEO / AEO specific */
@@ -28,6 +30,9 @@ export default function SEO({
   softwareSchema,      // { name, description, category, os } - for /products/* pages
 }) {
   const { pathname } = useLocation();
+  /* A product that is not launched may still be reached through an old link;
+     keep it out of the index without anyone having to remember to flag it. */
+  const noindex = noindexProp || UNLAUNCHED_ROUTES.has(pathname);
   /* The home page's canonical keeps its trailing slash (https://techbird.in/),
      matching the sitemap and og:url. Every other route has none. */
   const canonical = `${SITE}${pathname}`;
