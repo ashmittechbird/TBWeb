@@ -8,6 +8,7 @@ import MapEmbed from '../components/MapEmbed';
 import Turnstile from '../components/Turnstile';
 import useContactEnquiry from '../hooks/useContactEnquiry';
 import { CONTACT_EMAIL, TURNSTILE_SITE_KEY, isTurnstileEnabled } from '../lib/mailbird';
+import { OFFICE, ADDRESS_LINE, MAPS_LINK, MAP_EMBED_SRC, organizationRef } from '../data/organization';
 import '../styles/inner.css';
 import '../styles/contact-page.css';
 
@@ -95,7 +96,7 @@ export default function ContactPage() {
     <div className="cp-root" ref={root}>
       <SEO
         title="Contact Us"
-        description="Get in touch with TechBird IT Services. Custom software development, AI solutions, ERP implementation, cloud services. Unit 312-314, SOHO by Panchsheel, Kharadi, Pune 411014."
+        description={`Get in touch with TechBird IT Services. Custom software development, AI solutions, ERP implementation, cloud services. ${ADDRESS_LINE}.`}
         keywords="contact TechBird, IT services Pune, software development inquiry, ERP consultation, AI solutions contact"
         faqItems={FAQS}
         schema={{
@@ -103,14 +104,7 @@ export default function ContactPage() {
           '@type': 'ContactPage',
           name: 'Contact TechBird IT Services',
           url: 'https://techbird.in/contact',
-          mainEntity: {
-            '@type': 'Organization',
-            name: 'TechBird IT Services',
-            url: 'https://techbird.in',
-            telephone: '+919767623456',
-            email: 'connect@techbirdit.in',
-            address: { '@type': 'PostalAddress', streetAddress: 'Unit 312-314, SOHO by Panchsheel', addressLocality: 'Kharadi, Pune', postalCode: '411014', addressRegion: 'Maharashtra', addressCountry: 'IN' },
-          },
+          mainEntity: organizationRef(),
         }}
       />
       <InnerNavbar />
@@ -133,13 +127,13 @@ export default function ContactPage() {
       <section className="cp-info-strip">
         <div className="cp-inner">
           <div className="cp-info-grid">
-            <a className="cp-info-item" href="tel:+919767623456">
+            <a className="cp-info-item" href={`tel:${OFFICE.phone}`}>
               <div className="cp-info-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
               </div>
               <div className="cp-info-text">
                 <span className="cp-info-label">Call Us</span>
-                <strong>+91 97676 23456</strong>
+                <strong>{OFFICE.phoneDisplay}</strong>
               </div>
             </a>
             <a className="cp-info-item" href="mailto:connect@techbirdit.in">
@@ -157,7 +151,7 @@ export default function ContactPage() {
               </div>
               <div className="cp-info-text">
                 <span className="cp-info-label">Visit Us</span>
-                <strong>Unit 312-314, SOHO by Panchsheel, Kharadi, Pune 411014</strong>
+                <strong>{ADDRESS_LINE}</strong>
               </div>
             </div>
             <div className="cp-info-item">
@@ -166,7 +160,7 @@ export default function ContactPage() {
               </div>
               <div className="cp-info-text">
                 <span className="cp-info-label">Working Hours</span>
-                <strong>Mon – Fri, 9 AM – 7 PM IST</strong>
+                <strong>{OFFICE.hours.label}</strong>
               </div>
             </div>
           </div>
@@ -307,18 +301,18 @@ export default function ContactPage() {
                   work, so it is the one that gets a consent step. */}
               <MapEmbed
                 title="TechBird Office"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.531!2d73.9402!3d18.5578!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c3c3c3c3c3c3%3A0x0!2sSOHO%20by%20Panchsheel%2C%20Kharadi!5e0!3m2!1sen!2sin"
-                externalUrl="https://www.google.com/maps/search/?api=1&query=SOHO+by+Panchsheel%2C+Kharadi%2C+Pune+411014"
-                address="Unit 312-314, SOHO by Panchsheel, Kharadi, Pune 411014"
+                src={MAP_EMBED_SRC}
+                externalUrl={MAPS_LINK}
+                address={ADDRESS_LINE}
               />
 
               {/* Quick connect */}
               <div className="cp-connect-card">
                 <h3>Prefer a quick chat?</h3>
                 <p>Book a 30-minute discovery call. No commitment, no sales pitch, just a direct conversation about your project.</p>
-                <a href="tel:+919767623456" className="cp-call-btn">
+                <a href={`tel:${OFFICE.phone}`} className="cp-call-btn">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-                  <span>Call +91 97676 23456</span>
+                  <span>Call {OFFICE.phoneDisplay}</span>
                 </a>
               </div>
 

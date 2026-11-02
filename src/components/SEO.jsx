@@ -2,19 +2,16 @@ import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
 import { UNLAUNCHED_ROUTES } from '../data/products';
 import { CLIENTS_PHRASE } from '../data/siteFacts';
+import { organizationSchema, organizationRef, SITE_URL, SITE_NAME } from '../data/organization';
 
-const SITE = 'https://techbird.in';
-const SITE_NAME = 'TechBird IT Services';
+const SITE = SITE_URL;
 const DEFAULT_TITLE = 'TechBird IT Services - Driving Digital Transformation';
 const DEFAULT_DESC = `Premier technology partner for startups to enterprises. Custom software development, AI solutions, cloud & DevOps, ERP (ERPNext), mobile apps, and marketing technology. ${CLIENTS_PHRASE} in Pune, India.`;
 const DEFAULT_IMG = `${SITE}/og-image.png`;
 
-/* Provider entity (reused across schemas) */
-const PROVIDER = {
-  '@type': 'Organization',
-  name: 'TechBird IT Services',
-  url: SITE,
-};
+/* Every schema block that needs the business refers to the one entity in
+   src/data/organization.js by @id instead of declaring its own Organization. */
+const PROVIDER = organizationRef();
 
 export default function SEO({
   title,
@@ -41,51 +38,7 @@ export default function SEO({
   const pageImg = image || DEFAULT_IMG;
 
   /* ── Organization schema (always present) ── */
-  const orgSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: 'TechBird IT Services',
-    url: SITE,
-    logo: `${SITE}/logo.webp`,
-    description: DEFAULT_DESC,
-    foundingDate: '2020',
-    address: {
-      '@type': 'PostalAddress',
-      addressLocality: 'Pune',
-      addressRegion: 'Maharashtra',
-      addressCountry: 'IN',
-    },
-    areaServed: [
-      { '@type': 'Country', name: 'India' },
-      { '@type': 'GeoCircle', geoMidpoint: { '@type': 'GeoCoordinates', latitude: 18.5204, longitude: 73.8567 }, geoRadius: '5000 km' },
-    ],
-    knowsAbout: [
-      'Enterprise Resource Planning', 'ERPNext', 'Frappe Framework',
-      'Artificial Intelligence', 'Machine Learning', 'Custom Software Development',
-      'Cloud Computing', 'DevOps', 'React', 'Python', 'Flutter',
-      'Digital Transformation', 'SaaS', 'Marketing Technology',
-    ],
-    sameAs: [
-      'https://www.linkedin.com/company/techbirdit/',
-      'https://www.instagram.com/techbirdit/',
-    ],
-    contactPoint: {
-      '@type': 'ContactPoint',
-      telephone: '+919767623456',
-      email: 'connect@techbirdit.in',
-      contactType: 'sales',
-      availableLanguage: ['English', 'Hindi'],
-    },
-    founder: [
-      { '@type': 'Person', name: 'Amol Sane', jobTitle: 'Co-Founder & CEO', sameAs: 'https://www.linkedin.com/in/amol-sane-b8675316/' },
-      { '@type': 'Person', name: 'Ekansh Jain', jobTitle: 'Co-Founder & CTO', sameAs: ['https://www.linkedin.com/in/jainekansh1512/', 'https://ekanshjain.com'] },
-    ],
-    employee: [
-      { '@type': 'Person', name: 'Amit Thakur', jobTitle: 'Partner & CBO', sameAs: 'https://www.linkedin.com/in/amitthakurtechbirdit/' },
-      { '@type': 'Person', name: 'Shubham Agarwal', jobTitle: 'CFO', sameAs: 'https://www.linkedin.com/in/shubham-a-54aa78271/' },
-      { '@type': 'Person', name: 'Purvesh Jain', jobTitle: 'CMO', sameAs: 'https://www.linkedin.com/in/jainpurvesh/' },
-    ],
-  };
+  const orgSchema = organizationSchema({ description: DEFAULT_DESC });
 
   /* ── WebSite schema (homepage only) ── */
   const websiteSchema = pathname === '/' ? {

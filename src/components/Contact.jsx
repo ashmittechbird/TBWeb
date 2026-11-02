@@ -1,3 +1,4 @@
+import { OFFICE } from '../data/organization';
 export default function Contact() {
   return (
     <section className="section contact" id="contact" data-screen-label="Contact">
@@ -20,8 +21,8 @@ export default function Contact() {
             {/* Right: contact details */}
             <div className="contact-right">
               <div className="contact-rows">
-                <a className="contact-row" href="tel:+919767623456">
-                  <span>Phone</span><strong>+91 97676 23456</strong>
+                <a className="contact-row" href={`tel:${OFFICE.phone}`}>
+                  <span>Phone</span><strong>{OFFICE.phoneDisplay}</strong>
                 </a>
                 <a className="contact-row" href="mailto:connect@techbirdit.in">
                   <span>Email</span><strong>connect@techbirdit.in</strong>

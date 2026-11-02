@@ -1,3 +1,5 @@
+import { OFFICE } from '../data/organization';
+
 /* ══════════════════════════════════════════════════════════════════
    Mailbird website-enquiry capture - configuration
 
@@ -109,7 +111,7 @@ export const ENQUIRY_ENDPOINT =
 export const REQUEST_TIMEOUT_MS = 12000;
 
 /* Shown to the visitor whenever we cannot submit for them. */
-export const CONTACT_EMAIL = 'connect@techbirdit.in';
+export const CONTACT_EMAIL = OFFICE.email;
 
 export const isTurnstileEnabled = () => Boolean(TURNSTILE_SITE_KEY);
 

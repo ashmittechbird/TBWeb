@@ -13,7 +13,8 @@ import { ROOT, SITE, importSrc } from './routes.mjs';
 export async function buildLlmsTxt() {
   const template = await fs.readFile(path.join(ROOT, 'scripts', 'templates', 'llms.txt'), 'utf8');
   const { LIVE_PRODUCTS } = await importSrc('data/products.js');
-  const { CLIENTS_PHRASE } = await importSrc('data/siteFacts.js');
+  const { CLIENTS_PHRASE, FOUNDED } = await importSrc('data/siteFacts.js');
+  const { OFFICE, ADDRESS_FULL } = await importSrc('data/organization.js');
 
   const productsSection = LIVE_PRODUCTS.map((p) => [
     `### ${p.name}`,
@@ -27,6 +28,11 @@ export async function buildLlmsTxt() {
     PRODUCT_COUNT: String(LIVE_PRODUCTS.length),
     PRODUCTS_SECTION: productsSection,
     PRODUCT_NAMES: LIVE_PRODUCTS.map((p) => p.name).join(', '),
+    FOUNDED: String(FOUNDED),
+    ADDRESS: ADDRESS_FULL,
+    PHONE: OFFICE.phoneDisplay,
+    EMAIL: OFFICE.email,
+    HOURS: OFFICE.hours.label,
   };
 
   const out = template.replace(/\{\{([A-Z_]+)\}\}/g, (_, key) => {

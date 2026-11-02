@@ -5,7 +5,11 @@
 ## Company Overview
 - **Name**: TechBird IT Services
 - **Type**: IT Services & Product Company
-- **Founded**: 2020, Pune, Maharashtra, India
+- **Founded**: {{FOUNDED}}, Pune, Maharashtra, India
+- **Office**: {{ADDRESS}}
+- **Phone**: {{PHONE}}
+- **Email**: {{EMAIL}}
+- **Working hours**: {{HOURS}}
 - **Expertise**: ERPNext, Frappe, React, Next.js, Python, Django, Flutter, AWS, Azure, GCP, AI/ML
 - **Scale**: {{CLIENTS_PHRASE}}, 100+ projects delivered, 15+ team members
 - **Website**: https://techbird.in
@@ -17,7 +21,7 @@
 TechBird builds enterprise software, AI solutions, cloud infrastructure, mobile apps, and marketing technology for businesses ranging from startups to large enterprises. Core specialities include ERPNext implementation, custom web/mobile development, and AI-powered automation.
 
 ### Where is TechBird located?
-TechBird is headquartered in Pune, Maharashtra, India and serves clients across India, Middle East, and globally.
+TechBird is headquartered at {{ADDRESS}} and serves clients across India, Middle East, and globally.
 
 ### What tech stack does TechBird use?
 Primary stack: ERPNext/Frappe (Python), React, Next.js, Vue.js, Node.js, Django, FastAPI, Flutter, React Native, PostgreSQL, MariaDB, AWS, Azure, GCP, Docker, Kubernetes, TensorFlow, PyTorch.

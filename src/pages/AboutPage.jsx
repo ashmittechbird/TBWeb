@@ -6,6 +6,7 @@ import InnerNavbar from '../components/InnerNavbar';
 import Footer from '../components/Footer';
 import AboutHero from '../components/AboutHero';
 import SEO from '../components/SEO';
+import { organizationRef } from '../data/organization';
 import '../styles/inner.css';
 import '../styles/about.css';
 
@@ -131,20 +132,7 @@ export default function AboutPage() {
           name: 'About TechBird IT Services',
           description: 'Learn about TechBird IT Services - a premier technology partner in Pune, India. Our expert team delivers custom software, AI, cloud, and digital transformation solutions for enterprises worldwide.',
           url: 'https://techbird.in/about',
-          mainEntity: {
-            '@type': 'Organization',
-            name: 'TechBird IT Services',
-            url: 'https://techbird.in',
-            foundingDate: '2020',
-            address: {
-              '@type': 'PostalAddress',
-              addressLocality: 'Pune',
-              addressRegion: 'Maharashtra',
-              addressCountry: 'IN',
-            },
-            numberOfEmployees: { '@type': 'QuantitativeValue', value: 20 },
-            areaServed: ['India', 'United Kingdom', 'United States', 'UAE'],
-          },
+          mainEntity: organizationRef(),
         }}
       />
       <InnerNavbar />

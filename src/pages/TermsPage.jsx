@@ -1,4 +1,5 @@
 import LegalPageLayout from '../components/LegalPageLayout';
+import { ADDRESS_FULL } from '../data/organization';
 
 /* Text is carried over verbatim from the previous version - only the layout
    moved onto LegalPageLayout so all four legal pages share one shell. */
@@ -119,7 +120,7 @@ const SECTIONS = [
       <p>
         For questions about these terms, contact us at:<br />
         Email: {mail}<br />
-        Address: Unit 312-314, SOHO by Panchsheel, Kharadi, Pune 411014, Maharashtra, India
+        Address: {ADDRESS_FULL}
       </p>
     ),
   },

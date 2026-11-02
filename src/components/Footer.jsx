@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { LIVE_PRODUCTS } from '../data/products';
 import { getLenis } from '../lib/smoothScroll';
+import { OFFICE, ADDRESS_LINE } from '../data/organization';
 
 const InstagramIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
@@ -52,11 +53,11 @@ export default function Footer() {
             <ul className="foot-contact-list">
               <li className="foot-contact-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                <span>Unit 312-314, SOHO by Panchsheel, Kharadi, Pune 411014</span>
+                <span>{ADDRESS_LINE}</span>
               </li>
               <li className="foot-contact-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-                <a href="tel:+919767623456">+91 97676 23456</a>
+                <a href={`tel:${OFFICE.phone}`}>{OFFICE.phoneDisplay}</a>
               </li>
               <li className="foot-contact-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>

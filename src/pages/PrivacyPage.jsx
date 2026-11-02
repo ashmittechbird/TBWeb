@@ -1,4 +1,5 @@
 import LegalPageLayout from '../components/LegalPageLayout';
+import { OFFICE, ADDRESS_FULL } from '../data/organization';
 
 /* Written to match what the site actually does. Two corrections from the
    previous version, both of which claimed things that were not true:
@@ -21,9 +22,9 @@ const SECTIONS = [
           collected through this website.
         </p>
         <p>
-          Unit 312-314, SOHO by Panchsheel, Kharadi, Pune 411014, Maharashtra, India<br />
+          {ADDRESS_FULL}<br />
           Email: {mail}<br />
-          Phone: <a href="tel:+919767623456">+91 97676 23456</a>
+          Phone: <a href={`tel:${OFFICE.phone}`}>{OFFICE.phoneDisplay}</a>
         </p>
       </>
     ),
